@@ -12,7 +12,6 @@ $ARGUMENTS
 
 - faça um brainstorm comigo para coletar mais detalhes sobre o que precisa ser implementado
 - crie um nome para nova branch para implementar a feature
-- criar arquivo ./tree/<branch>/specs/current.md.
 
 ## Create worktree
 
@@ -22,5 +21,4 @@ $ARGUMENTS
 - enter in new path: `cd ./tree/<branch>`
 - enable direnv: `direnv allow`
 - install dependencies: `pnpm install`
-- create instructions to implement this feature in ./tree/<branch>/specs/current.md override content if exists
-- do not implement this feature, only refine plan
+- do not implement this feature, wait to refine plan with slash command /plan-task
