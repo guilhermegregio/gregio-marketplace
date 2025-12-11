@@ -10,7 +10,6 @@ ultrathink, com base nos requisitos abaixo:
 $ARGUMENTS
 </requirements>
 
-- faça um brainstorm comigo para coletar mais detalhes sobre o que precisa ser implementado
 - crie um nome para nova branch para implementar a feature
 
 ## Create worktree
