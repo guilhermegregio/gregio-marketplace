@@ -12,5 +12,5 @@ package.json
 next.config.ts
 tailwind.config.ts
 
-src/periodizations/**
-src/app/management/periodizations/**
+
+src/**

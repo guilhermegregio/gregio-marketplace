@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "chrome-devtools-mcp@latest",
+        "--executablePath=/nix/store/gp4pz889m2w3srzc2jfn5j6wbibzyw1f-google-chrome-140.0.7339.127/bin/google-chrome-stable"
+      ]
+    }
+  }
+}
