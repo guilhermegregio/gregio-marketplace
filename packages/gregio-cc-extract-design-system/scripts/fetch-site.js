@@ -245,8 +245,17 @@ async function main() {
   if (!args.url || !args.outDir) { console.error(USAGE); process.exit(2); }
   const outDir = resolve(args.outDir);
   await mkdir(outDir, { recursive: true });
-  if (args.spa) await fetchWithPlaywright(args.url, outDir, args.maxAssets);
-  else await fetchWithCheerio(args.url, outDir, args.maxAssets);
+  if (args.spa) {
+    try {
+      await fetchWithPlaywright(args.url, outDir, args.maxAssets);
+    } catch (e) {
+      warn(`playwright failed: ${(e.message || String(e)).split('\n')[0]}`);
+      warn('falling back to cheerio (static fetch). If the site is a real SPA, the result may be incomplete.');
+      await fetchWithCheerio(args.url, outDir, args.maxAssets);
+    }
+  } else {
+    await fetchWithCheerio(args.url, outDir, args.maxAssets);
+  }
 }
 
 main().catch((err) => { console.error(err.stack || err.message); process.exit(1); });

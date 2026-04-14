@@ -31,6 +31,8 @@ Formato: `<url> [out-dir] [--spa]`
    npx --yes --package=cheerio@^1 --package=playwright@^1.48 -- node "${CLAUDE_PLUGIN_ROOT}/scripts/fetch-site.js" <url> <out-dir> --spa
    ```
 
+   Se Chromium falhar no launch (executable ausente, libs do sistema faltando em NixOS/distros minimais, timeout, etc.), o script **automaticamente** faz fallback para o path cheerio e avisa no stderr com `[fetch-site] playwright failed: …` + `falling back to cheerio`. Isso garante que você sempre recebe o HTML + assets, mesmo que perdendo o que dependia de JS.
+
    **Importante**: NÃO tente "descobrir" o path do plugin lendo diretórios ou usando paths hardcoded (tipo `/home/.../gregio-marketplace/...`). Sempre use `${CLAUDE_PLUGIN_ROOT}` literal na linha de comando — shell/Claude expande automaticamente.
    Se Chromium não estiver instalado (primeira vez com `--spa`):
    ```
