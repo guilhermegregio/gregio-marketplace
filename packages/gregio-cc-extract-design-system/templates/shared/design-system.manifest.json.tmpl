@@ -1,0 +1,88 @@
+{
+  "$schema": "https://gregio.dev/schemas/design-system.manifest.v1.json",
+  "name": "{{PROJECT_NAME}}",
+  "version": "0.1.0",
+  "generatedFrom": "{{SOURCE_URL_OR_PATH}}",
+  "generatedAt": "{{ISO_DATE}}",
+  "mode": "{{astro|standalone}}",
+
+  "entrypoints": {
+    "css": "{{./src/styles/design-system/index.css | ./assets/css/index.css}}",
+    "js": "{{./src/scripts/design-system.ts | ./assets/js/design-system.js}}",
+    "showcase": "{{/design-system | ./design-system.html}}",
+    "components": "{{./src/components/ds | ./assets/snippets}}"
+  },
+
+  "tokens": {
+    "colors": {
+      "{{token-name}}": {
+        "var": "--{{prefix}}-{{token-name}}",
+        "value": "{{hex/rgb}}",
+        "usage": "{{primary|accent|surface|text|feedback}}",
+        "description": "{{quando usar — ex.: CTA principal, fundo de seção}}"
+      }
+    },
+    "fonts": {
+      "display": { "var": "--font-display", "family": "{{font-name}}", "usage": "títulos decorativos" },
+      "primary": { "var": "--font-primary", "family": "{{font-name}}", "usage": "corpo e UI" },
+      "mono": { "var": "--font-mono", "family": "{{font-name}}", "usage": "labels e dados" }
+    },
+    "typography": [
+      { "name": "Heading 1", "class": "ds-h1", "element": "h1", "size": "{{px}}", "lineHeight": "{{px}}", "weight": {{400}}, "font": "display" }
+    ],
+    "spacing": { "{{scale-name}}": "{{value}}" },
+    "radii": { "{{name}}": "{{value}}" },
+    "easing": { "{{name}}": "{{cubic-bezier}}" },
+    "breakpoints": { "sm": "640px", "md": "768px", "lg": "1024px", "xl": "1280px" }
+  },
+
+  "components": [
+    {
+      "name": "Button",
+      "baseClass": "ds-btn",
+      "variants": [
+        { "name": "primary", "class": "ds-btn-primary", "when": "CTA principal, ações de conversão" },
+        { "name": "secondary", "class": "ds-btn-secondary", "when": "ações secundárias" },
+        { "name": "ghost", "class": "ds-btn-ghost", "when": "ações destrutivas ou terciárias em dark contexts" }
+      ],
+      "states": ["default", "hover", "active", "focus", "disabled", "loading"],
+      "source": "components.css",
+      "example": "<a class=\"ds-btn ds-btn-primary\">Comprar agora</a>",
+      "astroComponent": "{{./components/ds/Button.astro | null}}",
+      "snippet": "{{./assets/snippets/button.html | null}}"
+    }
+  ],
+
+  "animations": [
+    {
+      "name": "reveal-up",
+      "class": "reveal-up",
+      "trigger": "IntersectionObserver (entry)",
+      "duration": "{{ms}}",
+      "easing": "var(--ease-out)",
+      "usage": "entrada de seção ao scroll",
+      "source": "animations.css"
+    }
+  ],
+
+  "layoutPatterns": [
+    {
+      "name": "section-grid-2col",
+      "when": "seções de conteúdo com imagem + texto",
+      "markup": "<section class=\"ds-section\"><div class=\"ds-container ds-grid-2\">...</div></section>"
+    }
+  ],
+
+  "icons": {
+    "system": "{{astro-icon@iconify | inline-svg | icon-font}}",
+    "collections": ["{{mdi}}", "{{solar}}"],
+    "usage": "<Icon name=\"solar:heart-bold\" class=\"w-5 h-5\" />"
+  },
+
+  "conventions": {
+    "classPrefix": "ds-",
+    "cssVarPrefix": "--{{prefix}}-",
+    "responsive": "mobile-first",
+    "darkMode": "{{none|class|media}}"
+  }
+}

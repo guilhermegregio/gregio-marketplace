@@ -1,0 +1,51 @@
+/* ============================================
+   ANIMATIONS — keyframes + reveal/hover/ambient classes
+   ============================================ */
+
+/* --- Keyframes --- */
+@keyframes ds-reveal-up {
+  from { opacity: 0; transform: translateY({{px}}); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes ds-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY({{px}}); }
+}
+@keyframes ds-shimmer {
+  from { background-position: -200% 0; }
+  to   { background-position: 200% 0; }
+}
+/* Add additional keyframes observed in the source site */
+
+/* --- Reveal classes (triggered by IntersectionObserver → adds .is-visible) --- */
+.reveal-up,
+.reveal-zoom,
+.reveal-left,
+.reveal-right {
+  opacity: 0;
+  transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out);
+}
+.reveal-up   { transform: translateY({{px}}); }
+.reveal-zoom { transform: scale(0.9); }
+.reveal-left { transform: translateX(-{{px}}); }
+.reveal-right{ transform: translateX({{px}}); }
+
+.reveal-up.is-visible,
+.reveal-zoom.is-visible,
+.reveal-left.is-visible,
+.reveal-right.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.delay-100 { transition-delay: 100ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-500 { transition-delay: 500ms; }
+.delay-700 { transition-delay: 700ms; }
+
+/* --- Continuous ambient animations --- */
+.ds-float { animation: ds-float {{duration}} ease-in-out infinite; }
+
+/* --- Hover effects --- */
+.ds-hover-lift:hover { transform: translateY(-4px); box-shadow: {{shadow}}; }
+.ds-hover-glow:hover { box-shadow: 0 0 0 3px {{rgba}}; }

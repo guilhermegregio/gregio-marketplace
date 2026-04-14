@@ -1,0 +1,33 @@
+/* ============================================
+   TYPOGRAPHY — scale + classes
+   Only include styles that actually appear in the reference site.
+   ============================================ */
+
+.ds-h1 {
+  font-family: var(--font-{{family}});
+  font-size: {{px}};
+  line-height: {{px}};
+  font-weight: {{weight}};
+  letter-spacing: {{tracking}};
+}
+.ds-h2 { /* ... */ }
+.ds-h3 { /* ... */ }
+.ds-h4 { /* ... */ }
+
+.ds-body-lg  { font-family: var(--font-primary); font-size: {{px}}; line-height: {{px}}; }
+.ds-body     { font-family: var(--font-primary); font-size: {{px}}; line-height: {{px}}; }
+.ds-body-sm  { font-family: var(--font-primary); font-size: {{px}}; line-height: {{px}}; }
+
+.ds-label {
+  font-family: var(--font-mono);
+  font-size: {{px}};
+  letter-spacing: {{tracking}};
+  text-transform: uppercase;
+}
+
+.ds-text-gradient {
+  background: linear-gradient({{deg}}, {{color-a}}, {{color-b}});
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

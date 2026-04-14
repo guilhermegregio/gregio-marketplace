@@ -1,0 +1,81 @@
+/* ============================================
+   COMPONENTS — buttons, cards, inputs, badges, modals, nav
+   Include ONLY components that exist in the reference site.
+   Preserve original class names, timings, hover/focus states.
+   ============================================ */
+
+/* --- Buttons --- */
+.ds-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: {{py}} {{px}};
+  border-radius: var(--radius-full);
+  font-family: var(--font-primary);
+  font-weight: {{weight}};
+  font-size: {{px}};
+  cursor: pointer;
+  transition: all var(--transition-base);
+  border: none;
+  text-decoration: none;
+}
+.ds-btn-primary   { background: {{color}}; color: {{color}}; }
+.ds-btn-primary:hover { transform: translateY(-2px); box-shadow: {{shadow}}; }
+.ds-btn-secondary { /* ... */ }
+.ds-btn-ghost     { /* ... */ }
+.ds-btn-icon      { padding: {{px}}; }
+.ds-btn:disabled  { opacity: 0.5; cursor: not-allowed; }
+
+/* --- Cards --- */
+.ds-card {
+  background: {{color}};
+  border: 1px solid var(--{{prefix}}-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: all var(--transition-base);
+}
+.ds-card-product   { /* ... */ }
+.ds-card-glass     { backdrop-filter: blur({{px}}); background: {{rgba}}; }
+.ds-card-flashlight { /* ... */ }
+
+/* --- Inputs --- */
+.ds-input {
+  width: 100%;
+  padding: {{py}} {{px}};
+  border: 1px solid var(--{{prefix}}-border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-primary);
+  font-size: {{px}};
+  transition: border-color var(--transition-base);
+}
+.ds-input:focus { border-color: {{color}}; outline: none; }
+
+/* --- Badges --- */
+.ds-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: {{py}} {{px}};
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: {{px}};
+  text-transform: uppercase;
+}
+.ds-badge-label { /* inline badge com dot */ }
+
+/* --- Nav --- */
+.ds-nav {
+  position: sticky;
+  top: 0;
+  background: {{rgba}};
+  backdrop-filter: blur({{px}});
+  z-index: 50;
+}
+.ds-nav-inner { padding: {{py}} 0; }
+.ds-nav-content { display: flex; align-items: center; justify-content: space-between; }
+.ds-nav-links { display: flex; gap: var(--space-6); list-style: none; }
+
+/* --- Modal --- */
+.ds-modal { /* ... */ }
+.ds-modal-overlay { /* ... */ }

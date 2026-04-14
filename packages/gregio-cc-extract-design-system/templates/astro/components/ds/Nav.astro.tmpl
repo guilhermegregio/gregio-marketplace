@@ -1,0 +1,29 @@
+---
+export interface NavLink {
+  href: string;
+  label: string;
+}
+
+export interface Props {
+  logoSrc?: string;
+  logoAlt?: string;
+  links: NavLink[];
+}
+
+const { logoSrc, logoAlt = 'Logo', links } = Astro.props;
+---
+
+<nav class="ds-nav">
+  <div class="ds-nav-inner">
+    <div class="ds-nav-content">
+      <a href="/" class="ds-nav-logo">
+        {logoSrc && <img src={logoSrc} alt={logoAlt} />}
+      </a>
+      <ul class="ds-nav-links">
+        {links.map((l) => (
+          <li><a href={l.href}>{l.label}</a></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</nav>

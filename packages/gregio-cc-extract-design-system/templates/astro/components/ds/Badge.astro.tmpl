@@ -1,0 +1,16 @@
+---
+export interface Props {
+  variant?: 'default' | 'label' | 'primary' | 'accent';
+  dot?: boolean;
+  class?: string;
+}
+
+const { variant = 'default', dot = false, class: extraClass = '' } = Astro.props;
+const classes = ['ds-badge', variant !== 'default' && `ds-badge-${variant}`, extraClass]
+  .filter(Boolean).join(' ');
+---
+
+<span class={classes}>
+  {dot && <span class="dot"></span>}
+  <slot />
+</span>

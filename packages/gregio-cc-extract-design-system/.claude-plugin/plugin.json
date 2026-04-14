@@ -1,0 +1,23 @@
+{
+  "name": "gregio-cc-extract-design-system",
+  "description": "Extract a living design system from any website (or local HTML) into a modular, agent-consumable source of truth: tokens, components, animations, plus a manifest and guide for LLM-assisted development",
+  "version": "0.1.0",
+  "author": {
+    "name": "Guilherme Gregio",
+    "email": "guilherme@gregio.net"
+  },
+  "homepage": "https://github.com/glittercowboy/gregio-marketplace",
+  "repository": "https://github.com/glittercowboy/gregio-marketplace",
+  "license": "MIT",
+  "keywords": [
+    "design-system",
+    "astro",
+    "tailwind",
+    "css-tokens",
+    "component-library",
+    "scraping",
+    "playwright",
+    "slash-commands",
+    "source-of-truth"
+  ]
+}

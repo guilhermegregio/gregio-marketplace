@@ -1,0 +1,45 @@
+/*
+ * Design System interactions (vanilla JS)
+ * Matches reveal-* classes in animations.css.
+ * Extend with any observer/parallax/slider logic present in the source site.
+ */
+
+(function () {
+  'use strict';
+
+  const revealSelector = '.reveal-up, .reveal-zoom, .reveal-left, .reveal-right';
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      }
+    },
+    { threshold: 0.15, rootMargin: '0px 0px -10% 0px' }
+  );
+
+  document.querySelectorAll(revealSelector).forEach((el) => io.observe(el));
+
+  // Modal close handlers
+  document.querySelectorAll('[data-modal-close]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const dialog = btn.closest('dialog');
+      if (dialog && typeof dialog.close === 'function') dialog.close();
+    });
+  });
+
+  // Char-reveal effect for titles with .char-reveal — splits on load
+  document.querySelectorAll('.char-reveal').forEach((el) => {
+    const text = el.textContent || '';
+    el.textContent = '';
+    [...text].forEach((char, i) => {
+      const span = document.createElement('span');
+      span.textContent = char === ' ' ? '\u00A0' : char;
+      span.style.setProperty('--char-index', String(i));
+      el.appendChild(span);
+    });
+  });
+})();

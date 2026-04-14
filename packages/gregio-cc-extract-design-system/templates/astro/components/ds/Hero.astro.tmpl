@@ -1,0 +1,34 @@
+---
+export interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  class?: string;
+}
+
+const { eyebrow, title, subtitle, class: extraClass = '' } = Astro.props;
+---
+
+<section class={`ds-hero ${extraClass}`}>
+  <div class="ds-hero-bg"></div>
+
+  <div class="ds-hero-content">
+    {eyebrow && (
+      <div class="ds-badge-label reveal-up">
+        <div class="dot"></div>
+        <span>{eyebrow}</span>
+      </div>
+    )}
+    <h1 class="ds-hero-title char-reveal">{title}</h1>
+    {subtitle && (
+      <div class="text-reveal-wrapper">
+        <p class="ds-hero-subtitle text-reveal-content">{subtitle}</p>
+      </div>
+    )}
+    <div class="flex flex-wrap gap-4 mt-6 reveal-up delay-300 justify-center">
+      <slot name="cta" />
+    </div>
+  </div>
+
+  <slot name="decor" />
+</section>

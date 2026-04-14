@@ -1,0 +1,39 @@
+---
+export interface Props {
+  type?: string;
+  name: string;
+  label?: string;
+  placeholder?: string;
+  required?: boolean;
+  error?: string;
+  value?: string;
+  class?: string;
+}
+
+const {
+  type = 'text',
+  name,
+  label,
+  placeholder,
+  required = false,
+  error,
+  value,
+  class: extraClass = '',
+} = Astro.props;
+
+const inputClasses = ['ds-input', error && 'is-error', extraClass].filter(Boolean).join(' ');
+---
+
+<div class="ds-field">
+  {label && <label for={name} class="ds-label">{label}</label>}
+  <input
+    id={name}
+    name={name}
+    type={type}
+    class={inputClasses}
+    placeholder={placeholder}
+    required={required}
+    value={value}
+  />
+  {error && <p class="ds-field-error">{error}</p>}
+</div>

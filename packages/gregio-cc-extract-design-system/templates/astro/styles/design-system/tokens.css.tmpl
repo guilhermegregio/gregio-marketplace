@@ -1,0 +1,57 @@
+/* ============================================
+   TOKENS — source of truth for colors, fonts, spacing, easing
+   Fill from: colors/fonts/spacing actually used in the reference site.
+   Do NOT introduce tokens that don't appear in the original design.
+   ============================================ */
+
+:root {
+  /* --- Colors (primary) --- */
+  --{{prefix}}-{{primary-name}}:         {{#hex}};
+  --{{prefix}}-{{primary-name}}-dark:    {{#hex}};
+  --{{prefix}}-{{primary-name}}-light:   {{#hex}};
+  --{{prefix}}-{{primary-name}}-lighter: {{#hex}};
+
+  /* --- Colors (accent / complementary) --- */
+  /* repeat pattern for each additional color family */
+
+  /* --- Surfaces --- */
+  --{{prefix}}-bg:         {{#hex}};
+  --{{prefix}}-surface:    {{#hex}};
+  --{{prefix}}-surface-2:  {{#hex}};
+  --{{prefix}}-border:     {{#hex}};
+
+  /* --- Feedback --- */
+  --{{prefix}}-success: {{#hex}};
+  --{{prefix}}-warning: {{#hex}};
+  --{{prefix}}-danger:  {{#hex}};
+
+  /* --- Fonts --- */
+  --font-display: '{{DisplayFont}}', serif;
+  --font-primary: '{{PrimaryFont}}', system-ui, sans-serif;
+  --font-mono:    '{{MonoFont}}', ui-monospace, monospace;
+
+  /* --- Spacing (use as padding/margin/gap sources of truth) --- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+
+  /* --- Radii --- */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  /* --- Easing & transitions --- */
+  --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:  cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-bounce:  cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  --transition-fast:  150ms var(--ease-out);
+  --transition-base:  250ms var(--ease-out);
+  --transition-slow:  450ms var(--ease-out);
+}

@@ -1,0 +1,22 @@
+<!-- Modal — uses native <dialog>. Open with dialog.showModal() -->
+
+<dialog id="example-modal" class="ds-modal ds-modal-md">
+  <form method="dialog" class="ds-modal-overlay"></form>
+  <div class="ds-modal-content">
+    <header class="ds-modal-header">
+      <h3 class="ds-h3">Título do modal</h3>
+      <button class="ds-btn-icon" data-modal-close aria-label="Fechar">×</button>
+    </header>
+    <div class="ds-modal-body">
+      <p class="ds-body">Conteúdo do modal.</p>
+    </div>
+    <footer class="ds-modal-footer">
+      <button class="ds-btn ds-btn-ghost" data-modal-close>Cancelar</button>
+      <button class="ds-btn ds-btn-primary">Confirmar</button>
+    </footer>
+  </div>
+</dialog>
+
+<button class="ds-btn ds-btn-primary" onclick="document.getElementById('example-modal').showModal()">
+  Abrir modal
+</button>

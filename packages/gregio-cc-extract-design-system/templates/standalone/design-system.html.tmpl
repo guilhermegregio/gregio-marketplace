@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{PROJECT_NAME}} — Design System</title>
+  <meta name="description" content="Design System gerado a partir de {{SOURCE_URL}}. Fonte única de verdade para construir novas páginas e componentes." />
+
+  <!-- Fonts (preserve from source site) -->
+  {{GOOGLE_FONTS_LINKS_FROM_SOURCE}}
+
+  <!-- Design System CSS (modular, imported via index.css) -->
+  <link rel="stylesheet" href="./assets/css/index.css" />
+</head>
+<body>
+
+  <!-- ====== NAV ====== -->
+  <nav class="ds-nav">
+    <div class="ds-nav-inner">
+      <div class="ds-nav-content">
+        <a href="#hero" class="ds-nav-logo">
+          {{LOGO_IMG_OR_TEXT}}
+        </a>
+        <ul class="ds-nav-links">
+          <li><a href="#typography">Tipografia</a></li>
+          <li><a href="#colors">Cores</a></li>
+          <li><a href="#components">Componentes</a></li>
+          <li><a href="#icons">Ícones</a></li>
+          <li><a href="#animations">Animações</a></li>
+          <li><a href="#layout">Layout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ====== HERO (exact clone of source hero, text adapted) ====== -->
+  <section id="hero" class="ds-hero">
+    {{CLONE_OF_SOURCE_HERO_MARKUP_WITH_TEXT_ADAPTED_TO_DESIGN_SYSTEM}}
+  </section>
+
+  <!-- ====== TYPOGRAPHY ====== -->
+  <section id="typography" class="ds-section">
+    <div class="ds-container">
+      <header class="ds-section-header reveal-up">
+        <span class="ds-badge ds-badge-label"><span class="dot"></span>01 — Tipografia</span>
+        <h2 class="ds-h1 ds-text-gradient">Tipografia</h2>
+      </header>
+      <div class="ds-type-spec">
+        <div class="ds-type-row">
+          <span class="ds-label">Heading 1</span>
+          <h1 class="ds-h1">{{Exemplo}}</h1>
+          <span class="ds-type-size">{{40px / 48px}}</span>
+        </div>
+        <!-- ... only styles that exist in source site -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== COLORS ====== -->
+  <section id="colors" class="ds-section">
+    <div class="ds-container">
+      <header class="ds-section-header reveal-up">
+        <span class="ds-badge ds-badge-label"><span class="dot"></span>02 — Cores</span>
+        <h2 class="ds-h1 ds-text-gradient">Cores & Superfícies</h2>
+      </header>
+      <div class="ds-grid-4">
+        <!-- swatch + name + var + hex + usage -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== COMPONENTS ====== -->
+  <section id="components" class="ds-section">
+    <div class="ds-container">
+      <header class="ds-section-header reveal-up">
+        <span class="ds-badge ds-badge-label"><span class="dot"></span>03 — Componentes</span>
+        <h2 class="ds-h1 ds-text-gradient">Componentes</h2>
+      </header>
+
+      <h3 class="ds-h3">Buttons</h3>
+      <div class="ds-demo-row">
+        <a class="ds-btn ds-btn-primary">Primary</a>
+        <a class="ds-btn ds-btn-secondary">Secondary</a>
+        <a class="ds-btn ds-btn-ghost">Ghost</a>
+        <a class="ds-btn ds-btn-primary" aria-disabled="true">Disabled</a>
+      </div>
+
+      <h3 class="ds-h3">Cards</h3>
+      <div class="ds-grid-3">
+        <article class="ds-card">Default</article>
+        <article class="ds-card ds-card-glass">Glass</article>
+        <article class="ds-card ds-card-flashlight">Flashlight</article>
+      </div>
+
+      <!-- Inputs, Badges, Modals as present in source -->
+    </div>
+  </section>
+
+  <!-- ====== MOTION ====== -->
+  <section id="animations" class="ds-section">
+    <div class="ds-container">
+      <header class="ds-section-header reveal-up">
+        <span class="ds-badge ds-badge-label"><span class="dot"></span>05 — Motion</span>
+        <h2 class="ds-h1 ds-text-gradient">Animações</h2>
+      </header>
+      <div class="ds-grid-3">
+        <article class="ds-card"><div class="reveal-up is-visible">reveal-up</div></article>
+        <article class="ds-card"><div class="reveal-zoom is-visible">reveal-zoom</div></article>
+        <article class="ds-card"><div class="ds-float">float</div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== LAYOUT ====== -->
+  <section id="layout" class="ds-section">
+    <div class="ds-container">
+      <header class="ds-section-header reveal-up">
+        <span class="ds-badge ds-badge-label"><span class="dot"></span>04 — Layout</span>
+        <h2 class="ds-h1 ds-text-gradient">Layout</h2>
+      </header>
+      <!-- 2–3 layout patterns pulled from the source site -->
+    </div>
+  </section>
+
+  <!-- ====== ICONS (remove if source has no icon system) ====== -->
+
+  <script src="./assets/js/design-system.js" defer></script>
+</body>
+</html>

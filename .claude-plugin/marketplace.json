@@ -15,6 +15,13 @@
       "description": "Skills and commands for prompt engineering, MCP servers, subagents, hooks, and productivity workflows",
       "version": "0.1.0",
       "strict": true
+    },
+    {
+      "name": "gregio-cc-extract-design-system",
+      "source": "./packages/gregio-cc-extract-design-system",
+      "description": "Extract a living design system (tokens, components, animations) from any website into a modular source-of-truth with machine-readable manifest and LLM-consumable guide",
+      "version": "0.1.0",
+      "strict": true
     }
   ]
 }

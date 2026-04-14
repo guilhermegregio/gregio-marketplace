@@ -1,0 +1,38 @@
+---
+export interface Props {
+  variant?: 'primary' | 'secondary' | 'ghost' | 'accent' | 'white';
+  size?: 'sm' | 'md' | 'lg';
+  icon?: string;
+  iconRight?: string;
+  href?: string;
+  disabled?: boolean;
+  loading?: boolean;
+  class?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  icon,
+  iconRight,
+  href,
+  disabled = false,
+  loading = false,
+  class: extraClass = '',
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+const classes = [
+  'ds-btn',
+  `ds-btn-${variant}`,
+  size !== 'md' && `ds-btn-${size}`,
+  loading && 'is-loading',
+  extraClass,
+].filter(Boolean).join(' ');
+---
+
+<Tag class={classes} href={href} disabled={disabled} aria-busy={loading}>
+  {icon && <span class="ds-btn-icon-left"><!-- <Icon name={icon} /> --></span>}
+  <slot />
+  {iconRight && <span class="ds-btn-icon-right"><!-- <Icon name={iconRight} /> --></span>}
+</Tag>

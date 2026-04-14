@@ -1,0 +1,80 @@
+# Design System — {{PROJECT_NAME}}
+
+> Fonte da verdade para construir páginas, seções e componentes deste projeto.
+> Ao criar qualquer UI nova, **reuse** o que está aqui — não reinvente estilos.
+
+## Como o agente deve usar este documento
+
+1. Antes de criar qualquer componente novo, verifique a tabela **Componentes** abaixo.
+2. Se o componente já existe, **importe/copie** o markup de `{{COMPONENTS_PATH}}` ou consulte o snippet.
+3. Se precisar de cor, fonte, spacing ou animação, use **tokens CSS** (`var(--{{prefix}}-xxx)`) definidos em `{{TOKENS_PATH}}`.
+4. Se for criar uma variante nova, primeiro pergunte ao usuário se deve:
+   (a) adicionar variante em `components.css` e atualizar este guia + manifest, ou
+   (b) usar composição com classes utilitárias existentes.
+5. Consulte `design-system.manifest.json` quando precisar de dados estruturados (listar componentes, mapear classe → source).
+
+## Arquivos-chave
+
+| Arquivo | Papel |
+|---|---|
+| `{{TOKENS_PATH}}` | Custom properties (cores, fontes, spacing, easing) — **nunca** hardcode valores |
+| `{{TYPOGRAPHY_PATH}}` | Escala tipográfica e classes `ds-h1`–`ds-h4`, `ds-body-*`, `ds-label` |
+| `{{COMPONENTS_CSS_PATH}}` | Componentes: `ds-btn*`, `ds-card*`, `ds-input*`, `ds-badge*`, `ds-modal*`, `ds-nav*` |
+| `{{ANIMATIONS_PATH}}` | Keyframes e classes de reveal/hover/shimmer |
+| `{{LAYOUT_PATH}}` | Container, grids, sections, backgrounds |
+| `{{COMPONENTS_PATH}}` | {{Componentes Astro reutilizáveis | Snippets HTML prontos para copiar}} |
+| `{{SHOWCASE_PATH}}` | Página live do DS — abra para ver tudo em funcionamento |
+| `design-system.manifest.json` | Inventário machine-readable (tokens, componentes, animações) |
+
+## Tokens
+
+### Cores
+
+| Token | Valor | Uso |
+|---|---|---|
+| `--{{prefix}}-{{name}}` | `{{#hex}}` | {{propósito}} |
+
+### Tipografia
+
+- **Display**: `var(--font-display)` — `{{Nome da fonte}}` — títulos decorativos
+- **Primary**: `var(--font-primary)` — `{{Nome da fonte}}` — corpo e UI
+- **Mono**: `var(--font-mono)` — `{{Nome da fonte}}` — labels e dados
+
+Escala: `ds-h1` ({{px}}) · `ds-h2` ({{px}}) · `ds-h3` ({{px}}) · `ds-h4` ({{px}}) · `ds-body-lg` · `ds-body` · `ds-body-sm` · `ds-label`
+
+## Componentes — quando usar
+
+| Componente | Classes / Import | Quando usar | Quando **não** usar |
+|---|---|---|---|
+| Button (primary) | `<Button variant="primary">` ou `class="ds-btn ds-btn-primary"` | CTA principal, conversão | Para ação destrutiva (use `ghost`) |
+| Button (secondary) | `ds-btn ds-btn-secondary` | Ações secundárias ao lado do primário | Como única CTA de página |
+| Card (product) | `ds-card ds-card-product` | Listagem de produtos/itens | Blocos de texto puro |
+| Card (glass) | `ds-card ds-card-glass` | Overlay em cima de imagem/hero | Em fundos lisos (contraste ruim) |
+| Badge | `ds-badge` | Metadados curtos (tags, status) | Para texto longo |
+| Input | `ds-input` | Formulários | Displays de valor (use `ds-label`) |
+| Modal | `ds-modal` | Confirmações e dialogs | Navegação entre páginas |
+| Nav | `ds-nav` | Menu principal sticky | Submenus de seção |
+
+## Animações — quando usar
+
+| Classe | Gatilho | Uso |
+|---|---|---|
+| `reveal-up` | IntersectionObserver | Entrada de seção ao scroll |
+| `reveal-zoom` | IntersectionObserver | Logo/destaque do hero |
+| `char-reveal` | IntersectionObserver | Títulos impactantes (1x por página) |
+| `float` (contínua) | CSS | Elementos decorativos |
+
+## Regras de composição
+
+- **Mobile-first**: escreva estilos-base para mobile, use `@media (min-width: ...)` para up.
+- **Prefixo obrigatório**: classes `ds-*`, variáveis `--{{prefix}}-*`. Não introduza outras convenções sem atualizar este guia.
+- **Sem valores hardcoded**: use tokens CSS em cores, spacing, easing.
+- **Ícones**: use `{{iconSystem}}` — não misture SVGs inline soltos com `astro-icon`.
+- **Novas seções**: comece por `<section class="ds-section"><div class="ds-container">...</div></section>`.
+
+## Como estender o DS
+
+1. Abra `{{SHOWCASE_PATH}}` para ver se um padrão parecido já existe.
+2. Se sim: reuse.
+3. Se não: proponha variante nova **no arquivo CSS correto** (`components.css` para componentes, `animations.css` para motion) e atualize **este guia** e o `design-system.manifest.json`.
+4. Nunca adicione estilos inline em páginas — sempre via classe reutilizável.

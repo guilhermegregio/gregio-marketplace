@@ -1,0 +1,20 @@
+---
+export interface Props {
+  variant?: 'default' | 'product' | 'glass' | 'flashlight' | 'feature';
+  padding?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+
+const { variant = 'default', padding = 'md', class: extraClass = '' } = Astro.props;
+
+const classes = [
+  'ds-card',
+  variant !== 'default' && `ds-card-${variant}`,
+  `p-${padding}`,
+  extraClass,
+].filter(Boolean).join(' ');
+---
+
+<article class={classes}>
+  <slot />
+</article>
