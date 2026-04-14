@@ -16,11 +16,13 @@ Formato dos argumentos: `<url-or-local-path> [dest-dir] [--spa]`
 - `dest-dir` (opcional): onde gerar o design system. Default: diretório atual (`.`)
 - `--spa`: quando `url-or-local-path` for URL, força Playwright no download
 
-## Phase 0 — Resolve plugin path
+## Phase 0 — Plugin path
 
-Descubra `PLUGIN_ROOT` (o diretório raiz desta skill). Prefira `${CLAUDE_PLUGIN_ROOT}` se disponível; caso contrário, derive a partir do caminho deste arquivo (dois níveis acima de `commands/extract-ds.md`).
+Todos os scripts Node desta skill devem ser referenciados via `${CLAUDE_PLUGIN_ROOT}` (variável literal — Claude Code substitui em runtime pelo path da skill, seja em dev local ou instalada via plugin manager em `~/.claude/plugins/cache/...`).
 
-Todos os scripts Node são executados via `npx --yes --package=...` — **nada é instalado permanentemente** nem no plugin nem no projeto alvo. As deps ficam no cache global do npx (`~/.npm/_npx/`).
+**NÃO tente "descobrir" o path lendo diretórios, fazendo `ls`, ou usando path hardcoded como `/home/.../gregio-marketplace/...`.** Sempre escreva `${CLAUDE_PLUGIN_ROOT}` literal nos comandos shell.
+
+Scripts são executados via `npx --yes --package=...` — **nada é instalado permanentemente** nem no plugin nem no projeto alvo. As deps ficam no cache global do npx (`~/.npm/_npx/`).
 
 ## Phase 1 — Prepare source
 
@@ -28,11 +30,11 @@ Se `url-or-local-path` for URL:
 1. Crie `tmpDir = /tmp/ds-source-$(date +%s)`
 2. Execute:
    ```
-   npx --yes --package=cheerio@^1 -- node "$PLUGIN_ROOT/scripts/fetch-site.js" <url> <tmpDir>
+   npx --yes --package=cheerio@^1 -- node "${CLAUDE_PLUGIN_ROOT}/scripts/fetch-site.js" <url> <tmpDir>
    ```
    Se `--spa`:
    ```
-   npx --yes --package=cheerio@^1 --package=playwright@^1.48 -- node "$PLUGIN_ROOT/scripts/fetch-site.js" <url> <tmpDir> --spa
+   npx --yes --package=cheerio@^1 --package=playwright@^1.48 -- node "${CLAUDE_PLUGIN_ROOT}/scripts/fetch-site.js" <url> <tmpDir> --spa
    ```
 3. `sourceDir = tmpDir`
 
@@ -46,7 +48,7 @@ Leia `sourceHtml` e todos os CSS referenciados (via `<link>` ou inline `<style>`
 
 `detect-stack.js` usa só APIs nativas do Node, então roda direto:
 ```
-node "$PLUGIN_ROOT/scripts/detect-stack.js" <dest-dir>
+node "${CLAUDE_PLUGIN_ROOT}/scripts/detect-stack.js" <dest-dir>
 ```
 
 Capture o JSON. Decida o `mode`:
@@ -69,7 +71,7 @@ Extraia do HTML + CSS do site original:
 
 ## Phase 4 — Generate output
 
-Copie os templates de `<plugin-path>/templates/<mode>/` para o `dest-dir`, preenchendo placeholders `{{...}}` com os dados da Fase 3.
+Copie os templates de `${CLAUDE_PLUGIN_ROOT}/templates/<mode>/` (e `${CLAUDE_PLUGIN_ROOT}/templates/shared/`) para o `dest-dir`, preenchendo placeholders `{{...}}` com os dados da Fase 3.
 
 ### Se `mode === "astro"`:
 - `src/pages/design-system.astro` — a partir de `templates/astro/pages/design-system.astro.tmpl`
@@ -117,4 +119,4 @@ Ao terminar, reporte ao usuário:
 
 ## Reference (regras técnicas originais)
 
-O arquivo `<plugin-path>/extract-design-system.md` contém as regras detalhadas do showcase (hero clone, ordem de seções, regras de tipografia). Consulte-o quando estiver em dúvida sobre convenções das seções.
+O arquivo `${CLAUDE_PLUGIN_ROOT}/extract-design-system.md` contém as regras detalhadas do showcase (hero clone, ordem de seções, regras de tipografia). Consulte-o quando estiver em dúvida sobre convenções das seções.

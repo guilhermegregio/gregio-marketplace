@@ -19,18 +19,19 @@ Formato: `<url> [out-dir] [--spa]`
 ## Steps
 
 1. Determine o `out-dir`. Se não fornecido, use `/tmp/ds-fetch-$(date +%s)`.
-2. Descubra o path do plugin (diretório desta skill) — chame de `PLUGIN_ROOT`. Normalmente disponível via `${CLAUDE_PLUGIN_ROOT}` quando o comando é executado por Claude Code; senão, derive do caminho deste arquivo (`.../gregio-cc-extract-design-system/commands/fetch-site.md` → `PLUGIN_ROOT` é dois níveis acima).
-3. Execute **sem instalar nada permanentemente** — as deps são resolvidas on-demand via cache do `npx` (`~/.npm/_npx/`):
+2. Execute **sem instalar nada permanentemente** — as deps são resolvidas on-demand via cache do `npx` (`~/.npm/_npx/`). Use literalmente `${CLAUDE_PLUGIN_ROOT}` — o Claude Code substitui pelo path onde a skill está instalada (funciona tanto em dev local quanto via plugin manager).
 
    **Default (sites estáticos/SSR):**
    ```
-   npx --yes --package=cheerio@^1 -- node "$PLUGIN_ROOT/scripts/fetch-site.js" <url> <out-dir>
+   npx --yes --package=cheerio@^1 -- node "${CLAUDE_PLUGIN_ROOT}/scripts/fetch-site.js" <url> <out-dir>
    ```
 
    **Com `--spa` (SPAs / JS-heavy):**
    ```
-   npx --yes --package=cheerio@^1 --package=playwright@^1.48 -- node "$PLUGIN_ROOT/scripts/fetch-site.js" <url> <out-dir> --spa
+   npx --yes --package=cheerio@^1 --package=playwright@^1.48 -- node "${CLAUDE_PLUGIN_ROOT}/scripts/fetch-site.js" <url> <out-dir> --spa
    ```
+
+   **Importante**: NÃO tente "descobrir" o path do plugin lendo diretórios ou usando paths hardcoded (tipo `/home/.../gregio-marketplace/...`). Sempre use `${CLAUDE_PLUGIN_ROOT}` literal na linha de comando — shell/Claude expande automaticamente.
    Se Chromium não estiver instalado (primeira vez com `--spa`):
    ```
    npx --yes playwright install chromium
