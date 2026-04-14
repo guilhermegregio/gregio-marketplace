@@ -1,0 +1,8 @@
+-----------------
+ " Asimov Site Downloader: "https://sd.asimov.academy/"
+ " Github do projeto do Site Downloader: "https://github.com/asimov-academy/Website-Downloader"
+
+Para referências:
+ " Mobbin: "https://mobbin.com/browse/web/screens"
+ " Webflow/Dribble: "https://webflow.com/made-in-webflow/dribbble"
+ " Aura.build: "https://aura.build/"
