@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="{{VALUE:language-code (e.g. en, pt-BR)}}" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{VALUE:site-name}} — Design System</title>
+  <meta name="description" content="Living design system for {{VALUE:site-name}}" />
+
+  <!-- Google Fonts -->
+  {{REPEAT:google-font-links}}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="{{VALUE:google-font-url}}" rel="stylesheet" />
+  {{/REPEAT}}
+
+  <!-- Design System Styles -->
+  <link rel="stylesheet" href="./assets/css/index.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       Navigation
+       ═══════════════════════════════════════════ -->
+  <nav class="ds-nav" aria-label="Design system sections">
+    <div class="ds-nav__inner">
+      <strong class="ds-nav__brand">{{VALUE:site-name}} DS</strong>
+      <ul class="ds-nav__links">
+        <li><a href="#hero">Hero</a></li>
+        <li><a href="#typography">Typography</a></li>
+        <li><a href="#colors">Colors</a></li>
+        <li><a href="#components">Components</a></li>
+        <li><a href="#layout">Layout</a></li>
+        <li><a href="#motion">Motion</a></li>
+        {{CONDITIONAL:has-icons}}
+        <li><a href="#icons">Icons</a></li>
+        {{/CONDITIONAL}}
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ═══════════════════════════════════════════
+         Section 1 — Hero (exact clone)
+         ═══════════════════════════════════════════ -->
+    <section id="hero" class="ds-section ds-section--hero">
+      {{INSTRUCTION: Reproduce the exact hero section HTML from the source site.
+        Preserve all classes, structure, text content, images, and inline styles.
+        Use the same heading tags, paragraph text, CTAs, and background treatments.
+        Replace absolute image URLs with relative paths (./assets/images/...) if images were downloaded.}}
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         Section 2 — Typography
+         ═══════════════════════════════════════════ -->
+    <section id="typography" class="ds-section ds-section--typography">
+      <h2 class="ds-section__title">Typography</h2>
+
+      <div class="ds-type-specimen">
+        {{INSTRUCTION: Generate a type specimen block showing the primary font family.
+          Include a large preview of the alphabet (A-Z, a-z, 0-9) and a pangram sentence
+          using the actual font-family token value.}}
+      </div>
+
+      <table class="ds-type-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Font</th>
+            <th>Weight</th>
+            <th>Size</th>
+            <th>Line Height</th>
+            <th>Letter Spacing</th>
+            <th>Preview</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{REPEAT:typography-entries}}
+          <tr>
+            <td><code>{{VALUE:element-or-class}}</code></td>
+            <td>{{VALUE:font-family}}</td>
+            <td>{{VALUE:font-weight}}</td>
+            <td>{{VALUE:font-size}}</td>
+            <td>{{VALUE:line-height}}</td>
+            <td>{{VALUE:letter-spacing}}</td>
+            <td>
+              <span class="{{VALUE:preview-class}}" style="{{VALUE:preview-inline-styles}}">
+                {{VALUE:preview-text}}
+              </span>
+            </td>
+          </tr>
+          {{/REPEAT}}
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         Section 3 — Colors
+         ═══════════════════════════════════════════ -->
+    <section id="colors" class="ds-section ds-section--colors">
+      <h2 class="ds-section__title">Colors</h2>
+
+      {{REPEAT:color-groups}}
+      <h3 class="ds-color-group__title">{{VALUE:group-name}}</h3>
+      <div class="ds-color-grid">
+        {{REPEAT:colors}}
+        <div class="ds-color-swatch">
+          <div class="ds-color-swatch__preview" style="background: {{VALUE:color-value}};"></div>
+          <div class="ds-color-swatch__info">
+            <span class="ds-color-swatch__name">{{VALUE:color-name}}</span>
+            <code class="ds-color-swatch__token">{{VALUE:css-variable}}</code>
+            <code class="ds-color-swatch__hex">{{VALUE:color-value}}</code>
+          </div>
+        </div>
+        {{/REPEAT}}
+      </div>
+      {{/REPEAT}}
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         Section 4 — Components
+         ═══════════════════════════════════════════ -->
+    <section id="components" class="ds-section ds-section--components">
+      <h2 class="ds-section__title">Components</h2>
+
+      {{REPEAT:components}}
+      <article class="ds-component-block" id="component-{{VALUE:component-slug}}">
+        <h3 class="ds-component-block__title">{{VALUE:component-name}}</h3>
+        <p class="ds-component-block__desc">{{VALUE:component-description}}</p>
+
+        <!-- Default variant -->
+        <div class="ds-component-block__preview">
+          <h4>Default</h4>
+          {{INSTRUCTION: Generate the default variant HTML for this component using its base class.
+            Use realistic content that matches the source site context.}}
+        </div>
+
+        {{REPEAT:variants}}
+        <div class="ds-component-block__preview">
+          <h4>{{VALUE:variant-name}}</h4>
+          {{INSTRUCTION: Generate variant HTML with the appropriate modifier class applied.}}
+        </div>
+        {{/REPEAT}}
+
+        {{REPEAT:states}}
+        <div class="ds-component-block__preview ds-component-block__preview--state">
+          <h4>State: {{VALUE:state-name}}</h4>
+          {{INSTRUCTION: Generate an example of this component in the given state
+            (e.g. hover, focus, disabled, active, loading).}}
+        </div>
+        {{/REPEAT}}
+      </article>
+      {{/REPEAT}}
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         Section 5 — Layout
+         ═══════════════════════════════════════════ -->
+    <section id="layout" class="ds-section ds-section--layout">
+      <h2 class="ds-section__title">Layout</h2>
+
+      {{REPEAT:layout-patterns}}
+      <article class="ds-layout-block">
+        <h3 class="ds-layout-block__title">{{VALUE:pattern-name}}</h3>
+        <p class="ds-layout-block__desc">{{VALUE:pattern-description}}</p>
+
+        <div class="ds-layout-block__demo">
+          {{INSTRUCTION: Generate a representative HTML example of this layout pattern.
+            Use placeholder content blocks showing grid/flex structure, spacing, and breakpoints.
+            Apply the actual CSS classes from the source site.}}
+        </div>
+
+        <div class="ds-layout-block__spec">
+          <dl>
+            {{REPEAT:spec-items}}
+            <dt>{{VALUE:spec-label}}</dt>
+            <dd><code>{{VALUE:spec-value}}</code></dd>
+            {{/REPEAT}}
+          </dl>
+        </div>
+      </article>
+      {{/REPEAT}}
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         Section 6 — Motion
+         ═══════════════════════════════════════════ -->
+    <section id="motion" class="ds-section ds-section--motion">
+      <h2 class="ds-section__title">Motion</h2>
+
+      <div class="ds-motion-gallery">
+        {{REPEAT:animations}}
+        <div class="ds-motion-card">
+          <h4 class="ds-motion-card__title">{{VALUE:animation-name}}</h4>
+          <div class="ds-motion-card__preview">
+            {{INSTRUCTION: Generate a small demo element that plays this animation on hover or on loop.
+              Apply the relevant animation class or keyframe name.}}
+          </div>
+          <div class="ds-motion-card__spec">
+            <code>{{VALUE:animation-css}}</code>
+            <span>Duration: {{VALUE:duration}}</span>
+            <span>Easing: {{VALUE:easing}}</span>
+          </div>
+        </div>
+        {{/REPEAT}}
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         Section 7 — Icons (conditional)
+         ═══════════════════════════════════════════ -->
+    {{CONDITIONAL:has-icons}}
+    <section id="icons" class="ds-section ds-section--icons">
+      <h2 class="ds-section__title">Icons</h2>
+
+      <div class="ds-icon-grid">
+        {{REPEAT:icons}}
+        <div class="ds-icon-card">
+          <div class="ds-icon-card__preview">
+            {{INSTRUCTION: Render the icon using its original method (inline SVG, icon font class, or img tag).}}
+          </div>
+          <code class="ds-icon-card__name">{{VALUE:icon-name}}</code>
+          {{CONDITIONAL:icon-has-variants}}
+          <div class="ds-icon-card__variants">
+            {{REPEAT:icon-variants}}
+            <span class="ds-icon-card__variant" title="{{VALUE:variant-name}}">
+              {{INSTRUCTION: Render the icon variant.}}
+            </span>
+            {{/REPEAT}}
+          </div>
+          {{/CONDITIONAL}}
+        </div>
+        {{/REPEAT}}
+      </div>
+    </section>
+    {{/CONDITIONAL}}
+
+  </main>
+
+  <!-- Design System Script -->
+  <script src="./assets/js/design-system.js"></script>
+</body>
+</html>

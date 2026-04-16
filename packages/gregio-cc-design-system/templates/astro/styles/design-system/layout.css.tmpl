@@ -1,0 +1,331 @@
+/* ═══════════════════════════════════════════
+   Layout — {{VALUE:project-name}}
+   ═══════════════════════════════════════════ */
+
+/* ─── Body Reset ─── */
+
+.ds-body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Container ─── */
+
+.ds-container {
+  width: 100%;
+  max-width: {{VALUE:container-max-width}};
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+/* ─── Section ─── */
+
+.ds-section {
+  padding-block: var(--space-20);
+}
+
+.ds-section--alt {
+  background: var(--color-surface-alt);
+}
+
+.ds-section--hero {
+  padding-block: var(--space-24) var(--space-20);
+  text-align: center;
+}
+
+/* ─── Section Header ─── */
+
+.ds-section-header {
+  margin-block-end: var(--space-12);
+}
+
+.ds-section-header .ds-h2 {
+  margin-block-end: var(--space-3);
+}
+
+.ds-section-header .ds-body {
+  max-width: 40rem;
+}
+
+.ds-section--hero .ds-section-header .ds-body {
+  margin-inline: auto;
+}
+
+/* ─── Grid: 2 Columns ─── */
+
+.ds-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 640px) {
+  .ds-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ─── Grid: 3 Columns ─── */
+
+.ds-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 640px) {
+  .ds-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .ds-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ─── Grid: 4 Columns ─── */
+
+.ds-grid-4 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 640px) {
+  .ds-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .ds-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ─── Background Utilities ─── */
+
+.ds-bg-surface         { background: var(--color-surface); }
+.ds-bg-surface-alt     { background: var(--color-surface-alt); }
+.ds-bg-surface-elevated { background: var(--color-surface-elevated); }
+.ds-bg-primary         { background: var(--color-primary); color: var(--color-text-inverse); }
+.ds-bg-accent          { background: var(--color-accent); color: var(--color-text-inverse); }
+
+/* ─── Layout Demo Helpers (showcase only) ─── */
+
+.ds-layout-demo {
+  margin-block-end: var(--space-6);
+}
+
+.ds-layout-demo__box {
+  background: var(--color-surface-elevated);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.ds-layout-demo__cell {
+  background: var(--color-primary-100);
+  border: 1px solid var(--color-primary-300);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-primary-700);
+}
+
+/* ─── Spacing Scale Demo ─── */
+
+.ds-spacing-scale {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.ds-spacing-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.ds-spacing-item__bar {
+  height: var(--space-4);
+  background: var(--color-primary-300);
+  border-radius: var(--radius-sm);
+  min-width: 4px;
+}
+
+/* ─── Color Swatch ─── */
+
+.ds-color-group {
+  margin-block-end: var(--space-10);
+}
+
+.ds-color-group .ds-h4 {
+  margin-block-end: var(--space-4);
+}
+
+.ds-color-swatch {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+}
+
+.ds-color-swatch__fill {
+  height: 5rem;
+}
+
+.ds-color-swatch__meta {
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/* ─── Component Showcase Helpers ─── */
+
+.ds-component-block {
+  margin-block-end: var(--space-12);
+  padding-block-end: var(--space-12);
+  border-block-end: 1px solid var(--color-border-light);
+}
+
+.ds-component-block:last-child {
+  border-block-end: none;
+}
+
+.ds-component-block .ds-h3 {
+  margin-block-end: var(--space-2);
+}
+
+.ds-component-block .ds-body-sm {
+  margin-block-end: var(--space-6);
+}
+
+.ds-component-row {
+  margin-block-end: var(--space-6);
+}
+
+.ds-component-row .ds-label {
+  margin-block-end: var(--space-3);
+}
+
+.ds-component-row__items {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* ─── Motion Demo Helpers ─── */
+
+.ds-motion-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  text-align: center;
+  cursor: pointer;
+}
+
+.ds-motion-card__track {
+  height: 4px;
+  background: var(--color-border-light);
+  border-radius: var(--radius-full);
+  margin-block-end: var(--space-3);
+  position: relative;
+}
+
+.ds-motion-card__dot {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  transition: left var(--duration-slow);
+}
+
+.ds-motion-card__dot.is-animating {
+  left: calc(100% - 12px);
+}
+
+.ds-motion-demo__box {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+/* ─── Icon Card ─── */
+
+.ds-icon-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.ds-icon-card__preview {
+  font-size: 1.5rem;
+  color: var(--color-text);
+}
+
+.ds-icon-card__preview svg {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+/* ─── Spec Table ─── */
+
+.ds-spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.ds-spec-table th,
+.ds-spec-table td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-block-end: 1px solid var(--color-border-light);
+}
+
+.ds-spec-table th {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.ds-spec-table td code {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-primary);
+}

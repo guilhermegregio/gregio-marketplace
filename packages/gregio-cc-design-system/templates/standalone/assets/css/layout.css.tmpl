@@ -1,0 +1,74 @@
+/*  ═══════════════════════════════════════════
+    Layout Classes
+    Source: {{VALUE:site-url}}
+    ═══════════════════════════════════════════ */
+
+/* ── Container ───────────────────────────── */
+{{REPEAT:container-classes}}
+{{VALUE:selector}} {
+  width: 100%;
+  max-width: {{VALUE:max-width}};
+  margin-inline: auto;
+  padding-inline: {{VALUE:padding-inline}};
+}
+{{/REPEAT}}
+
+/* ── Grid System ─────────────────────────── */
+{{REPEAT:grid-classes}}
+{{VALUE:selector}} {
+  display: grid;
+  {{INSTRUCTION: Generate the grid-template-columns, gap, and any other grid
+    properties extracted from the source site for this class.}}
+}
+{{/REPEAT}}
+
+/* ── Flex Utilities ──────────────────────── */
+{{REPEAT:flex-classes}}
+{{VALUE:selector}} {
+  display: flex;
+  {{INSTRUCTION: Generate the flex properties (direction, wrap, gap, align, justify)
+    extracted from the source site for this class.}}
+}
+{{/REPEAT}}
+
+/* ── Spacing Utilities ───────────────────── */
+{{REPEAT:spacing-utilities}}
+{{VALUE:selector}} {
+  {{VALUE:property}}: {{VALUE:value}};
+}
+{{/REPEAT}}
+
+/* ── Section Spacing ─────────────────────── */
+{{REPEAT:section-spacing-classes}}
+{{VALUE:selector}} {
+  padding-block: {{VALUE:padding-block}};
+  {{CONDITIONAL:has-additional-styles}}
+  {{INSTRUCTION: Generate any additional layout styles for this section spacing class.}}
+  {{/CONDITIONAL}}
+}
+{{/REPEAT}}
+
+/* ── Responsive Layout ───────────────────── */
+{{REPEAT:responsive-layout-rules}}
+@media ({{VALUE:media-query}}) {
+  {{REPEAT:overrides}}
+  {{VALUE:selector}} {
+    {{INSTRUCTION: Generate responsive overrides for this layout class at this breakpoint.}}
+  }
+  {{/REPEAT}}
+}
+{{/REPEAT}}
+
+/* ── Display & Visibility ────────────────── */
+{{REPEAT:display-utilities}}
+{{VALUE:selector}} {
+  {{VALUE:property}}: {{VALUE:value}};
+}
+{{/REPEAT}}
+
+/* ── Position Utilities ──────────────────── */
+{{REPEAT:position-utilities}}
+{{VALUE:selector}} {
+  {{INSTRUCTION: Generate position-related properties for this utility class.}}
+}
+{{/REPEAT}}

@@ -1,0 +1,26 @@
+/*  ═══════════════════════════════════════════
+    {{VALUE:site-name}} — Design System CSS
+    Auto-generated aggregator — do not edit manually
+    ═══════════════════════════════════════════ */
+
+/* Tokens (custom properties) */
+@import './tokens.css';
+
+/* Typography classes */
+@import './typography.css';
+
+/* Layout utilities */
+@import './layout.css';
+
+/* Component styles */
+@import './components.css';
+
+/* Animations & keyframes */
+@import './animations.css';
+
+{{CONDITIONAL:has-additional-css-modules}}
+{{REPEAT:additional-css-modules}}
+/* {{VALUE:module-description}} */
+@import './{{VALUE:module-filename}}';
+{{/REPEAT}}
+{{/CONDITIONAL}}

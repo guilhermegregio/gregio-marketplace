@@ -1,0 +1,17 @@
+<!-- {{VALUE:component-name}} Component
+     Base class: {{VALUE:base-class}}
+     Variants: {{VALUE:variant-list}}
+     ─────────────────────────── -->
+
+<!-- Default -->
+{{INSTRUCTION: Generate default variant HTML using base class}}
+
+{{REPEAT:variants}}
+<!-- {{VALUE:variant-name}} -->
+{{INSTRUCTION: Generate variant HTML}}
+{{/REPEAT}}
+
+{{REPEAT:states}}
+<!-- State: {{VALUE:state-name}} -->
+{{INSTRUCTION: Generate state example HTML}}
+{{/REPEAT}}

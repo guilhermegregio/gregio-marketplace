@@ -1,0 +1,79 @@
+/*  ═══════════════════════════════════════════
+    Typography Classes
+    Source: {{VALUE:site-url}}
+    ═══════════════════════════════════════════ */
+
+/* ── Base / Reset ────────────────────────── */
+body {
+  font-family: {{VALUE:body-font-family}};
+  font-size: {{VALUE:body-font-size}};
+  font-weight: {{VALUE:body-font-weight}};
+  line-height: {{VALUE:body-line-height}};
+  color: {{VALUE:body-text-color}};
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Headings ────────────────────────────── */
+{{REPEAT:heading-styles}}
+{{VALUE:selector}} {
+  font-family: {{VALUE:font-family}};
+  font-size: {{VALUE:font-size}};
+  font-weight: {{VALUE:font-weight}};
+  line-height: {{VALUE:line-height}};
+  letter-spacing: {{VALUE:letter-spacing}};
+  {{CONDITIONAL:has-text-transform}}
+  text-transform: {{VALUE:text-transform}};
+  {{/CONDITIONAL}}
+  {{CONDITIONAL:has-margin}}
+  margin: {{VALUE:margin}};
+  {{/CONDITIONAL}}
+  color: {{VALUE:color}};
+}
+{{/REPEAT}}
+
+/* ── Body Text Variants ──────────────────── */
+{{REPEAT:body-text-styles}}
+{{VALUE:selector}} {
+  font-family: {{VALUE:font-family}};
+  font-size: {{VALUE:font-size}};
+  font-weight: {{VALUE:font-weight}};
+  line-height: {{VALUE:line-height}};
+  {{CONDITIONAL:has-letter-spacing}}
+  letter-spacing: {{VALUE:letter-spacing}};
+  {{/CONDITIONAL}}
+  color: {{VALUE:color}};
+}
+{{/REPEAT}}
+
+/* ── Utility Classes ─────────────────────── */
+{{REPEAT:text-utility-classes}}
+{{VALUE:selector}} {
+  {{INSTRUCTION: Generate the CSS properties for this text utility class
+    based on the extracted styles from the source site.}}
+}
+{{/REPEAT}}
+
+/* ── Links ───────────────────────────────── */
+a {
+  color: {{VALUE:link-color}};
+  text-decoration: {{VALUE:link-text-decoration}};
+  transition: {{VALUE:link-transition}};
+}
+
+a:hover {
+  color: {{VALUE:link-hover-color}};
+  text-decoration: {{VALUE:link-hover-text-decoration}};
+}
+
+/* ── Responsive Typography ───────────────── */
+{{REPEAT:responsive-type-rules}}
+@media ({{VALUE:media-query}}) {
+  {{VALUE:selector}} {
+    font-size: {{VALUE:font-size}};
+    {{CONDITIONAL:has-line-height-override}}
+    line-height: {{VALUE:line-height}};
+    {{/CONDITIONAL}}
+  }
+}
+{{/REPEAT}}

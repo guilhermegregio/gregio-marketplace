@@ -1,0 +1,153 @@
+/* ═══════════════════════════════════════════
+   Animations — {{VALUE:project-name}}
+   ═══════════════════════════════════════════ */
+
+/* ─── Keyframes ─── */
+
+@keyframes ds-reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY({{VALUE:reveal-distance}});
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ds-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY({{VALUE:float-distance}});
+  }
+}
+
+@keyframes ds-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ─── Reveal Classes ─── */
+
+.reveal-up,
+.reveal-zoom,
+.reveal-left,
+.reveal-right {
+  opacity: 0;
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out);
+  will-change: opacity, transform;
+}
+
+.reveal-up {
+  transform: translateY({{VALUE:reveal-distance}});
+}
+
+.reveal-zoom {
+  transform: scale(0.92);
+}
+
+.reveal-left {
+  transform: translateX(-{{VALUE:reveal-distance}});
+}
+
+.reveal-right {
+  transform: translateX({{VALUE:reveal-distance}});
+}
+
+/* Visible state (triggered by IntersectionObserver) */
+
+.reveal-up.is-visible,
+.reveal-zoom.is-visible,
+.reveal-left.is-visible,
+.reveal-right.is-visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
+}
+
+/* ─── Delay Utilities ─── */
+
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+.delay-600 { transition-delay: 600ms; }
+.delay-700 { transition-delay: 700ms; }
+
+/* ─── Ambient: Float ─── */
+
+.ds-float {
+  animation: ds-float {{VALUE:float-duration}} var(--ease-in-out) infinite;
+}
+
+/* ─── Ambient: Hover Lift ─── */
+
+.ds-hover-lift {
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+
+.ds-hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ─── Ambient: Hover Glow ─── */
+
+.ds-hover-glow {
+  transition:
+    box-shadow var(--duration-base) var(--ease-out);
+}
+
+.ds-hover-glow:hover {
+  box-shadow: var(--shadow-glow);
+}
+
+/* ─── Shimmer (skeleton loading) ─── */
+
+.ds-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-alt) 25%,
+    var(--color-surface-elevated) 50%,
+    var(--color-surface-alt) 75%
+  );
+  background-size: 200% 100%;
+  animation: ds-shimmer 1.5s var(--ease-in-out) infinite;
+}
+
+/* ─── Reduced Motion ─── */
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up,
+  .reveal-zoom,
+  .reveal-left,
+  .reveal-right {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .ds-float {
+    animation: none;
+  }
+
+  .ds-hover-lift:hover {
+    transform: none;
+  }
+
+  .ds-char {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}

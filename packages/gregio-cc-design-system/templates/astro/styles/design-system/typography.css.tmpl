@@ -1,0 +1,107 @@
+/* ═══════════════════════════════════════════
+   Typography — {{VALUE:project-name}}
+   ═══════════════════════════════════════════ */
+
+/* ─── Headings ─── */
+
+.ds-h1 {
+  font-family: var(--font-display);
+  font-size: {{VALUE:h1-font-size}};
+  font-weight: {{VALUE:h1-font-weight}};
+  line-height: {{VALUE:h1-line-height}};
+  letter-spacing: {{VALUE:h1-letter-spacing}};
+  color: var(--color-text);
+}
+
+.ds-h2 {
+  font-family: var(--font-display);
+  font-size: {{VALUE:h2-font-size}};
+  font-weight: {{VALUE:h2-font-weight}};
+  line-height: {{VALUE:h2-line-height}};
+  letter-spacing: {{VALUE:h2-letter-spacing}};
+  color: var(--color-text);
+}
+
+.ds-h3 {
+  font-family: var(--font-display);
+  font-size: {{VALUE:h3-font-size}};
+  font-weight: {{VALUE:h3-font-weight}};
+  line-height: {{VALUE:h3-line-height}};
+  letter-spacing: {{VALUE:h3-letter-spacing}};
+  color: var(--color-text);
+}
+
+.ds-h4 {
+  font-family: var(--font-display);
+  font-size: {{VALUE:h4-font-size}};
+  font-weight: {{VALUE:h4-font-weight}};
+  line-height: {{VALUE:h4-line-height}};
+  letter-spacing: {{VALUE:h4-letter-spacing}};
+  color: var(--color-text);
+}
+
+/* ─── Body ─── */
+
+.ds-body-lg {
+  font-family: var(--font-primary);
+  font-size: {{VALUE:body-lg-font-size}};
+  font-weight: {{VALUE:body-lg-font-weight}};
+  line-height: {{VALUE:body-lg-line-height}};
+  letter-spacing: {{VALUE:body-lg-letter-spacing}};
+  color: var(--color-text-secondary);
+}
+
+.ds-body {
+  font-family: var(--font-primary);
+  font-size: {{VALUE:body-font-size}};
+  font-weight: {{VALUE:body-font-weight}};
+  line-height: {{VALUE:body-line-height}};
+  letter-spacing: {{VALUE:body-letter-spacing}};
+  color: var(--color-text-secondary);
+}
+
+.ds-body-sm {
+  font-family: var(--font-primary);
+  font-size: {{VALUE:body-sm-font-size}};
+  font-weight: {{VALUE:body-sm-font-weight}};
+  line-height: {{VALUE:body-sm-line-height}};
+  letter-spacing: {{VALUE:body-sm-letter-spacing}};
+  color: var(--color-text-muted);
+}
+
+/* ─── Label ─── */
+
+.ds-label {
+  font-family: var(--font-mono);
+  font-size: {{VALUE:label-font-size}};
+  font-weight: {{VALUE:label-font-weight}};
+  line-height: {{VALUE:label-line-height}};
+  letter-spacing: {{VALUE:label-letter-spacing}};
+  text-transform: {{VALUE:label-text-transform}};
+  color: var(--color-text-muted);
+}
+
+/* ─── Gradient Text ─── */
+
+.ds-text-gradient {
+  background: {{VALUE:text-gradient}};
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Char Reveal (animated headline) ─── */
+
+.ds-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.3em);
+  animation: ds-char-in 0.4s var(--ease-out) forwards;
+}
+
+@keyframes ds-char-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

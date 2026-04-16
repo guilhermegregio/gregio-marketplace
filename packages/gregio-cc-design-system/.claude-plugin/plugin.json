@@ -1,0 +1,26 @@
+{
+  "name": "gregio-cc-design-system",
+  "description": "Complete design system workbench: extract from websites, create from scratch, improve, merge, and generate components/pages for Astro, React/Next, or standalone HTML. Produces machine-readable manifests and human-readable guides as source of truth for LLM-assisted development.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Guilherme Gregio",
+    "email": "guilherme@gregio.net"
+  },
+  "homepage": "https://github.com/glittercowboy/gregio-marketplace",
+  "repository": "https://github.com/glittercowboy/gregio-marketplace",
+  "license": "MIT",
+  "keywords": [
+    "design-system",
+    "astro",
+    "react",
+    "next",
+    "tailwind",
+    "css-tokens",
+    "component-library",
+    "source-of-truth",
+    "extraction",
+    "generation",
+    "showcase",
+    "slash-commands"
+  ]
+}

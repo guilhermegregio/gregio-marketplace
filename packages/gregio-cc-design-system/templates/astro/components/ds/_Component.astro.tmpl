@@ -1,0 +1,39 @@
+---
+{{INSTRUCTION: Define TypeScript interface for component props based on component catalog entry. Include variant, size, and component-specific props. Add JSDoc comments.}}
+
+interface Props {
+  {{REPEAT:props}}
+  /** {{VALUE:prop-description}} */
+  {{VALUE:prop-name}}?: {{VALUE:prop-type}};
+  {{/REPEAT}}
+  class?: string;
+  [key: string]: any;
+}
+
+const {
+  {{REPEAT:props}}
+  {{VALUE:prop-name}} = {{VALUE:prop-default}},
+  {{/REPEAT}}
+  class: className,
+  ...rest
+} = Astro.props;
+
+const classes = [
+  '{{VALUE:base-class}}',
+  {{REPEAT:variant-classes}}
+  {{VALUE:variant-condition}} && '{{VALUE:variant-class}}',
+  {{/REPEAT}}
+  className,
+].filter(Boolean).join(' ');
+
+{{CONDITIONAL:has-element-switch}}
+const Element = {{VALUE:element-switch-logic}};
+{{/CONDITIONAL}}
+---
+
+<{{VALUE:element-tag}} class={classes} {...rest}>
+  {{CONDITIONAL:has-icon-slot}}
+  {{{VALUE:icon-prop}} && <span class="{{VALUE:icon-class}}">{{{VALUE:icon-prop}}}</span>}
+  {{/CONDITIONAL}}
+  <slot />
+</{{VALUE:element-tag}}>

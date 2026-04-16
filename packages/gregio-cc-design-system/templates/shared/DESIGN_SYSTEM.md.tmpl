@@ -1,0 +1,81 @@
+# {{VALUE:project-name}} — Design System
+
+> Generated from {{VALUE:source}} on {{VALUE:date}}
+> Mode: {{VALUE:astro-or-standalone}}
+
+## Quick Start
+
+{{CONDITIONAL:mode-astro}}
+Import in your global CSS or BaseLayout:
+```css
+@import '../styles/design-system/index.css';
+```
+Start the dev server: `pnpm dev` → `http://localhost:4321/design-system`
+{{/CONDITIONAL}}
+
+{{CONDITIONAL:mode-standalone}}
+Link the CSS in your HTML:
+```html
+<link rel="stylesheet" href="./assets/css/index.css">
+<script src="./assets/js/design-system.js" defer></script>
+```
+Serve: `python3 -m http.server 8080` → `http://localhost:8080/design-system.html`
+{{/CONDITIONAL}}
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| {{VALUE:tokens-path}} | CSS custom properties (colors, fonts, spacing, etc.) |
+| {{VALUE:typography-path}} | Typography scale and classes |
+| {{VALUE:layout-path}} | Container, grid, section patterns |
+| {{VALUE:components-path}} | Component styles (button, card, etc.) |
+| {{VALUE:animations-path}} | Keyframes, reveal, hover effects |
+| {{VALUE:showcase-path}} | Living showcase page |
+| `design-system.manifest.json` | Machine-readable inventory (for agents) |
+
+## Tokens
+
+### Colors
+{{REPEAT:colors}}
+| `--{{VALUE:prefix}}-{{VALUE:name}}` | {{VALUE:hex}} | {{VALUE:usage}} |
+{{/REPEAT}}
+
+### Typography
+{{REPEAT:type-styles}}
+| `.{{VALUE:prefix}}-{{VALUE:name}}` | {{VALUE:font-size}} / {{VALUE:line-height}} | {{VALUE:weight}} |
+{{/REPEAT}}
+
+### Spacing Scale
+{{INSTRUCTION: Generate spacing scale table from space-1 to space-24}}
+
+## Components
+
+{{REPEAT:components}}
+### {{VALUE:component-name}}
+- **Base class**: `.{{VALUE:base-class}}`
+- **Variants**: {{VALUE:variant-list}}
+- **States**: {{VALUE:states-list}}
+- **When to use**: {{VALUE:usage-description}}
+{{/REPEAT}}
+
+## Animations
+
+{{REPEAT:animations}}
+| `.{{VALUE:class}}` | {{VALUE:usage}} | {{VALUE:trigger}} | {{VALUE:duration}} |
+{{/REPEAT}}
+
+## Composition Rules
+
+1. **Mobile-first**: base styles for mobile, `@media (min-width)` for up
+2. **Use tokens**: never hardcode colors, spacing, or fonts — use `var(--{{VALUE:prefix}}-...)`
+3. **Prefix convention**: all DS classes use `{{VALUE:prefix}}-` prefix
+4. **Dark mode**: {{VALUE:dark-mode-strategy}}
+5. **Accessibility**: target {{VALUE:a11y-level}} contrast, min 44px touch targets
+
+## How to Extend
+
+1. Add new tokens to `tokens.css` and update `design-system.manifest.json`
+2. Add new components to `components.css`, create snippet/Astro component
+3. Update this guide and the manifest
+4. Run `/improve-ds --audit` to validate changes

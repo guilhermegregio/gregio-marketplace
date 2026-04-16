@@ -1,0 +1,170 @@
+{
+  "$schema": "design-system-v1",
+  "name": "{{VALUE:project-name}}",
+  "version": "{{VALUE:version}}",
+  "generatedFrom": "{{VALUE:source-url-or-path}}",
+  "generatedAt": "{{VALUE:iso-date}}",
+  "mode": "{{VALUE:astro-or-standalone}}",
+
+  "meta": {
+    "aesthetic": "{{VALUE:aesthetic-style}}",
+    "sources": [{{REPEAT:sources}}"{{VALUE:source-url}}"{{/REPEAT}}],
+    "mergedFrom": [],
+    "lastImprovedAt": null
+  },
+
+  "entrypoints": {
+    "css": "{{VALUE:css-index-path}}",
+    "js": "{{VALUE:js-path-or-null}}",
+    "showcase": "{{VALUE:showcase-page-path}}",
+    "components": "{{VALUE:components-dir-path}}"
+  },
+
+  "tokens": {
+    "colors": {
+      {{REPEAT:colors}}
+      "{{VALUE:color-name}}": {
+        "value": "{{VALUE:hex}}",
+        "rgb": "{{VALUE:rgb}}",
+        "usage": "{{VALUE:primary-or-accent-or-surface-or-text-or-feedback}}",
+        "cssVar": "--{{VALUE:prefix}}-{{VALUE:color-name}}"
+      }
+      {{/REPEAT}}
+    },
+    "fonts": {
+      "display": { "family": "{{VALUE:display-font}}", "fallback": "{{VALUE:fallback-stack}}", "source": "{{VALUE:google-or-local-or-cdn}}" },
+      "primary": { "family": "{{VALUE:primary-font}}", "fallback": "{{VALUE:fallback-stack}}", "source": "{{VALUE:source}}" },
+      "mono": { "family": "{{VALUE:mono-font}}", "fallback": "monospace", "source": "{{VALUE:source}}" }
+    },
+    "typography": [
+      {{REPEAT:type-styles}}
+      {
+        "name": "{{VALUE:style-name}}",
+        "element": "{{VALUE:html-element}}",
+        "class": ".{{VALUE:prefix}}-{{VALUE:class-name}}",
+        "fontSize": "{{VALUE:font-size}}",
+        "lineHeight": "{{VALUE:line-height}}",
+        "fontWeight": "{{VALUE:font-weight}}",
+        "letterSpacing": "{{VALUE:letter-spacing}}",
+        "fontFamily": "{{VALUE:font-token-ref}}"
+      }
+      {{/REPEAT}}
+    ],
+    "spacing": {
+      {{REPEAT:spacing}}
+      "space-{{VALUE:scale-number}}": "{{VALUE:rem-value}}"
+      {{/REPEAT}}
+    },
+    "radii": {
+      "sm": "{{VALUE:sm-radius}}",
+      "md": "{{VALUE:md-radius}}",
+      "lg": "{{VALUE:lg-radius}}",
+      "full": "9999px"
+    },
+    "easing": {
+      "ease-out": "{{VALUE:ease-out-bezier}}",
+      "ease-in-out": "{{VALUE:ease-in-out-bezier}}",
+      "ease-bounce": "{{VALUE:ease-bounce-bezier}}"
+    },
+    "breakpoints": {
+      "sm": "640px",
+      "md": "768px",
+      "lg": "1024px",
+      "xl": "1280px"
+    },
+    "shadows": {
+      {{REPEAT:shadows}}
+      "{{VALUE:shadow-name}}": "{{VALUE:shadow-value}}"
+      {{/REPEAT}}
+    },
+    "gradients": {
+      {{REPEAT:gradients}}
+      "{{VALUE:gradient-name}}": {
+        "value": "{{VALUE:gradient-css}}",
+        "usage": "{{VALUE:text-or-background-or-border}}"
+      }
+      {{/REPEAT}}
+    },
+    "zIndex": {
+      "dropdown": "10",
+      "sticky": "20",
+      "modal": "50",
+      "toast": "60"
+    }
+  },
+
+  "components": [
+    {{REPEAT:components}}
+    {
+      "name": "{{VALUE:component-name}}",
+      "baseClass": ".{{VALUE:prefix}}-{{VALUE:component-name}}",
+      "variants": [
+        {{REPEAT:variants}}
+        { "name": "{{VALUE:variant-name}}", "class": ".{{VALUE:prefix}}-{{VALUE:component-name}}-{{VALUE:variant-name}}", "when": "{{VALUE:usage-context}}" }
+        {{/REPEAT}}
+      ],
+      "states": [{{VALUE:states-list}}],
+      "props": [
+        {{REPEAT:props}}
+        { "name": "{{VALUE:prop-name}}", "type": "{{VALUE:ts-type}}", "default": "{{VALUE:default-value}}" }
+        {{/REPEAT}}
+      ],
+      "a11y": {
+        "role": "{{VALUE:aria-role}}",
+        "focusVisible": {{VALUE:true-or-false}},
+        "minTarget": "{{VALUE:min-target-size}}"
+      },
+      "source": "{{VALUE:css-file-path}}",
+      "example": "{{VALUE:html-snippet}}",
+      "astroComponent": "{{VALUE:astro-component-path-or-null}}",
+      "snippet": "{{VALUE:snippet-path-or-null}}",
+      "reactComponent": "{{VALUE:react-component-path-or-null}}"
+    }
+    {{/REPEAT}}
+  ],
+
+  "animations": [
+    {{REPEAT:animations}}
+    {
+      "name": "{{VALUE:animation-name}}",
+      "class": ".{{VALUE:animation-class}}",
+      "trigger": "{{VALUE:trigger-mechanism}}",
+      "duration": "{{VALUE:duration}}",
+      "easing": "{{VALUE:easing-ref}}",
+      "usage": "{{VALUE:entrance-or-ambient-or-interaction}}",
+      "source": "{{VALUE:source-file}}"
+    }
+    {{/REPEAT}}
+  ],
+
+  "layoutPatterns": [
+    {{REPEAT:layouts}}
+    {
+      "name": "{{VALUE:pattern-name}}",
+      "when": "{{VALUE:usage-context}}",
+      "markup": "{{VALUE:html-example}}"
+    }
+    {{/REPEAT}}
+  ],
+
+  "icons": {
+    "system": "{{VALUE:icon-system-or-none}}",
+    "collections": [{{REPEAT:icon-collections}}"{{VALUE:collection-name}}"{{/REPEAT}}],
+    "usage": "{{VALUE:usage-description}}"
+  },
+
+  "conventions": {
+    "classPrefix": "{{VALUE:prefix}}-",
+    "cssVarPrefix": "--{{VALUE:prefix}}-",
+    "responsive": "mobile-first",
+    "darkMode": "{{VALUE:none-or-class-or-media}}",
+    "a11yLevel": "{{VALUE:AA-or-AAA}}",
+    "rtl": {{VALUE:true-or-false}}
+  },
+
+  "exports": {
+    "cssTokensPath": "{{VALUE:tokens-css-path}}",
+    "tsTokensPath": "{{VALUE:tokens-ts-path-or-null}}",
+    "reactComponentsPath": "{{VALUE:react-dir-or-null}}"
+  }
+}

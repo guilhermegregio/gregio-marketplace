@@ -1,0 +1,530 @@
+---
+/**
+ * Design System Showcase — {{VALUE:project-name}}
+ * Source: {{VALUE:source-url}}
+ * Generated: {{VALUE:iso-date}}
+ */
+
+{{INSTRUCTION: Import all DS components from the component catalog. Each component lives at ../components/ds/ComponentName.astro. Only import components that exist in the catalog.}}
+
+{{REPEAT:component-imports}}
+import {{VALUE:component-name}} from '../components/ds/{{VALUE:component-name}}.astro';
+{{/REPEAT}}
+
+const title = '{{VALUE:project-name}} — Design System';
+const sections = [
+  { id: 'hero', label: 'Overview' },
+  { id: 'typography', label: 'Typography' },
+  { id: 'colors', label: 'Colors' },
+  { id: 'components', label: 'Components' },
+  { id: 'layout', label: 'Layout' },
+  { id: 'motion', label: 'Motion' },
+  {{CONDITIONAL:has-icons}}
+  { id: 'icons', label: 'Icons' },
+  {{/CONDITIONAL}}
+];
+---
+
+<html lang="{{VALUE:locale}}">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  {{INSTRUCTION: Add font imports (Google Fonts link or @font-face) matching the extracted typography tokens.}}
+
+  <link rel="stylesheet" href="/styles/design-system/index.css" />
+</head>
+
+<body class="ds-body">
+
+  <!-- ═══════════════════════════════════════════
+       Navigation
+       ═══════════════════════════════════════════ -->
+  <nav class="ds-nav" aria-label="Design system sections">
+    <div class="ds-nav__brand">
+      {{CONDITIONAL:has-logo}}
+      <img src="{{VALUE:logo-src}}" alt="{{VALUE:project-name}}" class="ds-nav__logo" />
+      {{/CONDITIONAL}}
+      <span class="ds-nav__title">{{VALUE:project-name}}</span>
+    </div>
+    <ul class="ds-nav__links">
+      {sections.map((s) => (
+        <li><a href={`#${s.id}`} class="ds-nav__link">{s.label}</a></li>
+      ))}
+    </ul>
+  </nav>
+
+  <main>
+
+    <!-- ═══════════════════════════════════════════
+         Section 0 — Hero
+         ═══════════════════════════════════════════ -->
+    <section id="hero" class="ds-section ds-section--hero">
+      {{INSTRUCTION: Generate the hero section as an exact visual clone of the source site's above-the-fold area. Replicate headline, subheadline, CTA buttons, and decorative elements using DS components and tokens. Include a note comment reminding that this must be a pixel-accurate reproduction.}}
+
+      <!-- NOTE: This hero MUST be an exact clone of the source site's above-the-fold area. -->
+      <div class="ds-container">
+        <div class="ds-section-header reveal-up">
+          <h1 class="ds-h1 {{CONDITIONAL:has-gradient-text}}ds-text-gradient{{/CONDITIONAL}}">
+            {{VALUE:hero-headline}}
+          </h1>
+          <p class="ds-body-lg">{{VALUE:hero-subheadline}}</p>
+        </div>
+
+        <div class="ds-hero__actions reveal-up delay-200">
+          {{REPEAT:hero-ctas}}
+          <{{VALUE:cta-component}} variant="{{VALUE:cta-variant}}" {{VALUE:cta-extra-attrs}}>
+            {{VALUE:cta-label}}
+          </{{VALUE:cta-component}}>
+          {{/REPEAT}}
+        </div>
+
+        {{CONDITIONAL:has-hero-visual}}
+        <div class="ds-hero__visual reveal-zoom delay-400">
+          {{INSTRUCTION: Reproduce the hero's decorative/visual element — could be an illustration, gradient orb, mockup, or abstract shape. Use CSS and HTML to recreate it, not external images when possible.}}
+        </div>
+        {{/CONDITIONAL}}
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         Section 1 — Typography
+         ═══════════════════════════════════════════ -->
+    <section id="typography" class="ds-section">
+      <div class="ds-container">
+        <div class="ds-section-header reveal-up">
+          <h2 class="ds-h2">Typography</h2>
+          <p class="ds-body">Type scale and font specimens extracted from the source.</p>
+        </div>
+
+        <div class="ds-typography-spec">
+          <table class="ds-spec-table reveal-up delay-100">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Specimen</th>
+                <th>Font</th>
+                <th>Weight</th>
+                <th>Size</th>
+                <th>Line-Height</th>
+                <th>Letter-Spacing</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{REPEAT:typography-rows}}
+              <tr>
+                <td><code>{{VALUE:type-class}}</code></td>
+                <td><span class="{{VALUE:type-class}}">{{VALUE:type-specimen}}</span></td>
+                <td>{{VALUE:type-font-family}}</td>
+                <td>{{VALUE:type-font-weight}}</td>
+                <td>{{VALUE:type-font-size}}</td>
+                <td>{{VALUE:type-line-height}}</td>
+                <td>{{VALUE:type-letter-spacing}}</td>
+              </tr>
+              {{/REPEAT}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         Section 2 — Colors
+         ═══════════════════════════════════════════ -->
+    <section id="colors" class="ds-section ds-section--alt">
+      <div class="ds-container">
+        <div class="ds-section-header reveal-up">
+          <h2 class="ds-h2">Colors</h2>
+          <p class="ds-body">Complete palette with semantic and raw tokens.</p>
+        </div>
+
+        {{REPEAT:color-groups}}
+        <div class="ds-color-group reveal-up delay-{{VALUE:group-delay}}">
+          <h3 class="ds-h4">{{VALUE:color-group-name}}</h3>
+          <div class="ds-grid-4">
+            {{REPEAT:color-swatches}}
+            <div class="ds-color-swatch">
+              <div
+                class="ds-color-swatch__fill"
+                style={`background: var(--{{VALUE:color-token}})`}
+              ></div>
+              <div class="ds-color-swatch__meta">
+                <code class="ds-label">--{{VALUE:color-token}}</code>
+                <span class="ds-body-sm">{{VALUE:color-hex}}</span>
+              </div>
+            </div>
+            {{/REPEAT}}
+          </div>
+        </div>
+        {{/REPEAT}}
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         Section 3 — UI Components
+         ═══════════════════════════════════════════ -->
+    <section id="components" class="ds-section">
+      <div class="ds-container">
+        <div class="ds-section-header reveal-up">
+          <h2 class="ds-h2">Components</h2>
+          <p class="ds-body">Interactive catalog of every component with variants and states.</p>
+        </div>
+
+        {{REPEAT:component-showcases}}
+        <div class="ds-component-block reveal-up delay-{{VALUE:showcase-delay}}">
+          <h3 class="ds-h3">{{VALUE:component-display-name}}</h3>
+          <p class="ds-body-sm">{{VALUE:component-description}}</p>
+
+          <!-- Variants -->
+          <div class="ds-component-row">
+            <h4 class="ds-label">Variants</h4>
+            <div class="ds-component-row__items">
+              {{REPEAT:component-variants}}
+              <{{VALUE:component-tag}} variant="{{VALUE:variant-name}}" {{VALUE:variant-extra-attrs}}>
+                {{VALUE:variant-label}}
+              </{{VALUE:component-tag}}>
+              {{/REPEAT}}
+            </div>
+          </div>
+
+          {{CONDITIONAL:has-sizes}}
+          <!-- Sizes -->
+          <div class="ds-component-row">
+            <h4 class="ds-label">Sizes</h4>
+            <div class="ds-component-row__items">
+              {{REPEAT:component-sizes}}
+              <{{VALUE:component-tag}} size="{{VALUE:size-name}}">
+                {{VALUE:size-label}}
+              </{{VALUE:component-tag}}>
+              {{/REPEAT}}
+            </div>
+          </div>
+          {{/CONDITIONAL}}
+
+          {{CONDITIONAL:has-states}}
+          <!-- States -->
+          <div class="ds-component-row">
+            <h4 class="ds-label">States</h4>
+            <div class="ds-component-row__items">
+              {{REPEAT:component-states}}
+              <{{VALUE:component-tag}} {{VALUE:state-attr}}>
+                {{VALUE:state-label}}
+              </{{VALUE:component-tag}}>
+              {{/REPEAT}}
+            </div>
+          </div>
+          {{/CONDITIONAL}}
+        </div>
+        {{/REPEAT}}
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         Section 4 — Layout Patterns
+         ═══════════════════════════════════════════ -->
+    <section id="layout" class="ds-section ds-section--alt">
+      <div class="ds-container">
+        <div class="ds-section-header reveal-up">
+          <h2 class="ds-h2">Layout</h2>
+          <p class="ds-body">Grid systems, containers, and spacing patterns.</p>
+        </div>
+
+        <!-- Container demo -->
+        <div class="ds-component-block reveal-up delay-100">
+          <h3 class="ds-h4">Container</h3>
+          <div class="ds-layout-demo">
+            <div class="ds-container ds-layout-demo__box">
+              <code>.ds-container</code> — max-width: {{VALUE:container-max-width}}
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid demos -->
+        <div class="ds-component-block reveal-up delay-200">
+          <h3 class="ds-h4">Grid</h3>
+
+          <div class="ds-layout-demo">
+            <p class="ds-label">.ds-grid-2</p>
+            <div class="ds-grid-2">
+              <div class="ds-layout-demo__cell">1</div>
+              <div class="ds-layout-demo__cell">2</div>
+            </div>
+          </div>
+
+          <div class="ds-layout-demo">
+            <p class="ds-label">.ds-grid-3</p>
+            <div class="ds-grid-3">
+              <div class="ds-layout-demo__cell">1</div>
+              <div class="ds-layout-demo__cell">2</div>
+              <div class="ds-layout-demo__cell">3</div>
+            </div>
+          </div>
+
+          <div class="ds-layout-demo">
+            <p class="ds-label">.ds-grid-4</p>
+            <div class="ds-grid-4">
+              <div class="ds-layout-demo__cell">1</div>
+              <div class="ds-layout-demo__cell">2</div>
+              <div class="ds-layout-demo__cell">3</div>
+              <div class="ds-layout-demo__cell">4</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spacing scale -->
+        <div class="ds-component-block reveal-up delay-300">
+          <h3 class="ds-h4">Spacing Scale</h3>
+          <div class="ds-spacing-scale">
+            {{REPEAT:spacing-tokens}}
+            <div class="ds-spacing-item">
+              <div class="ds-spacing-item__bar" style={`width: var(--{{VALUE:spacing-token}})`}></div>
+              <code class="ds-label">--{{VALUE:spacing-token}}</code>
+              <span class="ds-body-sm">{{VALUE:spacing-value}}</span>
+            </div>
+            {{/REPEAT}}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         Section 5 — Motion Gallery
+         ═══════════════════════════════════════════ -->
+    <section id="motion" class="ds-section">
+      <div class="ds-container">
+        <div class="ds-section-header reveal-up">
+          <h2 class="ds-h2">Motion</h2>
+          <p class="ds-body">Easing curves, transitions, and animation patterns.</p>
+        </div>
+
+        <!-- Easing curves -->
+        <div class="ds-component-block reveal-up delay-100">
+          <h3 class="ds-h4">Easing Curves</h3>
+          <div class="ds-grid-3">
+            {{REPEAT:easing-tokens}}
+            <div class="ds-motion-card">
+              <div class="ds-motion-card__track">
+                <div
+                  class="ds-motion-card__dot"
+                  style={`transition-timing-function: var(--{{VALUE:easing-token}})`}
+                ></div>
+              </div>
+              <code class="ds-label">--{{VALUE:easing-token}}</code>
+              <span class="ds-body-sm">{{VALUE:easing-value}}</span>
+            </div>
+            {{/REPEAT}}
+          </div>
+        </div>
+
+        <!-- Reveal animations -->
+        <div class="ds-component-block reveal-up delay-200">
+          <h3 class="ds-h4">Reveal Animations</h3>
+          <div class="ds-grid-4">
+            <div class="ds-motion-demo reveal-up">
+              <div class="ds-motion-demo__box">.reveal-up</div>
+            </div>
+            <div class="ds-motion-demo reveal-zoom">
+              <div class="ds-motion-demo__box">.reveal-zoom</div>
+            </div>
+            <div class="ds-motion-demo reveal-left">
+              <div class="ds-motion-demo__box">.reveal-left</div>
+            </div>
+            <div class="ds-motion-demo reveal-right">
+              <div class="ds-motion-demo__box">.reveal-right</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ambient effects -->
+        <div class="ds-component-block reveal-up delay-300">
+          <h3 class="ds-h4">Ambient Effects</h3>
+          <div class="ds-grid-3">
+            <div class="ds-motion-demo__box ds-float">Float</div>
+            <div class="ds-motion-demo__box ds-hover-lift">Hover Lift</div>
+            <div class="ds-motion-demo__box ds-hover-glow">Hover Glow</div>
+          </div>
+        </div>
+
+        <!-- Delay utilities -->
+        <div class="ds-component-block reveal-up delay-400">
+          <h3 class="ds-h4">Stagger Delays</h3>
+          <div class="ds-grid-4">
+            {{REPEAT:delay-steps}}
+            <div class="reveal-up delay-{{VALUE:delay-ms}}">
+              <div class="ds-motion-demo__box">.delay-{{VALUE:delay-ms}}</div>
+            </div>
+            {{/REPEAT}}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         Section 6 — Icons (conditional)
+         ═══════════════════════════════════════════ -->
+    {{CONDITIONAL:has-icons}}
+    <section id="icons" class="ds-section ds-section--alt">
+      <div class="ds-container">
+        <div class="ds-section-header reveal-up">
+          <h2 class="ds-h2">Icons</h2>
+          <p class="ds-body">Icon set extracted from the source.</p>
+        </div>
+
+        <div class="ds-grid-4 reveal-up delay-100">
+          {{REPEAT:icons}}
+          <div class="ds-icon-card">
+            <span class="ds-icon-card__preview" set:html={`{{VALUE:icon-svg}}`} />
+            <code class="ds-label">{{VALUE:icon-name}}</code>
+          </div>
+          {{/REPEAT}}
+        </div>
+      </div>
+    </section>
+    {{/CONDITIONAL}}
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       Modal (component detail overlay)
+       ═══════════════════════════════════════════ -->
+  <div class="ds-modal" id="ds-modal" aria-hidden="true">
+    <div class="ds-modal__backdrop"></div>
+    <div class="ds-modal__content">
+      <button class="ds-modal__close" aria-label="Close">&times;</button>
+      <div class="ds-modal__body"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       Inline Script — IntersectionObserver + Modal + Char-Reveal
+       ═══════════════════════════════════════════ -->
+  <script>
+    /* --- IntersectionObserver: reveal on scroll --- */
+    (() => {
+      const revealEls = document.querySelectorAll(
+        '.reveal-up, .reveal-zoom, .reveal-left, .reveal-right'
+      );
+
+      if (!revealEls.length) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      revealEls.forEach((el) => observer.observe(el));
+    })();
+
+    /* --- Modal open / close --- */
+    (() => {
+      const modal = document.getElementById('ds-modal');
+      if (!modal) return;
+
+      const backdrop = modal.querySelector('.ds-modal__backdrop');
+      const closeBtn = modal.querySelector('.ds-modal__close');
+      const body = modal.querySelector('.ds-modal__body');
+
+      function openModal(html) {
+        body.innerHTML = html;
+        modal.setAttribute('aria-hidden', 'false');
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modal.setAttribute('aria-hidden', 'true');
+        modal.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+
+      backdrop?.addEventListener('click', closeModal);
+      closeBtn?.addEventListener('click', closeModal);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+      });
+
+      // Expose globally for component cards
+      window.__dsModal = { open: openModal, close: closeModal };
+    })();
+
+    /* --- Char-reveal animation for hero headline --- */
+    (() => {
+      const headline = document.querySelector('.ds-section--hero .ds-h1');
+      if (!headline) return;
+
+      const text = headline.textContent;
+      headline.textContent = '';
+      headline.setAttribute('aria-label', text);
+
+      [...text].forEach((char, i) => {
+        const span = document.createElement('span');
+        span.textContent = char;
+        span.className = 'ds-char';
+        span.style.animationDelay = `${i * 35}ms`;
+        headline.appendChild(span);
+      });
+    })();
+
+    /* --- Smooth scroll for nav links --- */
+    (() => {
+      document.querySelectorAll('.ds-nav__link').forEach((link) => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = document.querySelector(link.getAttribute('href'));
+          target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+    })();
+
+    /* --- Active nav highlight on scroll --- */
+    (() => {
+      const links = document.querySelectorAll('.ds-nav__link');
+      const sectionIds = [...links].map((l) => l.getAttribute('href').slice(1));
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              links.forEach((l) => l.classList.remove('is-active'));
+              const active = document.querySelector(
+                `.ds-nav__link[href="#${entry.target.id}"]`
+              );
+              active?.classList.add('is-active');
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+
+      sectionIds.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+    })();
+
+    /* --- Motion card hover-to-animate --- */
+    (() => {
+      document.querySelectorAll('.ds-motion-card').forEach((card) => {
+        card.addEventListener('mouseenter', () => {
+          const dot = card.querySelector('.ds-motion-card__dot');
+          dot?.classList.add('is-animating');
+        });
+        card.addEventListener('mouseleave', () => {
+          const dot = card.querySelector('.ds-motion-card__dot');
+          dot?.classList.remove('is-animating');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

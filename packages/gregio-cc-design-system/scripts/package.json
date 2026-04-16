@@ -1,0 +1,15 @@
+{
+  "name": "gregio-cc-extract-design-system-scripts",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Node helpers for the extract-design-system skill. Dependencies are NOT installed here — they are resolved on-demand via `npx --yes --package=...`.",
+  "engines": {
+    "node": ">=20"
+  },
+  "x-runtime-deps": {
+    "note": "Not real dependencies — documented here so the user/agent knows which packages to pass to `npx --package=...`.",
+    "always": ["cheerio@^1"],
+    "whenSpa": ["playwright@^1.48"]
+  }
+}

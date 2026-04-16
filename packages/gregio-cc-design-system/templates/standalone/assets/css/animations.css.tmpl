@@ -1,0 +1,105 @@
+/*  ═══════════════════════════════════════════
+    Animations & Keyframes
+    Source: {{VALUE:site-url}}
+    ═══════════════════════════════════════════ */
+
+/* ── Keyframes ───────────────────────────── */
+
+{{REPEAT:keyframes}}
+@keyframes {{VALUE:keyframe-name}} {
+  {{INSTRUCTION: Generate the exact keyframe stops (from/to or percentages)
+    and properties as extracted from the source site.}}
+}
+{{/REPEAT}}
+
+/* ── Animation Classes ───────────────────── */
+
+{{REPEAT:animation-classes}}
+{{VALUE:selector}} {
+  animation: {{VALUE:animation-shorthand}};
+  {{CONDITIONAL:has-additional-props}}
+  {{INSTRUCTION: Generate any additional properties (fill-mode, delay, play-state, etc.).}}
+  {{/CONDITIONAL}}
+}
+{{/REPEAT}}
+
+/* ── Reveal Animations (IntersectionObserver) ── */
+
+.reveal-up,
+.reveal-zoom,
+.reveal-left,
+.reveal-right {
+  opacity: 0;
+  transition: opacity {{VALUE:reveal-duration (e.g. 0.6s)}} {{VALUE:reveal-easing (e.g. ease-out)}},
+              transform {{VALUE:reveal-duration (e.g. 0.6s)}} {{VALUE:reveal-easing (e.g. ease-out)}};
+  will-change: opacity, transform;
+}
+
+.reveal-up {
+  transform: translateY({{VALUE:reveal-up-distance (e.g. 30px)}});
+}
+
+.reveal-zoom {
+  transform: scale({{VALUE:reveal-zoom-scale (e.g. 0.92)}});
+}
+
+.reveal-left {
+  transform: translateX({{VALUE:reveal-left-distance (e.g. -30px)}});
+}
+
+.reveal-right {
+  transform: translateX({{VALUE:reveal-right-distance (e.g. 30px)}});
+}
+
+.reveal-up.is-visible,
+.reveal-zoom.is-visible,
+.reveal-left.is-visible,
+.reveal-right.is-visible {
+  opacity: 1;
+  transform: translate(0) scale(1);
+}
+
+/* ── Char Reveal ─────────────────────────── */
+
+.char-reveal span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.3em);
+  animation: charRevealIn {{VALUE:char-reveal-duration (e.g. 0.4s)}} {{VALUE:char-reveal-easing (e.g. ease-out)}} forwards;
+  animation-delay: calc(var(--char-index) * {{VALUE:char-reveal-stagger (e.g. 0.03s)}});
+}
+
+@keyframes charRevealIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Transition Utilities ────────────────── */
+
+{{REPEAT:transition-utilities}}
+{{VALUE:selector}} {
+  transition: {{VALUE:transition-value}};
+}
+{{/REPEAT}}
+
+/* ── Reduced Motion ──────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal-up,
+  .reveal-zoom,
+  .reveal-left,
+  .reveal-right {
+    opacity: 1;
+    transform: none;
+  }
+}

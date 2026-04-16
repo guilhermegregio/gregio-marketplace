@@ -1,0 +1,77 @@
+/*  ═══════════════════════════════════════════
+    Design Tokens — CSS Custom Properties
+    Source: {{VALUE:site-url}}
+    ═══════════════════════════════════════════ */
+
+:root {
+  /* ── Colors ────────────────────────────── */
+  {{REPEAT:color-tokens}}
+  --{{VALUE:token-name}}: {{VALUE:token-value}};
+  {{/REPEAT}}
+
+  /* ── Typography ────────────────────────── */
+  {{REPEAT:font-family-tokens}}
+  --{{VALUE:token-name}}: {{VALUE:token-value}};
+  {{/REPEAT}}
+
+  {{REPEAT:font-size-tokens}}
+  --{{VALUE:token-name}}: {{VALUE:token-value}};
+  {{/REPEAT}}
+
+  {{REPEAT:font-weight-tokens}}
+  --{{VALUE:token-name}}: {{VALUE:token-value}};
+  {{/REPEAT}}
+
+  {{REPEAT:line-height-tokens}}
+  --{{VALUE:token-name}}: {{VALUE:token-value}};
+  {{/REPEAT}}
+
+  {{REPEAT:letter-spacing-tokens}}
+  --{{VALUE:token-name}}: {{VALUE:token-value}};
+  {{/REPEAT}}
+
+  /* ── Spacing ───────────────────────────── */
+  {{REPEAT:spacing-tokens}}
+  --{{VALUE:token-name}}: {{VALUE:token-value}};
+  {{/REPEAT}}
+
+  /* ── Border Radius ─────────────────────── */
+  {{REPEAT:radius-tokens}}
+  --{{VALUE:token-name}}: {{VALUE:token-value}};
+  {{/REPEAT}}
+
+  /* ── Shadows ───────────────────────────── */
+  {{REPEAT:shadow-tokens}}
+  --{{VALUE:token-name}}: {{VALUE:token-value}};
+  {{/REPEAT}}
+
+  /* ── Z-Index ───────────────────────────── */
+  {{REPEAT:z-index-tokens}}
+  --{{VALUE:token-name}}: {{VALUE:token-value}};
+  {{/REPEAT}}
+
+  /* ── Transitions ───────────────────────── */
+  {{REPEAT:transition-tokens}}
+  --{{VALUE:token-name}}: {{VALUE:token-value}};
+  {{/REPEAT}}
+
+  /* ── Breakpoints (for reference) ───────── */
+  {{REPEAT:breakpoint-tokens}}
+  --{{VALUE:token-name}}: {{VALUE:token-value}};
+  {{/REPEAT}}
+
+  {{CONDITIONAL:has-additional-tokens}}
+  /* ── Additional Tokens ─────────────────── */
+  {{REPEAT:additional-tokens}}
+  --{{VALUE:token-name}}: {{VALUE:token-value}};
+  {{/REPEAT}}
+  {{/CONDITIONAL}}
+}
+
+{{CONDITIONAL:has-dark-theme}}
+[data-theme="dark"] {
+  {{REPEAT:dark-color-tokens}}
+  --{{VALUE:token-name}}: {{VALUE:token-value}};
+  {{/REPEAT}}
+}
+{{/CONDITIONAL}}

@@ -1,0 +1,304 @@
+/*  ═══════════════════════════════════════════
+    Component Styles
+    Source: {{VALUE:site-url}}
+    ═══════════════════════════════════════════ */
+
+{{REPEAT:components}}
+/* ── {{VALUE:component-name}} ────────────── */
+
+/* Base */
+{{VALUE:base-selector}} {
+  {{INSTRUCTION: Generate all base CSS properties for this component
+    exactly as extracted from the source site. Include display, padding,
+    border, background, font, color, transition, and any other properties.}}
+}
+
+/* Variants */
+{{REPEAT:variants}}
+{{VALUE:variant-selector}} {
+  {{INSTRUCTION: Generate CSS overrides for this variant,
+    including only the properties that differ from the base.}}
+}
+{{/REPEAT}}
+
+/* States */
+{{VALUE:base-selector}}:hover {
+  {{INSTRUCTION: Generate hover state styles.}}
+}
+
+{{VALUE:base-selector}}:focus,
+{{VALUE:base-selector}}:focus-visible {
+  {{INSTRUCTION: Generate focus state styles including outline or ring.}}
+}
+
+{{CONDITIONAL:has-active-state}}
+{{VALUE:base-selector}}:active {
+  {{INSTRUCTION: Generate active/pressed state styles.}}
+}
+{{/CONDITIONAL}}
+
+{{CONDITIONAL:has-disabled-state}}
+{{VALUE:base-selector}}:disabled,
+{{VALUE:base-selector}}.is-disabled {
+  {{INSTRUCTION: Generate disabled state styles (opacity, pointer-events, colors).}}
+}
+{{/CONDITIONAL}}
+
+{{CONDITIONAL:has-sizes}}
+/* Sizes */
+{{REPEAT:sizes}}
+{{VALUE:size-selector}} {
+  {{INSTRUCTION: Generate size variant styles (padding, font-size, min-height, etc.).}}
+}
+{{/REPEAT}}
+{{/CONDITIONAL}}
+
+{{CONDITIONAL:has-child-elements}}
+/* Child Elements */
+{{REPEAT:child-elements}}
+{{VALUE:child-selector}} {
+  {{INSTRUCTION: Generate styles for this child element of the component.}}
+}
+{{/REPEAT}}
+{{/CONDITIONAL}}
+
+{{/REPEAT}}
+
+/* ── Design System Showcase Utilities ─────── */
+
+.ds-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-surface, #fff);
+  border-bottom: 1px solid var(--color-border, #e5e7eb);
+  padding: 0.75rem 1.5rem;
+}
+
+.ds-nav__inner {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  max-width: 1440px;
+  margin-inline: auto;
+}
+
+.ds-nav__brand {
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.ds-nav__links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+}
+
+.ds-nav__links a {
+  font-size: 0.875rem;
+  text-decoration: none;
+  white-space: nowrap;
+  color: inherit;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.ds-nav__links a:hover {
+  opacity: 1;
+}
+
+.ds-section {
+  padding: 4rem 1.5rem;
+  max-width: 1440px;
+  margin-inline: auto;
+}
+
+.ds-section__title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--color-border, #e5e7eb);
+}
+
+.ds-color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.ds-color-swatch__preview {
+  height: 80px;
+  border-radius: 8px 8px 0 0;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.ds-color-swatch__info {
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.8rem;
+}
+
+.ds-color-swatch__name {
+  font-weight: 600;
+}
+
+.ds-color-swatch__token,
+.ds-color-swatch__hex {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.ds-color-group__title {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.ds-type-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.ds-type-table th,
+.ds-type-table td {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-border, #e5e7eb);
+}
+
+.ds-type-table th {
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #888;
+}
+
+.ds-component-block {
+  margin-bottom: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--color-border, #e5e7eb);
+}
+
+.ds-component-block__title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.ds-component-block__desc {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.ds-component-block__preview {
+  padding: 2rem;
+  border: 1px dashed var(--color-border, #e5e7eb);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.ds-component-block__preview h4 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #888;
+  margin-bottom: 1rem;
+}
+
+.ds-layout-block {
+  margin-bottom: 3rem;
+}
+
+.ds-layout-block__demo {
+  border: 1px dashed var(--color-border, #e5e7eb);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 1rem;
+}
+
+.ds-layout-block__spec dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.25rem 1rem;
+  font-size: 0.875rem;
+}
+
+.ds-layout-block__spec dt {
+  font-weight: 600;
+}
+
+.ds-motion-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.ds-motion-card {
+  border: 1px solid var(--color-border, #e5e7eb);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.ds-motion-card__title {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-border, #e5e7eb);
+}
+
+.ds-motion-card__preview {
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+}
+
+.ds-motion-card__spec {
+  padding: 0.75rem 1rem;
+  font-size: 0.75rem;
+  color: #666;
+  border-top: 1px solid var(--color-border, #e5e7eb);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.ds-icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.ds-icon-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem 0.75rem;
+  border: 1px solid var(--color-border, #e5e7eb);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.ds-icon-card__preview {
+  font-size: 1.5rem;
+}
+
+.ds-icon-card__name {
+  font-size: 0.7rem;
+  word-break: break-all;
+  color: #666;
+}
+
+.ds-icon-card__variants {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 1rem;
+}

@@ -1,0 +1,429 @@
+/* ═══════════════════════════════════════════
+   Components — {{VALUE:project-name}}
+   ═══════════════════════════════════════════ */
+
+/* ─── Button Base ─── */
+
+.ds-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-primary);
+  font-size: {{VALUE:btn-font-size}};
+  font-weight: {{VALUE:btn-font-weight}};
+  line-height: 1;
+  padding: {{VALUE:btn-padding}};
+  border: {{VALUE:btn-border}};
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* Button: Primary */
+.ds-btn--primary {
+  background: {{VALUE:btn-primary-bg}};
+  color: {{VALUE:btn-primary-color}};
+  border-color: {{VALUE:btn-primary-border-color}};
+}
+
+.ds-btn--primary:hover {
+  background: {{VALUE:btn-primary-hover-bg}};
+  {{CONDITIONAL:btn-primary-hover-shadow}}
+  box-shadow: {{VALUE:btn-primary-hover-shadow}};
+  {{/CONDITIONAL}}
+}
+
+.ds-btn--primary:active {
+  background: {{VALUE:btn-primary-active-bg}};
+  transform: scale(0.98);
+}
+
+/* Button: Secondary */
+.ds-btn--secondary {
+  background: {{VALUE:btn-secondary-bg}};
+  color: {{VALUE:btn-secondary-color}};
+  border-color: {{VALUE:btn-secondary-border-color}};
+}
+
+.ds-btn--secondary:hover {
+  background: {{VALUE:btn-secondary-hover-bg}};
+  color: {{VALUE:btn-secondary-hover-color}};
+}
+
+.ds-btn--secondary:active {
+  transform: scale(0.98);
+}
+
+/* Button: Ghost */
+.ds-btn--ghost {
+  background: transparent;
+  color: {{VALUE:btn-ghost-color}};
+  border-color: transparent;
+}
+
+.ds-btn--ghost:hover {
+  background: {{VALUE:btn-ghost-hover-bg}};
+}
+
+.ds-btn--ghost:active {
+  background: {{VALUE:btn-ghost-active-bg}};
+}
+
+/* Button: Outline */
+.ds-btn--outline {
+  background: transparent;
+  color: {{VALUE:btn-outline-color}};
+  border-color: {{VALUE:btn-outline-border-color}};
+}
+
+.ds-btn--outline:hover {
+  background: {{VALUE:btn-outline-hover-bg}};
+  color: {{VALUE:btn-outline-hover-color}};
+  border-color: {{VALUE:btn-outline-hover-border-color}};
+}
+
+/* Button: Sizes */
+.ds-btn--sm {
+  font-size: {{VALUE:btn-sm-font-size}};
+  padding: {{VALUE:btn-sm-padding}};
+}
+
+.ds-btn--lg {
+  font-size: {{VALUE:btn-lg-font-size}};
+  padding: {{VALUE:btn-lg-padding}};
+}
+
+/* Button: States */
+.ds-btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.ds-btn:disabled,
+.ds-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.ds-btn.is-loading {
+  position: relative;
+  color: transparent;
+  pointer-events: none;
+}
+
+.ds-btn.is-loading::after {
+  content: '';
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: var(--radius-full);
+  animation: ds-spin 0.6s linear infinite;
+  color: var(--color-text-inverse);
+}
+
+@keyframes ds-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Card ─── */
+
+.ds-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: {{VALUE:card-padding}};
+  transition:
+    box-shadow var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out);
+}
+
+.ds-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Card: Elevated */
+.ds-card--elevated {
+  box-shadow: var(--shadow-sm);
+}
+
+.ds-card--elevated:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* Card: Outlined */
+.ds-card--outlined {
+  background: transparent;
+  border-color: var(--color-border);
+}
+
+.ds-card--outlined:hover {
+  border-color: var(--color-primary);
+}
+
+/* Card: Interactive */
+.ds-card--interactive {
+  cursor: pointer;
+}
+
+.ds-card--interactive:hover {
+  border-color: var(--color-primary-300);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.ds-card--interactive:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Card: Focus */
+.ds-card:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ─── Input ─── */
+
+.ds-input {
+  display: block;
+  width: 100%;
+  font-family: var(--font-primary);
+  font-size: {{VALUE:input-font-size}};
+  line-height: 1.5;
+  padding: {{VALUE:input-padding}};
+  background: {{VALUE:input-bg}};
+  color: var(--color-text);
+  border: {{VALUE:input-border}};
+  border-radius: var(--radius-md);
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.ds-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.ds-input:hover {
+  border-color: {{VALUE:input-hover-border-color}};
+}
+
+.ds-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px {{VALUE:input-focus-ring}};
+}
+
+.ds-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--color-surface-alt);
+}
+
+.ds-input--error {
+  border-color: var(--color-error);
+}
+
+.ds-input--error:focus {
+  box-shadow: 0 0 0 3px {{VALUE:input-error-ring}};
+}
+
+/* ─── Badge ─── */
+
+.ds-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-primary);
+  font-size: {{VALUE:badge-font-size}};
+  font-weight: {{VALUE:badge-font-weight}};
+  line-height: 1;
+  padding: {{VALUE:badge-padding}};
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.ds-badge--default {
+  background: {{VALUE:badge-default-bg}};
+  color: {{VALUE:badge-default-color}};
+}
+
+.ds-badge--primary {
+  background: {{VALUE:badge-primary-bg}};
+  color: {{VALUE:badge-primary-color}};
+}
+
+.ds-badge--success {
+  background: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.ds-badge--warning {
+  background: var(--color-warning-light);
+  color: var(--color-warning);
+}
+
+.ds-badge--error {
+  background: var(--color-error-light);
+  color: var(--color-error);
+}
+
+.ds-badge--info {
+  background: var(--color-info-light);
+  color: var(--color-info);
+}
+
+/* ─── Nav ─── */
+
+.ds-nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-6);
+  background: {{VALUE:nav-bg}};
+  backdrop-filter: blur(12px);
+  border-block-end: 1px solid var(--color-border-light);
+}
+
+.ds-nav__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.ds-nav__logo {
+  height: {{VALUE:nav-logo-height}};
+  width: auto;
+}
+
+.ds-nav__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.ds-nav__links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: var(--space-1);
+}
+
+.ds-nav__link {
+  display: inline-block;
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out);
+}
+
+.ds-nav__link:hover {
+  color: var(--color-text);
+  background: var(--color-surface-alt);
+}
+
+.ds-nav__link.is-active {
+  color: var(--color-primary);
+  background: {{VALUE:nav-active-bg}};
+}
+
+/* ─── Modal ─── */
+
+.ds-modal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+.ds-modal.is-open {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.ds-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--color-overlay);
+}
+
+.ds-modal__content {
+  position: relative;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-8);
+  max-width: 40rem;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  transform: translateY(1rem) scale(0.98);
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.ds-modal.is-open .ds-modal__content {
+  transform: translateY(0) scale(1);
+}
+
+.ds-modal__close {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: var(--space-1);
+  line-height: 1;
+  border-radius: var(--radius-sm);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.ds-modal__close:hover {
+  color: var(--color-text);
+}
+
+.ds-modal__body {
+  /* content injected via JS */
+}
+
+/* ─── Hero Actions ─── */
+
+.ds-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-block-start: var(--space-8);
+}
