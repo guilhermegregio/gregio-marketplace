@@ -10,51 +10,78 @@ ultrathink, com base nos argumentos abaixo:
 $ARGUMENTS
 </arguments>
 
-Formato: `<url> [out-dir] [--spa]`
+Formato: `<url...> [out-dir] [--spa] [--no-spa] [--file=urls.txt]`
 
-- `url` (obrigatório): URL do site a baixar
-- `out-dir` (opcional): pasta de destino. Default: `/tmp/ds-fetch-<timestamp>`
-- `--spa` (opcional): usa Playwright para renderizar JS (SPAs, sites JS-heavy)
+- `url` (obrigatório): Uma ou mais URLs do site a baixar
+- `out-dir` (opcional): pasta de destino. Default: `./ds-fetch` no diretório atual do usuário
+- `--spa` (opcional): força Playwright (pula detecção automática)
+- `--no-spa` (opcional): usa apenas cheerio (nunca tenta playwright)
+- `--file=<path>` (opcional): arquivo .txt com URLs (1 por linha, `#` = comentário)
+- `--screenshot` (opcional): salvar screenshot full-page por URL (só em modo playwright)
+
+## Comportamento padrão (sem --spa nem --no-spa)
+
+1. Tenta cheerio primeiro (rápido, sem browser, ~1-3s por URL)
+2. Analisa o HTML — se detectar SPA (body vazio, `#root`/`#app` sem filhos, poucos elementos de conteúdo vs muitos `<script>`) → **retenta automaticamente com playwright**
+3. Mantém o melhor resultado
 
 ## Steps
 
-1. Determine o `out-dir`. Se não fornecido, use `/tmp/ds-fetch-$(date +%s)`.
-2. Execute **sem instalar nada permanentemente** — as deps são resolvidas on-demand via cache do `npx` (`~/.npm/_npx/`). Use literalmente `${CLAUDE_PLUGIN_ROOT}` — o Claude Code substitui pelo path onde a skill está instalada (funciona tanto em dev local quanto via plugin manager).
+1. Determine o `out-dir`. Se não fornecido, use o diretório atual + `ds-fetch`.
+2. Separe as URLs dos argumentos (tudo que começa com `http://` ou `https://`) do out-dir (argumento que não é URL nem flag).
+3. Execute **sem instalar nada permanentemente** — deps são resolvidas via cache do `npx`. Use literalmente `${CLAUDE_PLUGIN_ROOT}` — o Claude Code substitui pelo path do plugin.
 
-   **Default (sites estáticos/SSR):**
    ```
-   npx --yes --package=cheerio@^1 -- node "${CLAUDE_PLUGIN_ROOT}/scripts/fetch-site.js" <url> <out-dir>
-   ```
-
-   **Com `--spa` (SPAs / JS-heavy):**
-   ```
-   npx --yes --package=cheerio@^1 --package=playwright@^1.48 -- node "${CLAUDE_PLUGIN_ROOT}/scripts/fetch-site.js" <url> <out-dir> --spa
+   npx --yes --package=cheerio@^1 --package=playwright@1.58.2 -- node "${CLAUDE_PLUGIN_ROOT}/scripts/fetch-site.js" <urls...> --out=<out-dir> [flags]
    ```
 
-   Se Chromium falhar no launch (executable ausente, libs do sistema faltando em NixOS/distros minimais, timeout, etc.), o script **automaticamente** faz fallback para o path cheerio e avisa no stderr com `[fetch-site] playwright failed: …` + `falling back to cheerio`. Isso garante que você sempre recebe o HTML + assets, mesmo que perdendo o que dependia de JS.
+   **Importante**: SEMPRE inclua ambos `--package=cheerio@^1` e `--package=playwright@1.58.2` no npx, mesmo sem `--spa`. O script decide internamente qual usar, e se precisar do playwright para fallback automático ele já estará disponível.
 
-   **Importante**: NÃO tente "descobrir" o path do plugin lendo diretórios ou usando paths hardcoded (tipo `/home/.../gregio-marketplace/...`). Sempre use `${CLAUDE_PLUGIN_ROOT}` literal na linha de comando — shell/Claude expande automaticamente.
-   Se Chromium não estiver instalado (primeira vez com `--spa`):
+   **NixOS**: O script detecta `/etc/NIXOS` automaticamente e seta `PLAYWRIGHT_BROWSERS_PATH`, `PLAYWRIGHT_NODEJS_PATH` e `PLAYWRIGHT_LAUNCH_OPTIONS_EXECUTABLE_PATH` via `nix-build`. Não é necessário nenhum export manual.
+
+   Se Chromium não estiver instalado (primeira vez):
    ```
    npx --yes playwright install chromium
    ```
 
-4. Primeira execução: ~5-15s para npx baixar cheerio no cache. Próximas execuções: instantâneas (cache hit).
+4. Primeira execução: ~5-15s para npx baixar cheerio+playwright no cache. Próximas execuções: instantâneas.
 5. Ao terminar, reporte ao usuário:
    - Pasta de saída
-   - Quantidade de assets baixados (lendo `manifest.json` da saída)
-   - Caminho do `index.html`
-   - Warnings (stderr — assets 4xx/5xx sem abortar)
-6. Sugira rodar `/extract-ds <out-dir> <dest-dir>` para gerar o design system.
+   - Por URL: modo usado (cheerio/playwright), assets baixados, se detectou SPA
+   - Leia o `summary.json` para os dados
+   - Caminho do `index.html` de cada URL
+6. Sugira rodar `/extract-ds <out-dir>/<slug> <dest-dir>` para gerar o design system.
+
+## Exemplos
+
+```bash
+# Uma URL, output no CWD
+/fetch-site https://example.com
+
+# Várias URLs
+/fetch-site https://site1.com https://site2.com
+
+# SPA forçado + output custom
+/fetch-site https://myapp.com ./meu-dir --spa
+
+# Lista de URLs via arquivo
+/fetch-site --file=urls.txt --out=./sites
+
+# Cheerio only (nunca tenta playwright)
+/fetch-site https://blog.com --no-spa
+```
 
 ## Quando usar `--spa`
 
 - O site é uma SPA e o HTML inicial vem vazio/shell
 - O download sem `--spa` retornou HTML sem conteúdo significativo
 - CSS é carregado dinamicamente via JS
+- Já sabe que o site é JS-heavy (React, Vue, Angular sem SSR)
+
+Na maioria dos casos, **não use nenhum flag** — o script detecta automaticamente.
 
 ## Por que `npx --yes --package=...`
 
 - **Zero pollution**: nada é instalado no plugin nem no projeto do usuário
 - **Cache global**: primeira execução baixa para `~/.npm/_npx/`, próximas reusam
-- **Reproduzível**: versão pinada garante mesmo comportamento em qualquer máquina
+- **Reproduzível**: versão pinada garante mesmo comportamento
