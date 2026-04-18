@@ -1,0 +1,24 @@
+{
+  "name": "gregio-cc-app-maintenance",
+  "description": "Skills for recurring Node.js app maintenance: updating dependencies, auditing, bumping runtimes, refreshing lockfiles. Agnostic to repo shape — works on Nx monorepos, pnpm workspaces, and simple pnpm apps.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Guilherme Gregio",
+    "email": "guilherme@gregio.net"
+  },
+  "homepage": "https://github.com/glittercowboy/gregio-marketplace",
+  "repository": "https://github.com/glittercowboy/gregio-marketplace",
+  "license": "MIT",
+  "keywords": [
+    "maintenance",
+    "dependencies",
+    "npm-check-updates",
+    "ncu",
+    "pnpm",
+    "nx",
+    "monorepo",
+    "workspace",
+    "upgrade",
+    "slash-commands"
+  ]
+}

@@ -29,6 +29,13 @@
       "description": "Complete design system workbench: extract from websites, create from scratch, improve, merge, and generate components/pages for Astro, React/Next, or standalone HTML",
       "version": "1.0.0",
       "strict": true
+    },
+    {
+      "name": "gregio-cc-app-maintenance",
+      "source": "./packages/gregio-cc-app-maintenance",
+      "description": "Skills for recurring Node.js app maintenance: updating dependencies with full validation (lint, typecheck, tests, build) and optional Chrome DevTools visual check. Agnostic to repo shape — Nx, pnpm workspace, or simple pnpm app.",
+      "version": "0.1.0",
+      "strict": true
     }
   ]
 }
