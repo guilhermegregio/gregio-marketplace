@@ -1,12 +1,12 @@
 ---
 name: update-deps
-description: "Atualiza dependências de qualquer app Node.js (Nx monorepo, pnpm workspace, ou app pnpm simples) com validação completa — lint, typecheck, testes, build — e auto-fix entre tentativas. Faz rollback seguro se a validação não passar após 3 tentativas. Use SEMPRE que o usuário pedir para 'atualizar deps', 'update dependencies', 'bump packages', 'rodar ncu', 'dependências desatualizadas', 'outdated packages', 'upgrade pacotes', 'atualizar libs', mesmo que não mencione a skill explicitamente. Detecta o tipo de repo automaticamente — não pergunte ao usuário se é Nx/workspace/simple, descubra rodando o detect-repo-type.js."
-argument-hint: [check | minor | all | <filtro>] [--no-visual]
+description: "Atualiza dependências de qualquer app Node.js (Nx monorepo, pnpm workspace, ou app pnpm simples) com validação completa — lint, typecheck, testes, build — e auto-fix entre tentativas, mais auditoria de segurança de supply-chain (minimumReleaseAge, allowlist de scripts, exact versions, bloqueio de deps exóticas). Faz rollback seguro se a validação não passar após 3 tentativas. Use SEMPRE que o usuário pedir para 'atualizar deps', 'update dependencies', 'bump packages', 'rodar ncu', 'dependências desatualizadas', 'outdated packages', 'upgrade pacotes', 'atualizar libs', 'configurar segurança das deps', mesmo que não mencione a skill explicitamente. Detecta o tipo de repo automaticamente — não pergunte ao usuário se é Nx/workspace/simple, descubra rodando o detect-repo-type.js."
+argument-hint: [check | minor | all | secure | <filtro>] [--no-visual]
 ---
 
 ## Your task
 
-Você é um agente de manutenção responsável por atualizar dependências com segurança. O risco é alto: uma atualização mal feita quebra o build, CI, ou pior, um deploy em produção. Por isso o fluxo é **detectar → descobrir → aplicar → validar (4 frentes) → corrigir → revalidar → só commitar se tudo passar**.
+Você é um agente de manutenção responsável por atualizar dependências com segurança. O risco é alto: uma atualização mal feita quebra o build, CI, ou pior, um deploy em produção — e uma dependência comprometida é um vetor de supply-chain. Por isso o fluxo é **detectar → auditar segurança → descobrir → aplicar → validar (4 frentes) → corrigir → revalidar → só commitar se tudo passar**.
 
 <arguments>
 $ARGUMENTS
@@ -17,6 +17,7 @@ Formato: `[modo] [--no-visual]`
 - `check` → dry-run: mostra o que seria atualizado e encerra sem modificar nada
 - `minor` → restringe a minor/patch (sem major bumps)
 - `all` (default) → fluxo completo
+- `secure` → roda **apenas** a auditoria de segurança (Phase S) e encerra, sem tocar em dependências
 - `<filtro>` → string literal passada ao `--filter` do ncu (ex: `next`, `react`, `@nx/*`)
 - `--no-visual` → pula a validação visual com chrome-devtools mesmo se for aplicável
 
@@ -38,6 +39,31 @@ O output é JSON com `type: "nx" | "pnpm-workspace" | "pnpm-simple" | "unknown"`
 - **unknown** → pare e avise o usuário que não encontrou `package.json` nem `nx.json` nem `pnpm-workspace.yaml`. Pergunte onde está a raiz do projeto.
 
 Guarde os comandos do reference em memória — você vai usá-los em todas as Phases seguintes. Se o detect reportar `nxVersionMismatch`, `hasOverrides`, ou `hasPatches`, anote para mencionar em Phase 2.
+
+## Phase S — Security audit
+
+Verifica se o repo tem as proteções de supply-chain configuradas **antes** de puxar versões novas. Roda sempre (gate no fluxo); com o modo `secure`, é a única coisa que roda.
+
+1. Audite:
+   ```bash
+   node "${CLAUDE_PLUGIN_ROOT}/scripts/check-security-config.js" .
+   ```
+   O output é JSON: `targetFile`, `pnpmVersion`, `hasBuildAllowlist`, `scopedRegistries`, `allOk`, `blockingCount`, `optionalCount` e `findings[]` (cada um com `key`, `intent`, `current`, `desired`, `status`, `optional`, `edit`, `note`).
+
+2. Leia `references/security-config.md` — explica a política, as diferenças por versão do pnpm (`.npmrc` × `pnpm-workspace.yaml`), a nuance `ignoreScripts` × `allowBuilds` e como aplicar os `edit` com a ferramenta **Edit** (sem depender de `yq`).
+
+3. **Se `allOk: true` e `optionalCount: 0`** → informe "🔒 Proteções de supply-chain OK" e:
+   - modo `secure` → encerre aqui.
+   - senão → siga para Phase 1.
+
+4. **Senão** → apresente um relatório dos `findings` com `status` em `missing`/`weak` (e os `optional`), mostrando `current → desired` e o `intent`/`note` de cada um. Respeite o `status: "ok"` adaptativo do `ignoreScripts` (quando `hasBuildAllowlist` é true, **não** proponha `ignoreScripts: true` — só repasse a nota). Então **AskUserQuestion**:
+   - "Configurar agora" → aplique cada `edit` selecionado.
+   - "Pular e continuar o update" → siga para Phase 1 (no modo `secure`, encerre).
+   - "Cancelar" → encerre.
+
+5. **Ao configurar**: aplique cada `edit` no `targetFile` com a ferramenta **Edit** (YAML: top-level camelCase, substitua se a chave existe, senão adicione; `.npmrc`: linha `chave=valor`, só se ainda não existir — não duplique nem toque em registry/auth). Mostre o diff do arquivo de config. **Não** rode `pnpm install` aqui se for seguir para o update (a Phase 3 já instala); no modo `secure`, rode `pnpm install` e revalide o build se `ignoreScripts` mudou.
+
+6. **Modo `secure`** → após aplicar (ou se nada a fazer), encerre com um resumo. **Não** entre em Discovery/Apply.
 
 ## Phase 1 — Pre-flight
 
@@ -179,3 +205,7 @@ Só chegue aqui se Phase 4 passou. Nunca use `--no-verify`.
 - No rollback, sempre rode `pnpm install` depois do `git checkout --` para sincronizar `node_modules` com o lockfile restaurado.
 - Respeite a indentação dos `package.json` — o ncu mantém, mas double-check se editou manualmente.
 - Se detectar `pnpm.overrides` ou `pnpm.patchedDependencies`, **nunca** silencie sem avisar. Os patches podem não aplicar na versão nova.
+- **No pnpm 11+, `.npmrc` só lê auth/registry.** Settings de segurança (`minimumReleaseAge`, `savePrefix`, `ignoreScripts`, `blockExoticSubdeps`) vão no `pnpm-workspace.yaml` (camelCase) — setá-las no `.npmrc` é ignorado silenciosamente. O script `check-security-config.js` resolve o `targetFile` certo; não assuma.
+- **Nunca** force `ignoreScripts: true` num repo que já tem allowlist (`allowBuilds`/`onlyBuiltDependencies`): isso anula o deny-by-default e quebra builds nativos (sharp, swc). A Phase S já trata isso de forma adaptativa.
+- `minimumReleaseAge` deve excluir os scopes privados (`minimumReleaseAgeExclude`) para não atrasar publicações internas em 7 dias.
+- **Nunca** desabilite uma proteção já presente (ex: setar `minimumReleaseAge: 0` ou `blockExoticSubdeps: false`) para "facilitar" um update. Se uma proteção bloqueia um bump, avise o usuário.

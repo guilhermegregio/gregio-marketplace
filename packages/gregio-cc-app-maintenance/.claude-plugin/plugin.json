@@ -1,7 +1,7 @@
 {
   "name": "gregio-cc-app-maintenance",
-  "description": "Skills for recurring Node.js app maintenance: updating dependencies, auditing, bumping runtimes, refreshing lockfiles. Agnostic to repo shape — works on Nx monorepos, pnpm workspaces, and simple pnpm apps.",
-  "version": "0.1.0",
+  "description": "Skills for recurring Node.js app maintenance: updating dependencies with full validation plus supply-chain security auditing (minimumReleaseAge, script allowlist, exact versions, exotic-dep blocking), bumping runtimes, refreshing lockfiles. Agnostic to repo shape — works on Nx monorepos, pnpm workspaces, and simple pnpm apps.",
+  "version": "0.2.0",
   "author": {
     "name": "Guilherme Gregio",
     "email": "guilherme@gregio.net"
@@ -19,6 +19,9 @@
     "monorepo",
     "workspace",
     "upgrade",
+    "security",
+    "supply-chain",
+    "minimum-release-age",
     "slash-commands"
   ]
 }
