@@ -52,6 +52,13 @@ Regras ao preencher cada task:
   (exceto a 31, que é a única dona do manifest).
 - Componentes com item no `gaps.md` → `provenance: designed`, com a diretriz do
   gap copiada na task; os demais → `extracted` com a entrada do consolidated.
+- **Com `components_ref` no spec (white-label)**: a task de cada componente
+  referenciado inclui o path do `.astro` de referência e a regra de paridade —
+  **a interface Props (nomes, tipos, defaults, slots) é contrato e não muda**;
+  use o componente de referência como ponto de partida estrutural e troque
+  apenas a pele (classes/valores → tokens extraídos). Critério de aceite
+  obrigatório: "Props idênticas às de `<ref>/.../X.astro` (diff da interface
+  vazio)". É isso que permite plugar o DS no app consumidor sem tocar no app.
 - Critérios de aceite objetivos (estados, variantes, a11y) — vêm do spec e do
   component-catalog.
 - Task 30 (showcase) referencia `references/showcase-rules.md`; task 31

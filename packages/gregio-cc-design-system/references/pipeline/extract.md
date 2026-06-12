@@ -19,7 +19,15 @@ offline sobre esse cache — extrair bem aqui evita re-fetch e retrabalho depois
    Flags úteis (defaults entre parênteses): `--out=<dir>` (./.ds-cache),
    `--max-pages=<n>` (10), `--max-depth=<n>` (2), `--include=<re>`, `--exclude=<re>`,
    `--max-assets=<n>` (1500), `--max-img=<n>` (400), `--no-mobile`, `--sections`,
-   `--force`.
+   `--click=<selector>` (repetível), `--click-wait=<ms>` (1500), `--force`.
+
+   **Gates (região/idade/consentimento)**: sites como cury.net cobrem TODAS as
+   páginas com um gate até o usuário escolher (ex.: SP/RJ) — sem tratar isso, o
+   cache inteiro vira screenshots do gate. Use `--click` com o seletor do botão
+   do gate (ex.: `--click='#adopt-accept-all-button' --click='[data-change-state="SP"]'`).
+   O clique acontece no primeiro match visível de cada página, o cookie
+   resultante persiste no crawl inteiro (context compartilhado) e navegações
+   disparadas pelo clique são aguardadas.
 
    - **NixOS**: o script detecta `/etc/NIXOS` e resolve o Chromium via nix
      automaticamente — nenhum export manual.

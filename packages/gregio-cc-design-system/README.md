@@ -44,10 +44,16 @@ repo usa Nx):
 
 - **Cache offline** (`.ds-cache/<site>/`): a extração é feita uma vez; todas as
   análises e rebuilds funcionam sem rede. Contrato em `references/cache-layout.md`.
+- **Gates**: sites com seleção de região/idade/cookies cobrindo o conteúdo são
+  atravessados com `--click=<seletor>` (cookie persiste no crawl inteiro).
 - **Spec** (`ds-spec.md`): o que o DS precisa ter para o app alvo. O que o site
   não tem vira gap e é **desenhado** coerente com a estética extraída.
 - **Provenance**: `extracted` = fiel ao site (classes/markup/timings exatos);
   `designed` = criado para preencher o spec.
+- **White-label** (`--ref=apps/ds-X`): o inventário e a API de componentes vêm
+  de um DS de referência existente (ex.: `apps/ds-nxt`); o visual vem do site
+  extraído. As Props dos componentes são contrato — o app consumidor troca de
+  DS sem mudar uma linha.
 
 ## Architecture
 

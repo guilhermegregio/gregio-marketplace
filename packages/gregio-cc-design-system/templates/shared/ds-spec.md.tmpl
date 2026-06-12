@@ -3,6 +3,7 @@ name: {{VALUE: nome do DS, ex. ds-cury}}
 source_url: {{VALUE: URL do site fonte, ou "none" se criação pura}}
 cache_dir: {{VALUE: path do cache, ex. .ds-cache/cury-net}}
 app_dir: {{VALUE: destino do app, ex. apps/ds-cury}}
+components_ref: {{VALUE: path do DS de referência (ex. apps/ds-nxt) ou "none" — define o inventário/API de componentes para white-label}}
 react_exports: {{VALUE: true|false}}
 status: draft
 created: {{VALUE: data ISO}}
@@ -30,12 +31,21 @@ como ponto de partida e ajuste ao que o usuário pediu.}}
 
 ## 4. Componentes requeridos
 
-| Componente | Prioridade | Origem esperada | Variantes/estados | Notas |
-|---|---|---|---|---|
+| Componente | Prioridade | Origem esperada | Variantes/estados | API de referência | Notas |
+|---|---|---|---|---|---|
 {{INSTRUCTION: uma linha por componente. Prioridade: must|nice. Origem esperada:
 "site" (provavelmente existe no extraído) ou "criar" (não existe, será desenhado).
-A origem é confirmada depois pela análise (gaps.md). Inclua todo o tier 1 do
-baseline a menos que o usuário corte explicitamente.}}
+A origem é confirmada depois pela análise (gaps.md).
+
+SEM components_ref: inclua todo o tier 1 do baseline a menos que o usuário corte
+explicitamente; coluna "API de referência" fica "—".
+
+COM components_ref: o inventário vem do manifest do DS de referência — UMA LINHA
+POR COMPONENTE dele, com variantes/estados copiados e "API de referência"
+apontando o .astro correspondente (ex. apps/ds-nxt/src/components/ds/Button.astro).
+O contrato white-label: o novo DS expõe os MESMOS componentes com as MESMAS
+Props, mudando apenas a pele (tokens do site extraído). Acrescente itens extras
+do baseline só se o usuário pedir.}}
 
 ## 5. Layout patterns
 

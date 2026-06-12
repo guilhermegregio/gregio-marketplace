@@ -1,7 +1,7 @@
 ---
 name: ds-create
-description: "Full design-system pipeline from a URL: crawl the site into an offline cache, brainstorm requirements into a spec, analyze with five specialized parallel agents, build the DS as an Astro app in apps/<name>, and review it covering gaps. Use this skill whenever the user wants a design system created from a website — 'criar design system do site X', 'create a DS from this URL', 'clonar o visual desse site', 'extrair o design system de', 'novo DS a partir de', 'monte um design system para meu app baseado em' — or pastes a URL asking for a design system, tokens, or a component library, even without naming the skill. Also use it to resume a partially completed pipeline (existing .ds-cache)."
-argument-hint: <url> [app-name] [--react] [--max-pages=N] [--max-depth=N] [--skip-brainstorm] [--force]
+description: "Full design-system pipeline from a URL: crawl the site into an offline cache, brainstorm requirements into a spec, analyze with five specialized parallel agents, build the DS as an Astro app in apps/<name>, and review it covering gaps. Supports white-label: --ref=<ds-app> takes the component inventory/API from an existing reference DS (e.g. apps/ds-nxt) while the visuals come from the crawled site. Use this skill whenever the user wants a design system created from a website — 'criar design system do site X', 'create a DS from this URL', 'clonar o visual desse site', 'extrair o design system de', 'novo DS a partir de', 'monte um design system para meu app baseado em', 'DS white label do site X com os componentes do ds-Y' — or pastes a URL asking for a design system, tokens, or a component library, even without naming the skill. Also use it to resume a partially completed pipeline (existing .ds-cache)."
+argument-hint: <url> [app-name] [--ref=<ds-app-dir>] [--react] [--max-pages=N] [--max-depth=N] [--click=<selector>] [--skip-brainstorm] [--force]
 ---
 
 ## Your task
@@ -37,10 +37,16 @@ mesma conversa. Leia o doc de cada fase ao chegar nela (não todos de uma vez).
 
 ## Execução
 
-- **extract**: `references/pipeline/extract.md` (repasse `--max-pages`/`--max-depth`)
+- **extract**: `references/pipeline/extract.md` (repasse `--max-pages`/
+  `--max-depth`/`--click`). Sites com gate (região/idade/cookies) precisam de
+  `--click=<seletor>` para capturar o conteúdo real — avalie o screenshot da
+  home; se todas as páginas mostram a mesma tela de gate, descubra o seletor no
+  HTML e re-extraia com `--force`.
 - **brainstorm**: `references/pipeline/brainstorm.md`. Com `--skip-brainstorm`,
   aplique o baseline (`references/ds-minimum-baseline.md`) sem entrevista e
-  marque o spec como approved direto.
+  marque o spec como approved direto. Com `--ref=<ds-app>` (white-label), o
+  inventário de componentes vem do manifest do DS de referência — a entrevista
+  encolhe para fidelidade visual/motion/extras.
 - **analyze**: `references/pipeline/analyze.md` (5 agentes em paralelo)
 - **build**: `references/pipeline/build.md` (waves de ds-builder; `--react`
   liga os exports)

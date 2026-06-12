@@ -38,6 +38,13 @@ outputs:
   md: <cacheDir>/analysis/<nome>.md
 ```
 
+Se o spec tem `components_ref` (white-label), acrescente ao prompt do
+**ds-component-analyst** uma linha extra:
+
+```
+componentsRef: <path absoluto do DS de referência> (manifest + src/components/ds/)
+```
+
 ## Consolidação (você, após os 5 retornarem)
 
 1. Leia os 5 JSONs. Resolva sobreposições com estas regras:
@@ -60,6 +67,11 @@ outputs:
      use primary para o estado on, radius full como os botões-pílula do site,
      transição base de 250ms")
    - Esses itens serão `provenance: designed` no build
+   - **Com `components_ref`**: cada gap referencia o `.astro` do DS de
+     referência como **contrato de API** — "preservar a interface Props de
+     `<ref>/src/components/ds/X.astro` exatamente (white-label drop-in);
+     re-estilizar com os tokens extraídos". A diretriz visual continua vindo da
+     estética do site; a estrutura/props vêm da referência.
 4. Escreva `analysis/ANALYSIS.md` — sumário executivo de uma tela: estética
    identificada, contagens, decisões de consolidação, gaps, riscos.
 

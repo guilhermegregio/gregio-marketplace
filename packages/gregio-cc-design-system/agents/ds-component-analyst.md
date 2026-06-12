@@ -17,6 +17,10 @@ dois paths de output. Bash apenas para leitura (jq, rg) — escreva só nos outp
 1. Leia `crawl.json` e a **tabela de componentes do `ds-spec.md`** — ela diz o
    que procurar. Componentes requeridos que você não encontrar no site são tão
    importantes quanto os encontrados: reporte-os como ausentes (viram gaps).
+   Se o prompt traz `componentsRef` (caso white-label), leia também o manifest
+   do DS de referência e as interfaces Props dos `.astro` dele: para cada item,
+   registre no JSON o campo `refComponent` (path do .astro de referência) —
+   esse é o contrato de API que o build vai preservar.
 2. Fontes de evidência:
    - `pages/*/index.html` → markup real. Procure padrões recorrentes: botões,
      cards, navs, forms, modais, accordions, sliders, badges, tabelas

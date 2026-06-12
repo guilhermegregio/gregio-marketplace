@@ -1,7 +1,7 @@
 ---
 name: ds-extract
 description: "Crawl and download a full website (multiple pages, assets, screenshots, computed styles) into a local offline cache for design system work. Use this skill whenever the user wants to extract/download/fetch a site for analysis, says 'extrair site', 'baixar site', 'crawl this site', 'fetch website for design system', 'download site for offline analysis', or provides a URL that will later feed design system creation. Also use it to refresh or extend an existing .ds-cache extraction."
-argument-hint: <url> [--max-pages=10] [--max-depth=2] [--include=re] [--exclude=re] [--no-mobile] [--sections] [--force]
+argument-hint: <url> [--max-pages=10] [--max-depth=2] [--click=<selector>] [--include=re] [--exclude=re] [--no-mobile] [--sections] [--force]
 ---
 
 ## Your task

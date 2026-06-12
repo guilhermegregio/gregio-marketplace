@@ -27,6 +27,11 @@ Options:
   --extra-wait=<ms>    Espera extra pós-load para animações/lazy (default: 1500)
   --no-mobile          Não tirar screenshot mobile (default: tira)
   --sections           Screenshots por seção da página de entrada (default: off)
+  --click=<selector>   Clica no seletor (se visível) após o load de CADA página,
+                       antes da captura. Repetível (cliques em sequência). Para
+                       atravessar gates de região/idade/cookies. O cookie/estado
+                       resultante persiste no crawl inteiro (context compartilhado).
+  --click-wait=<ms>    Espera após cada clique (default: 1500)
   --force              Ignora cache existente e re-crawla do zero
 
 Cache: se <out>/<site-slug>/crawl.json existir com status "complete" e sem --force,
@@ -43,6 +48,7 @@ function parseArgs(argv) {
     include: null, exclude: null, maxAssets: 1500, maxImg: 400,
     timeout: 60000, wait: 'networkidle', extraWait: 1500,
     mobile: true, sections: false, force: false,
+    clicks: [], clickWait: 1500,
   };
   for (const a of argv.slice(2)) {
     if (a.startsWith('--out=')) args.out = a.slice(6);
@@ -55,6 +61,8 @@ function parseArgs(argv) {
     else if (a.startsWith('--timeout=')) args.timeout = Number(a.split('=')[1]);
     else if (a.startsWith('--wait=')) args.wait = a.slice(7);
     else if (a.startsWith('--extra-wait=')) args.extraWait = Number(a.split('=')[1]);
+    else if (a.startsWith('--click=')) args.clicks.push(a.slice(8));
+    else if (a.startsWith('--click-wait=')) args.clickWait = Number(a.split('=')[1]);
     else if (a === '--no-mobile') args.mobile = false;
     else if (a === '--sections') args.sections = true;
     else if (a === '--force') args.force = true;
@@ -310,7 +318,9 @@ async function captureSections(page, screenshotsDir) {
 }
 
 // --- Processa uma página: goto, coleta, screenshots, grava no cache ---
-async function processPage(browser, item, ctx) {
+// Recebe o context COMPARTILHADO do crawl: cookies/localStorage persistem entre
+// páginas — essencial para sites com gate (região/idade) atravessado via --click.
+async function processPage(context, item, ctx) {
   const { args, siteDir, assets, counters, slugsUsed, entryOrigin } = ctx;
   const slug = pageSlug(item.url, slugsUsed);
   const pageDir = join(siteDir, 'pages', slug);
@@ -319,15 +329,12 @@ async function processPage(browser, item, ctx) {
 
   const record = {
     url: item.url, finalUrl: null, slug, title: '', depth: item.depth,
-    status: null, htmlBytes: 0, screenshots: {}, error: null,
+    status: null, htmlBytes: 0, screenshots: {}, clicksApplied: [], error: null,
   };
   const discovered = [];
 
-  const context = await browser.newContext({
-    userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-    viewport: { width: 1440, height: 900 },
-  });
   const page = await context.newPage();
+  await page.setViewportSize({ width: 1440, height: 900 });
 
   page.on('response', async (res) => {
     const rUrl = res.url();
@@ -383,7 +390,42 @@ async function processPage(browser, item, ctx) {
 
     if (args.extraWait > 0) await page.waitForTimeout(args.extraWait);
 
-    const data = await collectPageData(page);
+    // Gates (região/idade/cookies): clica no primeiro match VISÍVEL de cada
+    // seletor, em ordem. O mesmo seletor pode casar elementos ocultos (ex.: o
+    // item do dropdown do header além do botão do gate) — por isso não basta
+    // .first(). Idempotente: com o cookie persistido no context, o gate não
+    // reaparece e nada é clicado.
+    for (const sel of args.clicks) {
+      try {
+        const candidates = await page.locator(sel).all();
+        for (const loc of candidates) {
+          if (!(await loc.isVisible().catch(() => false))) continue;
+          await loc.click({ timeout: 3000 });
+          record.clicksApplied.push(sel);
+          log(`[click] ${sel} em ${slug}`);
+          // O clique pode disparar navegação (gate que recarrega com o
+          // conteúdo): dá tempo dela começar e espera assentar.
+          await page.waitForTimeout(500);
+          await page.waitForLoadState('load', { timeout: args.timeout }).catch(() => {});
+          await page.waitForTimeout(args.clickWait);
+          break;
+        }
+      } catch {}
+    }
+
+    let data;
+    try {
+      data = await collectPageData(page);
+    } catch (e) {
+      if (/Execution context was destroyed/i.test(e.message)) {
+        // navegação tardia pós-clique — espera e tenta uma vez mais
+        await page.waitForLoadState('load', { timeout: args.timeout }).catch(() => {});
+        await page.waitForTimeout(args.extraWait);
+        data = await collectPageData(page);
+      } else {
+        throw e;
+      }
+    }
     record.title = data.title;
 
     // CSS cross-origin bloqueia cssRules no browser (CORS), então o walkRules
@@ -469,7 +511,7 @@ async function processPage(browser, item, ctx) {
     record.error = e.message.split('\n')[0];
     warn(`falha em ${item.url}: ${record.error}`);
   } finally {
-    await context.close();
+    await page.close();
   }
 
   return { record, discovered };
@@ -504,6 +546,9 @@ async function main() {
     if (crawl?.status === 'complete') {
       if (args.maxPages > crawl.pages.length && crawl.queue?.length) {
         warn(`cache tem ${crawl.pages.length} páginas mas --max-pages=${args.maxPages}; use --force para re-crawlar com mais páginas`);
+      }
+      if (JSON.stringify(args.clicks) !== JSON.stringify(crawl.options?.clicks || [])) {
+        warn(`cache foi crawlado com clicks=${JSON.stringify(crawl.options?.clicks || [])} mas agora foi pedido clicks=${JSON.stringify(args.clicks)}; use --force para re-crawlar com a nova interação`);
       }
       summarize(crawl, siteDir, true);
       return;
@@ -549,6 +594,7 @@ async function main() {
     include: args.include?.source || null, exclude: args.exclude?.source || null,
     maxAssets: args.maxAssets, maxImg: args.maxImg,
     wait: args.wait, extraWait: args.extraWait, mobile: args.mobile, sections: args.sections,
+    clicks: args.clicks, clickWait: args.clickWait,
   };
 
   const saveState = async (status) => {
@@ -575,6 +621,12 @@ async function main() {
   log(`limites: ${args.maxPages} páginas, depth ${args.maxDepth}`);
 
   const browser = await launchBrowser();
+  // Context único para o crawl inteiro: cookies/localStorage (gates de região,
+  // consentimento) persistem entre páginas — uma página nova por URL.
+  const context = await browser.newContext({
+    userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    viewport: { width: 1440, height: 900 },
+  });
   const ctx = { args, siteDir, assets, counters, slugsUsed, entryOrigin };
 
   try {
@@ -583,7 +635,7 @@ async function main() {
       if (visited.has(item.url)) continue;
       visited.add(item.url);
 
-      const { record, discovered } = await processPage(browser, item, ctx);
+      const { record, discovered } = await processPage(context, item, ctx);
       pages.push(record);
 
       if (!record.error && item.depth < args.maxDepth) {

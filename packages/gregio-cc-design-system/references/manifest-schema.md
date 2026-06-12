@@ -37,7 +37,8 @@ Metadata about the design system origin and aesthetic.
   "aesthetic": "corporate",
   "sources": ["https://cury.net/"],
   "spec": ".ds-cache/cury-net/ds-spec.md",
-  "cacheDir": ".ds-cache/cury-net"
+  "cacheDir": ".ds-cache/cury-net",
+  "componentsRef": "apps/ds-nxt"
 }
 ```
 
@@ -47,6 +48,7 @@ Metadata about the design system origin and aesthetic.
 | `sources` | Yes | Array of URLs or paths used as visual references. At least one entry. |
 | `spec` | Yes | Path to the `ds-spec.md` that drove this DS (relative to the repo root), or `null`. |
 | `cacheDir` | No | Path to the extraction cache used, or `null` for pure creations. |
+| `componentsRef` | No | White-label: path to the reference DS app whose component inventory/Props API this DS implements (visuals differ, API is identical), or `null`. |
 
 ---
 
