@@ -43,6 +43,14 @@ Nem todo plugin precisa de tudo — `resources` só tem commands/hooks/scripts.
 
 ## Boas práticas de skills (validadas com o skill-creator neste repo)
 
+**Sempre crie/edite skills invocando a skill `skill-creator`** (em vez de
+escrever o SKILL.md "na mão"): ela carrega as práticas oficiais mais recentes —
+se o skill-creator for atualizado, herdamos as novidades automaticamente — e o
+loop dela (draft → test com/sem skill → eval-viewer → iterar → otimizar
+description) é como as skills deste repo foram calibradas. As práticas abaixo
+são o que já validamos aqui e **complementam** o skill-creator, não o
+substituem.
+
 1. **Description é o mecanismo de triggering.** Modelos under-trigger skills:
    escreva descriptions "pushy" com frases-gatilho em PT **e** EN, incluindo
    gatilhos indiretos (usuário cola uma URL e pede o resultado sem nomear a
@@ -72,7 +80,8 @@ Nem todo plugin precisa de tudo — `resources` só tem commands/hooks/scripts.
 
 1. `packages/gregio-cc-<nome>/` com `.claude-plugin/plugin.json` (version 0.1.0)
 2. Registrar em `.claude-plugin/marketplace.json` (mesma version)
-3. Skills seguindo as práticas acima; scripts ESM com deps via npx pinado
+3. Skills criadas **via skill-creator** (ver seção acima) seguindo as práticas
+   do repo; scripts ESM com deps via npx pinado
 4. `README.md` (consumidor) + `CLAUDE.md` (mantenedor) + `evals/evals.json`
 5. Testar instalado de verdade: `/plugin` → instalar deste repo → invocar a
    skill num projeto real (não só ler os arquivos)
