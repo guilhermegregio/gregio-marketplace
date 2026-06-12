@@ -1,5 +1,3 @@
-import { mkdir, writeFile, readFile } from 'node:fs/promises';
-import { dirname, join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
 
@@ -27,8 +25,8 @@ export function loadOptional(name) {
   return null;
 }
 
-export function log(msg) { process.stdout.write(`[fetch-site] ${msg}\n`); }
-export function warn(msg) { process.stderr.write(`[fetch-site] ${msg}\n`); }
+export function log(msg) { process.stdout.write(`[crawl-site] ${msg}\n`); }
+export function warn(msg) { process.stderr.write(`[crawl-site] ${msg}\n`); }
 
 export function kindFromContentType(ct = '', url = '') {
   if (ct.includes('text/html')) return 'html';
@@ -62,76 +60,34 @@ export function resolveUrl(base, ref) {
   try { return new URL(t, base).toString(); } catch { return null; }
 }
 
-export function hostSlug(urlStr) {
+/** Slug do site inteiro (1 diretório de cache por host): "https://www.cury.net/x" → "cury-net" */
+export function siteSlug(urlStr) {
   try {
     const u = new URL(urlStr);
-    const p = u.pathname.replace(/\/$/, '').replace(/[^a-zA-Z0-9._-]/g, '_');
-    return u.host + (p || '');
+    return u.host.toLowerCase().replace(/^www\./, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   } catch {
     return createHash('sha1').update(urlStr).digest('hex').slice(0, 10);
   }
 }
 
-export async function pLimit(items, limit, fn) {
-  const results = new Array(items.length);
-  let i = 0;
-  const workers = Array.from({ length: Math.min(limit, items.length) }, async () => {
-    while (true) {
-      const idx = i++;
-      if (idx >= items.length) return;
-      results[idx] = await fn(items[idx], idx);
+/** Slug de uma página dentro do site: "/" → "home", "/sobre/empresa" → "sobre-empresa" */
+export function pageSlug(urlStr, used = new Set()) {
+  let base = 'home';
+  try {
+    const u = new URL(urlStr);
+    const path = u.pathname.replace(/\/$/, '');
+    if (path) {
+      base = path.split('/').filter(Boolean).join('-')
+        .toLowerCase().replace(/[^a-z0-9._-]+/g, '-').replace(/^-|-$/g, '').slice(0, 60) || 'home';
     }
-  });
-  await Promise.all(workers);
-  return results;
-}
-
-export async function loadUrls(args) {
-  const all = [...(args.urls || [])];
-  if (args.file) {
-    const content = await readFile(args.file, 'utf8');
-    for (const line of content.split(/\r?\n/)) {
-      const t = line.trim();
-      if (!t || t.startsWith('#')) continue;
-      all.push(t);
-    }
+  } catch {}
+  let slug = base;
+  if (used.has(slug)) {
+    const hash = createHash('sha1').update(urlStr).digest('hex').slice(0, 6);
+    slug = `${base}-${hash}`;
   }
-  const seen = new Set();
-  const out = [];
-  for (const u of all) {
-    if (!/^https?:\/\//i.test(u)) { warn(`ignoring (not http/https): ${u}`); continue; }
-    if (seen.has(u)) continue;
-    seen.add(u);
-    out.push(u);
-  }
-  return out;
-}
-
-export async function downloadAsset(url, outDir, manifest, failures, counters, limits) {
-  if (manifest.assets[url]) return manifest.assets[url];
-  if (counters.total >= limits.maxAssets) { counters.droppedTotal++; return null; }
-
-  let res;
-  try { res = await fetch(url, { redirect: 'follow' }); }
-  catch (e) { failures.push({ url, reason: `network: ${e.message}` }); return null; }
-  if (!res.ok) { failures.push({ url, reason: `http ${res.status}` }); return null; }
-
-  const ct = res.headers.get('content-type') || '';
-  const kind = kindFromContentType(ct, url);
-  if (kind === 'img' && counters.img >= limits.maxImg) { counters.droppedImg++; return null; }
-
-  const filename = safeFilenameFromUrl(url, kind);
-  const relPath = join('assets', kind, filename);
-  const absPath = join(outDir, relPath);
-
-  await mkdir(dirname(absPath), { recursive: true });
-  const buf = Buffer.from(await res.arrayBuffer());
-  await writeFile(absPath, buf);
-
-  manifest.assets[url] = { kind, path: relPath, bytes: buf.length, contentType: ct };
-  counters.total++;
-  if (kind === 'img') counters.img++;
-  return manifest.assets[url];
+  used.add(slug);
+  return slug;
 }
 
 export function fmtBytes(n) {

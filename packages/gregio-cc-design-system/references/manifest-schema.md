@@ -8,23 +8,23 @@ Complete reference for `design-system.manifest.json` — the machine-readable so
 
 ```json
 {
-  "$schema": "design-system-v1",
+  "$schema": "design-system-v2",
   "name": "string",
   "version": "string",
   "generatedFrom": "string",
-  "generatedAt": "string",
-  "mode": "astro | standalone"
+  "generatedAt": "string"
 }
 ```
 
 | Field | Required | Description |
 |---|---|---|
-| `$schema` | Yes | Always `"design-system-v1"`. Identifies the manifest version. |
+| `$schema` | Yes | Always `"design-system-v2"`. Identifies the manifest version. |
 | `name` | Yes | Human-readable name of the design system (e.g., `"Acme DS"`). |
 | `version` | Yes | Semver string (e.g., `"1.0.0"`). Increment on each regeneration. |
-| `generatedFrom` | Yes | Source URL or local path the DS was extracted from. |
+| `generatedFrom` | Yes | Source URL the DS was extracted from, or `"spec"` for pure creations. |
 | `generatedAt` | Yes | ISO 8601 timestamp of generation (e.g., `"2026-01-15T10:30:00Z"`). |
-| `mode` | Yes | `"astro"` for Astro component output, `"standalone"` for vanilla HTML/CSS/JS. |
+
+Output is always an Astro app — there is no `mode` field in v2.
 
 ---
 
@@ -34,10 +34,10 @@ Metadata about the design system origin and aesthetic.
 
 ```json
 "meta": {
-  "aesthetic": "luxury",
-  "sources": ["https://example.com"],
-  "mergedFrom": [],
-  "lastImprovedAt": null
+  "aesthetic": "corporate",
+  "sources": ["https://cury.net/"],
+  "spec": ".ds-cache/cury-net/ds-spec.md",
+  "cacheDir": ".ds-cache/cury-net"
 }
 ```
 
@@ -45,8 +45,8 @@ Metadata about the design system origin and aesthetic.
 |---|---|---|
 | `aesthetic` | Yes | One of: `"luxury"`, `"minimal"`, `"brutalist"`, `"playful"`, `"corporate"`, `"tech"`. Guides creative decisions when extending the DS. |
 | `sources` | Yes | Array of URLs or paths used as visual references. At least one entry. |
-| `mergedFrom` | No | Array of manifest file paths when this DS was created by merging multiple systems. Empty array if single-source. |
-| `lastImprovedAt` | No | ISO 8601 timestamp of last `/improve-ds` run, or `null` if never improved. |
+| `spec` | Yes | Path to the `ds-spec.md` that drove this DS (relative to the repo root), or `null`. |
+| `cacheDir` | No | Path to the extraction cache used, or `null` for pure creations. |
 
 ---
 
@@ -56,8 +56,7 @@ Paths to the key files in the generated design system.
 
 ```json
 "entrypoints": {
-  "css": "src/styles/index.css",
-  "js": "src/design-system.js",
+  "css": "src/styles/design-system/index.css",
   "showcase": "src/pages/design-system.astro",
   "components": "src/components/ds/"
 }
@@ -66,11 +65,10 @@ Paths to the key files in the generated design system.
 | Field | Required | Description |
 |---|---|---|
 | `css` | Yes | Path to the main CSS file that imports/defines all tokens and component styles. |
-| `js` | Conditional | Path to the JS bundle. Required when `mode` is `"standalone"`, `null` for Astro mode. |
 | `showcase` | Yes | Path to the showcase/documentation page. |
-| `components` | Yes | Path to the directory containing component files (.astro, .html, or .tsx). |
+| `components` | Yes | Path to the directory containing the `.astro` component files. |
 
-All paths are relative to the project root.
+All paths are relative to the app root (`apps/<name>/`).
 
 ---
 
@@ -276,6 +274,7 @@ Array of component definitions.
 "components": [
   {
     "name": "button",
+    "provenance": "extracted",
     "baseClass": ".ds-btn",
     "variants": [
       { "name": "primary", "class": ".ds-btn-primary", "when": "main CTA" },
@@ -292,10 +291,9 @@ Array of component definitions.
       "focusVisible": true,
       "minTarget": "44px"
     },
-    "source": "src/styles/components/button.css",
+    "source": "src/styles/design-system/components/actions.css",
     "example": "<button class=\"ds-btn ds-btn-primary\">Click me</button>",
     "astroComponent": "src/components/ds/Button.astro",
-    "snippet": "src/snippets/button.html",
     "reactComponent": null
   }
 ]
@@ -304,6 +302,7 @@ Array of component definitions.
 | Field | Required | Description |
 |---|---|---|
 | `name` | Yes | Component identifier in kebab-case. |
+| `provenance` | Yes | `"extracted"` (came from the source site — exact classes/markup preserved) or `"designed"` (created to fill a spec gap, coherent with the extracted aesthetic). Tells consumers and the reviewer what is faithful clone vs. original design. |
 | `baseClass` | Yes | The root CSS class (e.g., `.ds-btn`). |
 | `variants` | Yes | Array of variant objects, each with `name`, `class`, and `when` (usage guidance). |
 | `states` | Yes | Array of interactive state names the component supports. |
@@ -311,8 +310,7 @@ Array of component definitions.
 | `a11y` | Yes | Accessibility requirements: `role`, `focusVisible`, `minTarget` size, and any ARIA attributes. |
 | `source` | Yes | Path to the CSS file defining this component. |
 | `example` | Yes | Minimal HTML snippet showing basic usage. |
-| `astroComponent` | No | Path to generated Astro component, or `null`. |
-| `snippet` | No | Path to standalone HTML snippet file, or `null`. |
+| `astroComponent` | Yes | Path to the Astro component. |
 | `reactComponent` | No | Path to generated React component, or `null`. |
 
 ---
@@ -439,4 +437,5 @@ Paths to generated export files for consumption by other tools.
 - Optional object fields should be set to `null` rather than omitted, for consistent parsing.
 - Color values in `tokens.colors` must include the `rgb` field even for rgba/hsla values (extract the base RGB).
 - Component `example` fields must use the actual DS class names, not pseudocode.
-- The `$schema` field must always be `"design-system-v1"` for this version of the spec.
+- The `$schema` field must always be `"design-system-v2"` for this version of the spec.
+- Every component must declare `provenance` — the build phase sets it from `analysis/gaps.md` (items listed there are `"designed"`).

@@ -62,6 +62,9 @@ function validate(manifest) {
       errors.push({ path: field, message: `missing required field "${field}"` });
     }
   }
+  if (manifest.$schema && manifest.$schema !== 'design-system-v2') {
+    warnings.push({ path: '$schema', message: `expected "design-system-v2", got "${manifest.$schema}"` });
+  }
 
   // --- tokens checks ---
   const tokens = manifest.tokens;
@@ -88,6 +91,9 @@ function validate(manifest) {
       }
       if (!comp.baseClass) {
         errors.push({ path: comp.name ? `components[${i}](${comp.name})` : prefix, message: 'component missing required field "baseClass"' });
+      }
+      if (comp.provenance !== 'extracted' && comp.provenance !== 'designed') {
+        errors.push({ path: comp.name ? `components[${i}](${comp.name})` : prefix, message: 'component "provenance" must be "extracted" or "designed"' });
       }
 
       // a11y warning
