@@ -32,6 +32,11 @@ diretório `analysis/`. A task é seu contrato: leia-a primeiro e por inteiro.
 5. Astro: componentes `.astro` com props tipadas via `interface Props`, CSS no
    arquivo CSS do grupo (não `<style>` inline no componente, para o CSS ser
    consumível fora do Astro).
+6. **Escopo**: trabalhe apenas nos paths recebidos no prompt (task, appDir,
+   cache, analysis). Não consulte outros apps/DSs do projeto nem outros
+   workspaces do cache — a única referência externa legítima é o DS de
+   referência (`components_ref`) quando a task o indica. Runs paralelas do
+   mesmo site dependem desse isolamento.
 
 ## Ao terminar
 

@@ -1,6 +1,6 @@
 ---
 name: ds-create
-description: "Full design-system pipeline from a URL: crawl the site into an offline cache, brainstorm requirements into a spec, analyze with five specialized parallel agents, build the DS as an Astro app in apps/<name>, and review it covering gaps. Supports white-label: --ref=<ds-app> takes the component inventory/API from an existing reference DS (e.g. apps/ds-nxt) while the visuals come from the crawled site. Use this skill whenever the user wants a design system created from a website — 'criar design system do site X', 'create a DS from this URL', 'clonar o visual desse site', 'extrair o design system de', 'novo DS a partir de', 'monte um design system para meu app baseado em', 'DS white label do site X com os componentes do ds-Y' — or pastes a URL asking for a design system, tokens, or a component library, even without naming the skill. Also use it to resume a partially completed pipeline (existing .ds-cache)."
+description: "Full design-system pipeline from a URL: crawl the site into an offline cache, brainstorm requirements into a spec, analyze with five specialized parallel agents, build the DS as an Astro app in apps/<name>, and review it covering gaps. Supports white-label: --ref=<ds-app> takes the component inventory/API from an existing reference DS (e.g. apps/ds-nxt) while the visuals come from the crawled site. Use this skill whenever the user wants a design system created from a website — 'criar design system do site X', 'create a DS from this URL', 'clonar o visual desse site', 'extrair o design system de', 'novo DS a partir de', 'monte um design system para meu app baseado em', 'DS white label do site X com os componentes do ds-Y' — or pastes a URL asking for a design system, tokens, or a component library, even without naming the skill. Also use it to resume a partially completed pipeline (existing workspace in ~/.ds-cache) or to start a parallel independent run from the same site under a new app name."
 argument-hint: <url> [app-name] [--ref=<ds-app-dir>] [--react] [--max-pages=N] [--max-depth=N] [--click=<selector>] [--skip-brainstorm] [--force]
 ---
 
@@ -24,24 +24,39 @@ mesma conversa. Leia o doc de cada fase ao chegar nela (não todos de uma vez).
 
 ## Resolução de estado (antes de tudo)
 
-1. `cacheDir = .ds-cache/<site-slug>` (o slug é o host sem www, ex.: `cury-net`)
-   e `appDir = apps/<app-name>` (default: `ds-<site>`, ex.: `ds-cury`).
+1. Resolva os três paths da run:
+   - `cacheDir = ~/.ds-cache/<site-slug>` (cache GLOBAL na home; slug = host sem
+     www, ex.: `cury-net`)
+   - `appName` (default: `ds-<site>`, ex.: `ds-cury`) e `appDir = apps/<appName>`
+   - `workspace = <cacheDir>/apps/<appName>` — o estado desta run
 2. Detecte o que já existe e **pule fases com artefato pronto** (o pipeline é
-   retomável; cada artefato é caro):
-   - `crawl.json` com status `complete` → extract feito
-   - `ds-spec.md` com `status: approved` → brainstorm feito
-   - `analysis/consolidated.json` → analyze feito
-   - `appDir` com `design-system.manifest.json` → build feito
+   retomável; cada artefato é caro). Olhe SOMENTE o workspace desta run:
+   - `<cacheDir>/crawl.json` com status `complete` → extract feito (o crawler
+     re-crawla sozinho se as flags pedirem mais — apenas repasse-as)
+   - `<workspace>/ds-spec.md` com `status: approved` → brainstorm feito
+   - `<workspace>/analysis/consolidated.json` → analyze feito
+   - `<appDir>/design-system.manifest.json` → build feito
 3. Reporte ao usuário o que vai reusar e o que vai executar. `--force` re-roda
    tudo do zero (repasse aos scripts onde aplicável).
 
+## Isolamento (regra de escopo)
+
+O escopo da run é exatamente **{url, app-name, --ref}**. Workspaces de outros
+apps no mesmo cache, outros `apps/*` do projeto e seus showcases/manifests são
+**invisíveis** para esta run — criar DSs em paralelo do mesmo site para comparar
+soluções é caso de uso suportado, e olhar o vizinho contamina o resultado. Um
+app-name novo = run nova do zero (mesmo que exista um DS "parecido" do mesmo
+site). Exceções únicas: o DS de `--ref` (contrato de API) e o scan de
+`apps/*/package.json` para achar porta livre no build.
+
 ## Execução
 
-- **extract**: `references/pipeline/extract.md` (repasse `--max-pages`/
-  `--max-depth`/`--click`). Sites com gate (região/idade/cookies) precisam de
-  `--click=<seletor>` para capturar o conteúdo real — avalie o screenshot da
-  home; se todas as páginas mostram a mesma tela de gate, descubra o seletor no
-  HTML e re-extraia com `--force`.
+- **extract**: `references/pipeline/extract.md` (repasse TODAS as flags de crawl:
+  `--max-pages`/`--max-depth`/`--click`/... — se o cache existir com opções mais
+  estreitas, o crawler re-crawla automaticamente e reporta `recrawled: true`).
+  Sites com gate (região/idade/cookies) precisam de `--click=<seletor>` para
+  capturar o conteúdo real — avalie o screenshot da home; se todas as páginas
+  mostram a mesma tela de gate, descubra o seletor no HTML e re-extraia.
 - **brainstorm**: `references/pipeline/brainstorm.md`. Com `--skip-brainstorm`,
   aplique o baseline (`references/ds-minimum-baseline.md`) sem entrevista e
   marque o spec como approved direto. Com `--ref=<ds-app>` (white-label), o

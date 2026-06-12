@@ -5,10 +5,10 @@
     {
       "id": 1,
       "prompt": "crie um design system a partir de https://cury.net/ aqui no monorepo, pode usar o baseline de componentes sem me perguntar nada",
-      "expected_output": "Pipeline completo: cache em .ds-cache/cury-net, ds-spec.md aprovado, analysis/ com 5 outputs + consolidated.json + gaps.md, app Astro em apps/ds-cury com showcase, manifest v2 válido, build verde, review.md",
+      "expected_output": "Pipeline completo: cache em ~/.ds-cache/cury-net, workspace apps/<nome>/ com ds-spec.md aprovado e analysis/ com 5 outputs + consolidated.json + gaps.md, app Astro em apps/ds-cury com showcase, manifest v2 válido, build verde, review.md",
       "files": [],
       "assertions": [
-        "cache .ds-cache/<slug>/crawl.json existe com status complete e >= 5 páginas",
+        "cache ~/.ds-cache/<slug>/crawl.json existe com status complete e >= 5 páginas",
         "pages/home/computed.json tem rootVars ou samples não-vazios e screenshots/desktop.png existe",
         "analysis/consolidated.json existe e gaps.md lista componentes designed",
         "apps/<nome>/design-system.manifest.json valida com 0 errors no validate-manifest.js",

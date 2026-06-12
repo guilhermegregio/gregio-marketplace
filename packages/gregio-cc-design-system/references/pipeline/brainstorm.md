@@ -1,7 +1,9 @@
 # Fase 2 — Brainstorm (requisitos → ds-spec.md)
 
 Objetivo: transformar a intenção do usuário num documento de requisitos
-(`<cache>/ds-spec.md`) que guia a análise e o build. O spec é o que permite criar
+(`<cacheDir>/apps/<app-name>/ds-spec.md` — o workspace da run) que guia a
+análise e o build. `app-name` é obrigatório nesta fase: é ele que isola esta
+run das demais (o ds-create passa; standalone, derive do pedido ou pergunte). O spec é o que permite criar
 um DS **completo para o app alvo** mesmo quando o site fonte não tem tudo — o que
 faltar vira gap a ser desenhado, não buraco no DS.
 
@@ -51,11 +53,13 @@ Há três fontes possíveis para o inventário de componentes, em ordem de prior
    - A entrevista encolhe: com referência definida, pergunte apenas fidelidade
      visual, motion e extras — nunca re-pergunte o inventário.
 
-4. **Escreva o spec** em `<cache>/ds-spec.md` usando
+4. **Escreva o spec** em `<cacheDir>/apps/<app-name>/ds-spec.md` (crie o
+   workspace se não existir) usando
    `${CLAUDE_PLUGIN_ROOT}/templates/shared/ds-spec.md.tmpl` (preencha os marcadores
    `{{VALUE:...}}` e `{{INSTRUCTION:...}}` — nenhum marcador pode sobrar no arquivo
    final). Pontos de atenção:
-   - O frontmatter é o **estado do pipeline**: `cache_dir`, `app_dir`,
+   - O frontmatter é o **estado do pipeline**: `cache_dir` (path ABSOLUTO do
+     cache, ex. `/home/<user>/.ds-cache/cury-net`), `app_dir`, `components_ref`,
      `react_exports` e `status` são lidos pelas fases seguintes.
    - Na tabela de componentes, marque a "origem esperada" (site|criar) pelo que
      você viu nos screenshots — a análise confirma depois.
@@ -63,3 +67,12 @@ Há três fontes possíveis para o inventário de componentes, em ordem de prior
 5. **Peça aprovação**: mostre um resumo do spec (não o arquivo inteiro) e pergunte
    se está bom. Ajuste se necessário e então mude `status: draft` → `status: approved`
    no frontmatter. As fases seguintes só rodam com spec aprovado.
+
+## Isolamento (regra de escopo)
+
+O escopo desta fase é o workspace `<cacheDir>/apps/<app-name>/` + o crawl do
+site. **Não leia** specs, análises ou apps de outros workspaces/DSs — runs
+paralelas do mesmo site (ex.: ds-cury e ds-cury-test) existem justamente para
+comparar soluções independentes, e olhar o vizinho contamina o resultado.
+Exceções únicas: o DS de referência indicado em `components_ref` (contrato de
+API) e, no build, o scan de `apps/*/package.json` só para achar porta livre.

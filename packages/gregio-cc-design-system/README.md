@@ -42,8 +42,15 @@ repo usa Nx):
 
 ## Conceitos
 
-- **Cache offline** (`.ds-cache/<site>/`): a extração é feita uma vez; todas as
-  análises e rebuilds funcionam sem rede. Contrato em `references/cache-layout.md`.
+- **Cache offline global** (`~/.ds-cache/<site>/`): a extração é feita uma vez e
+  compartilhada entre projetos; todas as análises e rebuilds funcionam sem rede.
+  Se as flags pedirem mais que o cache tem (`--max-depth` maior, `--click`
+  novo...), o crawler **re-crawla automaticamente**. Contrato em
+  `references/cache-layout.md`.
+- **Workspace por app** (`~/.ds-cache/<site>/apps/<nome>/`): spec + análise de
+  cada DS alvo, isolados — dá para criar DSs diferentes do mesmo site em
+  paralelo (ex.: `ds-cury` e `ds-cury-test`) sem uma run enxergar a outra.
+  Re-crawls preservam os workspaces.
 - **Gates**: sites com seleção de região/idade/cookies cobrindo o conteúdo são
   atravessados com `--click=<seletor>` (cookie persiste no crawl inteiro).
 - **Spec** (`ds-spec.md`): o que o DS precisa ter para o app alvo. O que o site

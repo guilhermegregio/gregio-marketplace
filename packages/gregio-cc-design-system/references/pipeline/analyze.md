@@ -7,16 +7,16 @@ consome, mais a lista de gaps (requerido pelo spec × ausente no site).
 
 ## Pré-requisitos
 
-- Cache completo: `<cache>/crawl.json` com `status: complete`
-- Spec aprovado: `<cache>/ds-spec.md` com `status: approved` no frontmatter.
-  Sem spec, pare e sugira `/ds-brainstorm` (a análise sem spec não sabe o que
-  procurar nem o que vira gap).
-- Se `analysis/consolidated.json` já existe e não foi pedido refazer, reporte o
-  que existe e pare — a análise é cara, não a repita à toa.
+- Cache completo: `<cacheDir>/crawl.json` com `status: complete`
+- Spec aprovado: `<workspace>/ds-spec.md` com `status: approved` no frontmatter,
+  onde `workspace = <cacheDir>/apps/<app-name>`. Sem spec, pare e sugira
+  `/ds-brainstorm` (a análise sem spec não sabe o que procurar nem o que vira gap).
+- Se `<workspace>/analysis/consolidated.json` já existe e não foi pedido
+  refazer, reporte o que existe e pare — a análise é cara, não a repita à toa.
 
 ## Dispatch dos analistas
 
-Crie `<cache>/analysis/` e dispare os **5 agentes em paralelo** (uma única
+Crie `<workspace>/analysis/` e dispare os **5 agentes em paralelo** (uma única
 mensagem com 5 chamadas da Agent tool). `subagent_type` e outputs:
 
 | subagent_type | reference a indicar | outputs |
@@ -31,11 +31,11 @@ O prompt de cada um é curto — o método vive no próprio agente. Inclua apena
 
 ```
 cacheDir: <path absoluto do cache>
-spec: <cacheDir>/ds-spec.md
+spec: <workspace>/ds-spec.md
 reference: ${CLAUDE_PLUGIN_ROOT}/references/<arquivo>
 outputs:
-  json: <cacheDir>/analysis/<nome>.json
-  md: <cacheDir>/analysis/<nome>.md
+  json: <workspace>/analysis/<nome>.json
+  md: <workspace>/analysis/<nome>.md
 ```
 
 Se o spec tem `components_ref` (white-label), acrescente ao prompt do
@@ -79,3 +79,12 @@ componentsRef: <path absoluto do DS de referência> (manifest + src/components/d
 
 Liste contagens (tokens/componentes/animações/gaps), destaque ambiguidades que
 o usuário deva validar, e sugira a próxima fase: `/ds-build`.
+
+## Isolamento (regra de escopo)
+
+O escopo desta fase é o workspace `<cacheDir>/apps/<app-name>/` + o crawl do
+site. **Não leia** specs, análises ou apps de outros workspaces/DSs — runs
+paralelas do mesmo site (ex.: ds-cury e ds-cury-test) existem justamente para
+comparar soluções independentes, e olhar o vizinho contamina o resultado.
+Exceções únicas: o DS de referência indicado em `components_ref` (contrato de
+API) e, no build, o scan de `apps/*/package.json` só para achar porta livre.

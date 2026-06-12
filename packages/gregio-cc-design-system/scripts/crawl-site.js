@@ -5,6 +5,7 @@
 import { mkdir, writeFile, readFile, rm } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
+import { homedir } from 'node:os';
 import { execSync } from 'node:child_process';
 import {
   loadOptional, log, warn, resolveUrl, kindFromContentType,
@@ -15,7 +16,8 @@ const USAGE = `Usage:
   node crawl-site.js <url> [options]
 
 Options:
-  --out=<dir>          Raiz do cache (default: ./.ds-cache). Site vai em <out>/<site-slug>/
+  --out=<dir>          Raiz do cache (default: ~/.ds-cache — global, compartilhado
+                       entre projetos). Site vai em <out>/<site-slug>/
   --max-pages=<n>      Máximo de páginas a baixar (default: 10)
   --max-depth=<n>      Profundidade máxima de links (entry = 0; default: 2)
   --include=<regex>    Só segue links cujo pathname casa com o regex
@@ -35,8 +37,12 @@ Options:
   --force              Ignora cache existente e re-crawla do zero
 
 Cache: se <out>/<site-slug>/crawl.json existir com status "complete" e sem --force,
-o script reporta o cache e sai sem tocar na rede. Crawls interrompidos ficam
-"partial" e são retomados de onde pararam.`;
+o script reporta o cache e sai sem tocar na rede — EXCETO quando as opções pedidas
+são mais amplas que as do cache (max-pages/max-depth maiores, clicks/include/exclude
+diferentes, sections/mobile recém-ligados): aí re-crawla automaticamente, logando o
+motivo. Re-crawl e --force apagam só crawl.json/pages/assets — workspaces de
+pipeline em <site>/apps/ são preservados. Crawls interrompidos ficam "partial" e
+são retomados de onde pararam.`;
 
 const BLOCK_EXT = /\.(pdf|zip|rar|7z|dmg|exe|msi|png|jpe?g|gif|webp|avif|svg|ico|mp4|mp3|wav|avi|mov|webm|docx?|xlsx?|pptx?|csv|xml|rss)$/i;
 const BLOCK_PATH = /(^|\/)(login|logout|signin|signup|sign-in|sign-up|register|cadastro|cart|carrinho|checkout|account|minha-conta|admin|wp-admin|wp-login|privacy|privacidade|terms|termos|cookies)(\/|$)/i;
@@ -517,7 +523,7 @@ async function processPage(context, item, ctx) {
   return { record, discovered };
 }
 
-function summarize(crawl, siteDir, cached = false) {
+function summarize(crawl, siteDir, { cached = false, recrawled = false, reasons = [] } = {}) {
   log('');
   log(`=== ${cached ? 'Cache existente' : 'Resultado'} ===`);
   for (const p of crawl.pages) {
@@ -526,36 +532,70 @@ function summarize(crawl, siteDir, cached = false) {
   }
   log(`pages: ${crawl.totals.pages} | assets: ${crawl.totals.assetsOk} ok (${fmtBytes(crawl.totals.bytes)})`);
   log(`cache: ${siteDir}`);
-  console.log(JSON.stringify({ cached, cacheDir: siteDir, status: crawl.status, totals: crawl.totals }));
+  console.log(JSON.stringify({ cached, recrawled, reasons, cacheDir: siteDir, status: crawl.status, totals: crawl.totals }));
+}
+
+// Opções pedidas pedem MAIS conteúdo do que o cache tem? Cada motivo retorna
+// uma string legível. Opções mais estreitas não invalidam o cache (superset).
+function broadenedReasons(crawl, args) {
+  const cached = crawl.options || {};
+  const r = [];
+  // mais páginas só rende algo se o crawl anterior foi truncado (fila sobrou)
+  if (args.maxPages > (cached.maxPages ?? Infinity) && (crawl.queue?.length || 0) > 0) {
+    r.push(`max-pages ${cached.maxPages} → ${args.maxPages}`);
+  }
+  // mais profundidade sempre pode render: links no nível-limite nunca entraram na fila
+  if (args.maxDepth > (cached.maxDepth ?? Infinity)) {
+    r.push(`max-depth ${cached.maxDepth} → ${args.maxDepth}`);
+  }
+  if (JSON.stringify(args.clicks) !== JSON.stringify(cached.clicks || [])) {
+    r.push(`clicks ${JSON.stringify(cached.clicks || [])} → ${JSON.stringify(args.clicks)}`);
+  }
+  if ((args.include?.source || null) !== (cached.include ?? null)) r.push('include diferente');
+  if ((args.exclude?.source || null) !== (cached.exclude ?? null)) r.push('exclude diferente');
+  if (args.sections && !cached.sections) r.push('sections ligado');
+  if (args.mobile && cached.mobile === false) r.push('mobile ligado');
+  return r;
+}
+
+// Remove SÓ os artefatos de crawl — <site>/apps/ guarda workspaces de pipeline
+// (ds-spec.md, analysis/) de runs que não podem ser perdidos num re-crawl.
+async function clearCrawlArtifacts(siteDir) {
+  for (const entry of ['crawl.json', 'pages', 'assets']) {
+    await rm(join(siteDir, entry), { recursive: true, force: true });
+  }
 }
 
 async function main() {
   const args = parseArgs(process.argv);
   if (!args.url || !/^https?:\/\//i.test(args.url)) { console.error(USAGE); process.exit(2); }
 
-  const rootOut = resolve(args.out || join(process.cwd(), '.ds-cache'));
+  const rootOut = resolve(args.out || join(homedir(), '.ds-cache'));
   const slug = siteSlug(args.url);
   const siteDir = join(rootOut, slug);
   const crawlJsonPath = join(siteDir, 'crawl.json');
   const entryOrigin = new URL(args.url).origin;
 
-  // --- Cache hit / resume ---
+  // --- Cache hit / re-crawl automático / resume ---
   let crawl = null;
+  let recrawlReasons = [];
   if (existsSync(crawlJsonPath) && !args.force) {
     try { crawl = JSON.parse(await readFile(crawlJsonPath, 'utf8')); } catch {}
-    if (crawl?.status === 'complete') {
-      if (args.maxPages > crawl.pages.length && crawl.queue?.length) {
-        warn(`cache tem ${crawl.pages.length} páginas mas --max-pages=${args.maxPages}; use --force para re-crawlar com mais páginas`);
+    if (crawl) {
+      recrawlReasons = broadenedReasons(crawl, args);
+      if (recrawlReasons.length > 0) {
+        // opções pedem mais que o cache tem → re-crawl automático do zero
+        log(`re-crawl automático: opções ampliadas (${recrawlReasons.join('; ')})`);
+        crawl = null;
+      } else if (crawl.status === 'complete') {
+        summarize(crawl, siteDir, { cached: true });
+        return;
+      } else if (crawl.status === 'partial') {
+        log(`retomando crawl parcial (${crawl.pages.length} páginas já no cache)`);
       }
-      if (JSON.stringify(args.clicks) !== JSON.stringify(crawl.options?.clicks || [])) {
-        warn(`cache foi crawlado com clicks=${JSON.stringify(crawl.options?.clicks || [])} mas agora foi pedido clicks=${JSON.stringify(args.clicks)}; use --force para re-crawlar com a nova interação`);
-      }
-      summarize(crawl, siteDir, true);
-      return;
     }
-    if (crawl?.status === 'partial') log(`retomando crawl parcial (${crawl.pages.length} páginas já no cache)`);
   }
-  if (args.force) await rm(siteDir, { recursive: true, force: true });
+  if (args.force || recrawlReasons.length > 0) await clearCrawlArtifacts(siteDir);
 
   await mkdir(siteDir, { recursive: true });
 
@@ -655,7 +695,7 @@ async function main() {
   }
 
   const finalData = await saveState('complete');
-  summarize(finalData, siteDir);
+  summarize(finalData, siteDir, { recrawled: recrawlReasons.length > 0, reasons: recrawlReasons });
 }
 
 main().catch((err) => { console.error(err.stack || err.message); process.exit(1); });

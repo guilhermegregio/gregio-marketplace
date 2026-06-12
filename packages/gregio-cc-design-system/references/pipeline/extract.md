@@ -1,13 +1,16 @@
 # Fase 1 — Extract (crawl do site para cache offline)
 
 Objetivo: baixar o site inteiro (páginas, assets, screenshots, estilos computados)
-para `.ds-cache/<site-slug>/` uma única vez. Todas as fases seguintes trabalham
+para `~/.ds-cache/<site-slug>/` uma única vez. Todas as fases seguintes trabalham
 offline sobre esse cache — extrair bem aqui evita re-fetch e retrabalho depois.
+O crawl é **compartilhado** entre runs e projetos (cache global na home); o que é
+exclusivo de cada DS alvo fica no workspace `apps/<app-name>/` dentro do site.
 
 ## Procedimento
 
-1. Resolva o diretório de saída: default `./.ds-cache` no projeto atual (o crawler
-   cria `<out>/<site-slug>/` sozinho; não crie diretórios manualmente).
+1. Diretório de saída: o default do crawler já é `~/.ds-cache` (global) — só
+   passe `--out` se o usuário pedir outro lugar. O crawler cria
+   `<out>/<site-slug>/` sozinho; não crie diretórios manualmente.
 
 2. Execute o crawler (referencie scripts sempre via `${CLAUDE_PLUGIN_ROOT}` literal —
    o Claude Code substitui em runtime; não tente descobrir o path):
@@ -16,7 +19,7 @@ offline sobre esse cache — extrair bem aqui evita re-fetch e retrabalho depois
    npx --yes --package=playwright@1.58.2 -- node "${CLAUDE_PLUGIN_ROOT}/scripts/crawl-site.js" <url> [flags]
    ```
 
-   Flags úteis (defaults entre parênteses): `--out=<dir>` (./.ds-cache),
+   Flags úteis (defaults entre parênteses): `--out=<dir>` (~/.ds-cache),
    `--max-pages=<n>` (10), `--max-depth=<n>` (2), `--include=<re>`, `--exclude=<re>`,
    `--max-assets=<n>` (1500), `--max-img=<n>` (400), `--no-mobile`, `--sections`,
    `--click=<selector>` (repetível), `--click-wait=<ms>` (1500), `--force`.
@@ -37,16 +40,22 @@ offline sobre esse cache — extrair bem aqui evita re-fetch e retrabalho depois
      que velocidade aqui. Não interrompa por demora; se interrompido, re-rodar
      **retoma** de onde parou (cache `partial`).
 
-3. O script imprime na última linha um JSON: `{cached, cacheDir, status, totals}`.
-   - `cached: true` → o cache já existia completo e nada foi baixado. Só use
-     `--force` se o usuário pedir dados frescos ou se os limites pedidos forem
-     maiores que os do cache (o script avisa nesse caso).
+3. O script imprime na última linha um JSON:
+   `{cached, recrawled, reasons, cacheDir, status, totals}`.
+   - `cached: true` → o cache já existia completo e nada foi baixado.
+   - `recrawled: true` → as opções pedidas eram mais amplas que as do cache
+     (ex.: `--max-depth` maior, `--click` novo) e o crawler re-crawlou sozinho —
+     `reasons` explica. Você NÃO precisa decidir isso nem usar `--force` para
+     limites maiores; repasse as flags do usuário e o script resolve.
+   - `--force` fica só para "quero dados frescos" explícito do usuário.
+   - Re-crawl e `--force` preservam os workspaces em `<site>/apps/`.
 
 4. Leia `<cacheDir>/crawl.json` e reporte ao usuário:
    - Páginas baixadas (url → slug, status, erros se houver)
    - Total de assets e bytes
-   - Páginas que ficaram na fila (`queue`) — sugira `--max-pages` maior se algo
-     importante ficou de fora (julgue pelos pathnames)
+   - Páginas que ficaram na fila (`queue`) — se algo importante ficou de fora
+     (julgue pelos pathnames), re-rode com `--max-pages` maior: o re-crawl é
+     automático
 
 5. Avalie a qualidade da extração antes de seguir adiante:
    - Abra 1–2 `pages/*/computed.json`: `rootVars` e `samples` vieram populados?

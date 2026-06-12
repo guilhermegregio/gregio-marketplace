@@ -16,8 +16,8 @@ por task; o reviewer existe para achar o que escapou **entre** as tasks.
    ```
    appDir: <path absoluto de apps/<nome>>
    cacheDir: <path absoluto do cache, se houver>
-   spec: <cacheDir>/ds-spec.md
-   analysis: <cacheDir>/analysis/
+   spec: <cacheDir>/apps/<app-name>/ds-spec.md
+   analysis: <cacheDir>/apps/<app-name>/analysis/
    validator: ${CLAUDE_PLUGIN_ROOT}/scripts/validate-manifest.js
    ```
 
@@ -34,3 +34,12 @@ por task; o reviewer existe para achar o que escapou **entre** as tasks.
    - Como abrir o showcase: `pnpm exec nx dev <nome>` → `http://localhost:<porta>/design-system`
    - Se houver `pending` de design (componente faltando), ofereça executar como
      uma rodada extra de build tasks
+
+## Isolamento (regra de escopo)
+
+O escopo desta fase é o workspace `<cacheDir>/apps/<app-name>/` + o crawl do
+site. **Não leia** specs, análises ou apps de outros workspaces/DSs — runs
+paralelas do mesmo site (ex.: ds-cury e ds-cury-test) existem justamente para
+comparar soluções independentes, e olhar o vizinho contamina o resultado.
+Exceções únicas: o DS de referência indicado em `components_ref` (contrato de
+API) e, no build, o scan de `apps/*/package.json` só para achar porta livre.

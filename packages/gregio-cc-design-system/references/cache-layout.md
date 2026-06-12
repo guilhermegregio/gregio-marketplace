@@ -3,23 +3,39 @@
 Todo o pipeline (brainstorm, analyze, build, review) trabalha **offline** sobre este
 cache. Depois que `crawl-site.js` termina com `status: "complete"`, nenhuma fase
 seguinte deve fazer requisição de rede ao site original — se algo está faltando aqui,
-o caminho certo é re-crawlar com `--force`/limites maiores, não buscar ad-hoc.
+o caminho certo é re-crawlar com limites maiores (automático) ou `--force`, não
+buscar ad-hoc.
+
+O cache é **global**: vive em `~/.ds-cache` (home do usuário), fora de qualquer
+projeto — projetos diferentes reusam o mesmo crawl e ele não some num `git clean`.
+
+Dois escopos convivem aqui, com regras diferentes:
+
+- **Crawl** (`crawl.json`, `pages/`, `assets/`) — escopo **site**, compartilhado
+  entre todas as runs e projetos. Re-crawls substituem esses artefatos.
+- **Workspace** (`apps/<app-name>/`) — escopo **app/run**: o `ds-spec.md` e a
+  `analysis/` de UM design system alvo. **Isolamento**: uma run só lê/escreve o
+  próprio workspace; specs/análises de outros apps são invisíveis para ela —
+  é o que permite criar DSs diferentes do mesmo site em paralelo e comparar
+  soluções. Re-crawl e `--force` preservam `apps/`.
 
 ## Layout
 
 ```
-.ds-cache/<site-slug>/              # site-slug = host sem www, ex: "cury-net"
+~/.ds-cache/<site-slug>/            # site-slug = host sem www, ex: "cury-net"
 ├── crawl.json                      # índice do crawl (ver abaixo)
-├── ds-spec.md                      # escrito pela fase brainstorm
-├── analysis/                       # escrito pela fase analyze
-│   ├── tokens.json / tokens.md
-│   ├── typography.json / typography.md
-│   ├── components.json / components.md
-│   ├── motion.json / motion.md
-│   ├── layout.json / layout.md
-│   ├── consolidated.json           # proto-manifest consolidado
-│   ├── gaps.md                     # itens do spec ausentes no site → diretrizes de design
-│   └── ANALYSIS.md                 # sumário executivo
+├── apps/                           # workspaces de pipeline, 1 por DS alvo
+│   └── <app-name>/                 # ex: ds-cury, ds-cury-test
+│       ├── ds-spec.md              # escrito pela fase brainstorm
+│       └── analysis/               # escrito pela fase analyze
+│           ├── tokens.json / tokens.md
+│           ├── typography.json / typography.md
+│           ├── components.json / components.md
+│           ├── motion.json / motion.md
+│           ├── layout.json / layout.md
+│           ├── consolidated.json   # proto-manifest consolidado
+│           ├── gaps.md             # itens do spec ausentes no site → diretrizes
+│           └── ANALYSIS.md         # sumário executivo
 ├── pages/
 │   └── <page-slug>/                # "home" para a entry; senão pathname slugificado
 │       ├── index.html              # DOM pós-JS, refs reescritas para ../../assets/
@@ -58,10 +74,15 @@ o caminho certo é re-crawlar com `--force`/limites maiores, não buscar ad-hoc.
 
 - `status: "complete"` → cache utilizável; re-runs do crawler saem imediatamente
   (`cached: true` no JSON final do stdout) sem tocar na rede.
+- **Re-crawl automático**: se as opções pedidas forem mais amplas que as de
+  `options` (max-pages/max-depth maiores, clicks/include/exclude diferentes,
+  sections/mobile recém-ligados), o crawler re-crawla sozinho, loga o motivo e
+  reporta `recrawled: true` + `reasons` no JSON final. Opções mais estreitas →
+  cache vale (é superset). O re-crawl apaga só crawl.json/pages/assets —
+  `apps/` (workspaces) é preservado.
 - `status: "partial"` → crawl interrompido; rodar o crawler de novo **retoma** a fila
   de onde parou (páginas já salvas não são re-baixadas).
-- `queue` lista o que ficou de fora (limite de páginas atingido) — útil para decidir
-  se vale re-crawlar com `--max-pages` maior.
+- `queue` lista o que ficou de fora (limite de páginas atingido).
 
 ## computed.json
 

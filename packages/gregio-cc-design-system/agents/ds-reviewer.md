@@ -30,6 +30,12 @@ promessas do spec não cumpridas.
    variantes e estados visíveis, hero conforme a regra de fidelidade do spec.
 6. **Build**: `pnpm build` (ou `nx build`) verde no app.
 
+## Escopo
+
+Revise apenas o app e o workspace recebidos no prompt. Não compare com outros
+DSs do projeto nem leia outros workspaces do cache — a exceção é o DS de
+referência (`components_ref` do spec), que é contrato de API a verificar.
+
 ## Postura de correção
 
 - **Corrija diretamente** o que for pequeno e inequívoco: token hardcoded,

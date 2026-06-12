@@ -6,8 +6,9 @@ tasks isolam arquivos para que os builders nunca conflitem entre si.
 
 ## Pré-requisitos
 
-- `<cache>/analysis/consolidated.json` e `gaps.md` (fase analyze)
-- `<cache>/ds-spec.md` aprovado (o frontmatter traz `app_dir` e `react_exports`)
+- `<workspace>/analysis/consolidated.json` e `gaps.md` (fase analyze), onde
+  `workspace = <cacheDir>/apps/<app-name>`
+- `<workspace>/ds-spec.md` aprovado (o frontmatter traz `app_dir` e `react_exports`)
 
 ## 1. Scaffold do app
 
@@ -15,7 +16,8 @@ Padrão ds-agent (monorepo Nx/pnpm com apps Astro independentes):
 
 1. Nome: do spec (`app_dir`), default `ds-<site>` (ex.: `ds-cury`).
 2. Porta: escaneie `apps/*/package.json` existentes (`rg -o 'port \d+'`) e use a
-   próxima livre a partir de 4000.
+   próxima livre a partir de 4000 — este scan é a ÚNICA leitura permitida de
+   outros apps (não abra src/, manifest ou showcase deles).
 3. Copie `${CLAUDE_PLUGIN_ROOT}/templates/astro-app/` para `apps/<nome>/`,
    removendo o sufixo `.tmpl` e preenchendo os marcadores:
    - `package.json`, `astro.config.mjs`, `tsconfig.json`
@@ -74,7 +76,7 @@ Dispare cada wave como chamadas paralelas da Agent tool
 task: <path absoluto do arquivo da task>
 appDir: <path absoluto de apps/<nome>>
 cacheDir: <path absoluto do cache>
-analysis: <cacheDir>/analysis/
+analysis: <cacheDir>/apps/<app-name>/analysis/
 ```
 
 - **Wave 1**: 00, 01, 02, 20 (fundação CSS — só dependem da análise)
@@ -98,3 +100,12 @@ analysis: <cacheDir>/analysis/
    `node "${CLAUDE_PLUGIN_ROOT}/scripts/validate-manifest.js" apps/<nome>/design-system.manifest.json`
 4. Reporte: arquivos por wave, componentes extracted × designed, como rodar o
    showcase, e sugira a próxima fase: `/ds-review apps/<nome> <cache>`.
+
+## Isolamento (regra de escopo)
+
+O escopo desta fase é o workspace `<cacheDir>/apps/<app-name>/` + o crawl do
+site. **Não leia** specs, análises ou apps de outros workspaces/DSs — runs
+paralelas do mesmo site (ex.: ds-cury e ds-cury-test) existem justamente para
+comparar soluções independentes, e olhar o vizinho contamina o resultado.
+Exceções únicas: o DS de referência indicado em `components_ref` (contrato de
+API) e, no build, o scan de `apps/*/package.json` só para achar porta livre.
