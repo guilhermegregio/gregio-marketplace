@@ -1,7 +1,7 @@
 {
   "name": "gregio-cc-design-system",
-  "description": "Complete design system workbench: extract from websites, create from scratch, improve, merge, and generate components/pages for Astro, React/Next, or standalone HTML. Produces machine-readable manifests and human-readable guides as source of truth for LLM-assisted development.",
-  "version": "1.0.0",
+  "description": "Design system pipeline: crawl a website with Playwright into a reusable offline cache, brainstorm requirements into a spec, analyze the extraction with specialized parallel agents (tokens, typography, components, motion, layout), build the DS as an Astro app in apps/<name>, and review it with a final gap-covering agent.",
+  "version": "2.0.0",
   "author": {
     "name": "Guilherme Gregio",
     "email": "guilherme@gregio.net"
@@ -12,14 +12,13 @@
   "keywords": [
     "design-system",
     "astro",
-    "react",
-    "next",
-    "tailwind",
+    "playwright",
+    "crawler",
     "css-tokens",
     "component-library",
     "source-of-truth",
     "extraction",
-    "generation",
+    "multi-agent",
     "showcase",
     "slash-commands"
   ]

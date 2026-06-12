@@ -19,8 +19,8 @@
     {
       "name": "gregio-cc-design-system",
       "source": "./packages/gregio-cc-design-system",
-      "description": "Complete design system workbench: extract from websites, create from scratch, improve, merge, and generate components/pages for Astro, React/Next, or standalone HTML",
-      "version": "1.0.0",
+      "description": "Design system pipeline: crawl a site with Playwright into an offline cache, brainstorm a spec, analyze with specialized parallel agents, build an Astro DS app in apps/<name>, and review covering gaps",
+      "version": "2.0.0",
       "strict": true
     },
     {
