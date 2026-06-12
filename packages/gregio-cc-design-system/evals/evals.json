@@ -1,0 +1,43 @@
+{
+  "skill_name": "gregio-cc-design-system",
+  "note": "Prompts realistas para o loop do skill-creator. A run with-skill de referência foi o e2e de 12/06/2026 (cury.net → apps/ds-cury no ds-agent). Assertions objetivas verificáveis por script.",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "crie um design system a partir de https://cury.net/ aqui no monorepo, pode usar o baseline de componentes sem me perguntar nada",
+      "expected_output": "Pipeline completo: cache em .ds-cache/cury-net, ds-spec.md aprovado, analysis/ com 5 outputs + consolidated.json + gaps.md, app Astro em apps/ds-cury com showcase, manifest v2 válido, build verde, review.md",
+      "files": [],
+      "assertions": [
+        "cache .ds-cache/<slug>/crawl.json existe com status complete e >= 5 páginas",
+        "pages/home/computed.json tem rootVars ou samples não-vazios e screenshots/desktop.png existe",
+        "analysis/consolidated.json existe e gaps.md lista componentes designed",
+        "apps/<nome>/design-system.manifest.json valida com 0 errors no validate-manifest.js",
+        "todo componente do manifest tem provenance extracted|designed",
+        "nenhum hex de design fora de tokens.css nos components/*.css (exceções: comentários, transparent/currentColor)",
+        "pnpm exec nx build <nome> (ou astro build) sai verde",
+        "animations.css contém @media (prefers-reduced-motion: reduce)"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "extraia o site https://cury.net/ para eu poder analisar offline depois, não precisa criar nada ainda",
+      "expected_output": "Só a fase extract: cache completo, relatório de páginas/assets/screenshots, sugestão de /ds-brainstorm. Re-run reporta cached:true sem rede.",
+      "files": [],
+      "assertions": [
+        "crawl.json complete; nenhum app criado em apps/",
+        "re-execução do crawler com os mesmos args termina <5s com cached:true"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "monte um DS pra um app de acompanhamento de obras baseado no visual de https://cury.net/, vou precisar de timeline de etapas, tabela de unidades e upload de documentos alem do basico",
+      "expected_output": "Brainstorm captura os componentes extras (timeline, table, upload) no ds-spec; gaps.md cobre os que o site não tem com diretrizes; app final contém todos como designed coerentes com a estética navy/sand.",
+      "files": [],
+      "assertions": [
+        "ds-spec.md contém timeline, table e upload na tabela de componentes",
+        "componentes ausentes no site aparecem em gaps.md com diretriz de design",
+        "manifest final contém os 3 com provenance designed e showcase os demonstra"
+      ]
+    }
+  ]
+}
