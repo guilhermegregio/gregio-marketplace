@@ -1,30 +1,42 @@
 # Astro Integration Guide
 
-How to integrate an extracted or created design system into an Astro project. The DS skill produces CSS files and a manifest — this guide covers turning those into Astro components and pages.
+How the design system materializes as a dedicated Astro app in `apps/<name>`
+(ds-agent pattern: each DS is an independent Astro app in an Nx/pnpm monorepo,
+with its own port, manifest and showcase).
 
 ---
 
 ## File Structure
 
 ```
-src/
-├── pages/
-│   └── design-system.astro        # Showcase page
-├── components/ds/
-│   ├── Button.astro
-│   ├── Card.astro
-│   ├── Badge.astro
-│   ├── Input.astro
-│   ├── Modal.astro
-│   ├── Nav.astro
-│   └── Hero.astro
-└── styles/design-system/
-    ├── index.css                   # @import aggregator
-    ├── tokens.css                  # CSS custom properties
-    ├── typography.css
-    ├── layout.css
-    ├── components.css
-    └── animations.css
+apps/ds-<name>/
+├── package.json                    # astro ^6, dev/build/preview on a unique port
+├── project.json                    # Nx targets (only when the repo has nx.json)
+├── astro.config.mjs
+├── tsconfig.json
+├── design-system.manifest.json     # machine-readable source of truth
+├── DESIGN_SYSTEM.md                # human/agent guide
+├── specs/ds-build/                 # build tasks + review.md (pipeline artifacts)
+├── public/                         # images/fonts copied from the extraction cache
+└── src/
+    ├── layouts/BaseLayout.astro
+    ├── pages/
+    │   ├── index.astro             # redirects to /design-system
+    │   └── design-system.astro     # showcase page
+    ├── components/ds/
+    │   ├── Button.astro
+    │   ├── Card.astro
+    │   └── ...
+    └── styles/design-system/
+        ├── index.css               # @import aggregator
+        ├── tokens.css              # CSS custom properties
+        ├── typography.css
+        ├── layout.css
+        ├── components/             # one CSS file per build-task group
+        │   ├── actions.css
+        │   ├── forms.css
+        │   └── ...
+        └── animations.css
 ```
 
 ---
@@ -40,7 +52,9 @@ The aggregator file `index.css` must import in this exact order:
 @import './tokens.css';
 @import './typography.css';
 @import './layout.css';
-@import './components.css';
+@import './components/actions.css';
+@import './components/forms.css';
+/* ...one import per component group... */
 @import './animations.css';
 ```
 
@@ -48,7 +62,7 @@ Order matters because:
 - `tokens.css` defines custom properties used by everything else
 - `typography.css` uses token values for font families, sizes, weights
 - `layout.css` uses spacing tokens
-- `components.css` depends on all of the above
+- `components/*.css` depend on all of the above
 - `animations.css` is standalone but loaded last for override ability
 
 ### Adding to the Project

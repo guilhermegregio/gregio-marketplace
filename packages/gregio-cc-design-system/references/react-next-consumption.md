@@ -1,6 +1,6 @@
 # React/Next.js Consumption Guide
 
-How React and Next.js projects can consume a design system created by this skill. The DS itself is always generated as Astro or standalone output — this guide covers creating consumption layers for React/Next.js projects.
+How React and Next.js projects can consume a design system created by this pipeline. The DS itself is always generated as an Astro app — this guide covers creating consumption layers (`ds-exports/`) for React/Next.js projects.
 
 ---
 

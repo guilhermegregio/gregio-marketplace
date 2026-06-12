@@ -1,12 +1,22 @@
 # Design System Showcase Rules
 
-Rules governing the generation of design system showcase pages. There are two modes: **extraction** (from an existing site) and **creative creation** (combining multiple references). Each mode has distinct constraints.
+Rules governing the generation of design system showcase pages. In v2 a single
+showcase mixes two kinds of content, distinguished by each component's
+`provenance` in the manifest:
+
+- **`extracted`** — came from the source site. Fidelity rules apply (below).
+- **`designed`** — created to fill a spec gap. Coherence rules apply (see
+  "Designed Components" at the end): it must look like it shipped with the
+  original site, following the directives in `analysis/gaps.md`.
+
+When the DS has no source site at all (pure creation from a spec), apply the
+Designed rules to everything, hero included.
 
 ---
 
-## Extraction Mode — Hard Rules (Non-Negotiable)
+## Extracted Content — Hard Rules (Non-Negotiable)
 
-These rules apply when extracting a design system from an existing website (`/extract-ds`).
+These rules apply to every component/section whose provenance is `extracted`.
 
 ### 1. No Redesign, No Invention
 
@@ -41,8 +51,8 @@ The showcase page MUST contain these sections in this exact order. Do not reorde
 
 ### Section 0 — Hero (Exact Clone, Text Adapted)
 
-- Must be a direct clone of the original hero section.
-- Preserve: HTML structure, class names, layout, images, animations, buttons, backgrounds.
+- When there is a source site, the hero must be a direct clone of the original hero section (check the spec's "Fidelidade à fonte" — the user may have chosen inspiration over clone).
+- Preserve: HTML structure, class names, layout, images (copy them from the cache's `assets/img/` into the app's `public/`), animations, buttons, backgrounds.
 - The ONLY allowed change: replace hero text to present the Design System. Keep similar text length and heading hierarchy.
 - **Forbidden**: change layout, spacing, alignment, animations, add elements, remove elements.
 
@@ -93,17 +103,22 @@ The showcase page MUST contain these sections in this exact order. Do not reorde
 
 ---
 
-## Creative Creation Mode Rules
+## Designed Components Rules
 
-These rules apply when creating a new design system from multiple references (`/create-ds`).
+These rules apply to components with `provenance: designed` (spec gaps filled by
+the build), and to the whole showcase when there is no source site.
 
 ### General Principles
 
-- Creative COMBINATION of multiple reference sources is expected.
+- A designed component must be indistinguishable in style from the extracted
+  ones: same tokens, same radii, same motion language. Follow the per-item
+  directives in `analysis/gaps.md`.
 - The result should feel cohesive, not like a collage.
 - Every token, component, and animation must be intentional and documented.
+- In the showcase, designed components live in the same sections as extracted
+  ones — no separate "extras" section.
 
-### Hero Section
+### Hero Section (no source site only)
 
 - Acts as a demonstration of the DS capabilities.
 - Must showcase: images, animations, visual effects, glow, layered backgrounds.

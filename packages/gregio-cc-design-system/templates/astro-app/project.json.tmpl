@@ -1,0 +1,20 @@
+{
+  "name": "{{VALUE:app-name}}",
+  "targets": {
+    "dev": {
+      "command": "astro dev --host 0.0.0.0 --port {{VALUE:port}}",
+      "options": { "cwd": "apps/{{VALUE:app-name}}" }
+    },
+    "build": {
+      "command": "astro build",
+      "options": { "cwd": "apps/{{VALUE:app-name}}" }
+    },
+    "preview": {
+      "command": "astro preview --host 0.0.0.0 --port {{VALUE:port}}",
+      "options": { "cwd": "apps/{{VALUE:app-name}}" }
+    },
+    "lint": {
+      "command": "biome check {projectRoot}"
+    }
+  }
+}

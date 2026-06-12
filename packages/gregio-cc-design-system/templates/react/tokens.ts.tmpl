@@ -1,0 +1,29 @@
+/**
+ * Design tokens — {{VALUE:project-name}}
+ * Gerado do design-system.manifest.json — não edite à mão.
+ * Os valores espelham as custom properties de tokens.css; prefira
+ * `var(--ds-*)` em CSS e use estas constantes onde CSS não alcança
+ * (canvas, chart configs, styled-system, etc.).
+ */
+
+export const colors = {
+  {{INSTRUCTION: uma entrada por token de cor do manifest, camelCase:
+  primary: '#FF6900', // var(--ds-primary)}}
+} as const;
+
+export const fonts = {
+  {{INSTRUCTION: display/primary/mono com a stack completa}}
+} as const;
+
+export const spacing = {
+  {{INSTRUCTION: space1: '0.25rem', ...}}
+} as const;
+
+export const radii = { {{INSTRUCTION: sm/md/lg/full}} } as const;
+export const shadows = { {{INSTRUCTION: sm/md/lg}} } as const;
+export const breakpoints = { {{INSTRUCTION: sm/md/lg/xl}} } as const;
+export const durations = { {{INSTRUCTION: fast/base/slow}} } as const;
+export const easings = { {{INSTRUCTION: easings nomeados}} } as const;
+
+export type ColorToken = keyof typeof colors;
+export type SpacingToken = keyof typeof spacing;

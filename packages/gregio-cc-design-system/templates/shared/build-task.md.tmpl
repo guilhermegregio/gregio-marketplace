@@ -1,0 +1,50 @@
+# Task {{VALUE:task-id}} — {{VALUE:task-title}}
+
+> Executada por um agente `ds-builder`. Este arquivo é o contrato: objetivo,
+> inputs, arquivos de saída exatos e critérios de aceite. O builder marca a
+> checklist e preenche as notas ao terminar.
+
+## Objetivo
+
+{{INSTRUCTION: 2-4 frases: o que esta task produz e como se encaixa no DS.}}
+
+## Inputs
+
+- Spec: {{VALUE:path ds-spec.md}}
+- Análise consolidada: {{VALUE:path consolidated.json}}
+- Gaps: {{VALUE:path gaps.md}} {{INSTRUCTION: só se a task cobre itens designed}}
+- Cache (evidência): {{VALUE:path do cache}}
+- Referências do plugin: {{INSTRUCTION: liste as references relevantes para esta
+  task — component-catalog.md para componentes, showcase-rules.md para showcase,
+  manifest-schema.md para docs, etc. — com paths absolutos.}}
+
+## Arquivos de saída (exatamente estes)
+
+{{INSTRUCTION: lista exata, um por linha, com path relativo ao app. Ex.:
+- src/styles/design-system/components/actions.css
+- src/components/ds/Button.astro
+Nenhum outro arquivo pode ser criado/modificado por esta task.}}
+
+## Componentes/itens cobertos
+
+{{INSTRUCTION: tabela com: item | provenance (extracted|designed) | variantes |
+estados | fonte da verdade (entrada do consolidated.json ou item do gaps.md).
+Omitir em tasks de fundação/docs.}}
+
+## Convenções
+
+- Prefixo de classes: `{{VALUE:class-prefix}}` | CSS vars: `{{VALUE:css-var-prefix}}`
+- Tokens sempre via `var()` — nenhum hex/px de design hardcoded
+- {{INSTRUCTION: convenções específicas desta task, se houver}}
+
+## Critérios de aceite
+
+{{INSTRUCTION: lista verificável, ex.:
+- [ ] Cada arquivo declarado existe e compila
+- [ ] Button tem variantes primary/secondary/ghost com estados hover/focus/disabled
+- [ ] Nenhuma cor fora de var(--ds-*)
+- [ ] focus-visible em todos os interativos}}
+
+## Notas do builder
+
+_(preenchido pelo agente ao concluir: decisões, pendências, sugestões)_

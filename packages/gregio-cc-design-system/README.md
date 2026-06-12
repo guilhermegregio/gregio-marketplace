@@ -1,75 +1,68 @@
 # gregio-cc-design-system
 
-Complete design system workbench for Claude Code. Extract from websites, create from scratch, improve, merge, and generate components/pages for Astro, React/Next, or standalone HTML.
+Pipeline de design systems para Claude Code: extrai um site inteiro com
+Playwright para um cache offline reutilizável, levanta requisitos num spec,
+analisa a extração com agentes especializados em paralelo, constrói o DS como
+um app Astro em `apps/<nome>` e revisa cobrindo gaps.
+
+```
+extract → brainstorm → analyze → build → review
+```
 
 ## Skills
 
-| Command | Description |
-|---------|-------------|
-| `/fetch-site <url>` | Download a website locally for analysis |
-| `/extract-ds <url-or-path> [dest]` | Extract DS from website/HTML into modular source-of-truth |
-| `/create-ds [dest]` | Create a new DS from scratch with references/preferences |
-| `/improve-ds [dir]` | Improve, audit, or extend an existing DS |
-| `/merge-ds <ds1> <ds2> [dest]` | Merge multiple design systems |
-| `/generate-from-ds <what>` | Generate components/pages using DS as source of truth |
-| `ds-conventions` | Auto-triggers when `design-system.manifest.json` is present |
+| Command | Fase | Description |
+|---------|------|-------------|
+| `/ds-create <url> [app-name]` | todas | Orquestrador: pipeline completo a partir de uma URL (retomável — pula fases com artefato pronto) |
+| `/ds-extract <url>` | 1 | Crawl multi-página (Playwright) → `.ds-cache/<site>/` com HTML pós-JS, assets, screenshots desktop+mobile e estilos computados |
+| `/ds-brainstorm <cache-dir>` | 2 | Entrevista de requisitos → `ds-spec.md` (com baseline próprio de "DS mínimo" quando o usuário não sabe o que precisa) |
+| `/ds-analyze <cache-dir>` | 3 | 5 agentes paralelos (tokens, tipografia, componentes, motion, layout) → `analysis/consolidated.json` + `gaps.md` |
+| `/ds-build <cache-dir> <app-dir>` | 4 | Scaffold Astro (padrão ds-agent/Nx) + tasks executadas por agentes `ds-builder` em waves paralelas |
+| `/ds-review <app-dir> [cache-dir]` | 5 | Agente revisor final: cobertura do spec, disciplina de tokens, a11y, showcase, build — corrige gaps pequenos |
 
-## What Gets Generated
+## Agentes
 
-### Files
-- **CSS Modules**: `tokens.css`, `typography.css`, `layout.css`, `components.css`, `animations.css`
-- **Showcase Page**: `design-system.astro` or `design-system.html`
-- **Components**: Astro `.astro` files or standalone HTML snippets
-- **Manifest**: `design-system.manifest.json` (machine-readable inventory)
-- **Guide**: `DESIGN_SYSTEM.md` (human + agent readable)
+`ds-token-analyst`, `ds-typography-analyst`, `ds-component-analyst`,
+`ds-motion-analyst`, `ds-layout-analyst` (análise, read-only + outputs),
+`ds-builder` (executa uma task de build), `ds-reviewer` (revisão final).
 
-### Output Modes
-- **Astro**: typed components, CSS imports, showcase page at `/design-system`
-- **Standalone**: pure HTML/CSS/JS, zero dependencies, copy-paste snippets
-- **React/Next exports** (optional): `tokens.ts` + typed component wrappers
+## O que é gerado
+
+App Astro independente em `apps/ds-<nome>` (porta própria, `project.json` se o
+repo usa Nx):
+
+- `src/styles/design-system/` — `tokens.css`, `typography.css`, `layout.css`,
+  `components/<grupo>.css`, `animations.css`
+- `src/components/ds/*.astro` — componentes com props tipadas
+- `src/pages/design-system.astro` — showcase vivo (hero clonado do original)
+- `design-system.manifest.json` — fonte da verdade machine-readable; cada
+  componente tem `provenance: extracted | designed`
+- `DESIGN_SYSTEM.md` — guia humano/agente
+- `ds-exports/` (com `--react`) — `tokens.ts` + wrappers React
+
+## Conceitos
+
+- **Cache offline** (`.ds-cache/<site>/`): a extração é feita uma vez; todas as
+  análises e rebuilds funcionam sem rede. Contrato em `references/cache-layout.md`.
+- **Spec** (`ds-spec.md`): o que o DS precisa ter para o app alvo. O que o site
+  não tem vira gap e é **desenhado** coerente com a estética extraída.
+- **Provenance**: `extracted` = fiel ao site (classes/markup/timings exatos);
+  `designed` = criado para preencher o spec.
 
 ## Architecture
 
 ```
 gregio-cc-design-system/
-├── skills/          7 SKILL.md files (the commands above)
-├── references/      8 markdown guides (loaded on-demand by skills)
-├── templates/       Astro, standalone, and shared templates
-└── scripts/         Node.js utilities (zero permanent deps, via npx)
+├── skills/          6 SKILL.md finos (1 orquestrador + 5 fases)
+├── agents/          7 agentes (5 analistas, builder, reviewer)
+├── references/      pipeline/<fase>.md + guias on-demand
+├── templates/       astro-app/ (scaffold), shared/ (spec, task, manifest), react/
+└── scripts/         crawl-site.js, validate-manifest.js (deps via npx)
 ```
 
-### Scripts
-- `fetch-site.js` — orchestrates cheerio (static) + playwright (SPA) fetching
-- `cheerio-fetch.js` — fast static HTML extraction
-- `playwright-fetch.js` — headless browser for SPAs
-- `detect-stack.js` — detects Astro/React/Next/Vue/Tailwind
-- `merge-manifests.js` — deep merge two manifest JSONs
-- `validate-manifest.js` — validate manifest schema
+## Requisitos
 
-All scripts use only Node.js built-in modules. Runtime deps (cheerio, playwright) are resolved via `npx --yes --package=...` — nothing is installed permanently.
-
-## Quick Start
-
-```bash
-# 1. Download a site
-/fetch-site https://example.com
-
-# 2. Extract design system
-/extract-ds ./ds-fetch/example-com ./my-project
-
-# 3. Improve it
-/improve-ds ./my-project --audit
-
-# 4. Generate pages from it
-/generate-from-ds "landing page with hero and pricing"
-```
-
-## Requirements
-
-- Node.js >= 20
-- Claude Code with plugin support
-- Chromium (auto-installed via playwright on first SPA fetch)
-
-## Author
-
-Guilherme Gregio <guilherme@gregio.net>
+- Node ≥ 20 (deps via `npx --yes --package=playwright@1.58.2`, nada instalado
+  permanentemente)
+- NixOS suportado out-of-the-box (resolve o Chromium via nix automaticamente);
+  em outros sistemas, `npx --yes playwright install chromium` na primeira vez

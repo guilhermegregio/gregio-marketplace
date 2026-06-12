@@ -1,23 +1,21 @@
 {
-  "$schema": "design-system-v1",
+  "$schema": "design-system-v2",
   "name": "{{VALUE:project-name}}",
   "version": "{{VALUE:version}}",
-  "generatedFrom": "{{VALUE:source-url-or-path}}",
+  "generatedFrom": "{{VALUE:source-url-or-spec}}",
   "generatedAt": "{{VALUE:iso-date}}",
-  "mode": "{{VALUE:astro-or-standalone}}",
 
   "meta": {
     "aesthetic": "{{VALUE:aesthetic-style}}",
     "sources": [{{REPEAT:sources}}"{{VALUE:source-url}}"{{/REPEAT}}],
-    "mergedFrom": [],
-    "lastImprovedAt": null
+    "spec": "{{VALUE:ds-spec-path-or-null}}",
+    "cacheDir": "{{VALUE:cache-dir-or-null}}"
   },
 
   "entrypoints": {
-    "css": "{{VALUE:css-index-path}}",
-    "js": "{{VALUE:js-path-or-null}}",
-    "showcase": "{{VALUE:showcase-page-path}}",
-    "components": "{{VALUE:components-dir-path}}"
+    "css": "src/styles/design-system/index.css",
+    "showcase": "src/pages/design-system.astro",
+    "components": "src/components/ds/"
   },
 
   "tokens": {
@@ -97,6 +95,7 @@
     {{REPEAT:components}}
     {
       "name": "{{VALUE:component-name}}",
+      "provenance": "{{VALUE:extracted-or-designed}}",
       "baseClass": ".{{VALUE:prefix}}-{{VALUE:component-name}}",
       "variants": [
         {{REPEAT:variants}}
@@ -116,8 +115,7 @@
       },
       "source": "{{VALUE:css-file-path}}",
       "example": "{{VALUE:html-snippet}}",
-      "astroComponent": "{{VALUE:astro-component-path-or-null}}",
-      "snippet": "{{VALUE:snippet-path-or-null}}",
+      "astroComponent": "{{VALUE:astro-component-path}}",
       "reactComponent": "{{VALUE:react-component-path-or-null}}"
     }
     {{/REPEAT}}

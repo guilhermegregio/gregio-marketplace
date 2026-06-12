@@ -6,5 +6,7 @@
 @import './tokens.css';
 @import './typography.css';
 @import './layout.css';
-@import './components.css';
+{{INSTRUCTION: um @import por arquivo de grupo de componentes gerado no build,
+ex.: @import './components/actions.css'; — este agregador é escrito pelo main
+thread ao fim da wave de componentes, nunca por uma task individual.}}
 @import './animations.css';

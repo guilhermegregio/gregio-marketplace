@@ -1,0 +1,21 @@
+{{INSTRUCTION: wrapper React fino sobre as classes do DS — o CSS continua sendo
+a fonte da verdade (importe o index.css do DS no root da app consumidora).
+Padrão por componente do manifest:}}
+
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
+
+export interface {{VALUE:ComponentName}}Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  {{INSTRUCTION: props do manifest (variant, size...) com os mesmos unions/defaults}}
+  children?: ReactNode;
+}
+
+export function {{VALUE:ComponentName}}({ variant = '{{VALUE:default-variant}}', className, children, ...rest }: {{VALUE:ComponentName}}Props) {
+  const classes = ['{{VALUE:base-class}}', `{{VALUE:base-class}}-${variant}`, className]
+    .filter(Boolean)
+    .join(' ');
+  return (
+    <button className={classes} {...rest}>
+      {children}
+    </button>
+  );
+}

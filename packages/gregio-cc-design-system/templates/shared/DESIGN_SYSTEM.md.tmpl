@@ -1,26 +1,16 @@
 # {{VALUE:project-name}} — Design System
 
 > Generated from {{VALUE:source}} on {{VALUE:date}}
-> Mode: {{VALUE:astro-or-standalone}}
+> Spec: {{VALUE:spec-path}}
 
 ## Quick Start
 
-{{CONDITIONAL:mode-astro}}
-Import in your global CSS or BaseLayout:
+O DS já está importado globalmente via `src/layouts/BaseLayout.astro`:
 ```css
 @import '../styles/design-system/index.css';
 ```
-Start the dev server: `pnpm dev` → `http://localhost:4321/design-system`
-{{/CONDITIONAL}}
-
-{{CONDITIONAL:mode-standalone}}
-Link the CSS in your HTML:
-```html
-<link rel="stylesheet" href="./assets/css/index.css">
-<script src="./assets/js/design-system.js" defer></script>
-```
-Serve: `python3 -m http.server 8080` → `http://localhost:8080/design-system.html`
-{{/CONDITIONAL}}
+Dev server: `pnpm exec nx dev {{VALUE:app-name}}` (ou `pnpm dev` dentro do app)
+→ `http://localhost:{{VALUE:port}}/design-system`
 
 ## Files
 
@@ -54,6 +44,7 @@ Serve: `python3 -m http.server 8080` → `http://localhost:8080/design-system.ht
 {{REPEAT:components}}
 ### {{VALUE:component-name}}
 - **Base class**: `.{{VALUE:base-class}}`
+- **Provenance**: {{VALUE:extracted-or-designed}}
 - **Variants**: {{VALUE:variant-list}}
 - **States**: {{VALUE:states-list}}
 - **When to use**: {{VALUE:usage-description}}
@@ -76,6 +67,7 @@ Serve: `python3 -m http.server 8080` → `http://localhost:8080/design-system.ht
 ## How to Extend
 
 1. Add new tokens to `tokens.css` and update `design-system.manifest.json`
-2. Add new components to `components.css`, create snippet/Astro component
-3. Update this guide and the manifest
-4. Run `/improve-ds --audit` to validate changes
+2. Add new components to the matching `components/<group>.css`, create the
+   Astro component in `src/components/ds/`, add it to the showcase
+3. Update this guide and the manifest (new components get `provenance: designed`)
+4. Validate: `node <plugin>/scripts/validate-manifest.js design-system.manifest.json`

@@ -1,0 +1,32 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "{{VALUE:ds-title}} — Design System",
+  description = "{{VALUE:ds-description}}",
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="{{VALUE:locale}}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="{{VALUE:color-primary}}" />
+    {{INSTRUCTION: font loading — Google Fonts <link> preconnect+stylesheet OU
+    @font-face em tokens.css com os arquivos em public/fonts/, conforme a origem
+    das fontes na análise (tokens.fonts[].source).}}
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/design-system/index.css';
+</style>
