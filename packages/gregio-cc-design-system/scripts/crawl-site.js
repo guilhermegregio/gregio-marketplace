@@ -298,6 +298,89 @@ async function collectPageData(page) {
   });
 }
 
+// --- Ícones do site (favicon, apple-touch, mask-icon, webmanifest) ---
+// Browsers headless não requisitam favicons, então o listener de response
+// nunca os vê — busca explícita via context.request, só na entry page.
+// Essencial para o DS gerado configurar ícones iOS/Android/Safari.
+async function captureIcons(page, siteDir, assets, entryOrigin) {
+  const context = page.context();
+  const baseUrl = page.url();
+
+  const declared = await page.evaluate(() => {
+    const out = [...document.querySelectorAll('link[rel*="icon" i], link[rel="manifest"], link[rel="mask-icon"]')]
+      .map((l) => ({
+        rel: (l.getAttribute('rel') || '').toLowerCase(),
+        href: l.getAttribute('href'),
+        sizes: l.getAttribute('sizes') || null,
+        type: l.getAttribute('type') || null,
+        color: l.getAttribute('color') || null,
+      }));
+    const tile = document.querySelector('meta[name="msapplication-TileImage"]');
+    if (tile?.content) out.push({ rel: 'msapplication-tileimage', href: tile.content, sizes: null, type: null, color: null });
+    return out;
+  });
+
+  // Convenções que existem mesmo sem <link> declarado
+  const candidates = [...declared];
+  const declaredAbs = new Set(declared.map((d) => resolveUrl(baseUrl, d.href)).filter(Boolean));
+  for (const [path, rel] of [['/favicon.ico', 'icon'], ['/apple-touch-icon.png', 'apple-touch-icon']]) {
+    const abs = entryOrigin + path;
+    if (!declaredAbs.has(abs)) candidates.push({ rel, href: abs, sizes: null, type: null, color: null, conventional: true });
+  }
+
+  const icons = [];
+  // while indexado: ícones do webmanifest são acrescentados durante o loop
+  for (let i = 0; i < candidates.length && i < 40; i++) {
+    const c = candidates[i];
+    const abs = resolveUrl(baseUrl, c.href);
+    if (!abs) continue;
+
+    let res;
+    try { res = await context.request.get(abs, { timeout: 15000 }); } catch { continue; }
+    if (!res.ok()) continue;
+    const body = await res.body();
+    const ct = (res.headers()['content-type'] || '');
+
+    if (c.rel === 'manifest' || /manifest\+json|\.webmanifest/i.test(ct + abs)) {
+      try {
+        const man = JSON.parse(body.toString('utf8'));
+        for (const mi of man.icons || []) {
+          candidates.push({
+            rel: 'manifest-icon', href: resolveUrl(abs, mi.src),
+            sizes: mi.sizes || null, type: mi.type || null, purpose: mi.purpose || null,
+          });
+        }
+        const filename = safeFilenameFromUrl(abs, 'json');
+        const relPath = join('assets', 'icon', filename);
+        await mkdir(dirname(join(siteDir, relPath)), { recursive: true });
+        await writeFile(join(siteDir, relPath), body);
+        icons.push({ rel: 'manifest', url: abs, path: relPath, sizes: null, type: 'application/manifest+json' });
+      } catch {}
+      continue;
+    }
+
+    // ícone binário: rejeita respostas html (404 disfarçado de página)
+    if (ct.includes('text/html')) continue;
+    const filename = safeFilenameFromUrl(abs, 'img');
+    const relPath = join('assets', 'icon', filename);
+    try {
+      await mkdir(dirname(join(siteDir, relPath)), { recursive: true });
+      await writeFile(join(siteDir, relPath), body);
+    } catch { continue; }
+    if (!assets[abs]) assets[abs] = { kind: 'icon', path: relPath, bytes: body.length, contentType: ct, pages: ['home'] };
+    icons.push({
+      rel: c.rel, url: abs, path: relPath,
+      sizes: c.sizes, type: c.type || ct || null,
+      ...(c.color ? { color: c.color } : {}),
+      ...(c.purpose ? { purpose: c.purpose } : {}),
+      ...(c.conventional ? { conventional: true } : {}),
+    });
+  }
+
+  if (icons.length) log(`[icons] ${icons.length} capturados (favicon/apple-touch/manifest)`);
+  return icons;
+}
+
 async function captureSections(page, screenshotsDir) {
   const captured = [];
   const handles = await page.$$('main > section, body > section, section, header, footer');
@@ -466,6 +549,10 @@ async function processPage(context, item, ctx) {
       record.screenshots.desktop = 'screenshots/desktop.png';
     } catch (e) { warn(`screenshot desktop falhou (${slug}): ${e.message.split('\n')[0]}`); }
 
+    if (item.depth === 0) {
+      ctx.icons.push(...await captureIcons(page, siteDir, assets, entryOrigin));
+    }
+
     if (args.sections && item.depth === 0) {
       const sections = await captureSections(page, screenshotsDir);
       if (sections.length) record.screenshots.sections = sections.map((f) => `screenshots/${f}`);
@@ -555,6 +642,8 @@ function broadenedReasons(crawl, args) {
   if ((args.exclude?.source || null) !== (cached.exclude ?? null)) r.push('exclude diferente');
   if (args.sections && !cached.sections) r.push('sections ligado');
   if (args.mobile && cached.mobile === false) r.push('mobile ligado');
+  // caches de versões antigas do crawler não têm ícones (favicon/apple-touch)
+  if (!Array.isArray(crawl.icons)) r.push('cache de versão antiga (sem ícones)');
   return r;
 }
 
@@ -648,7 +737,7 @@ async function main() {
     const data = {
       sourceUrl: args.url, siteSlug: slug, startedAt: crawl?.startedAt || startedAt,
       finishedAt: status === 'complete' ? new Date().toISOString() : null,
-      status, options: optionsUsed, pages, queue, totals,
+      status, options: optionsUsed, icons: ctx.icons, pages, queue, totals,
     };
     await writeFile(crawlJsonPath, JSON.stringify(data, null, 2));
     await mkdir(dirname(assetsManifestPath), { recursive: true });
@@ -667,7 +756,8 @@ async function main() {
     userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
     viewport: { width: 1440, height: 900 },
   });
-  const ctx = { args, siteDir, assets, counters, slugsUsed, entryOrigin };
+  const ctx = { args, siteDir, assets, counters, slugsUsed, entryOrigin, icons: [] };
+  if (crawl?.status === 'partial' && Array.isArray(crawl.icons)) ctx.icons.push(...crawl.icons);
 
   try {
     while (queue.length > 0 && pages.length < args.maxPages) {

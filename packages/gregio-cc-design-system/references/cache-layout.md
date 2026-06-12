@@ -47,6 +47,7 @@ Dois escopos convivem aqui, com regras diferentes:
 │           └── section-NN-<id>.png # só com --sections, só na entry page
 └── assets/                         # compartilhado entre páginas, dedup global por URL
     ├── css/ js/ img/ font/ json/ other/
+    ├── icon/                       # favicons, apple-touch-icons, ícones do webmanifest
     └── manifest.json               # { assets: { <url>: {kind, path, bytes, contentType, pages[]} } }
 ```
 
@@ -59,6 +60,9 @@ Dois escopos convivem aqui, com regras diferentes:
   "startedAt": "...", "finishedAt": "...",
   "status": "complete | partial",
   "options": { "maxPages": 10, "maxDepth": 2, "...": "flags usadas" },
+  "icons": [
+    { "rel": "apple-touch-icon", "url": "...", "path": "assets/icon/...", "sizes": "180x180", "type": "image/png" }
+  ],
   "pages": [
     {
       "url": "...", "finalUrl": "...", "slug": "home", "title": "...",
@@ -83,6 +87,11 @@ Dois escopos convivem aqui, com regras diferentes:
 - `status: "partial"` → crawl interrompido; rodar o crawler de novo **retoma** a fila
   de onde parou (páginas já salvas não são re-baixadas).
 - `queue` lista o que ficou de fora (limite de páginas atingido).
+- `icons` — favicons/apple-touch/mask-icon/webmanifest capturados explicitamente
+  na entry page (browsers headless não os requisitam; o crawler busca os
+  declarados no `<head>`, os do webmanifest e os convencionais `/favicon.ico` e
+  `/apple-touch-icon.png`). Use-os no build para configurar os ícones
+  iOS/Android/Safari do app gerado.
 
 ## computed.json
 

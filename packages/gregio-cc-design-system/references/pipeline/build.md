@@ -26,7 +26,13 @@ Padrão ds-agent (monorepo Nx/pnpm com apps Astro independentes):
    - Os `.css.tmpl` e `design-system.astro.tmpl`/`_Component.astro.tmpl` ficam
      como referência para as tasks — NÃO os copie preenchidos agora; as tasks
      das waves é que geram esses arquivos.
-4. Se o repo é pnpm workspace, confirme que `apps/*` está no
+4. **Ícones**: copie os arquivos de `crawl.json → icons[]` (em
+   `<cacheDir>/assets/icon/`) para `apps/<nome>/public/icons/` e gere no
+   `BaseLayout.astro` as tags correspondentes — `link rel=icon` (com sizes/type),
+   `apple-touch-icon`, `mask-icon` (com color) e, se houver webmanifest com
+   ícones, um `site.webmanifest` próprio do app apontando para os paths locais.
+   É o que faz o DS instalável/identificável em iOS, Android e Safari.
+5. Se o repo é pnpm workspace, confirme que `apps/*` está no
    `pnpm-workspace.yaml`.
 
 ## 2. Geração das tasks

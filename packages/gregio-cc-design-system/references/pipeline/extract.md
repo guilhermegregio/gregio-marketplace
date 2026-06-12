@@ -53,6 +53,7 @@ exclusivo de cada DS alvo fica no workspace `apps/<app-name>/` dentro do site.
 4. Leia `<cacheDir>/crawl.json` e reporte ao usuário:
    - Páginas baixadas (url → slug, status, erros se houver)
    - Total de assets e bytes
+   - Ícones capturados (`icons`: favicon, apple-touch, manifest — com sizes)
    - Páginas que ficaram na fila (`queue`) — se algo importante ficou de fora
      (julgue pelos pathnames), re-rode com `--max-pages` maior: o re-crawl é
      automático
