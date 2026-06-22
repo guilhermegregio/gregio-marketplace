@@ -1,0 +1,12 @@
+filters:
+  and:
+    - 'type == "project"'
+views:
+  - type: table
+    name: Projetos
+    order:
+      - file.name
+      - status
+      - groups
+      - stack
+      - updated

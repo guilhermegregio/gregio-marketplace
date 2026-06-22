@@ -1,0 +1,9 @@
+node_modules/
+.env
+archive/
+.DS_Store
+*.log
+
+# KB engine — registro com paths absolutos e grafo central (mistura visibilidades)
+kb.config.json
+graphify-out/central-graph.json

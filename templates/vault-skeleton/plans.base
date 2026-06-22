@@ -1,0 +1,20 @@
+filters:
+  and:
+    - 'type == "plan"'
+views:
+  - type: table
+    name: Planos
+    order:
+      - file.name
+      - status
+      - projects
+      - updated
+  - type: table
+    name: Ativos
+    filters:
+      and:
+        - 'status == "active"'
+    order:
+      - file.name
+      - projects
+      - updated
