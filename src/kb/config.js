@@ -165,10 +165,30 @@ export function graphSources(config, { onlyRepos = null } = {}) {
   return sources;
 }
 
-// Resolve um grupo para a lista de repos (nomes de fonte) que ele agrega.
-// Membros podem ser "repo" ou "repo#subproj" -> normaliza para o nome de fonte.
+// Resolve um grupo para os nomes de FONTE (o atributo `repo` no grafo) que ele agrega.
+// Membros aceitos:
+//   "my-coach"            -> repo simples (ou vault)
+//   "nxt-app-workout"     -> monorepo: expande para TODOS os subprojetos
+//   "ds-agent#ds-nxt"     -> subprojeto específico (casa por nome ou sufixo)
 export function groupRepos(config, groupName) {
   const g = getGroup(config, groupName);
   if (!g) throw new Error(`grupo "${groupName}" não existe (veja "kb group list")`);
-  return (g.members ?? []).map(m => (m.includes('#') ? m.split('#')[1] : m));
+  const subsByProject = new Map();
+  for (const p of config.projects ?? []) {
+    if (p.subprojects?.length) subsByProject.set(p.name, p.subprojects.map(s => s.name));
+  }
+  const out = [];
+  for (const m of g.members ?? []) {
+    if (m.includes('#')) {
+      const [repo, sub] = m.split('#');
+      const subs = subsByProject.get(repo) ?? [];
+      const match = subs.find(n => n === sub || n === `${repo}-${sub}` || n.endsWith(`-${sub}`));
+      out.push(match ?? sub);
+    } else if (subsByProject.has(m)) {
+      out.push(...subsByProject.get(m)); // monorepo -> todos os subprojetos
+    } else {
+      out.push(m);
+    }
+  }
+  return [...new Set(out)];
 }

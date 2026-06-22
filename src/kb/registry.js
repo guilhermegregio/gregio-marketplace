@@ -102,6 +102,8 @@ export function upsertGroup(config, group) {
 }
 
 // Valida que cada membro existe como repo ou subprojeto registrado.
+// Aceita: "repo", "subprojeto-name", "repo#subproj-name" e "repo#base"
+// (base = nome do subprojeto sem o prefixo "<repo>-").
 export function validateMembers(config, members) {
   const known = new Set();
   for (const p of config.projects ?? []) {
@@ -109,8 +111,11 @@ export function validateMembers(config, members) {
     for (const sp of p.subprojects ?? []) {
       known.add(sp.name);
       known.add(`${p.name}#${sp.name}`);
+      const base = sp.name.startsWith(`${p.name}-`) ? sp.name.slice(p.name.length + 1) : sp.name;
+      known.add(`${p.name}#${base}`);
     }
   }
+  for (const v of config.vaults ?? []) known.add(v.name);
   const missing = members.filter(m => !known.has(m));
   if (missing.length) {
     throw new Error(`membros não registrados: ${missing.join(', ')} (rode "kb project add" antes)`);
