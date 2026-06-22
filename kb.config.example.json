@@ -1,7 +1,7 @@
 {
   "version": 1,
   "central": {
-    "graphOut": "graphify-out/central-graph.json",
+    "graphOut": "auto",
     "pythonInterp": "auto"
   },
   "defaults": {

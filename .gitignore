@@ -4,6 +4,10 @@ archive/
 .DS_Store
 *.log
 
-# KB engine — registro com paths absolutos e grafo central (mistura visibilidades)
-kb.config.json
-graphify-out/central-graph.json
+# nix
+result
+result-*
+
+# Estado do engine kb mora em XDG (~/.config/kb, ~/.local/state/kb), não no repo.
+# graphify-out fica ignorado caso o graphify rode localmente no checkout.
+graphify-out/

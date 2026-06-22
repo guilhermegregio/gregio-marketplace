@@ -1,17 +1,32 @@
-import { readFile, writeFile } from 'node:fs/promises';
-import { existsSync, readFileSync } from 'node:fs';
-import { execFileSync } from 'node:child_process';
-import { join } from 'node:path';
-import { CONFIG_PATH, ENGINE_ROOT, expandPath } from './paths.js';
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { existsSync, readFileSync, accessSync, constants } from 'node:fs';
+import { join, delimiter } from 'node:path';
+import { CONFIG_PATH, CONFIG_DIR, ENGINE_ROOT, expandPath } from './paths.js';
 
 const DEFAULT_CONFIG = {
   version: 1,
-  central: { graphOut: 'graphify-out/central-graph.json', pythonInterp: 'auto' },
+  central: { graphOut: 'auto', pythonInterp: 'auto' },
   defaults: { visibility: 'private', category: 'article' },
   vaults: [],
   groups: [],
   projects: [],
 };
+
+// Busca um executável no PATH (nativo, sem depender de `which`).
+function findOnPath(cmd) {
+  const dirs = (process.env.PATH || '').split(delimiter);
+  for (const dir of dirs) {
+    if (!dir) continue;
+    const p = join(dir, cmd);
+    try {
+      accessSync(p, constants.X_OK);
+      return p;
+    } catch {
+      /* segue procurando */
+    }
+  }
+  return null;
+}
 
 // Resolve o interpretador Python que consegue importar o graphify (para o MCP serve
 // e o ingest). Ordem: config explícita → marker do graphify-out (se existir) →
@@ -23,9 +38,9 @@ export function resolvePythonInterp(config) {
   const marker = join(ENGINE_ROOT, 'graphify-out', '.graphify_python');
   if (existsSync(marker)) return readFileSync(marker, 'utf8').trim();
 
-  // Deriva do shebang do binário `graphify` (ex.: instalado via nix/uv/pipx).
+  // Deriva do shebang do binário `graphify` no PATH (instalado via nix/uv/pipx).
   try {
-    const bin = execFileSync('which', ['graphify'], { encoding: 'utf8' }).trim();
+    const bin = findOnPath('graphify');
     if (bin) {
       const shebang = readFileSync(bin, 'utf8').split('\n', 1)[0];
       const m = shebang.match(/^#!\s*(\S+)/);
@@ -41,8 +56,8 @@ export async function loadConfig({ required = true } = {}) {
   if (!existsSync(CONFIG_PATH)) {
     if (required) {
       throw new Error(
-        `kb.config.json não encontrado em ${CONFIG_PATH}.\n` +
-          'Copie kb.config.example.json para kb.config.json ou rode "kb vault new <nome>".',
+        `config não encontrada em ${CONFIG_PATH}.\n` +
+          'Rode "kb vault new <nome>" (cria a config) ou copie kb.config.example.json para lá.',
       );
     }
     return structuredClone(DEFAULT_CONFIG);
@@ -51,12 +66,13 @@ export async function loadConfig({ required = true } = {}) {
   try {
     raw = JSON.parse(await readFile(CONFIG_PATH, 'utf8'));
   } catch (e) {
-    throw new Error(`kb.config.json inválido: ${e.message}`);
+    throw new Error(`config inválida (${CONFIG_PATH}): ${e.message}`);
   }
   return { ...structuredClone(DEFAULT_CONFIG), ...raw };
 }
 
 export async function saveConfig(config) {
+  await mkdir(CONFIG_DIR, { recursive: true });
   await writeFile(CONFIG_PATH, JSON.stringify(config, null, 2) + '\n');
 }
 

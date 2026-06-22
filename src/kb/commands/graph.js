@@ -2,12 +2,13 @@ import { existsSync } from 'node:fs';
 import { mkdir } from 'node:fs/promises';
 import { join, dirname, isAbsolute } from 'node:path';
 import { loadConfig, resolvePythonInterp, graphSources, groupRepos } from '../config.js';
-import { ENGINE_ROOT } from '../paths.js';
+import { STATE_DIR, CENTRAL_GRAPH_DEFAULT } from '../paths.js';
 import { updateGraph, mergeGraphs, serve } from '../graphify.js';
 
 function centralPath(config) {
-  const rel = config.central?.graphOut || 'graphify-out/central-graph.json';
-  return isAbsolute(rel) ? rel : join(ENGINE_ROOT, rel);
+  const v = config.central?.graphOut;
+  if (!v || v === 'auto') return CENTRAL_GRAPH_DEFAULT;
+  return isAbsolute(v) ? v : join(STATE_DIR, v);
 }
 
 function sourceGraphPath(src) {
