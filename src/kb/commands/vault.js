@@ -1,10 +1,10 @@
-import { mkdir, symlink, rm, cp } from 'node:fs/promises';
+import { mkdir, symlink, rm } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { loadConfig, saveConfig, validateConfig } from '../config.js';
 import { upsertVault, removeVault } from '../registry.js';
-import { scaffoldVault, listScaffoldFiles, fileMtime } from '../templates.js';
+import { scaffoldVault, listScaffoldFiles, fileMtime, renderScaffoldFile } from '../templates.js';
 import { expandPath, VAULT_SKELETON } from '../paths.js';
 
 export async function run({ positionals, opts }) {
@@ -108,8 +108,14 @@ async function sync(opts) {
   const apply = opts.apply === true;
   const files = await listScaffoldFiles(VAULT_SKELETON);
   let drift = 0;
+  const today = new Date().toISOString().slice(0, 10);
   for (const v of config.vaults ?? []) {
     const root = expandPath(v.path);
+    const tokens = {
+      VAULT_NAME: v.name,
+      VISIBILITY: v.visibility ?? config.defaults?.visibility ?? 'private',
+      DATE: today,
+    };
     for (const rel of files) {
       const src = join(VAULT_SKELETON, rel);
       const dst = join(root, rel);
@@ -120,7 +126,9 @@ async function sync(opts) {
         console.log(`${apply ? 'atualizar' : 'drift'}: ${v.name}/${rel}`);
         if (apply) {
           await mkdir(dirname(dst), { recursive: true });
-          await cp(src, dst);
+          // Renderiza tokens ({{VAULT_NAME}}/{{VISIBILITY}}/{{DATE}}) ao propagar,
+          // senão o skeleton injetaria tokens crus no vault.
+          await renderScaffoldFile(src, dst, tokens);
         }
       }
     }

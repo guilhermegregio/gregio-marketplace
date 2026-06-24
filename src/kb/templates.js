@@ -20,6 +20,21 @@ export async function scaffoldVault(destRoot, { vaultName, visibility }) {
   });
 }
 
+// Substitui {{TOKEN}} num texto (função pura). Tokens: VAULT_NAME, VISIBILITY, DATE.
+export function renderTokens(text, tokens) {
+  let out = text;
+  for (const [k, v] of Object.entries(tokens)) {
+    out = out.replace(new RegExp(`\\{\\{${k}\\}\\}`, 'g'), v);
+  }
+  return out;
+}
+
+// Copia um arquivo de scaffold do skeleton para o vault, substituindo tokens.
+export async function renderScaffoldFile(srcPath, dstPath, tokens) {
+  const text = await readFile(srcPath, 'utf8');
+  await writeFile(dstPath, renderTokens(text, tokens));
+}
+
 async function substituteTokens(dir, tokens) {
   const entries = await readdir(dir, { withFileTypes: true });
   for (const e of entries) {
@@ -27,16 +42,9 @@ async function substituteTokens(dir, tokens) {
     if (e.isDirectory()) {
       await substituteTokens(p, tokens);
     } else if (e.name.endsWith('.md') || e.name.endsWith('.base') || e.name.endsWith('.json')) {
-      let text = await readFile(p, 'utf8');
-      let changed = false;
-      for (const [k, v] of Object.entries(tokens)) {
-        const re = new RegExp(`\\{\\{${k}\\}\\}`, 'g');
-        if (re.test(text)) {
-          text = text.replace(re, v);
-          changed = true;
-        }
-      }
-      if (changed) await writeFile(p, text);
+      const text = await readFile(p, 'utf8');
+      const next = renderTokens(text, tokens);
+      if (next !== text) await writeFile(p, next);
     }
   }
 }
