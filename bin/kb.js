@@ -10,6 +10,7 @@ const COMMANDS = {
   aggregator: () => import('../src/kb/commands/vault.js'), // aggregator vive em vault.js
   project: () => import('../src/kb/commands/project.js'),
   group: () => import('../src/kb/commands/group.js'),
+  dev: () => import('../src/kb/commands/dev/index.js'),
   source: () => import('../src/kb/commands/source.js'),
 };
 
@@ -34,6 +35,10 @@ Comandos:
   project list | remove <n> | scan <n>
   group new <n> [--title t] | add <g> <membro...> | rm <g> <membro> | list
   graph build [--group g] [--force] | merge | serve
+  dev start <slug> --vault <n> --project <repo> [--title t]   cria um plano (draft)
+  dev check <slug> [--task Txx]    valida DAG + ready-set; roda gates de uma task
+  dev done <slug> [--promote ...]  promove durável + arquiva o plano + re-merge central
+  dev run <slug> [--max N] [--dry-run]   orquestra as tasks (ver plan-structure)
   source discord|gmail ...    (fase posterior)
 `;
 
