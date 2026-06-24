@@ -93,6 +93,11 @@ Para "planeje X entre projetos": (1) resolva o grupo/projetos via grafo central
 `30-plans/<slug>/execution/AAAA-MM-DD.md`; ao concluir, promova aprendizados para
 `40-knowledge/learnings/` e marque o plano `done`.
 
+**Só planos ativos.** Ao listar/varrer planos, considere **apenas** `30-plans/*`
+(ativos). **Nunca** leia `30-plans/_archive/**` por padrão — planos concluídos são
+arquivados ali (via `kb dev done`) e só entram no contexto sob pedido explícito ("o
+que já foi feito em X?"). Assim um novo planejamento não herda ruído do histórico.
+
 ## Privacidade
 
 O grafo central e o `vault-all/` agregador misturam TODAS as visibilidades — são
