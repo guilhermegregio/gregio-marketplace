@@ -29,6 +29,13 @@
       "description": "Skills for recurring Node.js app maintenance: updating dependencies with full validation (lint, typecheck, tests, build), supply-chain security auditing (minimumReleaseAge, script allowlist, exact versions, exotic-dep blocking), and optional Chrome DevTools visual check. Agnostic to repo shape — Nx, pnpm workspace, or simple pnpm app.",
       "version": "0.2.0",
       "strict": true
+    },
+    {
+      "name": "gregio-cc-kb",
+      "source": "./packages/gregio-cc-kb",
+      "description": "Contrato e protocolo de carregamento cirúrgico da base de conhecimento pessoal (vaults Obsidian-markdown multi-audiência + grafo central Graphify). A skill 'kb' ensina o agente a ler o vault sem estourar contexto e documenta o engine CLI 'kb' do repo knowledge-gregio.",
+      "version": "0.1.0",
+      "strict": true
     }
   ]
 }

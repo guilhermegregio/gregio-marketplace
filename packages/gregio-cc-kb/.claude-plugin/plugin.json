@@ -1,0 +1,24 @@
+{
+  "name": "gregio-cc-kb",
+  "description": "Contrato e protocolo de carregamento cirúrgico da base de conhecimento pessoal (vaults Obsidian-markdown multi-audiência + grafo central via Graphify). A skill 'kb' ensina o agente a ler o vault sem estourar contexto (router → índices → folhas, grafo para cross-cutting) e documenta o engine CLI 'kb' (add/capture/new/vault/project/group/graph) que vive no repo knowledge-gregio.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Guilherme Gregio",
+    "email": "guilherme@gregio.net"
+  },
+  "homepage": "https://github.com/glittercowboy/gregio-marketplace",
+  "repository": "https://github.com/glittercowboy/gregio-marketplace",
+  "license": "MIT",
+  "keywords": [
+    "knowledge-base",
+    "obsidian",
+    "vault",
+    "graphify",
+    "knowledge-graph",
+    "surgical-loading",
+    "progressive-disclosure",
+    "mcp",
+    "multi-vault",
+    "frontmatter"
+  ]
+}
