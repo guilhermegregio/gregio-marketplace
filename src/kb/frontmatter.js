@@ -23,7 +23,10 @@ function parseScalar(raw) {
 }
 
 function parseInlineArray(raw) {
-  const inner = raw.trim().slice(1, -1).trim();
+  const s = raw.trim();
+  const start = s.indexOf('[');
+  const end = s.lastIndexOf(']'); // ignora comentário inline após o ]
+  const inner = s.slice(start + 1, end).trim();
   if (!inner) return [];
   return inner.split(',').map(x => parseScalar(x));
 }
