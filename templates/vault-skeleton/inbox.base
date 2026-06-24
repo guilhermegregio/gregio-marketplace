@@ -1,0 +1,15 @@
+filters:
+  and:
+    - 'type == "source"'
+    - 'projects == null || projects.isEmpty()'
+views:
+  - type: table
+    name: Triagem (não processados)
+    order:
+      - title
+      - file.folder
+      - tags
+      - created
+    sort:
+      - property: created
+        direction: DESC
