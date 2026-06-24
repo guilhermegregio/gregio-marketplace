@@ -2,7 +2,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { loadConfig, getVault, defaultVault } from '../config.js';
-import { expandPath } from '../paths.js';
+import { expandPath, ENGINE_ROOT } from '../paths.js';
 import { asList } from '../args.js';
 import { resolveNewTarget } from '../routing.js';
 import { buildFrontmatter, uniquePath, today } from '../note.js';
@@ -37,8 +37,8 @@ export async function run({ opts }) {
     visibility: opts.visibility || vault.visibility || config.defaults?.visibility,
   });
 
-  // Corpo a partir do template do tipo, se existir; substitui {{title}}/{{DATE}}.
-  const tplPath = join(root, '00-meta', 'templates', `${type}.md`);
+  // Corpo a partir do template do tipo (no engine), se existir; substitui {{title}}/{{DATE}}.
+  const tplPath = join(ENGINE_ROOT, 'templates', 'notes', `${type}.md`);
   let body = `# ${title}\n`;
   if (existsSync(tplPath)) {
     const parsed = parse(await readFile(tplPath, 'utf8'));

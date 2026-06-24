@@ -5,16 +5,22 @@ views:
   - type: table
     name: Planos
     order:
-      - file.name
+      - title
       - status
+      - file.folder
       - projects
       - updated
+    sort:
+      - property: updated
+        direction: DESC
   - type: table
     name: Ativos
     filters:
       and:
-        - 'status == "active"'
+        - 'status != "done"'
+        - 'status != "archived"'
     order:
-      - file.name
+      - title
+      - status
       - projects
       - updated

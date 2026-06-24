@@ -5,8 +5,12 @@ views:
   - type: table
     name: Projetos
     order:
-      - file.name
+      - title
       - status
+      - file.folder
       - groups
       - stack
       - updated
+    sort:
+      - property: updated
+        direction: DESC
