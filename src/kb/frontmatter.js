@@ -5,7 +5,12 @@
 const FM_RE = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?/;
 
 function parseScalar(raw) {
-  const s = raw.trim();
+  let s = raw.trim();
+  // Comentário inline YAML (espaço + #) em escalar NÃO citado.
+  if (!(s.startsWith('"') || s.startsWith("'"))) {
+    const c = s.match(/\s+#/);
+    if (c) s = s.slice(0, c.index).trim();
+  }
   if (s === '' || s === '~' || s === 'null') return null;
   if (s === 'true') return true;
   if (s === 'false') return false;
