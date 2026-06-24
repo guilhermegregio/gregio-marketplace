@@ -1,0 +1,7 @@
+# grafos do graphify (gerados por /graphify e kb graph build)
+graphify-out/
+
+# Obsidian: ignora cache/workspace local, versiona o resto do .obsidian/
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
