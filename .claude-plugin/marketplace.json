@@ -36,6 +36,13 @@
       "description": "Contrato e protocolo de carregamento cirúrgico da base de conhecimento pessoal (vaults Obsidian-markdown multi-audiência + grafo central Graphify). A skill 'kb' ensina o agente a ler o vault sem estourar contexto e documenta o engine CLI 'kb' do repo knowledge-gregio.",
       "version": "0.1.0",
       "strict": true
+    },
+    {
+      "name": "gregio-cc-devflow",
+      "source": "./packages/gregio-cc-devflow",
+      "description": "Ciclo de desenvolvimento ponta-a-ponta (draft → sincronizar → planejar → executar → validar → promover) via o CLI 'kb dev' (start/check/run/done). Tasks atômicas, execução paralela observável via herdr+wtree, gate de revisão humana. Repo = código; vault = conhecimento.",
+      "version": "0.1.0",
+      "strict": true
     }
   ]
 }
