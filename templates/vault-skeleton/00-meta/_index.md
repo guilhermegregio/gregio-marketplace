@@ -15,6 +15,11 @@ updated: {{DATE}}
 > cross-cutting use o Graphify MCP, não leia o vault inteiro. Veja
 > [[conventions]] para o contrato e [[taxonomy]] para o que vai onde.
 
+## Comece aqui
+
+- [[START-HERE]] — onde adiciono o quê (árvore de decisão `kb`).
+- [[obsidian-setup]] — plugins e setup do app.
+
 ## Mapa
 
 - [[10-projects/_index|Projetos]] — uma "casa" por projeto (stack, repos, status).
