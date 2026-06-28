@@ -9,5 +9,5 @@ result
 result-*
 
 # Estado do engine kb mora em XDG (~/.config/kb, ~/.local/state/kb), não no repo.
-# graphify-out fica ignorado caso o graphify rode localmente no checkout.
-graphify-out/
+# graphify-out/ é versionado via allowlist (graphify-out/.gitignore): só
+# graph.json+manifest.json entram; cache/html/relatórios ficam de fora (onda3 T06).
