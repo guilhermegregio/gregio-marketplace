@@ -3,7 +3,8 @@ import { loadConfig, saveConfig, getProject } from '../config.js';
 import { upsertProject, removeProject, upsertGroup, detectSubprojects } from '../registry.js';
 import { expandPath } from '../paths.js';
 import { asList } from '../args.js';
-import { basename } from 'node:path';
+import { applyHygiene, installHook } from '../repo-hygiene.js';
+import { basename, join } from 'node:path';
 
 export async function run({ positionals, opts }) {
   const sub = positionals[0];
@@ -16,9 +17,32 @@ export async function run({ positionals, opts }) {
       return remove(positionals[1]);
     case 'scan':
       return scan(positionals[1]);
+    case 'init-hygiene':
+      return initHygiene(positionals[1]);
     default:
-      console.error('uso: kb project <add|list|remove|scan>');
+      console.error('uso: kb project <add|list|remove|scan|init-hygiene>');
       process.exit(1);
+  }
+}
+
+// Aplica hygiene (T02) + instala hook do graphify no repo e, se monorepo, em cada
+// subprojeto (cada subpath é seu próprio scan-root → precisa do .graphifyignore).
+async function applyToProject(project) {
+  const root = expandPath(project.path);
+  const targets = [root];
+  if (project.monorepo) {
+    for (const sp of project.subprojects ?? []) targets.push(join(root, sp.subpath));
+  }
+  for (const t of targets) {
+    if (!existsSync(t)) {
+      console.warn(`  ! ${t}: ausente — pulando hygiene`);
+      continue;
+    }
+    const { stack } = await applyHygiene(t);
+    const hook = await installHook(t);
+    const rel = t === root ? '(raiz)' : t.slice(root.length + 1);
+    console.log(`  hygiene ${rel}: .graphifyignore[${stack ?? 'genérico'}] + allowlist + gitattributes` +
+      (hook.ok ? ' + hook' : ' (hook: graphify indisponível, pulado)'));
   }
 }
 
@@ -59,7 +83,22 @@ async function add(pathArg, opts) {
   }
 
   await saveConfig(config);
-  console.log(`Projeto "${name}" registrado. Rode "kb graph build" para incluir no grafo central.`);
+  console.log(`Projeto "${name}" registrado.`);
+
+  if (opts['no-hygiene'] !== true) {
+    console.log('Aplicando hygiene + hook do graphify:');
+    await applyToProject(project);
+  }
+  console.log('Rode "kb graph build" para incluir no grafo central.');
+}
+
+async function initHygiene(name) {
+  if (!name) throw new Error('uso: kb project init-hygiene <nome>');
+  const config = await loadConfig();
+  const p = getProject(config, name);
+  if (!p) throw new Error(`projeto "${name}" não registrado (veja "kb project list")`);
+  console.log(`Hygiene para "${name}":`);
+  await applyToProject(p);
 }
 
 async function list() {
