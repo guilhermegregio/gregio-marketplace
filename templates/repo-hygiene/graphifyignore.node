@@ -1,0 +1,11 @@
+# .graphifyignore — snippet stack: node/ts (anexado à base)
+.next/
+.vite/
+.turbo/
+.nx/
+*.d.ts
+__generated__/
+*.generated.ts
+storybook-static/
+.tsbuildinfo
+tsconfig.tsbuildinfo

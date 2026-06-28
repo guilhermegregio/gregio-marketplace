@@ -3,7 +3,7 @@ import { mkdir } from 'node:fs/promises';
 import { join, dirname, isAbsolute } from 'node:path';
 import { loadConfig, resolvePythonInterp, graphSources, groupRepos } from '../config.js';
 import { STATE_DIR, CENTRAL_GRAPH_DEFAULT } from '../paths.js';
-import { updateGraph, mergeGraphs, serve } from '../graphify.js';
+import { updateGraph, mergeGraphs, serve, buildMonorepoRoot } from '../graphify.js';
 
 function centralPath(config) {
   const v = config.central?.graphOut;
@@ -51,7 +51,11 @@ async function build(opts) {
     }
     try {
       process.stdout.write(`  ${src.repo} ...`);
-      await updateGraph(src.root);
+      if (src.kind === 'monorepo') {
+        await buildMonorepoRoot(src.root, src.subprojects); // C5: por-subprojeto + merge na raiz
+      } else {
+        await updateGraph(src.root);
+      }
       process.stdout.write(' ok\n');
     } catch (e) {
       process.stdout.write(` falhou (${e.message})\n`);

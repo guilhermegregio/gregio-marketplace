@@ -139,16 +139,21 @@ export function graphSources(config, { onlyRepos = null } = {}) {
     if (p.includeInCentral === false) continue;
     const base = expandPath(p.path);
     if (p.monorepo && Array.isArray(p.subprojects) && p.subprojects.length) {
-      for (const sp of p.subprojects) {
-        if (sp.includeInCentral === false) continue;
-        sources.push({
-          repo: sp.name,
-          kind: 'subproject',
-          parent: p.name,
-          root: join(base, sp.subpath),
-          graphOut: sp.graphOut ?? 'graphify-out/graph.json',
-        });
-      }
+      // C5: o central indexa o MERGE NA RAIZ do monorepo (1 fonte), não N subgrafos.
+      // graphOut = grafo da raiz; subprojects carrega o que buildMonorepoRoot precisa.
+      sources.push({
+        repo: p.name,
+        kind: 'monorepo',
+        root: base,
+        graphOut: p.graphOut ?? 'graphify-out/graph.json',
+        subprojects: p.subprojects
+          .filter(sp => sp.includeInCentral !== false)
+          .map(sp => ({
+            name: sp.name,
+            subpath: sp.subpath,
+            graphOut: sp.graphOut ?? 'graphify-out/graph.json',
+          })),
+      });
     } else {
       sources.push({
         repo: p.name,
@@ -165,30 +170,21 @@ export function graphSources(config, { onlyRepos = null } = {}) {
   return sources;
 }
 
-// Resolve um grupo para os nomes de FONTE (o atributo `repo` no grafo) que ele agrega.
-// Membros aceitos:
-//   "my-coach"            -> repo simples (ou vault)
-//   "nxt-app-workout"     -> monorepo: expande para TODOS os subprojetos
-//   "ds-agent#ds-nxt"     -> subprojeto específico (casa por nome ou sufixo)
+// Resolve um grupo para os nomes de FONTE (o atributo `repo` no grafo central) que
+// ele agrega. Como o central indexa o MERGE NA RAIZ de cada monorepo (C5), a fonte
+// de um monorepo é UM repo = o nome do projeto. Membros aceitos:
+//   "my-coach"            -> repo simples (ou vault) = a própria fonte
+//   "nxt-app-workout"     -> monorepo = a fonte raiz (1 repo)
+//   "ds-agent#ds-nxt"     -> subprojeto: COLAPSA no monorepo "ds-agent" no central
+// Limite C5: no central, subprojetos de um mesmo monorepo não são separáveis
+// (todos vêm sob o nome do monorepo). A granularidade por-subprojeto fica nos
+// subgrafos em disco, p/ planejamento local dentro do subprojeto.
 export function groupRepos(config, groupName) {
   const g = getGroup(config, groupName);
   if (!g) throw new Error(`grupo "${groupName}" não existe (veja "kb group list")`);
-  const subsByProject = new Map();
-  for (const p of config.projects ?? []) {
-    if (p.subprojects?.length) subsByProject.set(p.name, p.subprojects.map(s => s.name));
-  }
   const out = [];
   for (const m of g.members ?? []) {
-    if (m.includes('#')) {
-      const [repo, sub] = m.split('#');
-      const subs = subsByProject.get(repo) ?? [];
-      const match = subs.find(n => n === sub || n === `${repo}-${sub}` || n.endsWith(`-${sub}`));
-      out.push(match ?? sub);
-    } else if (subsByProject.has(m)) {
-      out.push(...subsByProject.get(m)); // monorepo -> todos os subprojetos
-    } else {
-      out.push(m);
-    }
+    out.push(m.includes('#') ? m.split('#')[0] : m);
   }
   return [...new Set(out)];
 }

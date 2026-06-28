@@ -1,0 +1,11 @@
+# .graphifyignore — snippet stack: flutter/dart (anexado à base)
+.dart_tool/
+*.g.dart
+*.freezed.dart
+*.gr.dart
+*.config.dart
+ios/Pods/
+android/.gradle/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies

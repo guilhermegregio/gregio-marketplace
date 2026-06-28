@@ -1,0 +1,5 @@
+# Entradas para o grafo commitado (kb project init-hygiene mescla no .gitattributes do repo).
+# merge=graphify-union: usa o merge-driver do graphify em conflito (union, não textual).
+# -diff + linguist-generated: não polui PR (sem diff inline, não conta como código).
+graphify-out/graph.json merge=graphify-union -diff linguist-generated=true
+graphify-out/manifest.json merge=graphify-union -diff linguist-generated=true
