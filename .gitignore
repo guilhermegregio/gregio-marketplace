@@ -1,4 +1,4 @@
 .claude/settings.local.json
 
-# grafos do graphify (gerados localmente)
-graphify-out/
+# grafo do graphify versionado via allowlist (graphify-out/.gitignore):
+# só graph.json+manifest.json; cache/html/relatórios ficam de fora (onda3 T06).
