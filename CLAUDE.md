@@ -4,10 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Visão geral
 
-`knowledge-gregio` tem dois papéis: (a) **arquivador de Discord** (descrito abaixo);
-(b) **engine `kb`** da base de conhecimento pessoal (ingestão, roteamento e grafo
-central sobre vaults Obsidian). O engine `kb` está em `bin/kb.js` + `src/kb/` —
-veja a doc dele no vault (abaixo). O arquivador é uma fonte de ingestão futura.
+`knowledge-gregio` tem **dois papéis co-iguais**: (a) **engine `kb`** da base de
+conhecimento pessoal (ingestão, roteamento, grafo central e ciclo de planos sobre os
+vaults Obsidian) — hoje é a ferramenta de uso diário, em `bin/kb.js` + `src/kb/`;
+(b) **arquivador de Discord** (uma fonte de ingestão, descrita abaixo). A doc detalhada
+do engine vive na **skill `kb`** (marketplace) e no vault; este arquivo só resume.
 
 **Arquivador de Discord** em duas etapas: (1) **pull** baixa mensagens + anexos de
 canais/threads/forums de um guild numa janela de horas (default 24h); (2)
@@ -18,7 +19,40 @@ Docs e specs **não vivem neste repo** — moram no vault pessoal, em
 `vault-pessoal/10-projects/ai-dev-harness/` (spec do arquivador, setup do bot, doc do
 engine `kb`). Plano da base de conhecimento: `~/.claude/plans/happy-churning-reef.md`.
 
-## Comandos
+## Engine kb (base de conhecimento)
+
+O CLI `kb` (comando global; `node bin/kb.js` aqui) é a **única** coisa que muta os
+vaults e constrói os grafos. Detalhe operacional e protocolo de leitura cirúrgica: skill
+`kb`; ciclo de planos: skill `devflow`. Não duplicar aqui — este é só o mapa.
+
+```bash
+# Autoria / consulta
+kb add <url> --vault <n> [--as <cat>]   # ingest roteado de URL
+kb capture "<texto>" --vault <n>        # append no inbox
+kb new --vault <n> --type <t> --title   # nova nota (frontmatter do contrato)
+
+# Registro (repos → grafo central)
+kb project add <path> [--group g]       # registra repo (auto-detecta monorepo) + hygiene + hook
+kb project list | scan <n> | remove <n>
+kb project link-claude <n> | --all      # materializa o cross-link repo↔vault no CLAUDE.md
+kb group new <n> | add <g> <m...> | list # produtos lógicos (agregam repos/subprojetos)
+
+# Grafo central (privado, local, via MCP stdio)
+kb graph build [--group g]              # freshen por fonte + merge no central
+kb graph serve                          # sobe o MCP (interp Python absoluto)
+
+# Ciclo de planos cross-project (skill devflow)
+kb dev start <slug> --vault <n> --project <p>
+kb dev check <slug> [--task Txx]        # valida DAG / roda gates
+kb dev run <slug>                       # computa ondas de execução paralela
+kb dev done <slug> [--promote ...]      # promove learnings/ADRs → arquiva plano → re-merge
+```
+
+Arquitetura do engine: `src/kb/` (`config.js`, `routing.js`, `frontmatter.js`,
+`graphify.js` = chokepoint do scan-root, `repo-hygiene.js`, `repo-claudemd.js`,
+`commands/`). Config no XDG (`~/.config/kb/config.json`, **não** neste repo).
+
+## Comandos (arquivador de Discord)
 
 ```bash
 pnpm run pull                      # baixa últimas PULL_WINDOW_HOURS e grava archive/raw/{hoje}/
