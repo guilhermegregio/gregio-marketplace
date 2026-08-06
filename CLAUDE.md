@@ -55,3 +55,11 @@ Camada Discord (`src/discord/`):
 ## Configuração
 
 `.env` (copiar de `.env.example`): `DISCORD_BOT_TOKEN` e `DISCORD_GUILD_ID` obrigatórios. `DISCORD_USER_ID` opcional ativa substituição de `<@id>` por `@VOCÊ` no transcript e adiciona nota no system prompt. `EXCLUDE_CHANNEL_IDS` (CSV) e `PULL_WINDOW_HOURS` (default 24) também opcionais.
+
+<!-- kb:link start -->
+> 📚 **Conhecimento deste projeto mora no vault:** `vault-pessoal/10-projects/ai-dev-harness/`
+>
+> Repo = código + runtime. Docs, arquitetura, ADRs, planos, learnings e research
+> vivem no vault (não crie doc/plano solto aqui). Consulte/registre via skill `kb`;
+> planos cross-project via `kb dev` (skill `devflow`).
+<!-- kb:link end -->

@@ -4,6 +4,7 @@ import { upsertProject, removeProject, upsertGroup, detectSubprojects } from '..
 import { expandPath } from '../paths.js';
 import { asList } from '../args.js';
 import { applyHygiene, installHook } from '../repo-hygiene.js';
+import { linkClaudeMd } from '../repo-claudemd.js';
 import { basename, join } from 'node:path';
 
 export async function run({ positionals, opts }) {
@@ -19,8 +20,10 @@ export async function run({ positionals, opts }) {
       return scan(positionals[1]);
     case 'init-hygiene':
       return initHygiene(positionals[1]);
+    case 'link-claude':
+      return linkClaude(positionals[1], opts);
     default:
-      console.error('uso: kb project <add|list|remove|scan|init-hygiene>');
+      console.error('uso: kb project <add|list|remove|scan|init-hygiene|link-claude>');
       process.exit(1);
   }
 }
@@ -99,6 +102,34 @@ async function initHygiene(name) {
   if (!p) throw new Error(`projeto "${name}" não registrado (veja "kb project list")`);
   console.log(`Hygiene para "${name}":`);
   await applyToProject(p);
+}
+
+// Materializa/atualiza o bloco de cross-link repo↔vault no CLAUDE.md dos repos
+// registrados (idempotente). Monorepo: linka só o CLAUDE.md da raiz.
+async function linkClaude(name, opts) {
+  const config = await loadConfig();
+  let targets;
+  if (opts.all === true) {
+    targets = config.projects ?? [];
+  } else if (name) {
+    const p = getProject(config, name);
+    if (!p) throw new Error(`projeto "${name}" não registrado (veja "kb project list")`);
+    targets = [p];
+  } else {
+    throw new Error('uso: kb project link-claude <nome> | --all');
+  }
+  for (const p of targets) {
+    const root = expandPath(p.path);
+    if (!existsSync(root)) {
+      console.warn(`  ! ${p.name}: path ausente — pulando`);
+      continue;
+    }
+    const { target, changed } = await linkClaudeMd(root, config, p);
+    console.log(
+      `  ${p.name} → vault-${target.vaultName}/10-projects/${target.folder}/  ` +
+        (changed ? '(escrito)' : '(inalterado)'),
+    );
+  }
 }
 
 async function list() {
