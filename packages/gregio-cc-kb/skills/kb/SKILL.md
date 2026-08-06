@@ -35,6 +35,11 @@ NUNCA faça `ls -R` nem leia o vault inteiro. Protocolo, nesta ordem:
    Stone?", "o que liga o app mobile ao design system?" → use as tools MCP do grafo
    central (`query_graph`, `get_neighbors`, `shortest_path`, `get_community`) em vez
    de ler 20 arquivos. Cite `source_location` ao afirmar um fato do grafo.
+   - **Semântica de vault no grafo:** os nós-arquivo do vault carregam atributos de
+     frontmatter (`fm_type`, `fm_projects`, `fm_groups`, `fm_visibility`, `fm_tags`, …)
+     e os `[[wikilinks]]` são arestas `origin: wikilink`. Filtre por eles (ex.: todos os
+     `fm_type=="learning"`, notas de um `fm_projects`, por `fm_visibility`) e navegue a
+     teia de wikilinks — não leia pasta por pasta.
 5. **Budget:** router + 1 índice + N notas-alvo. Precisou de mais? Vá ao grafo, não
    abra mais arquivos.
 
