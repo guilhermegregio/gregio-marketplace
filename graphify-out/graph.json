@@ -4,96 +4,6 @@
   "graph": {},
   "nodes": [
     {
-      "label": "project.js",
-      "file_type": "code",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "commands_project",
-      "community": 12,
-      "norm_label": "project.js"
-    },
-    {
-      "label": "run()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L10",
-      "_origin": "ast",
-      "id": "commands_project_run",
-      "community": 12,
-      "norm_label": "run()"
-    },
-    {
-      "label": "applyToProject()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L33",
-      "_origin": "ast",
-      "id": "commands_project_applytoproject",
-      "community": 12,
-      "norm_label": "applytoproject()"
-    },
-    {
-      "label": "add()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L54",
-      "_origin": "ast",
-      "id": "commands_project_add",
-      "community": 12,
-      "norm_label": "add()"
-    },
-    {
-      "label": "initHygiene()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L100",
-      "_origin": "ast",
-      "id": "commands_project_inithygiene",
-      "community": 12,
-      "norm_label": "inithygiene()"
-    },
-    {
-      "label": "linkClaude()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L111",
-      "_origin": "ast",
-      "id": "commands_project_linkclaude",
-      "community": 12,
-      "norm_label": "linkclaude()"
-    },
-    {
-      "label": "list()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L137",
-      "_origin": "ast",
-      "id": "commands_project_list",
-      "community": 12,
-      "norm_label": "list()"
-    },
-    {
-      "label": "remove()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L146",
-      "_origin": "ast",
-      "id": "commands_project_remove",
-      "community": 12,
-      "norm_label": "remove()"
-    },
-    {
-      "label": "scan()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L154",
-      "_origin": "ast",
-      "id": "commands_project_scan",
-      "community": 12,
-      "norm_label": "scan()"
-    },
-    {
       "label": "repo-hygiene.js",
       "file_type": "code",
       "source_file": "src/kb/repo-hygiene.js",
@@ -137,7 +47,7 @@
       "label": "mergeGitattributes()",
       "file_type": "code",
       "source_file": "src/kb/repo-hygiene.js",
-      "source_location": "L52",
+      "source_location": "L58",
       "_origin": "ast",
       "id": "kb_repo_hygiene_mergegitattributes",
       "community": 12,
@@ -147,11 +57,101 @@
       "label": "installHook()",
       "file_type": "code",
       "source_file": "src/kb/repo-hygiene.js",
-      "source_location": "L73",
+      "source_location": "L79",
       "_origin": "ast",
       "id": "kb_repo_hygiene_installhook",
       "community": 12,
       "norm_label": "installhook()"
+    },
+    {
+      "label": "project.js",
+      "file_type": "code",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 12,
+      "norm_label": "project.js",
+      "id": "commands_project"
+    },
+    {
+      "label": "run()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L10",
+      "_origin": "ast",
+      "community": 12,
+      "norm_label": "run()",
+      "id": "commands_project_run"
+    },
+    {
+      "label": "applyToProject()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L33",
+      "_origin": "ast",
+      "community": 12,
+      "norm_label": "applytoproject()",
+      "id": "commands_project_applytoproject"
+    },
+    {
+      "label": "add()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L54",
+      "_origin": "ast",
+      "community": 12,
+      "norm_label": "add()",
+      "id": "commands_project_add"
+    },
+    {
+      "label": "initHygiene()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L100",
+      "_origin": "ast",
+      "community": 12,
+      "norm_label": "inithygiene()",
+      "id": "commands_project_inithygiene"
+    },
+    {
+      "label": "linkClaude()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L111",
+      "_origin": "ast",
+      "community": 12,
+      "norm_label": "linkclaude()",
+      "id": "commands_project_linkclaude"
+    },
+    {
+      "label": "list()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L137",
+      "_origin": "ast",
+      "community": 12,
+      "norm_label": "list()",
+      "id": "commands_project_list"
+    },
+    {
+      "label": "remove()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L146",
+      "_origin": "ast",
+      "community": 12,
+      "norm_label": "remove()",
+      "id": "commands_project_remove"
+    },
+    {
+      "label": "scan()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L154",
+      "_origin": "ast",
+      "community": 12,
+      "norm_label": "scan()",
+      "id": "commands_project_scan"
     },
     {
       "label": "kb.js",
@@ -2427,216 +2427,15 @@
   ],
   "links": [
     {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L54",
-      "weight": 1.0,
-      "source": "commands_project",
-      "target": "commands_project_add",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L33",
-      "weight": 1.0,
-      "source": "commands_project",
-      "target": "commands_project_applytoproject",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L100",
-      "weight": 1.0,
-      "source": "commands_project",
-      "target": "commands_project_inithygiene",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L111",
-      "weight": 1.0,
-      "source": "commands_project",
-      "target": "commands_project_linkclaude",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L137",
-      "weight": 1.0,
-      "source": "commands_project",
-      "target": "commands_project_list",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L146",
-      "weight": 1.0,
-      "source": "commands_project",
-      "target": "commands_project_remove",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L10",
-      "weight": 1.0,
-      "source": "commands_project",
-      "target": "commands_project_run",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L154",
-      "weight": 1.0,
-      "source": "commands_project",
-      "target": "commands_project_scan",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/kb/commands/project.js",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "commands_project",
-      "target": "kb_repo_hygiene",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "commands_project",
-      "target": "kb_repo_hygiene_applyhygiene",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "commands_project",
-      "target": "kb_repo_hygiene_installhook",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L14",
-      "weight": 1.0,
-      "source": "commands_project_run",
-      "target": "commands_project_add",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L22",
-      "weight": 1.0,
-      "source": "commands_project_run",
-      "target": "commands_project_inithygiene",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L24",
-      "weight": 1.0,
-      "source": "commands_project_run",
-      "target": "commands_project_linkclaude",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L18",
-      "weight": 1.0,
-      "source": "commands_project_run",
-      "target": "commands_project_remove",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L20",
-      "weight": 1.0,
-      "source": "commands_project_run",
-      "target": "commands_project_scan",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L95",
-      "weight": 1.0,
-      "source": "commands_project_add",
-      "target": "commands_project_applytoproject",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L46",
-      "weight": 1.0,
-      "source": "commands_project_applytoproject",
-      "target": "kb_repo_hygiene_applyhygiene",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L47",
-      "weight": 1.0,
-      "source": "commands_project_applytoproject",
-      "target": "kb_repo_hygiene_installhook",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L106",
-      "weight": 1.0,
-      "source": "commands_project_inithygiene",
-      "target": "commands_project_applytoproject",
-      "confidence_score": 1.0
+      "target": "kb_repo_hygiene"
     },
     {
       "relation": "contains",
@@ -2644,9 +2443,9 @@
       "source_file": "src/kb/repo-hygiene.js",
       "source_location": "L27",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "kb_repo_hygiene",
-      "target": "kb_repo_hygiene_applyhygiene",
-      "confidence_score": 1.0
+      "target": "kb_repo_hygiene_applyhygiene"
     },
     {
       "relation": "contains",
@@ -2654,9 +2453,9 @@
       "source_file": "src/kb/repo-hygiene.js",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "kb_repo_hygiene",
-      "target": "kb_repo_hygiene_detectstack",
-      "confidence_score": 1.0
+      "target": "kb_repo_hygiene_detectstack"
     },
     {
       "relation": "contains",
@@ -2664,9 +2463,9 @@
       "source_file": "src/kb/repo-hygiene.js",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "kb_repo_hygiene",
-      "target": "kb_repo_hygiene_hygiene_dir",
-      "confidence_score": 1.0
+      "target": "kb_repo_hygiene_hygiene_dir"
     },
     {
       "relation": "contains",
@@ -2674,9 +2473,9 @@
       "source_file": "src/kb/repo-hygiene.js",
       "source_location": "L73",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "kb_repo_hygiene",
-      "target": "kb_repo_hygiene_installhook",
-      "confidence_score": 1.0
+      "target": "kb_repo_hygiene_installhook"
     },
     {
       "relation": "contains",
@@ -2684,9 +2483,9 @@
       "source_file": "src/kb/repo-hygiene.js",
       "source_location": "L52",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "kb_repo_hygiene",
-      "target": "kb_repo_hygiene_mergegitattributes",
-      "confidence_score": 1.0
+      "target": "kb_repo_hygiene_mergegitattributes"
     },
     {
       "relation": "calls",
@@ -2695,9 +2494,31 @@
       "source_file": "src/kb/repo-hygiene.js",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "kb_repo_hygiene_applyhygiene",
-      "target": "kb_repo_hygiene_detectstack",
-      "confidence_score": 1.0
+      "target": "kb_repo_hygiene_detectstack"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "kb_repo_hygiene_applyhygiene"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L46",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_applytoproject",
+      "target": "kb_repo_hygiene_applyhygiene"
     },
     {
       "relation": "calls",
@@ -2706,9 +2527,188 @@
       "source_file": "src/kb/repo-hygiene.js",
       "source_location": "L47",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "kb_repo_hygiene_applyhygiene",
-      "target": "kb_repo_hygiene_mergegitattributes",
-      "confidence_score": 1.0
+      "target": "kb_repo_hygiene_mergegitattributes"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "kb_repo_hygiene_installhook"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L47",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_applytoproject",
+      "target": "kb_repo_hygiene_installhook"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L54",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "commands_project_add"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L33",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "commands_project_applytoproject"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L100",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "commands_project_inithygiene"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L111",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "commands_project_linkclaude"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L137",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "commands_project_list"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L146",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "commands_project_remove"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "commands_project_run"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L154",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "commands_project_scan"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_run",
+      "target": "commands_project_add"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_run",
+      "target": "commands_project_inithygiene"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_run",
+      "target": "commands_project_linkclaude"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_run",
+      "target": "commands_project_remove"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_run",
+      "target": "commands_project_scan"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L95",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_add",
+      "target": "commands_project_applytoproject"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L106",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_inithygiene",
+      "target": "commands_project_applytoproject"
     },
     {
       "relation": "contains",
@@ -8657,5 +8657,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "28972e65861bea3203c8ea2a9df1bcdc97502016"
+  "built_at_commit": "b06772c844cb7339b762619599678b32ac859afc"
 }
