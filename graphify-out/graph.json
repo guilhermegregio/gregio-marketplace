@@ -4,1056 +4,6 @@
   "graph": {},
   "nodes": [
     {
-      "label": "kb.js",
-      "file_type": "code",
-      "source_file": "bin/kb.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "bin_kb",
-      "community": 6,
-      "norm_label": "kb.js"
-    },
-    {
-      "label": "COMMANDS",
-      "file_type": "code",
-      "source_file": "bin/kb.js",
-      "source_location": "L4",
-      "_origin": "ast",
-      "id": "bin_kb_commands",
-      "community": 6,
-      "norm_label": "commands"
-    },
-    {
-      "label": "main()",
-      "file_type": "code",
-      "source_file": "bin/kb.js",
-      "source_location": "L45",
-      "_origin": "ast",
-      "id": "bin_kb_main",
-      "community": 6,
-      "norm_label": "main()"
-    },
-    {
-      "label": "package.json",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "package",
-      "community": 5,
-      "norm_label": "package.json"
-    },
-    {
-      "label": "name",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L2",
-      "_origin": "ast",
-      "id": "package_name",
-      "community": 5,
-      "norm_label": "name"
-    },
-    {
-      "label": "version",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L3",
-      "_origin": "ast",
-      "id": "package_version",
-      "community": 5,
-      "norm_label": "version"
-    },
-    {
-      "label": "private",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L4",
-      "_origin": "ast",
-      "id": "package_private",
-      "community": 5,
-      "norm_label": "private"
-    },
-    {
-      "label": "type",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L5",
-      "_origin": "ast",
-      "id": "package_type",
-      "community": 5,
-      "norm_label": "type"
-    },
-    {
-      "label": "description",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L6",
-      "_origin": "ast",
-      "id": "package_description",
-      "community": 5,
-      "norm_label": "description"
-    },
-    {
-      "label": "bin",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L7",
-      "_origin": "ast",
-      "id": "package_bin",
-      "community": 5,
-      "norm_label": "bin"
-    },
-    {
-      "label": "kb",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L8",
-      "_origin": "ast",
-      "id": "package_bin_kb",
-      "community": 5,
-      "norm_label": "kb"
-    },
-    {
-      "label": "scripts",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L10",
-      "_origin": "ast",
-      "id": "package_scripts",
-      "community": 5,
-      "norm_label": "scripts"
-    },
-    {
-      "label": "pull",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L11",
-      "_origin": "ast",
-      "id": "package_scripts_pull",
-      "community": 5,
-      "norm_label": "pull"
-    },
-    {
-      "label": "consolidate",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L12",
-      "_origin": "ast",
-      "id": "package_scripts_consolidate",
-      "community": 5,
-      "norm_label": "consolidate"
-    },
-    {
-      "label": "daily",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L13",
-      "_origin": "ast",
-      "id": "package_scripts_daily",
-      "community": 5,
-      "norm_label": "daily"
-    },
-    {
-      "label": "kb",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L14",
-      "_origin": "ast",
-      "id": "package_scripts_kb",
-      "community": 5,
-      "norm_label": "kb"
-    },
-    {
-      "label": "kb:graph",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L15",
-      "_origin": "ast",
-      "id": "package_scripts_kb_graph",
-      "community": 5,
-      "norm_label": "kb:graph"
-    },
-    {
-      "label": "kb:serve",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L16",
-      "_origin": "ast",
-      "id": "package_scripts_kb_serve",
-      "community": 5,
-      "norm_label": "kb:serve"
-    },
-    {
-      "label": "engines",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L18",
-      "_origin": "ast",
-      "id": "package_engines",
-      "community": 5,
-      "norm_label": "engines"
-    },
-    {
-      "label": "node",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L19",
-      "_origin": "ast",
-      "id": "package_engines_node",
-      "community": 5,
-      "norm_label": "node"
-    },
-    {
-      "label": "consolidate.js",
-      "file_type": "code",
-      "source_file": "src/consolidate.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_consolidate",
-      "community": 1,
-      "norm_label": "consolidate.js"
-    },
-    {
-      "label": "inputDir",
-      "file_type": "code",
-      "source_file": "src/consolidate.js",
-      "source_location": "L7",
-      "_origin": "ast",
-      "id": "src_consolidate_inputdir",
-      "community": 1,
-      "norm_label": "inputdir"
-    },
-    {
-      "label": "jsonFiles",
-      "file_type": "code",
-      "source_file": "src/consolidate.js",
-      "source_location": "L17",
-      "_origin": "ast",
-      "id": "src_consolidate_jsonfiles",
-      "community": 1,
-      "norm_label": "jsonfiles"
-    },
-    {
-      "label": "formatMessage()",
-      "file_type": "code",
-      "source_file": "src/consolidate.js",
-      "source_location": "L28",
-      "_origin": "ast",
-      "id": "src_consolidate_formatmessage",
-      "community": 1,
-      "norm_label": "formatmessage()"
-    },
-    {
-      "label": "blocks",
-      "file_type": "code",
-      "source_file": "src/consolidate.js",
-      "source_location": "L61",
-      "_origin": "ast",
-      "id": "src_consolidate_blocks",
-      "community": 1,
-      "norm_label": "blocks"
-    },
-    {
-      "label": "transcript",
-      "file_type": "code",
-      "source_file": "src/consolidate.js",
-      "source_location": "L73",
-      "_origin": "ast",
-      "id": "src_consolidate_transcript",
-      "community": 1,
-      "norm_label": "transcript"
-    },
-    {
-      "label": "outDir",
-      "file_type": "code",
-      "source_file": "src/consolidate.js",
-      "source_location": "L120",
-      "_origin": "ast",
-      "id": "src_consolidate_outdir",
-      "community": 1,
-      "norm_label": "outdir"
-    },
-    {
-      "label": "outPath",
-      "file_type": "code",
-      "source_file": "src/consolidate.js",
-      "source_location": "L122",
-      "_origin": "ast",
-      "id": "src_consolidate_outpath",
-      "community": 1,
-      "norm_label": "outpath"
-    },
-    {
-      "label": "proc",
-      "file_type": "code",
-      "source_file": "src/consolidate.js",
-      "source_location": "L124",
-      "_origin": "ast",
-      "id": "src_consolidate_proc",
-      "community": 1,
-      "norm_label": "proc"
-    },
-    {
-      "label": "attachments.js",
-      "file_type": "code",
-      "source_file": "src/discord/attachments.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "discord_attachments",
-      "community": 1,
-      "norm_label": "attachments.js"
-    },
-    {
-      "label": "sanitize()",
-      "file_type": "code",
-      "source_file": "src/discord/attachments.js",
-      "source_location": "L4",
-      "_origin": "ast",
-      "id": "discord_attachments_sanitize",
-      "community": 1,
-      "norm_label": "sanitize()"
-    },
-    {
-      "label": "downloadAttachments()",
-      "file_type": "code",
-      "source_file": "src/discord/attachments.js",
-      "source_location": "L8",
-      "_origin": "ast",
-      "id": "discord_attachments_downloadattachments",
-      "community": 1,
-      "norm_label": "downloadattachments()"
-    },
-    {
-      "label": "channels.js",
-      "file_type": "code",
-      "source_file": "src/discord/channels.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "discord_channels",
-      "community": 1,
-      "norm_label": "channels.js"
-    },
-    {
-      "label": "CHANNEL_TYPE",
-      "file_type": "code",
-      "source_file": "src/discord/channels.js",
-      "source_location": "L3",
-      "_origin": "ast",
-      "id": "discord_channels_channel_type",
-      "community": 1,
-      "norm_label": "channel_type"
-    },
-    {
-      "label": "TEXTLIKE",
-      "file_type": "code",
-      "source_file": "src/discord/channels.js",
-      "source_location": "L13",
-      "_origin": "ast",
-      "id": "discord_channels_textlike",
-      "community": 1,
-      "norm_label": "textlike"
-    },
-    {
-      "label": "isForumLike()",
-      "file_type": "code",
-      "source_file": "src/discord/channels.js",
-      "source_location": "L20",
-      "_origin": "ast",
-      "id": "discord_channels_isforumlike",
-      "community": 1,
-      "norm_label": "isforumlike()"
-    },
-    {
-      "label": "listGuildChannels()",
-      "file_type": "code",
-      "source_file": "src/discord/channels.js",
-      "source_location": "L24",
-      "_origin": "ast",
-      "id": "discord_channels_listguildchannels",
-      "community": 1,
-      "norm_label": "listguildchannels()"
-    },
-    {
-      "label": "listActiveThreads()",
-      "file_type": "code",
-      "source_file": "src/discord/channels.js",
-      "source_location": "L29",
-      "_origin": "ast",
-      "id": "discord_channels_listactivethreads",
-      "community": 1,
-      "norm_label": "listactivethreads()"
-    },
-    {
-      "label": "listArchivedThreadsSince()",
-      "file_type": "code",
-      "source_file": "src/discord/channels.js",
-      "source_location": "L34",
-      "_origin": "ast",
-      "id": "discord_channels_listarchivedthreadssince",
-      "community": 1,
-      "norm_label": "listarchivedthreadssince()"
-    },
-    {
-      "label": "discoverAllSources()",
-      "file_type": "code",
-      "source_file": "src/discord/channels.js",
-      "source_location": "L73",
-      "_origin": "ast",
-      "id": "discord_channels_discoverallsources",
-      "community": 1,
-      "norm_label": "discoverallsources()"
-    },
-    {
-      "label": "client.js",
-      "file_type": "code",
-      "source_file": "src/discord/client.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "discord_client",
-      "community": 1,
-      "norm_label": "client.js"
-    },
-    {
-      "label": "throttleChain",
-      "file_type": "code",
-      "source_file": "src/discord/client.js",
-      "source_location": "L5",
-      "_origin": "ast",
-      "id": "discord_client_throttlechain",
-      "community": 1,
-      "norm_label": "throttlechain"
-    },
-    {
-      "label": "reserveSlot()",
-      "file_type": "code",
-      "source_file": "src/discord/client.js",
-      "source_location": "L7",
-      "_origin": "ast",
-      "id": "discord_client_reserveslot",
-      "community": 1,
-      "norm_label": "reserveslot()"
-    },
-    {
-      "label": "discordFetch()",
-      "file_type": "code",
-      "source_file": "src/discord/client.js",
-      "source_location": "L19",
-      "_origin": "ast",
-      "id": "discord_client_discordfetch",
-      "community": 1,
-      "norm_label": "discordfetch()"
-    },
-    {
-      "label": "messages.js",
-      "file_type": "code",
-      "source_file": "src/discord/messages.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "discord_messages",
-      "community": 1,
-      "norm_label": "messages.js"
-    },
-    {
-      "label": "fetchMessagesSince()",
-      "file_type": "code",
-      "source_file": "src/discord/messages.js",
-      "source_location": "L3",
-      "_origin": "ast",
-      "id": "discord_messages_fetchmessagessince",
-      "community": 1,
-      "norm_label": "fetchmessagessince()"
-    },
-    {
-      "label": "snowflake.js",
-      "file_type": "code",
-      "source_file": "src/discord/snowflake.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "discord_snowflake",
-      "community": 16,
-      "norm_label": "snowflake.js"
-    },
-    {
-      "label": "timestampToSnowflake()",
-      "file_type": "code",
-      "source_file": "src/discord/snowflake.js",
-      "source_location": "L3",
-      "_origin": "ast",
-      "id": "discord_snowflake_timestamptosnowflake",
-      "community": 16,
-      "norm_label": "timestamptosnowflake()"
-    },
-    {
-      "label": "snowflakeToTimestamp()",
-      "file_type": "code",
-      "source_file": "src/discord/snowflake.js",
-      "source_location": "L8",
-      "_origin": "ast",
-      "id": "discord_snowflake_snowflaketotimestamp",
-      "community": 16,
-      "norm_label": "snowflaketotimestamp()"
-    },
-    {
-      "label": "index.js",
-      "file_type": "code",
-      "source_file": "src/index.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_index",
-      "community": 1,
-      "norm_label": "index.js"
-    },
-    {
-      "label": "HOURS",
-      "file_type": "code",
-      "source_file": "src/index.js",
-      "source_location": "L17",
-      "_origin": "ast",
-      "id": "src_index_hours",
-      "community": 1,
-      "norm_label": "hours"
-    },
-    {
-      "label": "today",
-      "file_type": "code",
-      "source_file": "src/index.js",
-      "source_location": "L19",
-      "_origin": "ast",
-      "id": "src_index_today",
-      "community": 1,
-      "norm_label": "today"
-    },
-    {
-      "label": "outDir",
-      "file_type": "code",
-      "source_file": "src/index.js",
-      "source_location": "L20",
-      "_origin": "ast",
-      "id": "src_index_outdir",
-      "community": 1,
-      "norm_label": "outdir"
-    },
-    {
-      "label": "attachmentsRoot",
-      "file_type": "code",
-      "source_file": "src/index.js",
-      "source_location": "L21",
-      "_origin": "ast",
-      "id": "src_index_attachmentsroot",
-      "community": 1,
-      "norm_label": "attachmentsroot"
-    },
-    {
-      "label": "summary",
-      "file_type": "code",
-      "source_file": "src/index.js",
-      "source_location": "L31",
-      "_origin": "ast",
-      "id": "src_index_summary",
-      "community": 1,
-      "norm_label": "summary"
-    },
-    {
-      "label": "processSource()",
-      "file_type": "code",
-      "source_file": "src/index.js",
-      "source_location": "L42",
-      "_origin": "ast",
-      "id": "src_index_processsource",
-      "community": 1,
-      "norm_label": "processsource()"
-    },
-    {
-      "label": "args.js",
-      "file_type": "code",
-      "source_file": "src/kb/args.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "kb_args",
-      "community": 6,
-      "norm_label": "args.js"
-    },
-    {
-      "label": "parseArgs()",
-      "file_type": "code",
-      "source_file": "src/kb/args.js",
-      "source_location": "L3",
-      "_origin": "ast",
-      "id": "kb_args_parseargs",
-      "community": 6,
-      "norm_label": "parseargs()"
-    },
-    {
-      "label": "asList()",
-      "file_type": "code",
-      "source_file": "src/kb/args.js",
-      "source_location": "L31",
-      "_origin": "ast",
-      "id": "kb_args_aslist",
-      "community": 6,
-      "norm_label": "aslist()"
-    },
-    {
-      "label": "add.js",
-      "file_type": "code",
-      "source_file": "src/kb/commands/add.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "commands_add",
-      "community": 0,
-      "norm_label": "add.js"
-    },
-    {
-      "label": "run()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/add.js",
-      "source_location": "L12",
-      "_origin": "ast",
-      "id": "commands_add_run",
-      "community": 0,
-      "norm_label": "run()"
-    },
-    {
-      "label": "titleFromIngest()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/add.js",
-      "source_location": "L72",
-      "_origin": "ast",
-      "id": "commands_add_titlefromingest",
-      "community": 0,
-      "norm_label": "titlefromingest()"
-    },
-    {
-      "label": "smartCategory()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/add.js",
-      "source_location": "L78",
-      "_origin": "ast",
-      "id": "commands_add_smartcategory",
-      "community": 0,
-      "norm_label": "smartcategory()"
-    },
-    {
-      "label": "capture.js",
-      "file_type": "code",
-      "source_file": "src/kb/commands/capture.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "commands_capture",
-      "community": 6,
-      "norm_label": "capture.js"
-    },
-    {
-      "label": "run()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/capture.js",
-      "source_location": "L7",
-      "_origin": "ast",
-      "id": "commands_capture_run",
-      "community": 6,
-      "norm_label": "run()"
-    },
-    {
-      "label": "check.js",
-      "file_type": "code",
-      "source_file": "src/kb/commands/dev/check.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "dev_check",
-      "community": 6,
-      "norm_label": "check.js"
-    },
-    {
-      "label": "run()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/dev/check.js",
-      "source_location": "L11",
-      "_origin": "ast",
-      "id": "dev_check_run",
-      "community": 6,
-      "norm_label": "run()"
-    },
-    {
-      "label": "resolveRepo()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/dev/check.js",
-      "source_location": "L58",
-      "_origin": "ast",
-      "id": "dev_check_resolverepo",
-      "community": 6,
-      "norm_label": "resolverepo()"
-    },
-    {
-      "label": "today()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/dev/check.js",
-      "source_location": "L67",
-      "_origin": "ast",
-      "id": "dev_check_today",
-      "community": 6,
-      "norm_label": "today()"
-    },
-    {
-      "label": "done.js",
-      "file_type": "code",
-      "source_file": "src/kb/commands/dev/done.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "dev_done",
-      "community": 6,
-      "norm_label": "done.js"
-    },
-    {
-      "label": "run()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/dev/done.js",
-      "source_location": "L13",
-      "_origin": "ast",
-      "id": "dev_done_run",
-      "community": 6,
-      "norm_label": "run()"
-    },
-    {
-      "label": "updateMoc()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/dev/done.js",
-      "source_location": "L60",
-      "_origin": "ast",
-      "id": "dev_done_updatemoc",
-      "community": 6,
-      "norm_label": "updatemoc()"
-    },
-    {
-      "label": "today()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/dev/done.js",
-      "source_location": "L77",
-      "_origin": "ast",
-      "id": "dev_done_today",
-      "community": 6,
-      "norm_label": "today()"
-    },
-    {
-      "label": "index.js",
-      "file_type": "code",
-      "source_file": "src/kb/commands/dev/index.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "dev_index",
-      "community": 7,
-      "norm_label": "index.js"
-    },
-    {
-      "label": "SUB",
-      "file_type": "code",
-      "source_file": "src/kb/commands/dev/index.js",
-      "source_location": "L2",
-      "_origin": "ast",
-      "id": "dev_index_sub",
-      "community": 7,
-      "norm_label": "sub"
-    },
-    {
-      "label": "run()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/dev/index.js",
-      "source_location": "L9",
-      "_origin": "ast",
-      "id": "dev_index_run",
-      "community": 7,
-      "norm_label": "run()"
-    },
-    {
-      "label": "plan.js",
-      "file_type": "code",
-      "source_file": "src/kb/commands/dev/plan.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "dev_plan",
-      "community": 6,
-      "norm_label": "plan.js"
-    },
-    {
-      "label": "planDir()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/dev/plan.js",
-      "source_location": "L9",
-      "_origin": "ast",
-      "id": "dev_plan_plandir",
-      "community": 6,
-      "norm_label": "plandir()"
-    },
-    {
-      "label": "loadPlan()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/dev/plan.js",
-      "source_location": "L18",
-      "_origin": "ast",
-      "id": "dev_plan_loadplan",
-      "community": 6,
-      "norm_label": "loadplan()"
-    },
-    {
-      "label": "buildDag()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/dev/plan.js",
-      "source_location": "L38",
-      "_origin": "ast",
-      "id": "dev_plan_builddag",
-      "community": 6,
-      "norm_label": "builddag()"
-    },
-    {
-      "label": "norm()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/dev/plan.js",
-      "source_location": "L67",
-      "_origin": "ast",
-      "id": "dev_plan_norm",
-      "community": 6,
-      "norm_label": "norm()"
-    },
-    {
-      "label": "scopeOverlaps()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/dev/plan.js",
-      "source_location": "L70",
-      "_origin": "ast",
-      "id": "dev_plan_scopeoverlaps",
-      "community": 6,
-      "norm_label": "scopeoverlaps()"
-    },
-    {
-      "label": "readySet()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/dev/plan.js",
-      "source_location": "L80",
-      "_origin": "ast",
-      "id": "dev_plan_readyset",
-      "community": 6,
-      "norm_label": "readyset()"
-    },
-    {
-      "label": "run.js",
-      "file_type": "code",
-      "source_file": "src/kb/commands/dev/run.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "dev_run",
-      "community": 6,
-      "norm_label": "run.js"
-    },
-    {
-      "label": "run()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/dev/run.js",
-      "source_location": "L9",
-      "_origin": "ast",
-      "id": "dev_run_run",
-      "community": 6,
-      "norm_label": "run()"
-    },
-    {
-      "label": "computeWaves()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/dev/run.js",
-      "source_location": "L57",
-      "_origin": "ast",
-      "id": "dev_run_computewaves",
-      "community": 6,
-      "norm_label": "computewaves()"
-    },
-    {
-      "label": "start.js",
-      "file_type": "code",
-      "source_file": "src/kb/commands/dev/start.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "dev_start",
-      "community": 6,
-      "norm_label": "start.js"
-    },
-    {
-      "label": "run()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/dev/start.js",
-      "source_location": "L11",
-      "_origin": "ast",
-      "id": "dev_start_run",
-      "community": 6,
-      "norm_label": "run()"
-    },
-    {
-      "label": "graph.js",
-      "file_type": "code",
-      "source_file": "src/kb/commands/graph.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "commands_graph",
-      "community": 4,
-      "norm_label": "graph.js"
-    },
-    {
-      "label": "centralPath()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/graph.js",
-      "source_location": "L8",
-      "_origin": "ast",
-      "id": "commands_graph_centralpath",
-      "community": 4,
-      "norm_label": "centralpath()"
-    },
-    {
-      "label": "sourceGraphPath()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/graph.js",
-      "source_location": "L14",
-      "_origin": "ast",
-      "id": "commands_graph_sourcegraphpath",
-      "community": 4,
-      "norm_label": "sourcegraphpath()"
-    },
-    {
-      "label": "run()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/graph.js",
-      "source_location": "L18",
-      "_origin": "ast",
-      "id": "commands_graph_run",
-      "community": 4,
-      "norm_label": "run()"
-    },
-    {
-      "label": "scopedSources()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/graph.js",
-      "source_location": "L33",
-      "_origin": "ast",
-      "id": "commands_graph_scopedsources",
-      "community": 4,
-      "norm_label": "scopedsources()"
-    },
-    {
-      "label": "build()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/graph.js",
-      "source_location": "L41",
-      "_origin": "ast",
-      "id": "commands_graph_build",
-      "community": 4,
-      "norm_label": "build()"
-    },
-    {
-      "label": "mergeOnly()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/graph.js",
-      "source_location": "L67",
-      "_origin": "ast",
-      "id": "commands_graph_mergeonly",
-      "community": 4,
-      "norm_label": "mergeonly()"
-    },
-    {
-      "label": "doMerge()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/graph.js",
-      "source_location": "L73",
-      "_origin": "ast",
-      "id": "commands_graph_domerge",
-      "community": 4,
-      "norm_label": "domerge()"
-    },
-    {
-      "label": "serveCmd()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/graph.js",
-      "source_location": "L89",
-      "_origin": "ast",
-      "id": "commands_graph_servecmd",
-      "community": 4,
-      "norm_label": "servecmd()"
-    },
-    {
-      "label": "group.js",
-      "file_type": "code",
-      "source_file": "src/kb/commands/group.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "commands_group",
-      "community": 2,
-      "norm_label": "group.js"
-    },
-    {
-      "label": "run()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/group.js",
-      "source_location": "L4",
-      "_origin": "ast",
-      "id": "commands_group_run",
-      "community": 2,
-      "norm_label": "run()"
-    },
-    {
-      "label": "create()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/group.js",
-      "source_location": "L21",
-      "_origin": "ast",
-      "id": "commands_group_create",
-      "community": 2,
-      "norm_label": "create()"
-    },
-    {
-      "label": "addMembers()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/group.js",
-      "source_location": "L29",
-      "_origin": "ast",
-      "id": "commands_group_addmembers",
-      "community": 2,
-      "norm_label": "addmembers()"
-    },
-    {
-      "label": "rmMember()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/group.js",
-      "source_location": "L40",
-      "_origin": "ast",
-      "id": "commands_group_rmmember",
-      "community": 2,
-      "norm_label": "rmmember()"
-    },
-    {
-      "label": "list()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/group.js",
-      "source_location": "L50",
-      "_origin": "ast",
-      "id": "commands_group_list",
-      "community": 2,
-      "norm_label": "list()"
-    },
-    {
-      "label": "new.js",
-      "file_type": "code",
-      "source_file": "src/kb/commands/new.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "commands_new",
-      "community": 0,
-      "norm_label": "new.js"
-    },
-    {
-      "label": "run()",
-      "file_type": "code",
-      "source_file": "src/kb/commands/new.js",
-      "source_location": "L11",
-      "_origin": "ast",
-      "id": "commands_new_run",
-      "community": 0,
-      "norm_label": "run()"
-    },
-    {
       "label": "project.js",
       "file_type": "code",
       "source_file": "src/kb/commands/project.js",
@@ -1067,7 +17,7 @@
       "label": "run()",
       "file_type": "code",
       "source_file": "src/kb/commands/project.js",
-      "source_location": "L9",
+      "source_location": "L10",
       "_origin": "ast",
       "id": "commands_project_run",
       "community": 2,
@@ -1077,7 +27,7 @@
       "label": "applyToProject()",
       "file_type": "code",
       "source_file": "src/kb/commands/project.js",
-      "source_location": "L30",
+      "source_location": "L33",
       "_origin": "ast",
       "id": "commands_project_applytoproject",
       "community": 2,
@@ -1087,7 +37,7 @@
       "label": "add()",
       "file_type": "code",
       "source_file": "src/kb/commands/project.js",
-      "source_location": "L49",
+      "source_location": "L52",
       "_origin": "ast",
       "id": "commands_project_add",
       "community": 2,
@@ -1097,17 +47,27 @@
       "label": "initHygiene()",
       "file_type": "code",
       "source_file": "src/kb/commands/project.js",
-      "source_location": "L95",
+      "source_location": "L98",
       "_origin": "ast",
       "id": "commands_project_inithygiene",
       "community": 2,
       "norm_label": "inithygiene()"
     },
     {
+      "label": "linkClaude()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L109",
+      "_origin": "ast",
+      "id": "commands_project_linkclaude",
+      "community": 2,
+      "norm_label": "linkclaude()"
+    },
+    {
       "label": "list()",
       "file_type": "code",
       "source_file": "src/kb/commands/project.js",
-      "source_location": "L104",
+      "source_location": "L135",
       "_origin": "ast",
       "id": "commands_project_list",
       "community": 2,
@@ -1117,7 +77,7 @@
       "label": "remove()",
       "file_type": "code",
       "source_file": "src/kb/commands/project.js",
-      "source_location": "L113",
+      "source_location": "L144",
       "_origin": "ast",
       "id": "commands_project_remove",
       "community": 2,
@@ -1127,11 +87,1111 @@
       "label": "scan()",
       "file_type": "code",
       "source_file": "src/kb/commands/project.js",
-      "source_location": "L121",
+      "source_location": "L152",
       "_origin": "ast",
       "id": "commands_project_scan",
       "community": 2,
       "norm_label": "scan()"
+    },
+    {
+      "label": "repo-claudemd.js",
+      "file_type": "code",
+      "source_file": "src/kb/repo-claudemd.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "kb_repo_claudemd",
+      "community": 8,
+      "norm_label": "repo-claudemd.js"
+    },
+    {
+      "label": "slug()",
+      "file_type": "code",
+      "source_file": "src/kb/repo-claudemd.js",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "kb_repo_claudemd_slug",
+      "community": 8,
+      "norm_label": "slug()"
+    },
+    {
+      "label": "resolveVaultTarget()",
+      "file_type": "code",
+      "source_file": "src/kb/repo-claudemd.js",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "kb_repo_claudemd_resolvevaulttarget",
+      "community": 8,
+      "norm_label": "resolvevaulttarget()"
+    },
+    {
+      "label": "renderBlock()",
+      "file_type": "code",
+      "source_file": "src/kb/repo-claudemd.js",
+      "source_location": "L46",
+      "_origin": "ast",
+      "id": "kb_repo_claudemd_renderblock",
+      "community": 8,
+      "norm_label": "renderblock()"
+    },
+    {
+      "label": "linkClaudeMd()",
+      "file_type": "code",
+      "source_file": "src/kb/repo-claudemd.js",
+      "source_location": "L62",
+      "_origin": "ast",
+      "id": "kb_repo_claudemd_linkclaudemd",
+      "community": 8,
+      "norm_label": "linkclaudemd()"
+    },
+    {
+      "label": "kb.js",
+      "file_type": "code",
+      "source_file": "bin/kb.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "kb.js",
+      "id": "bin_kb"
+    },
+    {
+      "label": "COMMANDS",
+      "file_type": "code",
+      "source_file": "bin/kb.js",
+      "source_location": "L4",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "commands",
+      "id": "bin_kb_commands"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "bin/kb.js",
+      "source_location": "L45",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "main()",
+      "id": "bin_kb_main"
+    },
+    {
+      "label": "package.json",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "package.json",
+      "id": "package"
+    },
+    {
+      "label": "name",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L2",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "name",
+      "id": "package_name"
+    },
+    {
+      "label": "version",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L3",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "version",
+      "id": "package_version"
+    },
+    {
+      "label": "private",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L4",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "private",
+      "id": "package_private"
+    },
+    {
+      "label": "type",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L5",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "type",
+      "id": "package_type"
+    },
+    {
+      "label": "description",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L6",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "description",
+      "id": "package_description"
+    },
+    {
+      "label": "bin",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L7",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "bin",
+      "id": "package_bin"
+    },
+    {
+      "label": "kb",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L8",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "kb",
+      "id": "package_bin_kb"
+    },
+    {
+      "label": "scripts",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L10",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "scripts",
+      "id": "package_scripts"
+    },
+    {
+      "label": "pull",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L11",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "pull",
+      "id": "package_scripts_pull"
+    },
+    {
+      "label": "consolidate",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L12",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "consolidate",
+      "id": "package_scripts_consolidate"
+    },
+    {
+      "label": "daily",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L13",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "daily",
+      "id": "package_scripts_daily"
+    },
+    {
+      "label": "kb",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L14",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "kb",
+      "id": "package_scripts_kb"
+    },
+    {
+      "label": "kb:graph",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L15",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "kb:graph",
+      "id": "package_scripts_kb_graph"
+    },
+    {
+      "label": "kb:serve",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L16",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "kb:serve",
+      "id": "package_scripts_kb_serve"
+    },
+    {
+      "label": "engines",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L18",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "engines",
+      "id": "package_engines"
+    },
+    {
+      "label": "node",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L19",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "node",
+      "id": "package_engines_node"
+    },
+    {
+      "label": "consolidate.js",
+      "file_type": "code",
+      "source_file": "src/consolidate.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "consolidate.js",
+      "id": "src_consolidate"
+    },
+    {
+      "label": "inputDir",
+      "file_type": "code",
+      "source_file": "src/consolidate.js",
+      "source_location": "L7",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "inputdir",
+      "id": "src_consolidate_inputdir"
+    },
+    {
+      "label": "jsonFiles",
+      "file_type": "code",
+      "source_file": "src/consolidate.js",
+      "source_location": "L17",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "jsonfiles",
+      "id": "src_consolidate_jsonfiles"
+    },
+    {
+      "label": "formatMessage()",
+      "file_type": "code",
+      "source_file": "src/consolidate.js",
+      "source_location": "L28",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "formatmessage()",
+      "id": "src_consolidate_formatmessage"
+    },
+    {
+      "label": "blocks",
+      "file_type": "code",
+      "source_file": "src/consolidate.js",
+      "source_location": "L61",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "blocks",
+      "id": "src_consolidate_blocks"
+    },
+    {
+      "label": "transcript",
+      "file_type": "code",
+      "source_file": "src/consolidate.js",
+      "source_location": "L73",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "transcript",
+      "id": "src_consolidate_transcript"
+    },
+    {
+      "label": "outDir",
+      "file_type": "code",
+      "source_file": "src/consolidate.js",
+      "source_location": "L120",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "outdir",
+      "id": "src_consolidate_outdir"
+    },
+    {
+      "label": "outPath",
+      "file_type": "code",
+      "source_file": "src/consolidate.js",
+      "source_location": "L122",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "outpath",
+      "id": "src_consolidate_outpath"
+    },
+    {
+      "label": "proc",
+      "file_type": "code",
+      "source_file": "src/consolidate.js",
+      "source_location": "L124",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "proc",
+      "id": "src_consolidate_proc"
+    },
+    {
+      "label": "attachments.js",
+      "file_type": "code",
+      "source_file": "src/discord/attachments.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "attachments.js",
+      "id": "discord_attachments"
+    },
+    {
+      "label": "sanitize()",
+      "file_type": "code",
+      "source_file": "src/discord/attachments.js",
+      "source_location": "L4",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "sanitize()",
+      "id": "discord_attachments_sanitize"
+    },
+    {
+      "label": "downloadAttachments()",
+      "file_type": "code",
+      "source_file": "src/discord/attachments.js",
+      "source_location": "L8",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "downloadattachments()",
+      "id": "discord_attachments_downloadattachments"
+    },
+    {
+      "label": "channels.js",
+      "file_type": "code",
+      "source_file": "src/discord/channels.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "channels.js",
+      "id": "discord_channels"
+    },
+    {
+      "label": "CHANNEL_TYPE",
+      "file_type": "code",
+      "source_file": "src/discord/channels.js",
+      "source_location": "L3",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "channel_type",
+      "id": "discord_channels_channel_type"
+    },
+    {
+      "label": "TEXTLIKE",
+      "file_type": "code",
+      "source_file": "src/discord/channels.js",
+      "source_location": "L13",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "textlike",
+      "id": "discord_channels_textlike"
+    },
+    {
+      "label": "isForumLike()",
+      "file_type": "code",
+      "source_file": "src/discord/channels.js",
+      "source_location": "L20",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "isforumlike()",
+      "id": "discord_channels_isforumlike"
+    },
+    {
+      "label": "listGuildChannels()",
+      "file_type": "code",
+      "source_file": "src/discord/channels.js",
+      "source_location": "L24",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "listguildchannels()",
+      "id": "discord_channels_listguildchannels"
+    },
+    {
+      "label": "listActiveThreads()",
+      "file_type": "code",
+      "source_file": "src/discord/channels.js",
+      "source_location": "L29",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "listactivethreads()",
+      "id": "discord_channels_listactivethreads"
+    },
+    {
+      "label": "listArchivedThreadsSince()",
+      "file_type": "code",
+      "source_file": "src/discord/channels.js",
+      "source_location": "L34",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "listarchivedthreadssince()",
+      "id": "discord_channels_listarchivedthreadssince"
+    },
+    {
+      "label": "discoverAllSources()",
+      "file_type": "code",
+      "source_file": "src/discord/channels.js",
+      "source_location": "L73",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "discoverallsources()",
+      "id": "discord_channels_discoverallsources"
+    },
+    {
+      "label": "client.js",
+      "file_type": "code",
+      "source_file": "src/discord/client.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "client.js",
+      "id": "discord_client"
+    },
+    {
+      "label": "throttleChain",
+      "file_type": "code",
+      "source_file": "src/discord/client.js",
+      "source_location": "L5",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "throttlechain",
+      "id": "discord_client_throttlechain"
+    },
+    {
+      "label": "reserveSlot()",
+      "file_type": "code",
+      "source_file": "src/discord/client.js",
+      "source_location": "L7",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "reserveslot()",
+      "id": "discord_client_reserveslot"
+    },
+    {
+      "label": "discordFetch()",
+      "file_type": "code",
+      "source_file": "src/discord/client.js",
+      "source_location": "L19",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "discordfetch()",
+      "id": "discord_client_discordfetch"
+    },
+    {
+      "label": "messages.js",
+      "file_type": "code",
+      "source_file": "src/discord/messages.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "messages.js",
+      "id": "discord_messages"
+    },
+    {
+      "label": "fetchMessagesSince()",
+      "file_type": "code",
+      "source_file": "src/discord/messages.js",
+      "source_location": "L3",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "fetchmessagessince()",
+      "id": "discord_messages_fetchmessagessince"
+    },
+    {
+      "label": "snowflake.js",
+      "file_type": "code",
+      "source_file": "src/discord/snowflake.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 16,
+      "norm_label": "snowflake.js",
+      "id": "discord_snowflake"
+    },
+    {
+      "label": "timestampToSnowflake()",
+      "file_type": "code",
+      "source_file": "src/discord/snowflake.js",
+      "source_location": "L3",
+      "_origin": "ast",
+      "community": 16,
+      "norm_label": "timestamptosnowflake()",
+      "id": "discord_snowflake_timestamptosnowflake"
+    },
+    {
+      "label": "snowflakeToTimestamp()",
+      "file_type": "code",
+      "source_file": "src/discord/snowflake.js",
+      "source_location": "L8",
+      "_origin": "ast",
+      "community": 16,
+      "norm_label": "snowflaketotimestamp()",
+      "id": "discord_snowflake_snowflaketotimestamp"
+    },
+    {
+      "label": "index.js",
+      "file_type": "code",
+      "source_file": "src/index.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "index.js",
+      "id": "src_index"
+    },
+    {
+      "label": "HOURS",
+      "file_type": "code",
+      "source_file": "src/index.js",
+      "source_location": "L17",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "hours",
+      "id": "src_index_hours"
+    },
+    {
+      "label": "today",
+      "file_type": "code",
+      "source_file": "src/index.js",
+      "source_location": "L19",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "today",
+      "id": "src_index_today"
+    },
+    {
+      "label": "outDir",
+      "file_type": "code",
+      "source_file": "src/index.js",
+      "source_location": "L20",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "outdir",
+      "id": "src_index_outdir"
+    },
+    {
+      "label": "attachmentsRoot",
+      "file_type": "code",
+      "source_file": "src/index.js",
+      "source_location": "L21",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "attachmentsroot",
+      "id": "src_index_attachmentsroot"
+    },
+    {
+      "label": "summary",
+      "file_type": "code",
+      "source_file": "src/index.js",
+      "source_location": "L31",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "summary",
+      "id": "src_index_summary"
+    },
+    {
+      "label": "processSource()",
+      "file_type": "code",
+      "source_file": "src/index.js",
+      "source_location": "L42",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "processsource()",
+      "id": "src_index_processsource"
+    },
+    {
+      "label": "args.js",
+      "file_type": "code",
+      "source_file": "src/kb/args.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "args.js",
+      "id": "kb_args"
+    },
+    {
+      "label": "parseArgs()",
+      "file_type": "code",
+      "source_file": "src/kb/args.js",
+      "source_location": "L3",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "parseargs()",
+      "id": "kb_args_parseargs"
+    },
+    {
+      "label": "asList()",
+      "file_type": "code",
+      "source_file": "src/kb/args.js",
+      "source_location": "L31",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "aslist()",
+      "id": "kb_args_aslist"
+    },
+    {
+      "label": "add.js",
+      "file_type": "code",
+      "source_file": "src/kb/commands/add.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "add.js",
+      "id": "commands_add"
+    },
+    {
+      "label": "run()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/add.js",
+      "source_location": "L12",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "run()",
+      "id": "commands_add_run"
+    },
+    {
+      "label": "titleFromIngest()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/add.js",
+      "source_location": "L72",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "titlefromingest()",
+      "id": "commands_add_titlefromingest"
+    },
+    {
+      "label": "smartCategory()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/add.js",
+      "source_location": "L78",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "smartcategory()",
+      "id": "commands_add_smartcategory"
+    },
+    {
+      "label": "capture.js",
+      "file_type": "code",
+      "source_file": "src/kb/commands/capture.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "capture.js",
+      "id": "commands_capture"
+    },
+    {
+      "label": "run()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/capture.js",
+      "source_location": "L7",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "run()",
+      "id": "commands_capture_run"
+    },
+    {
+      "label": "check.js",
+      "file_type": "code",
+      "source_file": "src/kb/commands/dev/check.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "check.js",
+      "id": "dev_check"
+    },
+    {
+      "label": "run()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/dev/check.js",
+      "source_location": "L11",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "run()",
+      "id": "dev_check_run"
+    },
+    {
+      "label": "resolveRepo()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/dev/check.js",
+      "source_location": "L58",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "resolverepo()",
+      "id": "dev_check_resolverepo"
+    },
+    {
+      "label": "today()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/dev/check.js",
+      "source_location": "L67",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "today()",
+      "id": "dev_check_today"
+    },
+    {
+      "label": "done.js",
+      "file_type": "code",
+      "source_file": "src/kb/commands/dev/done.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "done.js",
+      "id": "dev_done"
+    },
+    {
+      "label": "run()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/dev/done.js",
+      "source_location": "L13",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "run()",
+      "id": "dev_done_run"
+    },
+    {
+      "label": "updateMoc()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/dev/done.js",
+      "source_location": "L60",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "updatemoc()",
+      "id": "dev_done_updatemoc"
+    },
+    {
+      "label": "today()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/dev/done.js",
+      "source_location": "L77",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "today()",
+      "id": "dev_done_today"
+    },
+    {
+      "label": "index.js",
+      "file_type": "code",
+      "source_file": "src/kb/commands/dev/index.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "index.js",
+      "id": "dev_index"
+    },
+    {
+      "label": "SUB",
+      "file_type": "code",
+      "source_file": "src/kb/commands/dev/index.js",
+      "source_location": "L2",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "sub",
+      "id": "dev_index_sub"
+    },
+    {
+      "label": "run()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/dev/index.js",
+      "source_location": "L9",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "run()",
+      "id": "dev_index_run"
+    },
+    {
+      "label": "plan.js",
+      "file_type": "code",
+      "source_file": "src/kb/commands/dev/plan.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "plan.js",
+      "id": "dev_plan"
+    },
+    {
+      "label": "planDir()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/dev/plan.js",
+      "source_location": "L9",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "plandir()",
+      "id": "dev_plan_plandir"
+    },
+    {
+      "label": "loadPlan()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/dev/plan.js",
+      "source_location": "L18",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "loadplan()",
+      "id": "dev_plan_loadplan"
+    },
+    {
+      "label": "buildDag()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/dev/plan.js",
+      "source_location": "L38",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "builddag()",
+      "id": "dev_plan_builddag"
+    },
+    {
+      "label": "norm()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/dev/plan.js",
+      "source_location": "L67",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "norm()",
+      "id": "dev_plan_norm"
+    },
+    {
+      "label": "scopeOverlaps()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/dev/plan.js",
+      "source_location": "L70",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "scopeoverlaps()",
+      "id": "dev_plan_scopeoverlaps"
+    },
+    {
+      "label": "readySet()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/dev/plan.js",
+      "source_location": "L80",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "readyset()",
+      "id": "dev_plan_readyset"
+    },
+    {
+      "label": "run.js",
+      "file_type": "code",
+      "source_file": "src/kb/commands/dev/run.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "run.js",
+      "id": "dev_run"
+    },
+    {
+      "label": "run()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/dev/run.js",
+      "source_location": "L9",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "run()",
+      "id": "dev_run_run"
+    },
+    {
+      "label": "computeWaves()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/dev/run.js",
+      "source_location": "L57",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "computewaves()",
+      "id": "dev_run_computewaves"
+    },
+    {
+      "label": "start.js",
+      "file_type": "code",
+      "source_file": "src/kb/commands/dev/start.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "start.js",
+      "id": "dev_start"
+    },
+    {
+      "label": "run()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/dev/start.js",
+      "source_location": "L11",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "run()",
+      "id": "dev_start_run"
+    },
+    {
+      "label": "graph.js",
+      "file_type": "code",
+      "source_file": "src/kb/commands/graph.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "graph.js",
+      "id": "commands_graph"
+    },
+    {
+      "label": "centralPath()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/graph.js",
+      "source_location": "L8",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "centralpath()",
+      "id": "commands_graph_centralpath"
+    },
+    {
+      "label": "sourceGraphPath()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/graph.js",
+      "source_location": "L14",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "sourcegraphpath()",
+      "id": "commands_graph_sourcegraphpath"
+    },
+    {
+      "label": "run()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/graph.js",
+      "source_location": "L18",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "run()",
+      "id": "commands_graph_run"
+    },
+    {
+      "label": "scopedSources()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/graph.js",
+      "source_location": "L33",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "scopedsources()",
+      "id": "commands_graph_scopedsources"
+    },
+    {
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/graph.js",
+      "source_location": "L41",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "build()",
+      "id": "commands_graph_build"
+    },
+    {
+      "label": "mergeOnly()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/graph.js",
+      "source_location": "L67",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "mergeonly()",
+      "id": "commands_graph_mergeonly"
+    },
+    {
+      "label": "doMerge()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/graph.js",
+      "source_location": "L73",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "domerge()",
+      "id": "commands_graph_domerge"
+    },
+    {
+      "label": "serveCmd()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/graph.js",
+      "source_location": "L89",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "servecmd()",
+      "id": "commands_graph_servecmd"
+    },
+    {
+      "label": "group.js",
+      "file_type": "code",
+      "source_file": "src/kb/commands/group.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "group.js",
+      "id": "commands_group"
+    },
+    {
+      "label": "run()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/group.js",
+      "source_location": "L4",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "run()",
+      "id": "commands_group_run"
+    },
+    {
+      "label": "create()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/group.js",
+      "source_location": "L21",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "create()",
+      "id": "commands_group_create"
+    },
+    {
+      "label": "addMembers()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/group.js",
+      "source_location": "L29",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "addmembers()",
+      "id": "commands_group_addmembers"
+    },
+    {
+      "label": "rmMember()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/group.js",
+      "source_location": "L40",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "rmmember()",
+      "id": "commands_group_rmmember"
+    },
+    {
+      "label": "list()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/group.js",
+      "source_location": "L50",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "list()",
+      "id": "commands_group_list"
+    },
+    {
+      "label": "new.js",
+      "file_type": "code",
+      "source_file": "src/kb/commands/new.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "new.js",
+      "id": "commands_new"
+    },
+    {
+      "label": "run()",
+      "file_type": "code",
+      "source_file": "src/kb/commands/new.js",
+      "source_location": "L11",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "run()",
+      "id": "commands_new_run"
     },
     {
       "label": "source.js",
@@ -1139,9 +1199,9 @@
       "source_file": "src/kb/commands/source.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "commands_source",
       "community": 23,
-      "norm_label": "source.js"
+      "norm_label": "source.js",
+      "id": "commands_source"
     },
     {
       "label": "run()",
@@ -1149,9 +1209,9 @@
       "source_file": "src/kb/commands/source.js",
       "source_location": "L5",
       "_origin": "ast",
-      "id": "commands_source_run",
       "community": 23,
-      "norm_label": "run()"
+      "norm_label": "run()",
+      "id": "commands_source_run"
     },
     {
       "label": "vault.js",
@@ -1159,9 +1219,9 @@
       "source_file": "src/kb/commands/vault.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "commands_vault",
-      "community": 3,
-      "norm_label": "vault.js"
+      "community": 2,
+      "norm_label": "vault.js",
+      "id": "commands_vault"
     },
     {
       "label": "run()",
@@ -1169,9 +1229,9 @@
       "source_file": "src/kb/commands/vault.js",
       "source_location": "L10",
       "_origin": "ast",
-      "id": "commands_vault_run",
-      "community": 3,
-      "norm_label": "run()"
+      "community": 2,
+      "norm_label": "run()",
+      "id": "commands_vault_run"
     },
     {
       "label": "list()",
@@ -1179,9 +1239,9 @@
       "source_file": "src/kb/commands/vault.js",
       "source_location": "L31",
       "_origin": "ast",
-      "id": "commands_vault_list",
-      "community": 3,
-      "norm_label": "list()"
+      "community": 2,
+      "norm_label": "list()",
+      "id": "commands_vault_list"
     },
     {
       "label": "create()",
@@ -1189,9 +1249,9 @@
       "source_file": "src/kb/commands/vault.js",
       "source_location": "L56",
       "_origin": "ast",
-      "id": "commands_vault_create",
-      "community": 3,
-      "norm_label": "create()"
+      "community": 2,
+      "norm_label": "create()",
+      "id": "commands_vault_create"
     },
     {
       "label": "register()",
@@ -1199,9 +1259,9 @@
       "source_file": "src/kb/commands/vault.js",
       "source_location": "L82",
       "_origin": "ast",
-      "id": "commands_vault_register",
-      "community": 3,
-      "norm_label": "register()"
+      "community": 2,
+      "norm_label": "register()",
+      "id": "commands_vault_register"
     },
     {
       "label": "unregister()",
@@ -1209,9 +1269,9 @@
       "source_file": "src/kb/commands/vault.js",
       "source_location": "L97",
       "_origin": "ast",
-      "id": "commands_vault_unregister",
-      "community": 3,
-      "norm_label": "unregister()"
+      "community": 2,
+      "norm_label": "unregister()",
+      "id": "commands_vault_unregister"
     },
     {
       "label": "sync()",
@@ -1219,9 +1279,9 @@
       "source_file": "src/kb/commands/vault.js",
       "source_location": "L106",
       "_origin": "ast",
-      "id": "commands_vault_sync",
-      "community": 3,
-      "norm_label": "sync()"
+      "community": 2,
+      "norm_label": "sync()",
+      "id": "commands_vault_sync"
     },
     {
       "label": "aggregator()",
@@ -1229,9 +1289,9 @@
       "source_file": "src/kb/commands/vault.js",
       "source_location": "L141",
       "_origin": "ast",
-      "id": "commands_vault_aggregator",
-      "community": 3,
-      "norm_label": "aggregator()"
+      "community": 2,
+      "norm_label": "aggregator()",
+      "id": "commands_vault_aggregator"
     },
     {
       "label": "config.js",
@@ -1239,9 +1299,9 @@
       "source_file": "src/kb/config.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "kb_config",
-      "community": 6,
-      "norm_label": "config.js"
+      "community": 4,
+      "norm_label": "config.js",
+      "id": "kb_config"
     },
     {
       "label": "DEFAULT_CONFIG",
@@ -1249,9 +1309,9 @@
       "source_file": "src/kb/config.js",
       "source_location": "L6",
       "_origin": "ast",
-      "id": "kb_config_default_config",
-      "community": 6,
-      "norm_label": "default_config"
+      "community": 4,
+      "norm_label": "default_config",
+      "id": "kb_config_default_config"
     },
     {
       "label": "findOnPath()",
@@ -1259,9 +1319,9 @@
       "source_file": "src/kb/config.js",
       "source_location": "L16",
       "_origin": "ast",
-      "id": "kb_config_findonpath",
-      "community": 0,
-      "norm_label": "findonpath()"
+      "community": 4,
+      "norm_label": "findonpath()",
+      "id": "kb_config_findonpath"
     },
     {
       "label": "resolvePythonInterp()",
@@ -1269,9 +1329,9 @@
       "source_file": "src/kb/config.js",
       "source_location": "L34",
       "_origin": "ast",
-      "id": "kb_config_resolvepythoninterp",
-      "community": 0,
-      "norm_label": "resolvepythoninterp()"
+      "community": 4,
+      "norm_label": "resolvepythoninterp()",
+      "id": "kb_config_resolvepythoninterp"
     },
     {
       "label": "loadConfig()",
@@ -1279,9 +1339,9 @@
       "source_file": "src/kb/config.js",
       "source_location": "L55",
       "_origin": "ast",
-      "id": "kb_config_loadconfig",
       "community": 2,
-      "norm_label": "loadconfig()"
+      "norm_label": "loadconfig()",
+      "id": "kb_config_loadconfig"
     },
     {
       "label": "saveConfig()",
@@ -1289,9 +1349,9 @@
       "source_file": "src/kb/config.js",
       "source_location": "L74",
       "_origin": "ast",
-      "id": "kb_config_saveconfig",
       "community": 2,
-      "norm_label": "saveconfig()"
+      "norm_label": "saveconfig()",
+      "id": "kb_config_saveconfig"
     },
     {
       "label": "validateConfig()",
@@ -1299,9 +1359,9 @@
       "source_file": "src/kb/config.js",
       "source_location": "L80",
       "_origin": "ast",
-      "id": "kb_config_validateconfig",
-      "community": 3,
-      "norm_label": "validateconfig()"
+      "community": 2,
+      "norm_label": "validateconfig()",
+      "id": "kb_config_validateconfig"
     },
     {
       "label": "getVault()",
@@ -1309,9 +1369,9 @@
       "source_file": "src/kb/config.js",
       "source_location": "L104",
       "_origin": "ast",
-      "id": "kb_config_getvault",
-      "community": 6,
-      "norm_label": "getvault()"
+      "community": 0,
+      "norm_label": "getvault()",
+      "id": "kb_config_getvault"
     },
     {
       "label": "defaultVault()",
@@ -1319,9 +1379,9 @@
       "source_file": "src/kb/config.js",
       "source_location": "L110",
       "_origin": "ast",
-      "id": "kb_config_defaultvault",
       "community": 6,
-      "norm_label": "defaultvault()"
+      "norm_label": "defaultvault()",
+      "id": "kb_config_defaultvault"
     },
     {
       "label": "getProject()",
@@ -1329,9 +1389,9 @@
       "source_file": "src/kb/config.js",
       "source_location": "L116",
       "_origin": "ast",
-      "id": "kb_config_getproject",
       "community": 2,
-      "norm_label": "getproject()"
+      "norm_label": "getproject()",
+      "id": "kb_config_getproject"
     },
     {
       "label": "getGroup()",
@@ -1339,9 +1399,9 @@
       "source_file": "src/kb/config.js",
       "source_location": "L120",
       "_origin": "ast",
-      "id": "kb_config_getgroup",
       "community": 2,
-      "norm_label": "getgroup()"
+      "norm_label": "getgroup()",
+      "id": "kb_config_getgroup"
     },
     {
       "label": "graphSources()",
@@ -1349,9 +1409,9 @@
       "source_file": "src/kb/config.js",
       "source_location": "L126",
       "_origin": "ast",
-      "id": "kb_config_graphsources",
       "community": 4,
-      "norm_label": "graphsources()"
+      "norm_label": "graphsources()",
+      "id": "kb_config_graphsources"
     },
     {
       "label": "groupRepos()",
@@ -1359,9 +1419,9 @@
       "source_file": "src/kb/config.js",
       "source_location": "L182",
       "_origin": "ast",
-      "id": "kb_config_grouprepos",
       "community": 4,
-      "norm_label": "grouprepos()"
+      "norm_label": "grouprepos()",
+      "id": "kb_config_grouprepos"
     },
     {
       "label": "frontmatter.js",
@@ -1369,9 +1429,9 @@
       "source_file": "src/kb/frontmatter.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "kb_frontmatter",
-      "community": 0,
-      "norm_label": "frontmatter.js"
+      "community": 6,
+      "norm_label": "frontmatter.js",
+      "id": "kb_frontmatter"
     },
     {
       "label": "parseScalar()",
@@ -1379,9 +1439,9 @@
       "source_file": "src/kb/frontmatter.js",
       "source_location": "L7",
       "_origin": "ast",
-      "id": "kb_frontmatter_parsescalar",
-      "community": 0,
-      "norm_label": "parsescalar()"
+      "community": 6,
+      "norm_label": "parsescalar()",
+      "id": "kb_frontmatter_parsescalar"
     },
     {
       "label": "parseInlineArray()",
@@ -1389,9 +1449,9 @@
       "source_file": "src/kb/frontmatter.js",
       "source_location": "L25",
       "_origin": "ast",
-      "id": "kb_frontmatter_parseinlinearray",
-      "community": 0,
-      "norm_label": "parseinlinearray()"
+      "community": 6,
+      "norm_label": "parseinlinearray()",
+      "id": "kb_frontmatter_parseinlinearray"
     },
     {
       "label": "parse()",
@@ -1399,9 +1459,9 @@
       "source_file": "src/kb/frontmatter.js",
       "source_location": "L35",
       "_origin": "ast",
-      "id": "kb_frontmatter_parse",
-      "community": 0,
-      "norm_label": "parse()"
+      "community": 6,
+      "norm_label": "parse()",
+      "id": "kb_frontmatter_parse"
     },
     {
       "label": "needsQuote()",
@@ -1409,9 +1469,9 @@
       "source_file": "src/kb/frontmatter.js",
       "source_location": "L72",
       "_origin": "ast",
-      "id": "kb_frontmatter_needsquote",
-      "community": 0,
-      "norm_label": "needsquote()"
+      "community": 6,
+      "norm_label": "needsquote()",
+      "id": "kb_frontmatter_needsquote"
     },
     {
       "label": "serializeScalar()",
@@ -1419,9 +1479,9 @@
       "source_file": "src/kb/frontmatter.js",
       "source_location": "L76",
       "_origin": "ast",
-      "id": "kb_frontmatter_serializescalar",
-      "community": 0,
-      "norm_label": "serializescalar()"
+      "community": 6,
+      "norm_label": "serializescalar()",
+      "id": "kb_frontmatter_serializescalar"
     },
     {
       "label": "stringify()",
@@ -1429,9 +1489,9 @@
       "source_file": "src/kb/frontmatter.js",
       "source_location": "L83",
       "_origin": "ast",
-      "id": "kb_frontmatter_stringify",
-      "community": 0,
-      "norm_label": "stringify()"
+      "community": 6,
+      "norm_label": "stringify()",
+      "id": "kb_frontmatter_stringify"
     },
     {
       "label": "merge()",
@@ -1439,9 +1499,9 @@
       "source_file": "src/kb/frontmatter.js",
       "source_location": "L99",
       "_origin": "ast",
-      "id": "kb_frontmatter_merge",
-      "community": 0,
-      "norm_label": "merge()"
+      "community": 6,
+      "norm_label": "merge()",
+      "id": "kb_frontmatter_merge"
     },
     {
       "label": "graphify.js",
@@ -1449,9 +1509,9 @@
       "source_file": "src/kb/graphify.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "kb_graphify",
       "community": 4,
-      "norm_label": "graphify.js"
+      "norm_label": "graphify.js",
+      "id": "kb_graphify"
     },
     {
       "label": "run()",
@@ -1459,9 +1519,9 @@
       "source_file": "src/kb/graphify.js",
       "source_location": "L8",
       "_origin": "ast",
-      "id": "kb_graphify_run",
       "community": 4,
-      "norm_label": "run()"
+      "norm_label": "run()",
+      "id": "kb_graphify_run"
     },
     {
       "label": "ingestUrl()",
@@ -1469,9 +1529,9 @@
       "source_file": "src/kb/graphify.js",
       "source_location": "L26",
       "_origin": "ast",
-      "id": "kb_graphify_ingesturl",
       "community": 0,
-      "norm_label": "ingesturl()"
+      "norm_label": "ingesturl()",
+      "id": "kb_graphify_ingesturl"
     },
     {
       "label": "updateGraph()",
@@ -1479,9 +1539,9 @@
       "source_file": "src/kb/graphify.js",
       "source_location": "L49",
       "_origin": "ast",
-      "id": "kb_graphify_updategraph",
       "community": 4,
-      "norm_label": "updategraph()"
+      "norm_label": "updategraph()",
+      "id": "kb_graphify_updategraph"
     },
     {
       "label": "buildMonorepoRoot()",
@@ -1489,9 +1549,9 @@
       "source_file": "src/kb/graphify.js",
       "source_location": "L61",
       "_origin": "ast",
-      "id": "kb_graphify_buildmonoreporoot",
       "community": 4,
-      "norm_label": "buildmonoreporoot()"
+      "norm_label": "buildmonoreporoot()",
+      "id": "kb_graphify_buildmonoreporoot"
     },
     {
       "label": "mergeGraphs()",
@@ -1499,9 +1559,9 @@
       "source_file": "src/kb/graphify.js",
       "source_location": "L83",
       "_origin": "ast",
-      "id": "kb_graphify_mergegraphs",
       "community": 4,
-      "norm_label": "mergegraphs()"
+      "norm_label": "mergegraphs()",
+      "id": "kb_graphify_mergegraphs"
     },
     {
       "label": "serve()",
@@ -1509,9 +1569,9 @@
       "source_file": "src/kb/graphify.js",
       "source_location": "L92",
       "_origin": "ast",
-      "id": "kb_graphify_serve",
       "community": 4,
-      "norm_label": "serve()"
+      "norm_label": "serve()",
+      "id": "kb_graphify_serve"
     },
     {
       "label": "note.js",
@@ -1519,9 +1579,9 @@
       "source_file": "src/kb/note.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "kb_note",
       "community": 0,
-      "norm_label": "note.js"
+      "norm_label": "note.js",
+      "id": "kb_note"
     },
     {
       "label": "COMBINING",
@@ -1529,9 +1589,9 @@
       "source_file": "src/kb/note.js",
       "source_location": "L6",
       "_origin": "ast",
-      "id": "kb_note_combining",
       "community": 0,
-      "norm_label": "combining"
+      "norm_label": "combining",
+      "id": "kb_note_combining"
     },
     {
       "label": "slugify()",
@@ -1539,9 +1599,9 @@
       "source_file": "src/kb/note.js",
       "source_location": "L9",
       "_origin": "ast",
-      "id": "kb_note_slugify",
       "community": 0,
-      "norm_label": "slugify()"
+      "norm_label": "slugify()",
+      "id": "kb_note_slugify"
     },
     {
       "label": "noteId()",
@@ -1549,9 +1609,9 @@
       "source_file": "src/kb/note.js",
       "source_location": "L23",
       "_origin": "ast",
-      "id": "kb_note_noteid",
       "community": 0,
-      "norm_label": "noteid()"
+      "norm_label": "noteid()",
+      "id": "kb_note_noteid"
     },
     {
       "label": "today()",
@@ -1559,9 +1619,9 @@
       "source_file": "src/kb/note.js",
       "source_location": "L27",
       "_origin": "ast",
-      "id": "kb_note_today",
       "community": 0,
-      "norm_label": "today()"
+      "norm_label": "today()",
+      "id": "kb_note_today"
     },
     {
       "label": "uniquePath()",
@@ -1569,9 +1629,9 @@
       "source_file": "src/kb/note.js",
       "source_location": "L32",
       "_origin": "ast",
-      "id": "kb_note_uniquepath",
       "community": 0,
-      "norm_label": "uniquepath()"
+      "norm_label": "uniquepath()",
+      "id": "kb_note_uniquepath"
     },
     {
       "label": "buildFrontmatter()",
@@ -1579,9 +1639,9 @@
       "source_file": "src/kb/note.js",
       "source_location": "L43",
       "_origin": "ast",
-      "id": "kb_note_buildfrontmatter",
       "community": 0,
-      "norm_label": "buildfrontmatter()"
+      "norm_label": "buildfrontmatter()",
+      "id": "kb_note_buildfrontmatter"
     },
     {
       "label": "paths.js",
@@ -1589,9 +1649,9 @@
       "source_file": "src/kb/paths.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "kb_paths",
-      "community": 6,
-      "norm_label": "paths.js"
+      "community": 4,
+      "norm_label": "paths.js",
+      "id": "kb_paths"
     },
     {
       "label": "here",
@@ -1599,9 +1659,9 @@
       "source_file": "src/kb/paths.js",
       "source_location": "L5",
       "_origin": "ast",
-      "id": "kb_paths_here",
-      "community": 6,
-      "norm_label": "here"
+      "community": 4,
+      "norm_label": "here",
+      "id": "kb_paths_here"
     },
     {
       "label": "ENGINE_ROOT",
@@ -1609,9 +1669,9 @@
       "source_file": "src/kb/paths.js",
       "source_location": "L8",
       "_origin": "ast",
-      "id": "kb_paths_engine_root",
-      "community": 6,
-      "norm_label": "engine_root"
+      "community": 0,
+      "norm_label": "engine_root",
+      "id": "kb_paths_engine_root"
     },
     {
       "label": "CONFIG_EXAMPLE_PATH",
@@ -1619,9 +1679,9 @@
       "source_file": "src/kb/paths.js",
       "source_location": "L11",
       "_origin": "ast",
-      "id": "kb_paths_config_example_path",
-      "community": 6,
-      "norm_label": "config_example_path"
+      "community": 4,
+      "norm_label": "config_example_path",
+      "id": "kb_paths_config_example_path"
     },
     {
       "label": "VAULT_SKELETON",
@@ -1629,9 +1689,9 @@
       "source_file": "src/kb/paths.js",
       "source_location": "L12",
       "_origin": "ast",
-      "id": "kb_paths_vault_skeleton",
       "community": 3,
-      "norm_label": "vault_skeleton"
+      "norm_label": "vault_skeleton",
+      "id": "kb_paths_vault_skeleton"
     },
     {
       "label": "expandPath()",
@@ -1639,9 +1699,9 @@
       "source_file": "src/kb/paths.js",
       "source_location": "L15",
       "_origin": "ast",
-      "id": "kb_paths_expandpath",
-      "community": 3,
-      "norm_label": "expandpath()"
+      "community": 2,
+      "norm_label": "expandpath()",
+      "id": "kb_paths_expandpath"
     },
     {
       "label": "CONFIG_DIR",
@@ -1649,9 +1709,9 @@
       "source_file": "src/kb/paths.js",
       "source_location": "L27",
       "_origin": "ast",
-      "id": "kb_paths_config_dir",
-      "community": 6,
-      "norm_label": "config_dir"
+      "community": 4,
+      "norm_label": "config_dir",
+      "id": "kb_paths_config_dir"
     },
     {
       "label": "STATE_DIR",
@@ -1659,9 +1719,9 @@
       "source_file": "src/kb/paths.js",
       "source_location": "L28",
       "_origin": "ast",
-      "id": "kb_paths_state_dir",
-      "community": 6,
-      "norm_label": "state_dir"
+      "community": 4,
+      "norm_label": "state_dir",
+      "id": "kb_paths_state_dir"
     },
     {
       "label": "CENTRAL_GRAPH_DEFAULT",
@@ -1669,9 +1729,9 @@
       "source_file": "src/kb/paths.js",
       "source_location": "L36",
       "_origin": "ast",
-      "id": "kb_paths_central_graph_default",
-      "community": 6,
-      "norm_label": "central_graph_default"
+      "community": 4,
+      "norm_label": "central_graph_default",
+      "id": "kb_paths_central_graph_default"
     },
     {
       "label": "registry.js",
@@ -1679,9 +1739,9 @@
       "source_file": "src/kb/registry.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "kb_registry",
       "community": 2,
-      "norm_label": "registry.js"
+      "norm_label": "registry.js",
+      "id": "kb_registry"
     },
     {
       "label": "PKG_MARKERS",
@@ -1689,9 +1749,9 @@
       "source_file": "src/kb/registry.js",
       "source_location": "L5",
       "_origin": "ast",
-      "id": "kb_registry_pkg_markers",
       "community": 2,
-      "norm_label": "pkg_markers"
+      "norm_label": "pkg_markers",
+      "id": "kb_registry_pkg_markers"
     },
     {
       "label": "WORKSPACE_DIRS",
@@ -1699,9 +1759,9 @@
       "source_file": "src/kb/registry.js",
       "source_location": "L13",
       "_origin": "ast",
-      "id": "kb_registry_workspace_dirs",
       "community": 2,
-      "norm_label": "workspace_dirs"
+      "norm_label": "workspace_dirs",
+      "id": "kb_registry_workspace_dirs"
     },
     {
       "label": "hasPackageMarker()",
@@ -1709,9 +1769,9 @@
       "source_file": "src/kb/registry.js",
       "source_location": "L15",
       "_origin": "ast",
-      "id": "kb_registry_haspackagemarker",
       "community": 2,
-      "norm_label": "haspackagemarker()"
+      "norm_label": "haspackagemarker()",
+      "id": "kb_registry_haspackagemarker"
     },
     {
       "label": "detectSubprojects()",
@@ -1719,9 +1779,9 @@
       "source_file": "src/kb/registry.js",
       "source_location": "L20",
       "_origin": "ast",
-      "id": "kb_registry_detectsubprojects",
       "community": 2,
-      "norm_label": "detectsubprojects()"
+      "norm_label": "detectsubprojects()",
+      "id": "kb_registry_detectsubprojects"
     },
     {
       "label": "upsertVault()",
@@ -1729,9 +1789,9 @@
       "source_file": "src/kb/registry.js",
       "source_location": "L57",
       "_origin": "ast",
-      "id": "kb_registry_upsertvault",
-      "community": 3,
-      "norm_label": "upsertvault()"
+      "community": 2,
+      "norm_label": "upsertvault()",
+      "id": "kb_registry_upsertvault"
     },
     {
       "label": "removeVault()",
@@ -1739,9 +1799,9 @@
       "source_file": "src/kb/registry.js",
       "source_location": "L71",
       "_origin": "ast",
-      "id": "kb_registry_removevault",
-      "community": 3,
-      "norm_label": "removevault()"
+      "community": 2,
+      "norm_label": "removevault()",
+      "id": "kb_registry_removevault"
     },
     {
       "label": "upsertProject()",
@@ -1749,9 +1809,9 @@
       "source_file": "src/kb/registry.js",
       "source_location": "L79",
       "_origin": "ast",
-      "id": "kb_registry_upsertproject",
       "community": 2,
-      "norm_label": "upsertproject()"
+      "norm_label": "upsertproject()",
+      "id": "kb_registry_upsertproject"
     },
     {
       "label": "removeProject()",
@@ -1759,9 +1819,9 @@
       "source_file": "src/kb/registry.js",
       "source_location": "L87",
       "_origin": "ast",
-      "id": "kb_registry_removeproject",
       "community": 2,
-      "norm_label": "removeproject()"
+      "norm_label": "removeproject()",
+      "id": "kb_registry_removeproject"
     },
     {
       "label": "upsertGroup()",
@@ -1769,9 +1829,9 @@
       "source_file": "src/kb/registry.js",
       "source_location": "L96",
       "_origin": "ast",
-      "id": "kb_registry_upsertgroup",
       "community": 2,
-      "norm_label": "upsertgroup()"
+      "norm_label": "upsertgroup()",
+      "id": "kb_registry_upsertgroup"
     },
     {
       "label": "validateMembers()",
@@ -1779,9 +1839,9 @@
       "source_file": "src/kb/registry.js",
       "source_location": "L107",
       "_origin": "ast",
-      "id": "kb_registry_validatemembers",
       "community": 2,
-      "norm_label": "validatemembers()"
+      "norm_label": "validatemembers()",
+      "id": "kb_registry_validatemembers"
     },
     {
       "label": "repo-hygiene.js",
@@ -1789,9 +1849,9 @@
       "source_file": "src/kb/repo-hygiene.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "kb_repo_hygiene",
-      "community": 2,
-      "norm_label": "repo-hygiene.js"
+      "community": 9,
+      "norm_label": "repo-hygiene.js",
+      "id": "kb_repo_hygiene"
     },
     {
       "label": "HYGIENE_DIR",
@@ -1799,9 +1859,9 @@
       "source_file": "src/kb/repo-hygiene.js",
       "source_location": "L9",
       "_origin": "ast",
-      "id": "kb_repo_hygiene_hygiene_dir",
-      "community": 2,
-      "norm_label": "hygiene_dir"
+      "community": 9,
+      "norm_label": "hygiene_dir",
+      "id": "kb_repo_hygiene_hygiene_dir"
     },
     {
       "label": "detectStack()",
@@ -1809,9 +1869,9 @@
       "source_file": "src/kb/repo-hygiene.js",
       "source_location": "L13",
       "_origin": "ast",
-      "id": "kb_repo_hygiene_detectstack",
-      "community": 2,
-      "norm_label": "detectstack()"
+      "community": 9,
+      "norm_label": "detectstack()",
+      "id": "kb_repo_hygiene_detectstack"
     },
     {
       "label": "applyHygiene()",
@@ -1819,9 +1879,9 @@
       "source_file": "src/kb/repo-hygiene.js",
       "source_location": "L24",
       "_origin": "ast",
-      "id": "kb_repo_hygiene_applyhygiene",
-      "community": 2,
-      "norm_label": "applyhygiene()"
+      "community": 9,
+      "norm_label": "applyhygiene()",
+      "id": "kb_repo_hygiene_applyhygiene"
     },
     {
       "label": "mergeGitattributes()",
@@ -1829,9 +1889,9 @@
       "source_file": "src/kb/repo-hygiene.js",
       "source_location": "L48",
       "_origin": "ast",
-      "id": "kb_repo_hygiene_mergegitattributes",
-      "community": 2,
-      "norm_label": "mergegitattributes()"
+      "community": 9,
+      "norm_label": "mergegitattributes()",
+      "id": "kb_repo_hygiene_mergegitattributes"
     },
     {
       "label": "installHook()",
@@ -1839,9 +1899,9 @@
       "source_file": "src/kb/repo-hygiene.js",
       "source_location": "L69",
       "_origin": "ast",
-      "id": "kb_repo_hygiene_installhook",
       "community": 2,
-      "norm_label": "installhook()"
+      "norm_label": "installhook()",
+      "id": "kb_repo_hygiene_installhook"
     },
     {
       "label": "routing.js",
@@ -1849,9 +1909,9 @@
       "source_file": "src/kb/routing.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "kb_routing",
       "community": 0,
-      "norm_label": "routing.js"
+      "norm_label": "routing.js",
+      "id": "kb_routing"
     },
     {
       "label": "CATEGORIES",
@@ -1859,9 +1919,9 @@
       "source_file": "src/kb/routing.js",
       "source_location": "L4",
       "_origin": "ast",
-      "id": "kb_routing_categories",
       "community": 0,
-      "norm_label": "categories"
+      "norm_label": "categories",
+      "id": "kb_routing_categories"
     },
     {
       "label": "resolveSubfolder()",
@@ -1869,9 +1929,9 @@
       "source_file": "src/kb/routing.js",
       "source_location": "L15",
       "_origin": "ast",
-      "id": "kb_routing_resolvesubfolder",
       "community": 0,
-      "norm_label": "resolvesubfolder()"
+      "norm_label": "resolvesubfolder()",
+      "id": "kb_routing_resolvesubfolder"
     },
     {
       "label": "resolveNewTarget()",
@@ -1879,9 +1939,9 @@
       "source_file": "src/kb/routing.js",
       "source_location": "L32",
       "_origin": "ast",
-      "id": "kb_routing_resolvenewtarget",
       "community": 0,
-      "norm_label": "resolvenewtarget()"
+      "norm_label": "resolvenewtarget()",
+      "id": "kb_routing_resolvenewtarget"
     },
     {
       "label": "inferCategoryFromMedia()",
@@ -1889,9 +1949,9 @@
       "source_file": "src/kb/routing.js",
       "source_location": "L60",
       "_origin": "ast",
-      "id": "kb_routing_infercategoryfrommedia",
       "community": 0,
-      "norm_label": "infercategoryfrommedia()"
+      "norm_label": "infercategoryfrommedia()",
+      "id": "kb_routing_infercategoryfrommedia"
     },
     {
       "label": "guessMediaType()",
@@ -1899,9 +1959,9 @@
       "source_file": "src/kb/routing.js",
       "source_location": "L78",
       "_origin": "ast",
-      "id": "kb_routing_guessmediatype",
       "community": 0,
-      "norm_label": "guessmediatype()"
+      "norm_label": "guessmediatype()",
+      "id": "kb_routing_guessmediatype"
     },
     {
       "label": "templates.js",
@@ -1909,9 +1969,9 @@
       "source_file": "src/kb/templates.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "kb_templates",
       "community": 3,
-      "norm_label": "templates.js"
+      "norm_label": "templates.js",
+      "id": "kb_templates"
     },
     {
       "label": "scaffoldVault()",
@@ -1919,9 +1979,9 @@
       "source_file": "src/kb/templates.js",
       "source_location": "L8",
       "_origin": "ast",
-      "id": "kb_templates_scaffoldvault",
       "community": 3,
-      "norm_label": "scaffoldvault()"
+      "norm_label": "scaffoldvault()",
+      "id": "kb_templates_scaffoldvault"
     },
     {
       "label": "renderTokens()",
@@ -1929,9 +1989,9 @@
       "source_file": "src/kb/templates.js",
       "source_location": "L24",
       "_origin": "ast",
-      "id": "kb_templates_rendertokens",
       "community": 3,
-      "norm_label": "rendertokens()"
+      "norm_label": "rendertokens()",
+      "id": "kb_templates_rendertokens"
     },
     {
       "label": "renderScaffoldFile()",
@@ -1939,9 +1999,9 @@
       "source_file": "src/kb/templates.js",
       "source_location": "L33",
       "_origin": "ast",
-      "id": "kb_templates_renderscaffoldfile",
       "community": 3,
-      "norm_label": "renderscaffoldfile()"
+      "norm_label": "renderscaffoldfile()",
+      "id": "kb_templates_renderscaffoldfile"
     },
     {
       "label": "substituteTokens()",
@@ -1949,9 +2009,9 @@
       "source_file": "src/kb/templates.js",
       "source_location": "L38",
       "_origin": "ast",
-      "id": "kb_templates_substitutetokens",
       "community": 3,
-      "norm_label": "substitutetokens()"
+      "norm_label": "substitutetokens()",
+      "id": "kb_templates_substitutetokens"
     },
     {
       "label": "listScaffoldFiles()",
@@ -1959,9 +2019,9 @@
       "source_file": "src/kb/templates.js",
       "source_location": "L53",
       "_origin": "ast",
-      "id": "kb_templates_listscaffoldfiles",
-      "community": 3,
-      "norm_label": "listscaffoldfiles()"
+      "community": 2,
+      "norm_label": "listscaffoldfiles()",
+      "id": "kb_templates_listscaffoldfiles"
     },
     {
       "label": "fileMtime()",
@@ -1969,9 +2029,9 @@
       "source_file": "src/kb/templates.js",
       "source_location": "L80",
       "_origin": "ast",
-      "id": "kb_templates_filemtime",
-      "community": 3,
-      "norm_label": "filemtime()"
+      "community": 2,
+      "norm_label": "filemtime()",
+      "id": "kb_templates_filemtime"
     },
     {
       "label": "storage.js",
@@ -1979,9 +2039,9 @@
       "source_file": "src/storage.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_storage",
       "community": 1,
-      "norm_label": "storage.js"
+      "norm_label": "storage.js",
+      "id": "src_storage"
     },
     {
       "label": "here",
@@ -1989,9 +2049,9 @@
       "source_file": "src/storage.js",
       "source_location": "L5",
       "_origin": "ast",
-      "id": "src_storage_here",
       "community": 1,
-      "norm_label": "here"
+      "norm_label": "here",
+      "id": "src_storage_here"
     },
     {
       "label": "ARCHIVE_ROOT",
@@ -1999,9 +2059,9 @@
       "source_file": "src/storage.js",
       "source_location": "L6",
       "_origin": "ast",
-      "id": "src_storage_archive_root",
       "community": 1,
-      "norm_label": "archive_root"
+      "norm_label": "archive_root",
+      "id": "src_storage_archive_root"
     },
     {
       "label": "rawDir()",
@@ -2009,9 +2069,9 @@
       "source_file": "src/storage.js",
       "source_location": "L8",
       "_origin": "ast",
-      "id": "src_storage_rawdir",
       "community": 1,
-      "norm_label": "rawdir()"
+      "norm_label": "rawdir()",
+      "id": "src_storage_rawdir"
     },
     {
       "label": "dailyDir()",
@@ -2019,9 +2079,9 @@
       "source_file": "src/storage.js",
       "source_location": "L12",
       "_origin": "ast",
-      "id": "src_storage_dailydir",
       "community": 1,
-      "norm_label": "dailydir()"
+      "norm_label": "dailydir()",
+      "id": "src_storage_dailydir"
     },
     {
       "label": "writeJson()",
@@ -2029,9 +2089,9 @@
       "source_file": "src/storage.js",
       "source_location": "L16",
       "_origin": "ast",
-      "id": "src_storage_writejson",
       "community": 1,
-      "norm_label": "writejson()"
+      "norm_label": "writejson()",
+      "id": "src_storage_writejson"
     },
     {
       "label": "safeName()",
@@ -2039,12 +2099,693 @@
       "source_file": "src/storage.js",
       "source_location": "L21",
       "_origin": "ast",
-      "id": "src_storage_safename",
       "community": 1,
-      "norm_label": "safename()"
+      "norm_label": "safename()",
+      "id": "src_storage_safename"
     }
   ],
   "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L25",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "commands_project_add"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L30",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "commands_project_applytoproject"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L95",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "commands_project_inithygiene"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L109",
+      "weight": 1.0,
+      "source": "commands_project",
+      "target": "commands_project_linkclaude",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L65",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "commands_project_list"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L74",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "commands_project_remove"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "commands_project_run"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L82",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "commands_project_scan"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "kb_args"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "kb_args_aslist"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "kb_config"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "kb_config_getproject"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "kb_config_loadconfig"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "kb_config_saveconfig"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "kb_paths"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "kb_paths_expandpath"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "kb_registry"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "kb_registry_detectsubprojects"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "kb_registry_removeproject"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "kb_registry_upsertgroup"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "kb_registry_upsertproject"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "commands_project",
+      "target": "kb_repo_claudemd",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "commands_project",
+      "target": "kb_repo_claudemd_linkclaudemd",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "kb_repo_hygiene"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "kb_repo_hygiene_applyhygiene"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project",
+      "target": "kb_repo_hygiene_installhook"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_run",
+      "target": "commands_project_add"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_run",
+      "target": "commands_project_inithygiene"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "commands_project_run",
+      "target": "commands_project_linkclaude",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_run",
+      "target": "commands_project_remove"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_run",
+      "target": "commands_project_scan"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L90",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_add",
+      "target": "commands_project_applytoproject"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_applytoproject",
+      "target": "kb_paths_expandpath"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L41",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_applytoproject",
+      "target": "kb_repo_hygiene_applyhygiene"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L42",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_applytoproject",
+      "target": "kb_repo_hygiene_installhook"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L101",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_inithygiene",
+      "target": "commands_project_applytoproject"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L36",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_add",
+      "target": "kb_args_aslist"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L30",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_add",
+      "target": "kb_config_loadconfig"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L61",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_add",
+      "target": "kb_config_saveconfig"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L27",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_add",
+      "target": "kb_paths_expandpath"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_add",
+      "target": "kb_registry_detectsubprojects"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L57",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_add",
+      "target": "kb_registry_upsertgroup"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L52",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_add",
+      "target": "kb_registry_upsertproject"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L98",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_inithygiene",
+      "target": "kb_config_getproject"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L97",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_inithygiene",
+      "target": "kb_config_loadconfig"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L127",
+      "weight": 1.0,
+      "source": "commands_project_linkclaude",
+      "target": "kb_repo_claudemd_linkclaudemd",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L66",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_list",
+      "target": "kb_config_loadconfig"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L76",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_remove",
+      "target": "kb_config_loadconfig"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L78",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_remove",
+      "target": "kb_config_saveconfig"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L77",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_remove",
+      "target": "kb_registry_removeproject"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L85",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_scan",
+      "target": "kb_config_getproject"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L84",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_scan",
+      "target": "kb_config_loadconfig"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L91",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_scan",
+      "target": "kb_config_saveconfig"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L87",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_scan",
+      "target": "kb_paths_expandpath"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/commands/project.js",
+      "source_location": "L87",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "commands_project_scan",
+      "target": "kb_registry_detectsubprojects"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/repo-claudemd.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "kb_repo_claudemd",
+      "target": "kb_paths_expandpath",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/repo-claudemd.js",
+      "source_location": "L62",
+      "weight": 1.0,
+      "source": "kb_repo_claudemd",
+      "target": "kb_repo_claudemd_linkclaudemd",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/repo-claudemd.js",
+      "source_location": "L46",
+      "weight": 1.0,
+      "source": "kb_repo_claudemd",
+      "target": "kb_repo_claudemd_renderblock",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/repo-claudemd.js",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "kb_repo_claudemd",
+      "target": "kb_repo_claudemd_resolvevaulttarget",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/repo-claudemd.js",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "kb_repo_claudemd",
+      "target": "kb_repo_claudemd_slug",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/repo-claudemd.js",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "kb_repo_claudemd_resolvevaulttarget",
+      "target": "kb_repo_claudemd_slug",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/repo-claudemd.js",
+      "source_location": "L63",
+      "weight": 1.0,
+      "source": "kb_repo_claudemd_linkclaudemd",
+      "target": "kb_repo_claudemd_resolvevaulttarget",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/kb/repo-claudemd.js",
+      "source_location": "L66",
+      "weight": 1.0,
+      "source": "kb_repo_claudemd_linkclaudemd",
+      "target": "kb_repo_claudemd_renderblock",
+      "confidence_score": 1.0
+    },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
@@ -2926,23 +3667,12 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project",
-      "target": "kb_args"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "src/kb/commands/dev/done.js",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_done",
-      "target": "kb_args",
-      "confidence_score": 1.0
+      "target": "kb_args"
     },
     {
       "relation": "contains",
@@ -3034,34 +3764,12 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project",
-      "target": "kb_args_aslist"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L36",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project_add",
-      "target": "kb_args_aslist"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "src/kb/commands/dev/done.js",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_done",
-      "target": "kb_args_aslist",
-      "confidence_score": 1.0
+      "target": "kb_args_aslist"
     },
     {
       "relation": "calls",
@@ -3582,9 +4290,9 @@
       "source_file": "src/kb/commands/dev/check.js",
       "source_location": "L58",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_check",
-      "target": "dev_check_resolverepo",
-      "confidence_score": 1.0
+      "target": "dev_check_resolverepo"
     },
     {
       "relation": "contains",
@@ -3592,9 +4300,9 @@
       "source_file": "src/kb/commands/dev/check.js",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_check",
-      "target": "dev_check_run",
-      "confidence_score": 1.0
+      "target": "dev_check_run"
     },
     {
       "relation": "contains",
@@ -3602,9 +4310,9 @@
       "source_file": "src/kb/commands/dev/check.js",
       "source_location": "L67",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_check",
-      "target": "dev_check_today",
-      "confidence_score": 1.0
+      "target": "dev_check_today"
     },
     {
       "relation": "imports_from",
@@ -3613,9 +4321,9 @@
       "source_file": "src/kb/commands/dev/check.js",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_check",
-      "target": "dev_plan",
-      "confidence_score": 1.0
+      "target": "dev_plan"
     },
     {
       "relation": "imports",
@@ -3624,9 +4332,9 @@
       "source_file": "src/kb/commands/dev/check.js",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_check",
-      "target": "dev_plan_builddag",
-      "confidence_score": 1.0
+      "target": "dev_plan_builddag"
     },
     {
       "relation": "imports",
@@ -3635,9 +4343,9 @@
       "source_file": "src/kb/commands/dev/check.js",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_check",
-      "target": "dev_plan_loadplan",
-      "confidence_score": 1.0
+      "target": "dev_plan_loadplan"
     },
     {
       "relation": "imports",
@@ -3646,9 +4354,9 @@
       "source_file": "src/kb/commands/dev/check.js",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_check",
-      "target": "dev_plan_readyset",
-      "confidence_score": 1.0
+      "target": "dev_plan_readyset"
     },
     {
       "relation": "imports_from",
@@ -3657,9 +4365,9 @@
       "source_file": "src/kb/commands/dev/check.js",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_check",
-      "target": "kb_config",
-      "confidence_score": 1.0
+      "target": "kb_config"
     },
     {
       "relation": "imports",
@@ -3668,9 +4376,9 @@
       "source_file": "src/kb/commands/dev/check.js",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_check",
-      "target": "kb_config_defaultvault",
-      "confidence_score": 1.0
+      "target": "kb_config_defaultvault"
     },
     {
       "relation": "imports",
@@ -3679,9 +4387,9 @@
       "source_file": "src/kb/commands/dev/check.js",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_check",
-      "target": "kb_config_getproject",
-      "confidence_score": 1.0
+      "target": "kb_config_getproject"
     },
     {
       "relation": "imports",
@@ -3690,9 +4398,9 @@
       "source_file": "src/kb/commands/dev/check.js",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_check",
-      "target": "kb_config_getvault",
-      "confidence_score": 1.0
+      "target": "kb_config_getvault"
     },
     {
       "relation": "imports",
@@ -3701,9 +4409,9 @@
       "source_file": "src/kb/commands/dev/check.js",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_check",
-      "target": "kb_config_loadconfig",
-      "confidence_score": 1.0
+      "target": "kb_config_loadconfig"
     },
     {
       "relation": "imports_from",
@@ -3712,9 +4420,9 @@
       "source_file": "src/kb/commands/dev/check.js",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_check",
-      "target": "kb_frontmatter",
-      "confidence_score": 1.0
+      "target": "kb_frontmatter"
     },
     {
       "relation": "imports",
@@ -3723,9 +4431,9 @@
       "source_file": "src/kb/commands/dev/check.js",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_check",
-      "target": "kb_frontmatter_merge",
-      "confidence_score": 1.0
+      "target": "kb_frontmatter_merge"
     },
     {
       "relation": "imports_from",
@@ -3734,9 +4442,9 @@
       "source_file": "src/kb/commands/dev/check.js",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_check",
-      "target": "kb_paths",
-      "confidence_score": 1.0
+      "target": "kb_paths"
     },
     {
       "relation": "imports",
@@ -3745,9 +4453,9 @@
       "source_file": "src/kb/commands/dev/check.js",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_check",
-      "target": "kb_paths_expandpath",
-      "confidence_score": 1.0
+      "target": "kb_paths_expandpath"
     },
     {
       "relation": "calls",
@@ -3756,9 +4464,9 @@
       "source_file": "src/kb/commands/dev/check.js",
       "source_location": "L34",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_check_run",
-      "target": "dev_check_resolverepo",
-      "confidence_score": 1.0
+      "target": "dev_check_resolverepo"
     },
     {
       "relation": "calls",
@@ -3767,9 +4475,9 @@
       "source_file": "src/kb/commands/dev/check.js",
       "source_location": "L50",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_check_run",
-      "target": "dev_check_today",
-      "confidence_score": 1.0
+      "target": "dev_check_today"
     },
     {
       "relation": "calls",
@@ -3866,9 +4574,9 @@
       "source_file": "src/kb/commands/dev/check.js",
       "source_location": "L60",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_check_resolverepo",
-      "target": "kb_config_getproject",
-      "confidence_score": 1.0
+      "target": "kb_config_getproject"
     },
     {
       "relation": "calls",
@@ -3877,9 +4585,9 @@
       "source_file": "src/kb/commands/dev/check.js",
       "source_location": "L61",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_check_resolverepo",
-      "target": "kb_paths_expandpath",
-      "confidence_score": 1.0
+      "target": "kb_paths_expandpath"
     },
     {
       "relation": "contains",
@@ -3887,9 +4595,9 @@
       "source_file": "src/kb/commands/dev/done.js",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_done",
-      "target": "dev_done_run",
-      "confidence_score": 1.0
+      "target": "dev_done_run"
     },
     {
       "relation": "contains",
@@ -3897,9 +4605,9 @@
       "source_file": "src/kb/commands/dev/done.js",
       "source_location": "L77",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_done",
-      "target": "dev_done_today",
-      "confidence_score": 1.0
+      "target": "dev_done_today"
     },
     {
       "relation": "contains",
@@ -3907,9 +4615,9 @@
       "source_file": "src/kb/commands/dev/done.js",
       "source_location": "L60",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_done",
-      "target": "dev_done_updatemoc",
-      "confidence_score": 1.0
+      "target": "dev_done_updatemoc"
     },
     {
       "relation": "imports_from",
@@ -3918,9 +4626,9 @@
       "source_file": "src/kb/commands/dev/done.js",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_done",
-      "target": "dev_plan",
-      "confidence_score": 1.0
+      "target": "dev_plan"
     },
     {
       "relation": "imports",
@@ -3929,9 +4637,9 @@
       "source_file": "src/kb/commands/dev/done.js",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_done",
-      "target": "dev_plan_loadplan",
-      "confidence_score": 1.0
+      "target": "dev_plan_loadplan"
     },
     {
       "relation": "imports",
@@ -3940,9 +4648,9 @@
       "source_file": "src/kb/commands/dev/done.js",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_done",
-      "target": "dev_plan_plandir",
-      "confidence_score": 1.0
+      "target": "dev_plan_plandir"
     },
     {
       "relation": "imports_from",
@@ -3951,9 +4659,9 @@
       "source_file": "src/kb/commands/dev/done.js",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_done",
-      "target": "kb_config",
-      "confidence_score": 1.0
+      "target": "kb_config"
     },
     {
       "relation": "imports",
@@ -3962,9 +4670,9 @@
       "source_file": "src/kb/commands/dev/done.js",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_done",
-      "target": "kb_config_defaultvault",
-      "confidence_score": 1.0
+      "target": "kb_config_defaultvault"
     },
     {
       "relation": "imports",
@@ -3973,9 +4681,9 @@
       "source_file": "src/kb/commands/dev/done.js",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_done",
-      "target": "kb_config_getvault",
-      "confidence_score": 1.0
+      "target": "kb_config_getvault"
     },
     {
       "relation": "imports",
@@ -3984,9 +4692,9 @@
       "source_file": "src/kb/commands/dev/done.js",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_done",
-      "target": "kb_config_loadconfig",
-      "confidence_score": 1.0
+      "target": "kb_config_loadconfig"
     },
     {
       "relation": "imports_from",
@@ -3995,9 +4703,9 @@
       "source_file": "src/kb/commands/dev/done.js",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_done",
-      "target": "kb_frontmatter",
-      "confidence_score": 1.0
+      "target": "kb_frontmatter"
     },
     {
       "relation": "imports",
@@ -4006,9 +4714,9 @@
       "source_file": "src/kb/commands/dev/done.js",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_done",
-      "target": "kb_frontmatter_merge",
-      "confidence_score": 1.0
+      "target": "kb_frontmatter_merge"
     },
     {
       "relation": "imports_from",
@@ -4017,9 +4725,9 @@
       "source_file": "src/kb/commands/dev/done.js",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_done",
-      "target": "kb_paths",
-      "confidence_score": 1.0
+      "target": "kb_paths"
     },
     {
       "relation": "imports",
@@ -4028,9 +4736,9 @@
       "source_file": "src/kb/commands/dev/done.js",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_done",
-      "target": "kb_paths_engine_root",
-      "confidence_score": 1.0
+      "target": "kb_paths_engine_root"
     },
     {
       "relation": "imports",
@@ -4039,9 +4747,9 @@
       "source_file": "src/kb/commands/dev/done.js",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_done",
-      "target": "kb_paths_expandpath",
-      "confidence_score": 1.0
+      "target": "kb_paths_expandpath"
     },
     {
       "relation": "calls",
@@ -4050,9 +4758,9 @@
       "source_file": "src/kb/commands/dev/done.js",
       "source_location": "L42",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_done_run",
-      "target": "dev_done_today",
-      "confidence_score": 1.0
+      "target": "dev_done_today"
     },
     {
       "relation": "calls",
@@ -4061,9 +4769,9 @@
       "source_file": "src/kb/commands/dev/done.js",
       "source_location": "L47",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_done_run",
-      "target": "dev_done_updatemoc",
-      "confidence_score": 1.0
+      "target": "dev_done_updatemoc"
     },
     {
       "relation": "calls",
@@ -4138,9 +4846,9 @@
       "source_file": "src/kb/commands/dev/done.js",
       "source_location": "L68",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_done_updatemoc",
-      "target": "dev_done_today",
-      "confidence_score": 1.0
+      "target": "dev_done_today"
     },
     {
       "relation": "contains",
@@ -4148,9 +4856,9 @@
       "source_file": "src/kb/commands/dev/index.js",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_index",
-      "target": "dev_index_run",
-      "confidence_score": 1.0
+      "target": "dev_index_run"
     },
     {
       "relation": "contains",
@@ -4158,9 +4866,9 @@
       "source_file": "src/kb/commands/dev/index.js",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_index",
-      "target": "dev_index_sub",
-      "confidence_score": 1.0
+      "target": "dev_index_sub"
     },
     {
       "relation": "contains",
@@ -4168,9 +4876,9 @@
       "source_file": "src/kb/commands/dev/plan.js",
       "source_location": "L38",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_plan",
-      "target": "dev_plan_builddag",
-      "confidence_score": 1.0
+      "target": "dev_plan_builddag"
     },
     {
       "relation": "contains",
@@ -4178,9 +4886,9 @@
       "source_file": "src/kb/commands/dev/plan.js",
       "source_location": "L18",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_plan",
-      "target": "dev_plan_loadplan",
-      "confidence_score": 1.0
+      "target": "dev_plan_loadplan"
     },
     {
       "relation": "contains",
@@ -4188,9 +4896,9 @@
       "source_file": "src/kb/commands/dev/plan.js",
       "source_location": "L67",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_plan",
-      "target": "dev_plan_norm",
-      "confidence_score": 1.0
+      "target": "dev_plan_norm"
     },
     {
       "relation": "contains",
@@ -4198,9 +4906,9 @@
       "source_file": "src/kb/commands/dev/plan.js",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_plan",
-      "target": "dev_plan_plandir",
-      "confidence_score": 1.0
+      "target": "dev_plan_plandir"
     },
     {
       "relation": "contains",
@@ -4208,9 +4916,9 @@
       "source_file": "src/kb/commands/dev/plan.js",
       "source_location": "L80",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_plan",
-      "target": "dev_plan_readyset",
-      "confidence_score": 1.0
+      "target": "dev_plan_readyset"
     },
     {
       "relation": "contains",
@@ -4218,9 +4926,9 @@
       "source_file": "src/kb/commands/dev/plan.js",
       "source_location": "L70",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_plan",
-      "target": "dev_plan_scopeoverlaps",
-      "confidence_score": 1.0
+      "target": "dev_plan_scopeoverlaps"
     },
     {
       "relation": "imports_from",
@@ -4229,9 +4937,9 @@
       "source_file": "src/kb/commands/dev/plan.js",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_plan",
-      "target": "kb_frontmatter",
-      "confidence_score": 1.0
+      "target": "kb_frontmatter"
     },
     {
       "relation": "imports",
@@ -4240,9 +4948,9 @@
       "source_file": "src/kb/commands/dev/plan.js",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_plan",
-      "target": "kb_frontmatter_parse",
-      "confidence_score": 1.0
+      "target": "kb_frontmatter_parse"
     },
     {
       "relation": "imports_from",
@@ -4251,9 +4959,9 @@
       "source_file": "src/kb/commands/dev/run.js",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_run",
-      "target": "dev_plan",
-      "confidence_score": 1.0
+      "target": "dev_plan"
     },
     {
       "relation": "calls",
@@ -4262,9 +4970,9 @@
       "source_file": "src/kb/commands/dev/plan.js",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_plan_loadplan",
-      "target": "dev_plan_plandir",
-      "confidence_score": 1.0
+      "target": "dev_plan_plandir"
     },
     {
       "relation": "calls",
@@ -4284,9 +4992,9 @@
       "source_file": "src/kb/commands/dev/run.js",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_run",
-      "target": "dev_plan_loadplan",
-      "confidence_score": 1.0
+      "target": "dev_plan_loadplan"
     },
     {
       "relation": "calls",
@@ -4306,9 +5014,9 @@
       "source_file": "src/kb/commands/dev/run.js",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_run",
-      "target": "dev_plan_builddag",
-      "confidence_score": 1.0
+      "target": "dev_plan_builddag"
     },
     {
       "relation": "calls",
@@ -4328,9 +5036,9 @@
       "source_file": "src/kb/commands/dev/run.js",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_run",
-      "target": "dev_plan_scopeoverlaps",
-      "confidence_score": 1.0
+      "target": "dev_plan_scopeoverlaps"
     },
     {
       "relation": "calls",
@@ -4339,9 +5047,9 @@
       "source_file": "src/kb/commands/dev/run.js",
       "source_location": "L72",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_run_computewaves",
-      "target": "dev_plan_scopeoverlaps",
-      "confidence_score": 1.0
+      "target": "dev_plan_scopeoverlaps"
     },
     {
       "relation": "contains",
@@ -4349,9 +5057,9 @@
       "source_file": "src/kb/commands/dev/run.js",
       "source_location": "L57",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_run",
-      "target": "dev_run_computewaves",
-      "confidence_score": 1.0
+      "target": "dev_run_computewaves"
     },
     {
       "relation": "contains",
@@ -4359,9 +5067,9 @@
       "source_file": "src/kb/commands/dev/run.js",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_run",
-      "target": "dev_run_run",
-      "confidence_score": 1.0
+      "target": "dev_run_run"
     },
     {
       "relation": "imports_from",
@@ -4370,9 +5078,9 @@
       "source_file": "src/kb/commands/dev/run.js",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_run",
-      "target": "kb_config",
-      "confidence_score": 1.0
+      "target": "kb_config"
     },
     {
       "relation": "imports",
@@ -4381,9 +5089,9 @@
       "source_file": "src/kb/commands/dev/run.js",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_run",
-      "target": "kb_config_defaultvault",
-      "confidence_score": 1.0
+      "target": "kb_config_defaultvault"
     },
     {
       "relation": "imports",
@@ -4392,9 +5100,9 @@
       "source_file": "src/kb/commands/dev/run.js",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_run",
-      "target": "kb_config_getvault",
-      "confidence_score": 1.0
+      "target": "kb_config_getvault"
     },
     {
       "relation": "imports",
@@ -4403,9 +5111,9 @@
       "source_file": "src/kb/commands/dev/run.js",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_run",
-      "target": "kb_config_loadconfig",
-      "confidence_score": 1.0
+      "target": "kb_config_loadconfig"
     },
     {
       "relation": "imports_from",
@@ -4414,9 +5122,9 @@
       "source_file": "src/kb/commands/dev/run.js",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_run",
-      "target": "kb_paths",
-      "confidence_score": 1.0
+      "target": "kb_paths"
     },
     {
       "relation": "imports",
@@ -4425,9 +5133,9 @@
       "source_file": "src/kb/commands/dev/run.js",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_run",
-      "target": "kb_paths_expandpath",
-      "confidence_score": 1.0
+      "target": "kb_paths_expandpath"
     },
     {
       "relation": "calls",
@@ -4436,9 +5144,9 @@
       "source_file": "src/kb/commands/dev/run.js",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_run_run",
-      "target": "dev_run_computewaves",
-      "confidence_score": 1.0
+      "target": "dev_run_computewaves"
     },
     {
       "relation": "calls",
@@ -4490,9 +5198,9 @@
       "source_file": "src/kb/commands/dev/start.js",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_start",
-      "target": "dev_start_run",
-      "confidence_score": 1.0
+      "target": "dev_start_run"
     },
     {
       "relation": "imports_from",
@@ -4501,9 +5209,9 @@
       "source_file": "src/kb/commands/dev/start.js",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_start",
-      "target": "kb_config",
-      "confidence_score": 1.0
+      "target": "kb_config"
     },
     {
       "relation": "imports",
@@ -4512,9 +5220,9 @@
       "source_file": "src/kb/commands/dev/start.js",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_start",
-      "target": "kb_config_defaultvault",
-      "confidence_score": 1.0
+      "target": "kb_config_defaultvault"
     },
     {
       "relation": "imports",
@@ -4523,9 +5231,9 @@
       "source_file": "src/kb/commands/dev/start.js",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_start",
-      "target": "kb_config_getvault",
-      "confidence_score": 1.0
+      "target": "kb_config_getvault"
     },
     {
       "relation": "imports",
@@ -4534,9 +5242,9 @@
       "source_file": "src/kb/commands/dev/start.js",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_start",
-      "target": "kb_config_loadconfig",
-      "confidence_score": 1.0
+      "target": "kb_config_loadconfig"
     },
     {
       "relation": "imports_from",
@@ -4545,9 +5253,9 @@
       "source_file": "src/kb/commands/dev/start.js",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_start",
-      "target": "kb_note",
-      "confidence_score": 1.0
+      "target": "kb_note"
     },
     {
       "relation": "imports",
@@ -4556,9 +5264,9 @@
       "source_file": "src/kb/commands/dev/start.js",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_start",
-      "target": "kb_note_today",
-      "confidence_score": 1.0
+      "target": "kb_note_today"
     },
     {
       "relation": "imports_from",
@@ -4567,9 +5275,9 @@
       "source_file": "src/kb/commands/dev/start.js",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_start",
-      "target": "kb_paths",
-      "confidence_score": 1.0
+      "target": "kb_paths"
     },
     {
       "relation": "imports",
@@ -4578,9 +5286,9 @@
       "source_file": "src/kb/commands/dev/start.js",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_start",
-      "target": "kb_paths_engine_root",
-      "confidence_score": 1.0
+      "target": "kb_paths_engine_root"
     },
     {
       "relation": "imports",
@@ -4589,9 +5297,9 @@
       "source_file": "src/kb/commands/dev/start.js",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_start",
-      "target": "kb_paths_expandpath",
-      "confidence_score": 1.0
+      "target": "kb_paths_expandpath"
     },
     {
       "relation": "imports_from",
@@ -4600,9 +5308,9 @@
       "source_file": "src/kb/commands/dev/start.js",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_start",
-      "target": "kb_templates",
-      "confidence_score": 1.0
+      "target": "kb_templates"
     },
     {
       "relation": "imports",
@@ -4611,9 +5319,9 @@
       "source_file": "src/kb/commands/dev/start.js",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "dev_start",
-      "target": "kb_templates_rendertokens",
-      "confidence_score": 1.0
+      "target": "kb_templates_rendertokens"
     },
     {
       "relation": "calls",
@@ -4834,9 +5542,9 @@
       "source_file": "src/kb/commands/graph.js",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "commands_graph",
-      "target": "kb_graphify_buildmonoreporoot",
-      "confidence_score": 1.0
+      "target": "kb_graphify_buildmonoreporoot"
     },
     {
       "relation": "imports",
@@ -5032,9 +5740,9 @@
       "source_file": "src/kb/commands/graph.js",
       "source_location": "L55",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "commands_graph_build",
-      "target": "kb_graphify_buildmonoreporoot",
-      "confidence_score": 1.0
+      "target": "kb_graphify_buildmonoreporoot"
     },
     {
       "relation": "calls",
@@ -5565,9 +6273,9 @@
       "source_file": "src/kb/commands/new.js",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "commands_new",
-      "target": "kb_paths_engine_root",
-      "confidence_score": 1.0
+      "target": "kb_paths_engine_root"
     },
     {
       "relation": "imports",
@@ -5711,516 +6419,6 @@
       "weight": 1.0,
       "source": "commands_new_run",
       "target": "kb_routing_resolvenewtarget"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L25",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project",
-      "target": "commands_project_add"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L30",
-      "weight": 1.0,
-      "source": "commands_project",
-      "target": "commands_project_applytoproject",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L95",
-      "weight": 1.0,
-      "source": "commands_project",
-      "target": "commands_project_inithygiene",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L65",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project",
-      "target": "commands_project_list"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L74",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project",
-      "target": "commands_project_remove"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project",
-      "target": "commands_project_run"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L82",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project",
-      "target": "commands_project_scan"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project",
-      "target": "kb_config"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project",
-      "target": "kb_config_getproject"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project",
-      "target": "kb_config_loadconfig"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project",
-      "target": "kb_config_saveconfig"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project",
-      "target": "kb_paths"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project",
-      "target": "kb_paths_expandpath"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project",
-      "target": "kb_registry"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project",
-      "target": "kb_registry_detectsubprojects"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project",
-      "target": "kb_registry_removeproject"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project",
-      "target": "kb_registry_upsertgroup"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project",
-      "target": "kb_registry_upsertproject"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "commands_project",
-      "target": "kb_repo_hygiene",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "commands_project",
-      "target": "kb_repo_hygiene_applyhygiene",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "commands_project",
-      "target": "kb_repo_hygiene_installhook",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project_run",
-      "target": "commands_project_add"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L21",
-      "weight": 1.0,
-      "source": "commands_project_run",
-      "target": "commands_project_inithygiene",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L16",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project_run",
-      "target": "commands_project_remove"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L18",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project_run",
-      "target": "commands_project_scan"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L90",
-      "weight": 1.0,
-      "source": "commands_project_add",
-      "target": "commands_project_applytoproject",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L31",
-      "weight": 1.0,
-      "source": "commands_project_applytoproject",
-      "target": "kb_paths_expandpath",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L41",
-      "weight": 1.0,
-      "source": "commands_project_applytoproject",
-      "target": "kb_repo_hygiene_applyhygiene",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L42",
-      "weight": 1.0,
-      "source": "commands_project_applytoproject",
-      "target": "kb_repo_hygiene_installhook",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L101",
-      "weight": 1.0,
-      "source": "commands_project_inithygiene",
-      "target": "commands_project_applytoproject",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L30",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project_add",
-      "target": "kb_config_loadconfig"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L61",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project_add",
-      "target": "kb_config_saveconfig"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L27",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project_add",
-      "target": "kb_paths_expandpath"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L37",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project_add",
-      "target": "kb_registry_detectsubprojects"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L57",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project_add",
-      "target": "kb_registry_upsertgroup"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L52",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project_add",
-      "target": "kb_registry_upsertproject"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L98",
-      "weight": 1.0,
-      "source": "commands_project_inithygiene",
-      "target": "kb_config_getproject",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L97",
-      "weight": 1.0,
-      "source": "commands_project_inithygiene",
-      "target": "kb_config_loadconfig",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L66",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project_list",
-      "target": "kb_config_loadconfig"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L76",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project_remove",
-      "target": "kb_config_loadconfig"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L78",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project_remove",
-      "target": "kb_config_saveconfig"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L77",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project_remove",
-      "target": "kb_registry_removeproject"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L85",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project_scan",
-      "target": "kb_config_getproject"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L84",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project_scan",
-      "target": "kb_config_loadconfig"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L91",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project_scan",
-      "target": "kb_config_saveconfig"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L87",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project_scan",
-      "target": "kb_paths_expandpath"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/kb/commands/project.js",
-      "source_location": "L87",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_project_scan",
-      "target": "kb_registry_detectsubprojects"
     },
     {
       "relation": "contains",
@@ -6452,9 +6650,9 @@
       "source_file": "src/kb/commands/vault.js",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "commands_vault",
-      "target": "kb_templates_renderscaffoldfile",
-      "confidence_score": 1.0
+      "target": "kb_templates_renderscaffoldfile"
     },
     {
       "relation": "imports",
@@ -6749,9 +6947,9 @@
       "source_file": "src/kb/commands/vault.js",
       "source_location": "L131",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "commands_vault_sync",
-      "target": "kb_templates_renderscaffoldfile",
-      "confidence_score": 1.0
+      "target": "kb_templates_renderscaffoldfile"
     },
     {
       "relation": "calls",
@@ -7125,9 +7323,9 @@
       "source_file": "src/kb/graphify.js",
       "source_location": "L61",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "kb_graphify",
-      "target": "kb_graphify_buildmonoreporoot",
-      "confidence_score": 1.0
+      "target": "kb_graphify_buildmonoreporoot"
     },
     {
       "relation": "contains",
@@ -7219,9 +7417,9 @@
       "source_file": "src/kb/graphify.js",
       "source_location": "L68",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "kb_graphify_buildmonoreporoot",
-      "target": "kb_graphify_updategraph",
-      "confidence_score": 1.0
+      "target": "kb_graphify_updategraph"
     },
     {
       "relation": "calls",
@@ -7230,9 +7428,9 @@
       "source_file": "src/kb/graphify.js",
       "source_location": "L77",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "kb_graphify_buildmonoreporoot",
-      "target": "kb_graphify_mergegraphs",
-      "confidence_score": 1.0
+      "target": "kb_graphify_mergegraphs"
     },
     {
       "relation": "contains",
@@ -7491,9 +7689,9 @@
       "source_file": "src/kb/repo-hygiene.js",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "kb_repo_hygiene",
-      "target": "kb_paths",
-      "confidence_score": 1.0
+      "target": "kb_paths"
     },
     {
       "relation": "imports_from",
@@ -7513,9 +7711,9 @@
       "source_file": "src/kb/repo-hygiene.js",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "kb_repo_hygiene",
-      "target": "kb_paths_engine_root",
-      "confidence_score": 1.0
+      "target": "kb_paths_engine_root"
     },
     {
       "relation": "imports",
@@ -7645,9 +7843,9 @@
       "source_file": "src/kb/repo-hygiene.js",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "kb_repo_hygiene",
-      "target": "kb_repo_hygiene_applyhygiene",
-      "confidence_score": 1.0
+      "target": "kb_repo_hygiene_applyhygiene"
     },
     {
       "relation": "contains",
@@ -7655,9 +7853,9 @@
       "source_file": "src/kb/repo-hygiene.js",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "kb_repo_hygiene",
-      "target": "kb_repo_hygiene_detectstack",
-      "confidence_score": 1.0
+      "target": "kb_repo_hygiene_detectstack"
     },
     {
       "relation": "contains",
@@ -7665,9 +7863,9 @@
       "source_file": "src/kb/repo-hygiene.js",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "kb_repo_hygiene",
-      "target": "kb_repo_hygiene_hygiene_dir",
-      "confidence_score": 1.0
+      "target": "kb_repo_hygiene_hygiene_dir"
     },
     {
       "relation": "contains",
@@ -7675,9 +7873,9 @@
       "source_file": "src/kb/repo-hygiene.js",
       "source_location": "L69",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "kb_repo_hygiene",
-      "target": "kb_repo_hygiene_installhook",
-      "confidence_score": 1.0
+      "target": "kb_repo_hygiene_installhook"
     },
     {
       "relation": "contains",
@@ -7685,9 +7883,9 @@
       "source_file": "src/kb/repo-hygiene.js",
       "source_location": "L48",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "kb_repo_hygiene",
-      "target": "kb_repo_hygiene_mergegitattributes",
-      "confidence_score": 1.0
+      "target": "kb_repo_hygiene_mergegitattributes"
     },
     {
       "relation": "calls",
@@ -7696,9 +7894,9 @@
       "source_file": "src/kb/repo-hygiene.js",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "kb_repo_hygiene_applyhygiene",
-      "target": "kb_repo_hygiene_detectstack",
-      "confidence_score": 1.0
+      "target": "kb_repo_hygiene_detectstack"
     },
     {
       "relation": "calls",
@@ -7707,9 +7905,9 @@
       "source_file": "src/kb/repo-hygiene.js",
       "source_location": "L43",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "kb_repo_hygiene_applyhygiene",
-      "target": "kb_repo_hygiene_mergegitattributes",
-      "confidence_score": 1.0
+      "target": "kb_repo_hygiene_mergegitattributes"
     },
     {
       "relation": "contains",
@@ -7798,9 +7996,9 @@
       "source_file": "src/kb/templates.js",
       "source_location": "L33",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "kb_templates",
-      "target": "kb_templates_renderscaffoldfile",
-      "confidence_score": 1.0
+      "target": "kb_templates_renderscaffoldfile"
     },
     {
       "relation": "contains",
@@ -7808,9 +8006,9 @@
       "source_file": "src/kb/templates.js",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "kb_templates",
-      "target": "kb_templates_rendertokens",
-      "confidence_score": 1.0
+      "target": "kb_templates_rendertokens"
     },
     {
       "relation": "contains",
@@ -7850,9 +8048,9 @@
       "source_file": "src/kb/templates.js",
       "source_location": "L35",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "kb_templates_renderscaffoldfile",
-      "target": "kb_templates_rendertokens",
-      "confidence_score": 1.0
+      "target": "kb_templates_rendertokens"
     },
     {
       "relation": "calls",
@@ -7861,9 +8059,9 @@
       "source_file": "src/kb/templates.js",
       "source_location": "L46",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "kb_templates_substitutetokens",
-      "target": "kb_templates_rendertokens",
-      "confidence_score": 1.0
+      "target": "kb_templates_rendertokens"
     },
     {
       "relation": "contains",
@@ -7927,5 +8125,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "e3e8f61df93cf57be46e04f1364ec375db985ba0"
+  "built_at_commit": "8138e2429421f51f0c38091afb8990ddbaa53c86"
 }
