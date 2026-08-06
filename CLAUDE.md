@@ -98,3 +98,11 @@ substituem.
   `httpie` (nunca curl). Node ≥ 20, pnpm.
 - **Consumidor real dos DSs**: `~/code/ds-agent` (monorepo Nx/pnpm, apps Astro
   em `apps/ds-*`) — é onde os testes e2e do design-system rodam.
+
+<!-- kb:link start -->
+> 📚 **Conhecimento deste projeto mora no vault:** `vault-pessoal/10-projects/gregio-marketplace/`
+>
+> Repo = código + runtime. Docs, arquitetura, ADRs, planos, learnings e research
+> vivem no vault (não crie doc/plano solto aqui). Consulte/registre via skill `kb`;
+> planos cross-project via `kb dev` (skill `devflow`).
+<!-- kb:link end -->
