@@ -4,6 +4,7 @@ import { join, dirname, isAbsolute } from 'node:path';
 import { loadConfig, resolvePythonInterp, graphSources, groupRepos } from '../config.js';
 import { STATE_DIR, CENTRAL_GRAPH_DEFAULT } from '../paths.js';
 import { updateGraph, mergeGraphs, serve, buildMonorepoRoot } from '../graphify.js';
+import { enrichVaultGraph } from '../vault-graph.js';
 
 function centralPath(config) {
   const v = config.central?.graphOut;
@@ -56,7 +57,22 @@ async function build(opts) {
       } else {
         await updateGraph(src.root);
       }
-      process.stdout.write(' ok\n');
+      // Enriquecimento de vault: frontmatter → attrs, [[wikilinks]] → arestas.
+      // Só fontes vault; tolerante a falha (o grafo cru ainda serve).
+      if (src.kind === 'vault') {
+        try {
+          const r = await enrichVaultGraph(src.root, sourceGraphPath(src));
+          process.stdout.write(
+            ` ok (enrich: +${r.addedEdges} wikilink, ${r.enrichedNodes} c/ frontmatter` +
+              (r.wikilinksUnresolved ? `, ${r.wikilinksUnresolved} não resolvidos` : '') +
+              ')\n',
+          );
+        } catch (e) {
+          process.stdout.write(` ok (enrich falhou: ${e.message})\n`);
+        }
+      } else {
+        process.stdout.write(' ok\n');
+      }
     } catch (e) {
       process.stdout.write(` falhou (${e.message})\n`);
     }
