@@ -1,4 +1,6 @@
 # Entradas para o grafo commitado (kb project init-hygiene mescla no .gitattributes do repo).
-# merge=graphify-union: usa o merge-driver do graphify em conflito (union, não textual).
+# merge=graphify: usa o merge-driver do graphify em conflito (union, não textual). O nome
+# do driver é "graphify" (graphify ≥ 0.9; antes era "graphify-union"). O `hook install`
+# registra o driver no .git/config e reconhece esta linha (não duplica).
 # -diff + linguist-generated: não polui PR (sem diff inline, não conta como código).
-graphify-out/graph.json merge=graphify-union -diff linguist-generated=true
+graphify-out/graph.json merge=graphify -diff linguist-generated=true

@@ -49,22 +49,28 @@ export async function applyHygiene(repoRoot, { stack, monorepoRoot = false } = {
   return { stack: resolved };
 }
 
+const GA_COMMENT = '# graphify (kb project init-hygiene)';
+
+// Self-healing: remove QUALQUER linha gerenciada pelo graphify (inclusive stale — driver
+// morto `graphify-union`, `manifest.json` que não é mais versionado, duplicata do
+// `hook install`) + o comentário, preserva as linhas do usuário, e reescreve o bloco
+// canônico do template. Idempotente: rodar 2x com o mesmo template não muda nada.
 async function mergeGitattributes(repoRoot, template) {
   const dst = join(repoRoot, '.gitattributes');
   const existing = existsSync(dst) ? readFileSync(dst, 'utf8') : '';
-  const have = new Set(existing.split('\n').map(l => l.trim()).filter(Boolean));
-  const toAdd = template
-    .split('\n')
-    .filter(l => l.trim() && !l.trim().startsWith('#'))
-    .filter(l => !have.has(l.trim()));
-  if (!toAdd.length) return; // idempotente: já tem todas as regras
 
-  let out = existing;
-  if (out && !out.endsWith('\n')) out += '\n';
-  if (!existing.includes('graphify-out/graph.json')) {
-    out += (out ? '\n' : '') + '# graphify (kb project init-hygiene)\n';
-  }
-  out += toAdd.join('\n') + '\n';
+  const isManaged = line => {
+    const t = line.trim();
+    return t === GA_COMMENT || (t.startsWith('graphify-out/') && /merge=graphify/.test(t));
+  };
+  const userLines = existing.split('\n').filter(l => !isManaged(l));
+  while (userLines.length && userLines[userLines.length - 1].trim() === '') userLines.pop();
+
+  const managed = template.split('\n').filter(l => l.trim() && !l.trim().startsWith('#'));
+
+  let out = userLines.join('\n');
+  if (out) out += '\n\n';
+  out += GA_COMMENT + '\n' + managed.join('\n') + '\n';
   await writeFile(dst, out);
 }
 
