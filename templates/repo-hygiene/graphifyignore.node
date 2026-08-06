@@ -9,3 +9,5 @@ __generated__/
 storybook-static/
 .tsbuildinfo
 tsconfig.tsbuildinfo
+# nx descriptors (config, zero nós)
+project.json

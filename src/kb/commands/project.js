@@ -41,7 +41,9 @@ async function applyToProject(project) {
       console.warn(`  ! ${t}: ausente — pulando hygiene`);
       continue;
     }
-    const { stack } = await applyHygiene(t);
+    // Raiz de um monorepo: allowlist reduzida (não versiona o merge da raiz).
+    const monorepoRoot = project.monorepo === true && t === root;
+    const { stack } = await applyHygiene(t, { monorepoRoot });
     const hook = await installHook(t);
     const rel = t === root ? '(raiz)' : t.slice(root.length + 1);
     console.log(`  hygiene ${rel}: .graphifyignore[${stack ?? 'genérico'}] + allowlist + gitattributes` +

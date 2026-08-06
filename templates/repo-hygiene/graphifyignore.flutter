@@ -9,3 +9,5 @@ android/.gradle/
 build/
 .flutter-plugins
 .flutter-plugins-dependencies
+# catálogos de asset xcode/ios (config, zero nós)
+*.xcassets/

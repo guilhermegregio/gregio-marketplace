@@ -2,3 +2,7 @@
 result
 result-*
 .direnv/
+# config de editor/nvim (zero nós)
+.neoconf.json
+lazy-lock.json
+lazyvim.json

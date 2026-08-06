@@ -21,7 +21,10 @@ export function detectStack(repoRoot) {
 
 // Escreve .graphifyignore (base + snippet do stack), graphify-out/.gitignore (allowlist)
 // e mescla .gitattributes (sem duplicar). Retorna { stack }.
-export async function applyHygiene(repoRoot, { stack } = {}) {
+// `monorepoRoot: true` → allowlist reduzida (`* !.gitignore`, sem `!graph.json`): o merge
+// da RAIZ do monorepo NÃO é versionado (grande + o hook flat o clobraria). Ver
+// graphify-out.monorepo-root.gitignore e o learning "monorepo root merge gitignored".
+export async function applyHygiene(repoRoot, { stack, monorepoRoot = false } = {}) {
   const resolved = stack ?? detectStack(repoRoot);
 
   // 1. .graphifyignore = base + snippet do stack (se houver)
@@ -32,11 +35,12 @@ export async function applyHygiene(repoRoot, { stack } = {}) {
   }
   await writeFile(join(repoRoot, '.graphifyignore'), content);
 
-  // 2. graphify-out/.gitignore (allowlist invertida)
+  // 2. graphify-out/.gitignore (allowlist invertida; raiz de monorepo = reduzida)
   await mkdir(join(repoRoot, 'graphify-out'), { recursive: true });
+  const gitignoreTpl = monorepoRoot ? 'graphify-out.monorepo-root.gitignore' : 'graphify-out.gitignore';
   await writeFile(
     join(repoRoot, 'graphify-out', '.gitignore'),
-    readFileSync(join(HYGIENE_DIR, 'graphify-out.gitignore'), 'utf8'),
+    readFileSync(join(HYGIENE_DIR, gitignoreTpl), 'utf8'),
   );
 
   // 3. .gitattributes (mescla regras sem duplicar)
