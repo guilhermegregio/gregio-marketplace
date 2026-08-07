@@ -66,6 +66,25 @@ Quem **monta** o plano (`kb dev start` + edita tasks) **para** e marca o `_plan.
 Só então `kb dev run` (ou execução manual task a task). Detalhe em
 `vault-pessoal/10-projects/ai-dev-harness/plan-structure.md`.
 
+## Despacho distribuído (execução das tasks)
+
+O orquestrador NÃO implementa a task no próprio contexto — **despacha** para o agente
+claude que o `wtree` já abre no worktree, e recebe só um resumo:
+
+```bash
+herdr pane send-text "$PANE" "<prompt autocontido + 'termine com RESULTADO:'>"
+sleep 1; herdr pane send-keys "$PANE" Enter          # Enter separado (paste é lento)
+herdr agent wait "$PANE" --status working --timeout 15000 || reenviar Enter
+herdr agent wait "$PANE" --status idle --timeout 900000   # idle COBRE done
+herdr agent read "$PANE" --source recent-unwrapped --lines 60   # buscar RESULTADO:
+```
+
+Regras: prompt autocontido (o agente não abre o _plan.md); sentinela `RESULTADO:`
+obrigatória; **nunca esperar `--status done`** (vira `idle` quando alguém foca o
+pane); o orquestrador reverifica o diff na coleta (o humano pode ter instruído o
+agente diretamente) e faz o merge — SEMPRE serial, agente de task nunca mergeia.
+Protocolo completo e tabela de falhas: `ai-dev-harness/dispatch-distribuido.md`.
+
 ## Tasks atômicas + paralelismo
 
 Cada task em `tasks/Txx-*.md` é **atômica**: um agente faz execute→validate→iterate→

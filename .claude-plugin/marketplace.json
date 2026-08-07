@@ -41,7 +41,7 @@
       "name": "gregio-cc-devflow",
       "source": "./packages/gregio-cc-devflow",
       "description": "Ciclo de desenvolvimento com CONTRATOS: spec → protótipo (gate) → behaviors Gherkin (gate + freeze) → código → review → finish, via o CLI 'kb dev'. Contrato congelado não se edita para o código passar. Tasks atômicas, execução paralela via herdr+wtree.",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "strict": true
     },
     {
