@@ -6,6 +6,7 @@ import { loadConfig, getVault, defaultVault } from '../../config.js';
 import { expandPath, ENGINE_ROOT } from '../../paths.js';
 import { merge } from '../../frontmatter.js';
 import { asList } from '../../args.js';
+import { unfreeze } from '../../freeze.js';
 import { loadPlan, planDir } from './plan.js';
 
 // kb dev done <slug> [--vault n] [--promote learning,adr,c4] [--force] [--no-graph]
@@ -46,7 +47,13 @@ export async function run({ positionals, opts }) {
   await rename(dir, archiveDir);
   await updateMoc(root, slug, plan.frontmatter?.title ?? slug);
 
-  // 4. Re-merge do grafo central (best-effort).
+  // 4. Descongela os contratos do plano. Sem justificativa aqui de propósito: arquivar
+  // o plano JÁ é a justificativa — o contrato só vale enquanto o plano está ativo, e
+  // esquecer entradas órfãs no índice bloquearia edições legítimas depois.
+  const thawed = await unfreeze({ plan: slug, vault: vault.name });
+  if (thawed > 0) console.log(`🔓 ${thawed} contrato(s) descongelado(s) (plano arquivado)`);
+
+  // 5. Re-merge do grafo central (best-effort).
   if (opts['no-graph'] !== true) {
     const g = spawnSync('node', [join(ENGINE_ROOT, 'bin', 'kb.js'), 'graph', 'merge'], { stdio: ['ignore', 'pipe', 'inherit'], encoding: 'utf8' });
     console.log(g.status === 0 ? 'grafo central re-mergeado.' : 'aviso: re-merge do central falhou (rode "kb graph build" depois).');
