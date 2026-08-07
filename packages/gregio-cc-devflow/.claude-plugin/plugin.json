@@ -1,7 +1,7 @@
 {
   "name": "gregio-cc-devflow",
   "description": "Conduz o ciclo de desenvolvimento ponta-a-ponta num repo (draft → sincronizar → planejar → executar → validar → promover), mantendo o grafo local do repo e a base de conhecimento (vault + grafo central) em dia. Usa o CLI 'kb dev' (start/check/done/run) do repo knowledge-gregio e a skill 'kb' para conhecimento. Tasks atômicas, execução paralela observável via herdr+wtree, gate de revisão humana antes de executar.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "Guilherme Gregio",
     "email": "guilherme@gregio.net"
