@@ -43,6 +43,13 @@
       "description": "Ciclo de desenvolvimento ponta-a-ponta (draft → sincronizar → planejar → executar → validar → promover) via o CLI 'kb dev' (start/check/run/done). Tasks atômicas, execução paralela observável via herdr+wtree, gate de revisão humana. Repo = código; vault = conhecimento.",
       "version": "0.1.0",
       "strict": true
+    },
+    {
+      "name": "gregio-cc-rules",
+      "source": "./packages/gregio-cc-rules",
+      "description": "Rules por contexto (Next server/client, Astro DS, n8n, Supabase SQL) instaláveis em qualquer repo via script. Cada rule é markdown curto com regras nascidas de dor real. Materializa em <repo>/.claude/rules/ por stack detectado, idempotente e versionado.",
+      "version": "0.1.0",
+      "strict": true
     }
   ]
 }
