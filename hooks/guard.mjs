@@ -70,8 +70,37 @@ if (!filePath) allow();
 const target = resolve(filePath);
 
 // ---------------------------------------------------------------- 1. freeze ----
+/**
+ * Identidade do arquivo dentro do repo: `<raiz-real>::<caminho-relativo>`.
+ *
+ * O contrato é congelado no path do repo principal, mas o código é escrito em
+ * WORKTREE — outro path para o mesmo arquivo versionado. Sem normalizar, o
+ * guardrail protegeria exatamente onde ninguém edita e liberaria onde todo mundo
+ * edita. `--git-common-dir` aponta para o `.git` do repo principal mesmo a partir
+ * de um worktree, então worktree e repo colapsam na mesma identidade.
+ */
+function repoIdentity(absPath) {
+  try {
+    const common = execFileSync('git', ['-C', dirname(absPath), 'rev-parse', '--path-format=absolute', '--git-common-dir'], {
+      encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim();
+    const root = dirname(common);
+    const top = execFileSync('git', ['-C', dirname(absPath), 'rev-parse', '--show-toplevel'], {
+      encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim();
+    return `${root}::${absPath.slice(top.length + 1)}`;
+  } catch {
+    return null;
+  }
+}
+
 const index = readJson(FREEZE_INDEX, { entries: [] });
-const frozen = (index.entries ?? []).find(e => resolve(e.file) === target);
+const targetIdentity = repoIdentity(target);
+const frozen = (index.entries ?? []).find(e => {
+  if (resolve(e.file) === target) return true;
+  if (!targetIdentity) return false;
+  return repoIdentity(resolve(e.file)) === targetIdentity;
+});
 if (frozen) {
   deny(
     `🧊 CONTRATO CONGELADO — ${frozen.file}\n\n` +
