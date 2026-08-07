@@ -35,8 +35,12 @@ Comandos:
   project list | remove <n> | scan <n>
   group new <n> [--title t] | add <g> <membro...> | rm <g> <membro> | list
   graph build [--group g] [--force] | merge | serve
-  dev start <slug> --vault <n> --project <repo> [--title t]   cria um plano (draft)
-  dev check <slug> [--task Txx]    valida DAG + ready-set; roda gates de uma task
+  dev start <slug> --vault <n> --project <repo> [--title t] [--ui] [--no-contract]
+                                   cria um plano (draft) com as tasks-gate do devflow
+  dev check <slug> [--task Txx]    valida DAG + ready-set + drift de contrato
+  dev freeze <slug>                congela os contracts do plano (behaviors.feature)
+  dev unfreeze <slug> --reason ""  descongela (exige justificativa; registra no plano)
+  dev frozen [--slug s]            lista contratos congelados e o que saiu do lugar
   dev done <slug> [--promote ...]  promove durável + arquiva o plano + re-merge central
   dev run <slug> [--max N] [--dry-run]   orquestra as tasks (ver plan-structure)
   source discord|gmail ...    (fase posterior)

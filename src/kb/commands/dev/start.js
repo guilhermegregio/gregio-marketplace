@@ -6,8 +6,13 @@ import { expandPath, ENGINE_ROOT } from '../../paths.js';
 import { renderTokens } from '../../templates.js';
 import { today } from '../../note.js';
 
-// kb dev start <slug> --vault <n> --project <repo> [--title t]
+// kb dev start <slug> --vault <n> --project <repo> [--title t] [--ui] [--no-contract]
 // Scaffolda 30-plans/<slug>/{_plan.md, tasks/, execution/} a partir do plan-skeleton.
+//
+// devflow v2: o plano nasce com as tasks-gate do fluxo
+//   spec → prototype ⛔ → behaviors ⛔🧊 → code → review → finish
+// `--ui` acrescenta a task de protótipo (fluxo com tela); `--no-contract` pula a task
+// de behaviors (plano sem comportamento observável — refactor puro, doc, infra).
 export async function run({ positionals, opts }) {
   const slug = positionals[0];
   if (!slug) throw new Error('uso: kb dev start <slug> --vault <n> --project <repo> [--title "..."]');
@@ -43,6 +48,24 @@ export async function run({ positionals, opts }) {
     }
   }
 
+  // Tasks-gate do devflow v2. Ids TP/TB são propositalmente fora da sequência
+  // numérica: são estágios do fluxo, não itens de trabalho paralelizáveis.
+  const stagesDir = join(skel, 'stages');
+  const staged = [];
+  if (existsSync(stagesDir)) {
+    if (opts.ui) {
+      await writeFile(join(dir, 'tasks', 'TP.md'), renderTokens(await readFile(join(stagesDir, 'prototype.md'), 'utf8'), tokens));
+      staged.push('TP (protótipo ⛔)');
+    }
+    if (opts['no-contract'] !== true) {
+      let tb = renderTokens(await readFile(join(stagesDir, 'behaviors.md'), 'utf8'), tokens);
+      if (!opts.ui) tb = tb.replace('depends_on: [TP]', 'depends_on: []');
+      await writeFile(join(dir, 'tasks', 'TB.md'), tb);
+      staged.push('TB (contrato ⛔🧊)');
+    }
+  }
+
   console.log(`Plano criado: ${dir} (status: draft)`);
+  if (staged.length) console.log(`Tasks-gate: ${staged.join(', ')} — as tasks de código dependem delas.`);
   console.log('Edite _plan.md + tasks/, troque para status: ready-for-review e pare para revisão (gate de handoff).');
 }

@@ -3,6 +3,7 @@ import { spawnSync } from 'node:child_process';
 import { loadConfig, getVault, defaultVault, getProject } from '../../config.js';
 import { expandPath } from '../../paths.js';
 import { merge } from '../../frontmatter.js';
+import { driftedFiles } from '../../freeze.js';
 import { loadPlan, buildDag, readySet } from './plan.js';
 
 // kb dev check <slug> [--task Txx] [--vault n]
@@ -26,6 +27,16 @@ export async function run({ positionals, opts }) {
     }
     const ready = readySet(tasks).map(t => t.id);
     console.log(`\nready agora: ${ready.join(', ') || '(nenhuma)'}`);
+
+    // Contratos congelados: drift aqui é o sinal mais importante do plano — quer
+    // dizer que alguém mudou o combinado no meio da implementação.
+    const drift = await driftedFiles(slug);
+    if (drift.length) {
+      console.log(`\n⚠️  ${drift.length} contrato(s) alterado(s) sem unfreeze:`);
+      for (const d of drift) console.log(`   ${d.file} — ${d.reason}`);
+      console.log('   Reverta a edição, ou `kb dev unfreeze --reason` e recongele.');
+      process.exitCode = 1;
+    }
     return;
   }
 

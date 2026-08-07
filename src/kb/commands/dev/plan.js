@@ -24,7 +24,12 @@ export async function loadPlan(vaultRoot, slug) {
   const tasksDir = join(dir, 'tasks');
   const tasks = [];
   if (existsSync(tasksDir)) {
-    for (const f of (await readdir(tasksDir)).filter(f => f.endsWith('.md')).sort()) {
+    // `_task.md` é o MODELO (vem com id T01 preenchido pelo skeleton) — arquivo
+    // começando com `_` nunca é task, senão o template entra no DAG.
+    const files = (await readdir(tasksDir))
+      .filter(f => f.endsWith('.md') && !f.startsWith('_'))
+      .sort();
+    for (const f of files) {
       const p = join(tasksDir, f);
       const { frontmatter, body } = parse(await readFile(p, 'utf8'));
       if (!frontmatter?.id) continue; // ignora _task.md template / arquivos sem id
@@ -68,8 +73,11 @@ function norm(p) {
   return String(p).replace(/\/?\*+$/, '').replace(/\/+$/, '');
 }
 export function scopeOverlaps(a = [], b = []) {
-  for (const x of a.map(norm)) {
-    for (const y of b.map(norm)) {
+  // Scope malformado (null, string solta, item vazio no YAML) não pode derrubar o
+  // planejamento: normaliza para lista de strings úteis.
+  const list = v => (Array.isArray(v) ? v : v == null ? [] : [v]).filter(Boolean).map(String);
+  for (const x of list(a).map(norm)) {
+    for (const y of list(b).map(norm)) {
       if (x === y || x.startsWith(y + '/') || y.startsWith(x + '/')) return true;
     }
   }
