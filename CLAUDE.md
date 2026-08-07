@@ -41,16 +41,23 @@ kb group new <n> | add <g> <m...> | list # produtos lógicos (agregam repos/subp
 kb graph build [--group g]              # freshen por fonte + merge no central
 kb graph serve                          # sobe o MCP (interp Python absoluto)
 
-# Ciclo de planos cross-project (skill devflow)
-kb dev start <slug> --vault <n> --project <p>
-kb dev check <slug> [--task Txx]        # valida DAG / roda gates
-kb dev run <slug>                       # computa ondas de execução paralela
+# Ciclo de planos cross-project (skill devflow) — fluxo v2:
+#   spec → protótipo ⛔ → behaviors ⛔🧊 → código → review → finish
+kb dev start <slug> --vault <n> --project <p> [--ui]   # --ui scaffolda a task-gate TP
+kb dev check <slug> [--task Txx]        # valida DAG / gates / drift de contrato
+kb dev freeze <slug>                    # 🧊 congela os behaviors.feature aprovados
+kb dev unfreeze <slug> --reason "..."   # descongela (decisão de produto, com rastro)
+kb dev run <slug>                       # computa ondas; avisa se o repo está na main
 kb dev done <slug> [--promote ...]      # promove learnings/ADRs → arquiva plano → re-merge
 ```
 
 Arquitetura do engine: `src/kb/` (`config.js`, `routing.js`, `frontmatter.js`,
 `graphify.js` = chokepoint do scan-root, `repo-hygiene.js`, `repo-claudemd.js`,
-`commands/`). Config no XDG (`~/.config/kb/config.json`, **não** neste repo).
+`freeze.js` = índice de contratos congelados, `commands/`). Config no XDG
+(`~/.config/kb/config.json`, **não** neste repo); estado em `~/.local/state/kb/`.
+
+`hooks/guard.mjs` é o guardrail no Claude Code: **bloqueia** edição de contrato
+congelado e **avisa** ao escrever na main de repo com plano ativo. Ver `hooks/README.md`.
 
 ## Comandos (arquivador de Discord)
 

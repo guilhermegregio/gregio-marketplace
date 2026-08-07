@@ -1,4 +1,6 @@
-import { loadConfig, getVault, defaultVault } from '../../config.js';
+import { execFileSync } from 'node:child_process';
+import { existsSync } from 'node:fs';
+import { loadConfig, getVault, defaultVault, getProject } from '../../config.js';
 import { expandPath } from '../../paths.js';
 import { loadPlan, buildDag, scopeOverlaps } from './plan.js';
 
@@ -47,10 +49,33 @@ export async function run({ positionals, opts }) {
   console.log('\n# Onda 1 — despache cada task no seu worktree+workspace (herdr):');
   for (const t of waves[0]) {
     const branch = t.fm.branch ?? `${t.id}-${slug}`;
+    const state = repoBranchState(config, t.fm.repo);
+    if (state === 'main') {
+      // Guardrail: o repo está na main. Feature vai em worktree — despachar aqui
+      // significaria trabalhar direto na branch principal.
+      console.log(`  ⚠️  ${t.id}: ${t.fm.repo} está na main — crie o worktree ANTES de despachar:`);
+    }
     console.log(`  wtree ${branch} --herdr   # depois: injete tasks/${t.id}*.md no pane AI`);
   }
   console.log('\nAo cada task reportar done: verifique `git diff --name-only ⊆ scope`,');
   console.log('faça o merge LOCAL na branch de integração, e re-rode `kb dev run` para a próxima onda.');
+}
+
+// Branch atual do repo de uma task: 'main' | 'feature' | null (repo desconhecido).
+// Serve ao guardrail do wtree — o despacho pressupõe worktree, não main.
+function repoBranchState(config, repo) {
+  if (!repo || repo === 'cross') return null;
+  const proj = getProject(config, repo);
+  const path = proj ? expandPath(proj.path) : null;
+  if (!path || !existsSync(path)) return null;
+  try {
+    const b = execFileSync('git', ['-C', path, 'rev-parse', '--abbrev-ref', 'HEAD'], {
+      encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim();
+    return b === 'main' || b === 'master' ? 'main' : 'feature';
+  } catch {
+    return null;
+  }
 }
 
 // Simula as ondas: readiness por deps + seleção gulosa de escopos disjuntos até `max`.

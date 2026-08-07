@@ -14,6 +14,7 @@ stack: []
 tags: [{{SLUG}}, plano]
 visibility: {{VISIBILITY}}
 gates_globais: []
+contracts: []                   # behaviors.feature congelados por `kb dev freeze`
 created: {{DATE}}
 updated: {{DATE}}
 ---
@@ -22,6 +23,11 @@ updated: {{DATE}}
 
 > Plano em `draft`. Ao terminar de montar as tasks, troque para `ready-for-review` e
 > pare (gate de handoff). Veja [[plan-structure]].
+>
+> **Fluxo (devflow v2):** spec → protótipo ⛔ → behaviors ⛔🧊 → código → review →
+> finish. Os ⛔ são gates humanos; o 🧊 é o freeze do contrato: depois dele, cenário
+> quebrando significa código errado. Mudar comportamento exige
+> `kb dev unfreeze <slug> --reason "..."`.
 
 ## Objetivo
 
