@@ -49,3 +49,25 @@ Com `--dry-run` mostra o que faria sem escrever nada.
 
 Node ≥ 20, zero dependências. `docker` e `graphify` são opcionais — checks que
 dependem deles são pulados/acusados conforme o caso.
+
+## `status` — trabalho não salvo
+
+```bash
+node scripts/harness.mjs status            # só o que tem risco (exit 1 se houver)
+node scripts/harness.mjs status --all      # inclui os repos limpos
+node scripts/harness.mjs status ~/outro    # outra base
+```
+
+Varre os repos git de `~/code` e reporta:
+
+| achado | por que importa |
+|---|---|
+| mudanças não commitadas | o clássico |
+| commits não enviados / não baixados | `ahead`/`behind` do upstream |
+| **branch não mergeada** | `wtree --rm -f` apaga branch sem perguntar — já custou um `git fsck` |
+| **worktree ativo** | trabalho aberto que ninguém lembra que existe |
+| **diretório órfão em `~/code/worktrees`** | sobra de worktree removido: o git não conhece mais, os arquivos ficam |
+| stash pendente | o esconderijo que todo mundo esquece |
+
+Origem: `~/code/check-uncommitted.sh` (uncommitted + ahead/behind). Os três itens em
+negrito são a parte que o fluxo com worktree acrescentou de risco.

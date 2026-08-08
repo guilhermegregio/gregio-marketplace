@@ -4,6 +4,8 @@
  *
  * Subcomandos:
  *   doctor            valida o conjunto e imprime relatório ✓/✗ (exit 1 se houver ✗)
+ *   status            trabalho não salvo nos repos (uncommitted, unpushed, branch
+ *                     não mergeada, worktree ativo, stash) — exit 1 se houver risco
  *   map               cruza ~/code com os projects do kb e lista os não registrados
  *   install <repo>    materializa rules (delega ao gregio-cc-rules) + hook guard.mjs
  *                     no settings.json global. Aceita --dry-run.
@@ -12,10 +14,16 @@
  * (ver CLAUDE.md do package) — não remova checks sem registrar o porquê.
  */
 import { copyFileSync, existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
-import { dirname, join, resolve } from "node:path";
+import { basename, dirname, join, resolve } from "node:path";
 import { homedir } from "node:os";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import {
+  findOrphanWorktreeDirs,
+  findRepos,
+  hasWarnings,
+  repoStatus,
+} from "./lib/repo-status.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const home = homedir();
@@ -154,6 +162,52 @@ function map() {
   for (const r of missing) console.log(`  ${r}\n    → kb project add ${r}`);
 }
 
+// ─── status ──────────────────────────────────────────────────────────────────
+
+/**
+ * Onde há trabalho não salvo. Nasceu de `~/code/check-uncommitted.sh` e cresceu
+ * para os riscos que o fluxo com worktree cria: branch não mergeada (o
+ * `wtree --rm -f` apaga sem perguntar) e sobras em `~/code/worktrees`.
+ */
+function status(baseDirArg, { all = false } = {}) {
+  const baseDir = resolve(baseDirArg ?? join(home, "code"));
+  const repos = findRepos(baseDir);
+  if (!repos.length) {
+    console.log(`nenhum repo git em ${baseDir}`);
+    return;
+  }
+
+  let risky = 0;
+  for (const repo of repos) {
+    const st = repoStatus(repo);
+    const warn = hasWarnings(st);
+    if (warn) risky += 1;
+    if (!warn && !all) continue;
+
+    const name = basename(repo);
+    console.log(`${warn ? "⚠️ " : "✓ "} ${name}`);
+    if (st.error) console.log(`     ✗ ${st.error}`);
+    for (const f of st.findings) {
+      console.log(`     ${f.level === "warn" ? "•" : "·"} ${f.what}: ${f.detail}`);
+    }
+  }
+
+  // Sobras de worktree: o git não as conhece mais, então nenhum repo as reporta.
+  const orphans = findOrphanWorktreeDirs(join(baseDir, "worktrees"));
+  if (orphans.length) {
+    console.log(`\n⚠️  ${orphans.length} diretório(s) órfão(s) em ${join(baseDir, "worktrees")}:`);
+    for (const o of orphans) console.log(`     ${basename(o)}  → confira e apague: rm -rf ${o}`);
+    risky += orphans.length;
+  }
+
+  console.log(
+    risky
+      ? `\n${risky} item(ns) com trabalho não salvo — commit, push, merge ou descarte antes de trocar de contexto.`
+      : `\n✓ ${repos.length} repo(s) limpos.`,
+  );
+  if (risky) process.exitCode = 1;
+}
+
 // ─── install ─────────────────────────────────────────────────────────────────
 
 /** Delegação, nunca duplicação: as rules moram no gregio-cc-rules. */
@@ -238,6 +292,9 @@ switch (cmd) {
   case "doctor":
     doctor();
     break;
+  case "status":
+    status(positional[0], { all: rest.includes("--all") });
+    break;
   case "map":
     map();
     break;
@@ -245,6 +302,6 @@ switch (cmd) {
     install(positional[0], dryRun);
     break;
   default:
-    console.log("uso: harness.mjs <doctor|map|install <repo> [--dry-run]>");
+    console.log("uso: harness.mjs <doctor|status [dir] [--all]|map|install <repo> [--dry-run]>");
     process.exit(cmd ? 1 : 0);
 }
