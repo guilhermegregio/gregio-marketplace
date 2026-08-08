@@ -44,3 +44,15 @@ node scripts/harness.mjs doctor          # exit 1 é resultado válido se houver
 node scripts/harness.mjs map
 node scripts/harness.mjs install /tmp/repo-fake --dry-run
 ```
+
+## `status` — contratos
+
+- **`warn` vs `info`**: `warn` = "você perde trabalho se ignorar" (uncommitted, ahead,
+  stash, branch não mergeada); `info` = contexto (worktree ativo, behind). O exit 1 só
+  conta `warn` — quem usa isso em CI/hook não pode ser interrompido por informação.
+- **Nunca apaga nada.** Diretório órfão em `~/code/worktrees` é REPORTADO com o `rm -rf`
+  pronto para copiar; executar por conta própria seria apagar trabalho que o git já não
+  consegue recuperar.
+- **1 nível de profundidade** em `~/code`: monorepo é um repo, não varremos dentro.
+- **Branch principal** é `main` ou `master`, o que existir; sem nenhuma das duas, o
+  check de branch não mergeada é pulado (não inventa base de comparação).
