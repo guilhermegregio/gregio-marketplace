@@ -1,7 +1,7 @@
 {
   "name": "gregio-cc-rules",
-  "description": "Rules por contexto (Next server/client, Astro DS, n8n, Supabase SQL) instaláveis em qualquer repo via script. Cada rule é um markdown curto com regras nascidas de dor real — o que quebrou, por quê, e a forma certa. Materializa em <repo>/.claude/rules/ por stack, idempotente e versionado.",
-  "version": "0.1.0",
+  "description": "Rules por contexto (Next server/client, Astro DS, n8n, Supabase SQL) instaláveis em qualquer repo com 'kb rules <repo>'. Cada rule é um markdown curto com regras nascidas de dor real — o que quebrou, por quê, e a forma certa. Materializa em <repo>/.claude/rules/ por stack, idempotente e versionado.",
+  "version": "0.2.0",
   "author": {
     "name": "Guilherme Gregio",
     "email": "guilherme@gregio.net"

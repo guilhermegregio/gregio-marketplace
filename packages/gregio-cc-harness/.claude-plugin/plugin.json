@@ -1,7 +1,7 @@
 {
   "name": "gregio-cc-harness",
-  "description": "CLI de bootstrap do harness: 'status (trabalho não salvo nos repos), doctor' valida o conjunto (kb config, plugins habilitados, hook guard.mjs, graphify, credenciais n8n dev vs prod), 'map' cruza ~/code com os projects do kb e lista repos não registrados, 'install <repo>' materializa as rules (delegando ao gregio-cc-rules) e garante o hook guard.mjs no settings.json global.",
-  "version": "0.2.1",
+  "description": "Doc e contratos do bootstrap do harness — a implementação vive no engine kb: 'kb doctor' valida o conjunto (kb config, plugins habilitados, hook do guard, graphify, credenciais n8n dev vs prod), 'kb status' aponta trabalho não salvo (uncommitted/unpushed/branch não mergeada/worktree órfão), 'kb map' lista repos de ~/code fora do kb, 'kb rules <repo>' materializa as rules e 'kb guard' é o hook PreToolUse dos guardrails.",
+  "version": "0.3.0",
   "author": {
     "name": "Guilherme Gregio",
     "email": "guilherme@gregio.net"

@@ -5,12 +5,18 @@ Rules por contexto para os repos do harness. Cada rule é um markdown curto com 
 
 ## Instalar num repo
 
+O instalador é o engine `kb` (`scripts/install-rules.mjs` virou stub de deprecação):
+
 ```bash
-node scripts/install-rules.mjs /caminho/do/repo            # auto-detecta stacks
-node scripts/install-rules.mjs /caminho/do/repo --dry-run  # mostra o que faria
-node scripts/install-rules.mjs /caminho/do/repo --stack next,sql
-node scripts/install-rules.mjs --list                      # rules disponíveis
+kb rules /caminho/do/repo            # auto-detecta stacks
+kb rules /caminho/do/repo --dry-run  # mostra o que faria
+kb rules /caminho/do/repo --stack next,sql
+kb rules --list                      # rules disponíveis
 ```
+
+O `kb rules` acha este diretório por `KB_RULES_DIR`, pelo path relativo ao engine
+(checkout/worktree do marketplace) ou pelo marketplace instalado em
+`~/.claude/plugins/repos/`.
 
 Materializa em `<repo>/.claude/rules/*.md`. Idempotente: rodar de novo atualiza, e o
 `git diff` do repo mostra o que mudou. `--prune` remove rules deste package que não se

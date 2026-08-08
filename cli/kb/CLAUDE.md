@@ -49,15 +49,26 @@ kb dev freeze <slug>                    # 🧊 congela os behaviors.feature apro
 kb dev unfreeze <slug> --reason "..."   # descongela (decisão de produto, com rastro)
 kb dev run <slug>                       # computa ondas; avisa se o repo está na main
 kb dev done <slug> [--promote ...]      # promove learnings/ADRs → arquiva plano → re-merge
+
+# Harness (bootstrap e guardrails do ambiente)
+kb doctor                               # ✓/✗ do conjunto (exit 1 se houver ✗)
+kb status [dir] [--all]                 # trabalho não salvo nos repos (exit 1 se houver risco)
+kb map [dir]                            # repos git de ~/code fora do kb
+kb rules <repo> [--stack a,b] [--dry-run] [--prune] [--list]   # rules do gregio-cc-rules
+kb guard                                # hook PreToolUse (stdin JSON → stdout JSON)
 ```
 
 Arquitetura do engine: `src/kb/` (`config.js`, `routing.js`, `frontmatter.js`,
 `graphify.js` = chokepoint do scan-root, `repo-hygiene.js`, `repo-claudemd.js`,
-`freeze.js` = índice de contratos congelados, `commands/`). Config no XDG
-(`~/.config/kb/config.json`, **não** neste repo); estado em `~/.local/state/kb/`.
+`freeze.js` = índice de contratos congelados, `repo-status.js` = varredura de trabalho
+não salvo, `commands/`). Config no XDG (`~/.config/kb/config.json`, **não** neste repo);
+estado em `~/.local/state/kb/`.
 
-`hooks/guard.mjs` é o guardrail no Claude Code: **bloqueia** edição de contrato
-congelado e **avisa** ao escrever na main de repo com plano ativo. Ver `hooks/README.md`.
+`kb guard` é o guardrail no Claude Code (subcomando, não script solto): **bloqueia**
+edição de contrato congelado e **avisa** ao escrever na main de repo com plano ativo.
+Instala-se como hook `PreToolUse` com `"command": "kb guard"` — qualquer exceção nele
+libera a chamada, um guardrail quebrado não pode travar o trabalho. Contratos e doc do
+consumidor: `packages/gregio-cc-harness/`.
 
 ## Comandos (arquivador de Discord)
 

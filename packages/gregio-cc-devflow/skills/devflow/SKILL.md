@@ -38,7 +38,7 @@ feito — deixa de ser contrato.
 
 **O freeze é o que dá dente ao contrato.** Com os behaviors congelados, um cenário
 falhando significa **o código está errado** — a saída fácil (editar o cenário) fica
-bloqueada pelo hook `guard.mjs`. Se o comportamento realmente precisa mudar, isso é
+bloqueada pelo hook `kb guard`. Se o comportamento realmente precisa mudar, isso é
 decisão de produto: peça ao usuário e registre com
 `kb dev unfreeze <slug> --reason "..."` (o motivo vai para o `_plan.md`), ajuste e
 recongele.

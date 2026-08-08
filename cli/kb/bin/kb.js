@@ -12,6 +12,13 @@ const COMMANDS = {
   group: () => import('../src/kb/commands/group.js'),
   dev: () => import('../src/kb/commands/dev/index.js'),
   source: () => import('../src/kb/commands/source.js'),
+  // harness: bootstrap e guardrails do ambiente (nasceram como scripts soltos do
+  // gregio-cc-harness/gregio-cc-rules; o engine é o dono agora).
+  doctor: () => import('../src/kb/commands/doctor.js'),
+  status: () => import('../src/kb/commands/status.js'),
+  map: () => import('../src/kb/commands/map.js'),
+  rules: () => import('../src/kb/commands/rules.js'),
+  guard: () => import('../src/kb/commands/guard.js'),
 };
 
 const HELP = `kb — engine da base de conhecimento
@@ -44,6 +51,15 @@ Comandos:
   dev done <slug> [--promote ...]  promove durável + arquiva o plano + re-merge central
   dev run <slug> [--max N] [--dry-run]   orquestra as tasks (ver plan-structure)
   source discord|gmail ...    (fase posterior)
+
+Harness (bootstrap e guardrails do ambiente):
+  doctor                      relatório ✓/✗ do conjunto (exit 1 se houver ✗)
+  status [dir] [--all]        trabalho não salvo nos repos (exit 1 se houver risco)
+  map [dir]                   repos git de ~/code fora do kb (só sugere o project add)
+  rules <repo> [--stack a,b] [--dry-run] [--prune] [--list]
+                              materializa as rules do gregio-cc-rules em <repo>/.claude/rules
+  guard                       hook PreToolUse (stdin JSON → stdout JSON): bloqueia
+                              contrato congelado, avisa feature na main
 `;
 
 async function main() {
