@@ -1,18 +1,49 @@
 {
-  "name": "knowledge-gregio",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@gregio/kb",
+  "version": "0.2.0",
   "type": "module",
-  "description": "Daily Discord archival and AI-summarized consolidation",
+  "description": "CLI do harness de desenvolvimento com IA: base de conhecimento pessoal (vaults Obsidian, grafo central, ciclo de planos) mais os guardrails do ambiente (doctor, status, map, rules, guard)",
+  "keywords": [
+    "knowledge-base",
+    "obsidian",
+    "vault",
+    "claude-code",
+    "ai-harness",
+    "knowledge-graph",
+    "cli",
+    "developer-tools"
+  ],
+  "license": "MIT",
+  "author": "Guilherme Gregio",
+  "homepage": "https://github.com/guilhermegregio/gregio-marketplace/tree/main/cli/kb#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guilhermegregio/gregio-marketplace.git",
+    "directory": "cli/kb"
+  },
+  "bugs": {
+    "url": "https://github.com/guilhermegregio/gregio-marketplace/issues"
+  },
   "bin": {
     "kb": "bin/kb.js"
   },
+  "files": [
+    "bin/",
+    "src/",
+    "templates/",
+    "rules/",
+    "kb.config.example.json"
+  ],
   "scripts": {
     "kb": "node bin/kb.js",
     "kb:graph": "node bin/kb.js graph build",
-    "kb:serve": "node bin/kb.js graph serve"
+    "kb:serve": "node bin/kb.js graph serve",
+    "prepack": "node scripts/sync-rules.mjs"
   },
   "engines": {
     "node": ">=20.6"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
