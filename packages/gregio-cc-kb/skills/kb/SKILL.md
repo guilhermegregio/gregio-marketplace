@@ -1,6 +1,6 @@
 ---
 name: kb
-description: "Lê e escreve a base de conhecimento pessoal do Gregio (vaults Obsidian-markdown multi-audiência + grafo central Graphify) SEM estourar contexto nem alucinar. Use SEMPRE que o usuário pedir para consultar/buscar/registrar conhecimento, ideias, projetos, planos, ADRs, learnings, research; quando perguntar 'o que eu sei sobre X', 'onde está a decisão sobre Y', 'planeje ponta-a-ponta entre projetos', 'adiciona isso na minha base', 'salva essa ideia/artigo'; ou citar vault/Obsidian/knowledge base. O protocolo é carregamento cirúrgico: router → índices → folhas alvo, e grafo (MCP) para perguntas cross-cutting. O engine de escrita é o CLI 'kb' no repo knowledge-gregio."
+description: "Lê e escreve a base de conhecimento pessoal do Gregio (vaults Obsidian-markdown multi-audiência + grafo central Graphify) SEM estourar contexto nem alucinar. Use SEMPRE que o usuário pedir para consultar/buscar/registrar conhecimento, ideias, projetos, planos, ADRs, learnings, research; quando perguntar 'o que eu sei sobre X', 'onde está a decisão sobre Y', 'planeje ponta-a-ponta entre projetos', 'adiciona isso na minha base', 'salva essa ideia/artigo'; ou citar vault/Obsidian/knowledge base. O protocolo é carregamento cirúrgico: router → índices → folhas alvo, e grafo (MCP) para perguntas cross-cutting. O engine de escrita é o CLI global 'kb' (gregio-marketplace/cli/kb)."
 argument-hint: [pergunta | add <url> | capture "<texto>" | plan <objetivo>]
 ---
 
@@ -14,11 +14,12 @@ A base de conhecimento do Gregio tem duas faces:
   (`00-meta` … `90-content`). Um **vault agregador** local (`vault-all/`, symlinks)
   dá visão única no Obsidian; ele é só para humano.
 - **Índice (consulta do agente):** grafos Graphify por-vault/projeto + um
-  **grafo central** merge-ado (`knowledge-gregio/graphify-out/central-graph.json`)
+  **grafo central** merge-ado (`~/.local/state/kb/central-graph.json`)
   com namespacing por `repo`, servido via MCP (stdio, local).
 
-O **engine** é o CLI `kb` (em `~/code/knowledge-gregio`, `node bin/kb.js …`). A
-escrita SEMPRE passa por ele — nunca crie notas no vault à mão por outro caminho.
+O **engine** é o CLI global `kb` (código em `~/code/gregio-marketplace/cli/kb`,
+empacotado pelo nix; basta chamar `kb …` do PATH). A escrita SEMPRE passa por ele —
+nunca crie notas no vault à mão por outro caminho.
 
 ## Regra de ouro: carregamento cirúrgico
 
@@ -56,17 +57,17 @@ id, type, title, status, projects[], groups[], stack[], tags[], visibility, crea
 
 ## Escrita — sempre via o CLI `kb`
 
-Rode no diretório do engine (`~/code/knowledge-gregio`):
+O `kb` é global (nix) — rode de qualquer diretório:
 
 ```bash
 # Ingerir URL roteada (artigo/ideia/research/...). Sem --as, infere por mídia.
-node bin/kb.js add <url> --vault <n> [--as article|idea|research|learning|pattern|content] [--topic t] [--projects a,b] [--groups g] [--tags x,y] [--smart] [--no-update]
+kb add <url> --vault <n> [--as article|idea|research|learning|pattern|content] [--topic t] [--projects a,b] [--groups g] [--tags x,y] [--smart] [--no-update]
 
 # Captura rápida no inbox
-node bin/kb.js capture "<texto>" --vault <n> [--tags ...]
+kb capture "<texto>" --vault <n> [--tags ...]
 
 # Criar nota estruturada a partir de template
-node bin/kb.js new --vault <n> --type project|plan|adr|c4|research|learning|pattern|content --title "..." [--project p] [--topic t]
+kb new --vault <n> --type project|plan|adr|c4|research|learning|pattern|content --title "..." [--project p] [--topic t]
 ```
 
 Roteamento do `add --as`: `article→60-sources/articles`, `idea→60-sources/ideas`,
@@ -79,10 +80,10 @@ alheios).
 ## Projetos, grupos e grafo central
 
 ```bash
-node bin/kb.js project add ~/code/<repo>   # detecta monorepo e registra subprojetos
-node bin/kb.js group new <nome> --title "..." ; node bin/kb.js group add <grupo> <repo|repo#sub> ...
-node bin/kb.js graph build [--group <g>]    # freshen por fonte + merge no central
-node bin/kb.js graph serve                  # sobe o MCP do grafo central (stdio) + imprime config
+kb project add ~/code/<repo>   # detecta monorepo e registra subprojetos
+kb group new <nome> --title "..." ; kb group add <grupo> <repo|repo#sub> ...
+kb graph build [--group <g>]    # freshen por fonte + merge no central
+kb graph serve                  # sobe o MCP do grafo central (stdio) + imprime config
 ```
 
 **Grupo** = produto lógico que agrega vários repos (backend+frontend+mobile+DS+libs).

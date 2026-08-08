@@ -12,7 +12,7 @@ fronteira: **repo = código + runtime** (`CLAUDE.md`, `references/` de skills,
 (arquitetura, PRD, spec, lições, ADR, logs). Toda escrita de conhecimento passa por
 comandos `kb`/`kb dev` — nunca crie `.md` de design solto no repo.
 
-Comandos (CLI no repo `knowledge-gregio`, `node bin/kb.js dev <sub>`):
+Comandos (binário global `kb`; engine em `~/code/gregio-marketplace/cli/kb`):
 
 ```bash
 kb dev start <slug> --vault <n> --project <repo> [--ui] [--no-contract]  # plano (draft) + tasks-gate
