@@ -69,5 +69,14 @@ Varre os repos git de `~/code` e reporta:
 | **diretório órfão em `~/code/worktrees`** | sobra de worktree removido: o git não conhece mais, os arquivos ficam |
 | stash pendente | o esconderijo que todo mundo esquece |
 
-Origem: `~/code/check-uncommitted.sh` (uncommitted + ahead/behind). Os três itens em
-negrito são a parte que o fluxo com worktree acrescentou de risco.
+Origem: `~/code/check-uncommitted.sh` (uncommitted + ahead/behind), **substituído por
+este comando** — os três itens em negrito são a parte que o fluxo com worktree
+acrescentou de risco.
+
+**Órfão com arquivos de outro dono**: volume de container (supabase local, por exemplo)
+deixa restos como `nobody`/`root` dentro do worktree. O `rm -rf` do usuário falha com
+"Permissão negada", então o output detecta o caso e sugere a via que funciona:
+
+```bash
+docker run --rm -v ~/code/worktrees:/w alpine rm -rf /w/<dir>
+```

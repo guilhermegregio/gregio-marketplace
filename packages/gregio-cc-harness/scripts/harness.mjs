@@ -172,10 +172,7 @@ function map() {
 function status(baseDirArg, { all = false } = {}) {
   const baseDir = resolve(baseDirArg ?? join(home, "code"));
   const repos = findRepos(baseDir);
-  if (!repos.length) {
-    console.log(`nenhum repo git em ${baseDir}`);
-    return;
-  }
+  if (!repos.length) console.log(`nenhum repo git em ${baseDir}`);
 
   let risky = 0;
   for (const repo of repos) {
@@ -196,7 +193,16 @@ function status(baseDirArg, { all = false } = {}) {
   const orphans = findOrphanWorktreeDirs(join(baseDir, "worktrees"));
   if (orphans.length) {
     console.log(`\n⚠️  ${orphans.length} diretório(s) órfão(s) em ${join(baseDir, "worktrees")}:`);
-    for (const o of orphans) console.log(`     ${basename(o)}  → confira e apague: rm -rf ${o}`);
+    for (const o of orphans) {
+      console.log(`     ${basename(o.path)}  → confira e apague: rm -rf ${o.path}`);
+      if (o.foreignOwner) {
+        // Volume de container (supabase local etc.) deixa restos de outro dono:
+        // o rm do usuário falha com "Permissão negada".
+        console.log("       ⤷ contém arquivos de OUTRO dono (volume de container).");
+        console.log("         Se der \"Permissão negada\", apague pela mesma via que criou:");
+        console.log(`         docker run --rm -v ${dirname(o.path)}:/w alpine rm -rf /w/${basename(o.path)}`);
+      }
+    }
     risky += orphans.length;
   }
 
