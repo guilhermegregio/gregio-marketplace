@@ -8,9 +8,6 @@
     "kb": "bin/kb.js"
   },
   "scripts": {
-    "pull": "node --env-file=.env src/index.js",
-    "consolidate": "node --env-file=.env src/consolidate.js",
-    "daily": "pnpm run pull && pnpm run consolidate",
     "kb": "node bin/kb.js",
     "kb:graph": "node bin/kb.js graph build",
     "kb:serve": "node bin/kb.js graph serve"
