@@ -20,16 +20,21 @@ import { ENGINE_ROOT, expandPath } from '../paths.js';
 const MARKER = 'gregio-cc-rules';
 
 /**
- * Onde estão as rules. Ordem pensada para os três jeitos de rodar o kb:
+ * Onde estão as rules. Ordem pensada para os quatro jeitos de rodar o kb:
  *   1. KB_RULES_DIR — escape hatch (teste, fork, rules próprias);
  *   2. checkout/worktree do gregio-marketplace — o engine mora em `cli/kb`, os
- *      packages são irmãos dois níveis acima;
- *   3. marketplace instalado via /plugin (repo clonado em ~/.claude/plugins/repos).
+ *      packages são irmãos dois níveis acima. Vem antes do `<engine>/rules` para que,
+ *      no repo, a fonte da verdade seja sempre o package (nunca uma cópia stale);
+ *   3. `<engine>/rules` — caso do tarball npm (`npx @gregio/kb`, `npm i -g`) e do Nix:
+ *      ali o package irmão não existe, então o `prepack` (scripts/sync-rules.mjs)
+ *      copia as rules para dentro do pacote e elas viajam com ele;
+ *   4. marketplace instalado via /plugin (repo clonado em ~/.claude/plugins/repos).
  */
 function resolveRulesDir() {
   const candidates = [
     process.env.KB_RULES_DIR && expandPath(process.env.KB_RULES_DIR),
     resolve(ENGINE_ROOT, '..', '..', 'packages', 'gregio-cc-rules', 'rules'),
+    join(ENGINE_ROOT, 'rules'),
     join(homedir(), '.claude', 'plugins', 'repos', 'gregio-marketplace', 'packages', 'gregio-cc-rules', 'rules'),
   ].filter(Boolean);
   const found = candidates.find(existsSync);

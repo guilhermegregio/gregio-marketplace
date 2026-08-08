@@ -2,3 +2,6 @@
 
 # grafo do graphify versionado via allowlist (graphify-out/.gitignore):
 # só graph.json+manifest.json; cache/html/relatórios ficam de fora (onda3 T06).
+
+# rules/ do cli/kb é gerado no prepack (espelho de packages/gregio-cc-rules/rules)
+/cli/kb/rules/
