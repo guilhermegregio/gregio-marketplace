@@ -1,0 +1,21 @@
+{
+  "name": "knowledge-gregio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Daily Discord archival and AI-summarized consolidation",
+  "bin": {
+    "kb": "bin/kb.js"
+  },
+  "scripts": {
+    "pull": "node --env-file=.env src/index.js",
+    "consolidate": "node --env-file=.env src/consolidate.js",
+    "daily": "pnpm run pull && pnpm run consolidate",
+    "kb": "node bin/kb.js",
+    "kb:graph": "node bin/kb.js graph build",
+    "kb:serve": "node bin/kb.js graph serve"
+  },
+  "engines": {
+    "node": ">=20.6"
+  }
+}

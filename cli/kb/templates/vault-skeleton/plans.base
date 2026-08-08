@@ -1,0 +1,26 @@
+filters:
+  and:
+    - 'type == "plan"'
+views:
+  - type: table
+    name: Planos
+    order:
+      - title
+      - status
+      - file.folder
+      - projects
+      - updated
+    sort:
+      - property: updated
+        direction: DESC
+  - type: table
+    name: Ativos
+    filters:
+      and:
+        - 'status != "done"'
+        - 'status != "archived"'
+    order:
+      - title
+      - status
+      - projects
+      - updated

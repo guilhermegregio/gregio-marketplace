@@ -1,0 +1,16 @@
+filters:
+  and:
+    - 'type == "project"'
+views:
+  - type: table
+    name: Projetos
+    order:
+      - title
+      - status
+      - file.folder
+      - groups
+      - stack
+      - updated
+    sort:
+      - property: updated
+        direction: DESC

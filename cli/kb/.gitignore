@@ -1,0 +1,13 @@
+node_modules/
+.env
+archive/
+.DS_Store
+*.log
+
+# nix
+result
+result-*
+
+# Estado do engine kb mora em XDG (~/.config/kb, ~/.local/state/kb), não no repo.
+# graphify-out/ é versionado via allowlist (graphify-out/.gitignore): só
+# graph.json+manifest.json entram; cache/html/relatórios ficam de fora (onda3 T06).

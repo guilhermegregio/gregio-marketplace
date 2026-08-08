@@ -1,0 +1,7 @@
+# graphify-out/.gitignore — RAIZ DE MONOREPO (allowlist reduzida).
+# O merge da raiz (kb graph build) NÃO é versionado: pode ser grande (MBs) e o hook
+# post-commit do graphify roda `graphify update` FLAT na raiz (não é monorepo-aware) e
+# clobraria o merge. É regenerável local e o grafo central é local. Os subgrafos
+# por-subprojeto (apps/*/graphify-out/graph.json) SÃO versionados via allowlist normal.
+*
+!.gitignore

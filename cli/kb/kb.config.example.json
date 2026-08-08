@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "central": {
+    "graphOut": "auto",
+    "pythonInterp": "auto"
+  },
+  "defaults": {
+    "visibility": "private",
+    "category": "article"
+  },
+  "vaults": [
+    {
+      "name": "pessoal",
+      "path": "~/code/vault-pessoal",
+      "visibility": "private",
+      "default": true,
+      "graphOut": "graphify-out/graph.json",
+      "includeInCentral": true
+    },
+    { "name": "nxt", "path": "~/code/vault-nxt", "visibility": "team-nxt", "includeInCentral": true },
+    { "name": "stone", "path": "~/code/vault-stone", "visibility": "team-stone", "includeInCentral": true },
+    { "name": "vivicupcakes", "path": "~/code/vault-vivicupcakes", "visibility": "shared", "includeInCentral": true }
+  ],
+  "groups": [
+    {
+      "name": "nxt",
+      "title": "NXT Training",
+      "members": ["nxt-app-workout", "ds-agent#ds-nxt", "agent-nxt-weight-training", "my-coach"]
+    },
+    { "name": "vivicupcakes", "title": "Vivi Cupcakes", "members": ["ds-agent#ds-vivicupcakes"] }
+  ],
+  "projects": [
+    {
+      "name": "jumpster-flutter",
+      "path": "~/code/jumpster-flutter",
+      "graphOut": "graphify-out/graph.json",
+      "includeInCentral": true
+    },
+    { "name": "my-coach", "path": "~/code/my-coach", "includeInCentral": true },
+    { "name": "agent-nxt-weight-training", "path": "~/code/agent-nxt-weight-training", "includeInCentral": true },
+    {
+      "name": "ds-agent",
+      "path": "~/code/ds-agent",
+      "includeInCentral": true,
+      "monorepo": true,
+      "subprojects": [
+        { "name": "ds-nxt", "subpath": "apps/ds-nxt" },
+        { "name": "ds-bluefit", "subpath": "apps/ds-bluefit" },
+        { "name": "ds-fit4you", "subpath": "apps/ds-fit4you" },
+        { "name": "ds-vivicupcakes", "subpath": "apps/ds-vivicupcakes" }
+      ]
+    },
+    {
+      "name": "nxt-app-workout",
+      "path": "~/code/nxt-app-workout",
+      "includeInCentral": true,
+      "monorepo": true,
+      "subprojects": [
+        { "name": "nxt-app", "subpath": "apps/app" },
+        { "name": "nxt-admin", "subpath": "apps/admin" },
+        { "name": "nxt-partners", "subpath": "apps/partners" }
+      ]
+    }
+  ]
+}
