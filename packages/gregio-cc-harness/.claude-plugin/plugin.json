@@ -1,0 +1,22 @@
+{
+  "name": "gregio-cc-harness",
+  "description": "CLI de bootstrap do harness: 'doctor' valida o conjunto (kb config, plugins habilitados, hook guard.mjs, graphify, credenciais n8n dev vs prod), 'map' cruza ~/code com os projects do kb e lista repos não registrados, 'install <repo>' materializa as rules (delegando ao gregio-cc-rules) e garante o hook guard.mjs no settings.json global.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Guilherme Gregio",
+    "email": "guilherme@gregio.net"
+  },
+  "homepage": "https://github.com/glittercowboy/gregio-marketplace",
+  "repository": "https://github.com/glittercowboy/gregio-marketplace",
+  "license": "MIT",
+  "keywords": [
+    "harness",
+    "bootstrap",
+    "doctor",
+    "setup",
+    "rules",
+    "hooks",
+    "kb",
+    "claude-code"
+  ]
+}

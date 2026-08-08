@@ -45,6 +45,13 @@
       "strict": true
     },
     {
+      "name": "gregio-cc-harness",
+      "source": "./packages/gregio-cc-harness",
+      "description": "CLI de bootstrap do harness: 'doctor' valida o conjunto (kb config, plugins habilitados, hook guard.mjs, graphify, credenciais n8n dev vs prod), 'map' cruza ~/code com os projects do kb e lista repos não registrados, 'install <repo>' materializa as rules (delegando ao gregio-cc-rules) e garante o hook guard.mjs no settings.json global.",
+      "version": "0.1.0",
+      "strict": true
+    },
+    {
       "name": "gregio-cc-rules",
       "source": "./packages/gregio-cc-rules",
       "description": "Rules por contexto (Next server/client, Astro DS, n8n, Supabase SQL) instaláveis em qualquer repo via script. Cada rule é markdown curto com regras nascidas de dor real. Materializa em <repo>/.claude/rules/ por stack detectado, idempotente e versionado.",

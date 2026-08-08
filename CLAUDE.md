@@ -12,6 +12,7 @@ este repo.
 | `gregio-cc-design-system` | [packages/gregio-cc-design-system/CLAUDE.md](packages/gregio-cc-design-system/CLAUDE.md) | Pipeline multi-agente de design systems: crawl de site → spec → análise → app Astro → review (o pacote mais complexo) |
 | `gregio-cc-resources` | [packages/gregio-cc-resources/CLAUDE.md](packages/gregio-cc-resources/CLAUDE.md) | Commands de workflow (plan→task→finish), hooks de notificação Discord, MCP chrome-devtools |
 | `gregio-cc-rules` | [packages/gregio-cc-rules/CLAUDE.md](packages/gregio-cc-rules/CLAUDE.md) | Rules por contexto (Next/Astro/n8n/SQL) instaláveis em qualquer repo — MVP da ponte de bootstrap do harness |
+| `gregio-cc-harness` | [packages/gregio-cc-harness/CLAUDE.md](packages/gregio-cc-harness/CLAUDE.md) | CLI de bootstrap do harness: doctor (valida o conjunto), map (repos de ~/code fora do kb), install (rules via gregio-cc-rules + hook guard.mjs) |
 | `gregio-cc-app-maintenance` | [packages/gregio-cc-app-maintenance/CLAUDE.md](packages/gregio-cc-app-maintenance/CLAUDE.md) | Manutenção de apps Node: update de deps com validação completa + auditoria supply-chain |
 
 Antes de mexer num pacote, leia o CLAUDE.md dele — cada um documenta os
