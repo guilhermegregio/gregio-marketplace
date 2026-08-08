@@ -14,7 +14,7 @@
  *
  * Puro: descobre e classifica; quem imprime é o CLI.
  */
-import { existsSync, readdirSync } from "node:fs";
+import { existsSync, readdirSync, statSync } from "node:fs";
 import { basename, join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 
@@ -33,16 +33,54 @@ export function findRepos(dir) {
 }
 
 /**
+ * Há algo aqui dentro que não pertence a este usuário?
+ *
+ * Container com volume montado (supabase local, por exemplo) cria diretórios como
+ * root/nobody dentro do worktree. Depois que o worktree some, o `rm -rf` do usuário
+ * falha com "Permissão negada" nesses restos — e a sugestão de limpeza vira uma
+ * mentira útil. Detectar aqui permite sugerir a via que funciona.
+ *
+ * Busca em profundidade limitada: o objetivo é detectar, não inventariar.
+ */
+function hasForeignOwner(dir, uid, depth = 0) {
+  if (depth > 4) return false;
+  let entries;
+  try {
+    entries = readdirSync(dir, { withFileTypes: true });
+  } catch {
+    // Não conseguir listar já é sintoma de dono/permissão diferente.
+    return true;
+  }
+  for (const e of entries) {
+    const p = join(dir, e.name);
+    try {
+      if (statSync(p).uid !== uid) return true;
+    } catch {
+      return true;
+    }
+    if (e.isDirectory() && hasForeignOwner(p, uid, depth + 1)) return true;
+  }
+  return false;
+}
+
+/**
  * Diretórios em `~/code/worktrees` sem `.git` — o `git worktree remove` levou o
  * registro, mas alguém interrompeu antes de apagar os arquivos (ou o `-f` falhou
  * no meio). Não são recuperáveis por git: ou têm lixo, ou trabalho perdido.
+ *
+ * Cada item traz `foreignOwner`: `true` quando há conteúdo de outro dono (típico de
+ * volume de container), caso em que `rm -rf` do usuário não dá conta.
  */
 export function findOrphanWorktreeDirs(worktreesDir) {
   if (!existsSync(worktreesDir)) return [];
+  const uid = typeof process.getuid === "function" ? process.getuid() : -1;
   return readdirSync(worktreesDir, { withFileTypes: true })
     .filter((e) => e.isDirectory() && !existsSync(join(worktreesDir, e.name, ".git")))
-    .map((e) => resolve(join(worktreesDir, e.name)))
-    .sort();
+    .map((e) => {
+      const path = resolve(join(worktreesDir, e.name));
+      return { path, foreignOwner: uid >= 0 && hasForeignOwner(path, uid) };
+    })
+    .sort((a, b) => a.path.localeCompare(b.path));
 }
 
 /** Branches locais com commits que não estão na branch principal do repo. */

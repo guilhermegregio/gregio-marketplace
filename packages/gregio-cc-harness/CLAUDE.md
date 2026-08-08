@@ -56,3 +56,8 @@ node scripts/harness.mjs install /tmp/repo-fake --dry-run
 - **1 nível de profundidade** em `~/code`: monorepo é um repo, não varremos dentro.
 - **Branch principal** é `main` ou `master`, o que existir; sem nenhuma das duas, o
   check de branch não mergeada é pulado (não inventa base de comparação).
+- **Dono estranho**: a varredura de `foreignOwner` é rasa (4 níveis) e para no primeiro
+  achado — o objetivo é decidir QUAL dica mostrar, não inventariar o diretório. Falha de
+  leitura conta como dono estranho (não conseguir listar já é o sintoma).
+- **Sem repos ≠ sem trabalho**: `status` continua checando os órfãos de
+  `<base>/worktrees` mesmo quando não há nenhum repo git na base.
