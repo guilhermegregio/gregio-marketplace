@@ -44,6 +44,25 @@ NUNCA faça `ls -R` nem leia o vault inteiro. Protocolo, nesta ordem:
 5. **Budget:** router + 1 índice + N notas-alvo. Precisou de mais? Vá ao grafo, não
    abra mais arquivos.
 
+## Vault-first: doc que não está no repo se procura no vault
+
+**Repo = código + runtime; vault = conhecimento.** Quando um doc de conhecimento sai
+do repo, ele **não deixa arquivo-ponteiro** no lugar ("📄 Movido para o vault: …").
+O rastro é o commit de remoção + a nota no vault, indexada e alcançável pelo
+protocolo acima. Um ponteiro por doc é dívida: envelhece, mente quando o destino
+muda e faz o agente ler o repo para descobrir o óbvio.
+
+O que **fica** no repo: um único ponteiro por repositório — o bloco "📚 Conhecimento
+deste projeto mora no vault: `<vault>/10-projects/<projeto>/`" no `CLAUDE.md`.
+
+Não achou um doc citado (spec, ADR, overview, guia, plano)? **Não conclua que sumiu**
+— o caminho é: router do vault → `10-projects/<projeto>/` → índice da subpasta
+(`specs/`, `guides/`, `architecture/`), ou o grafo central filtrando por
+`fm_projects`/`fm_type`. Só depois disso diga que não existe.
+
+Ao **mover** um doc para o vault: crie a nota (via `kb`), apague o arquivo no repo,
+atualize quem o referenciava para apontar o vault — e não deixe stub.
+
 ## Contrato de frontmatter (toda nota)
 
 ```yaml
