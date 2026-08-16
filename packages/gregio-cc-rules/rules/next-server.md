@@ -1,7 +1,7 @@
 ---
 rule: next-server
 stacks: [next]
-version: 1
+version: 2
 ---
 
 # Next — servidor (RSC, server actions, data-access)
@@ -33,6 +33,32 @@ dado velho e acha que não salvou.
 
 `if (error) throw` — engolir o erro renderiza "nenhum plano ativo", que é
 indistinguível de "não tem plano". O error boundary existe para isso.
+
+## `select` sem filtro mente a partir da linha 1000
+
+O PostgREST aplica `max-rows` (1000 no Supabase) e **não sinaliza o corte**: sem erro,
+sem flag, sem `count`. Varrer uma tabela para cruzar em memória funciona até ela passar
+do limite — aí o `Set` vem pela metade e o registro que caiu fora some da tela como se
+não existisse.
+
+```ts
+// ✗ 2631 assinaturas, 1000 voltam: quem estiver depois do corte "não tem assinatura"
+const { data: subs } = await supabase.from("subscriptions")
+  .select("user_id").in("status", ["active", "trialing", "free"]);
+const ativos = new Set(subs.map((s) => s.user_id));
+return vinculos.filter((v) => ativos.has(v.user_id));
+
+// ✓ pergunte "quais DESTES", não "todos" — em lotes, porque .in() vai na URL
+const ativos = await fetchActiveSubscriberIds(supabase, vinculos.map((v) => v.user_id));
+```
+
+O sintoma é cruel: aparece só para as linhas **novas** (fim da tabela), meses depois do
+código entrar, e o dado no banco está perfeito. Regra prática: todo `select` de leitura
+tem `.eq()`/`.in()` que o escope, ou `.range()` explícito assumindo o teto. Cruzamento
+em memória de tabela inteira é o cheiro — o banco faz esse join melhor.
+
+Se a lista de ids for grande, mande em chunks (~100): `.in()` entra na querystring e a
+URL tem limite de tamanho.
 
 ## Fronteira de package
 
