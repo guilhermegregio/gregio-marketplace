@@ -5,6 +5,7 @@ deste repo). Este package é a camada fina que ensina os comandos e guarda o
 contrato deles.
 
 ```bash
+kb scaffold [--profiles a,b] # prepara a estação: dirs do workspace + blocos do CLAUDE.md global
 kb doctor                    # relatório ✓/✗ do conjunto (exit 1 se houver ✗)
 kb status [dir] [--all]      # trabalho não salvo nos repos (exit 1 se houver risco)
 kb map [dir]                 # repos git de ~/code fora do kb
@@ -14,6 +15,49 @@ kb guard                     # hook PreToolUse dos guardrails (stdin/stdout JSON
 
 `scripts/harness.mjs` continua no lugar apenas como stub de deprecação: imprime
 o comando `kb` equivalente e sai com 1.
+
+## `kb scaffold` — bootstrap da estação
+
+```bash
+kb scaffold --profiles backend,frontend   # aplica e salva os perfis na config
+kb scaffold                               # usa os perfis salvos (só "all" se não houver)
+kb scaffold --dry-run                     # relata o que faria, sem escrever
+kb scaffold --list                        # seletor: perfis e versões dos blocos
+```
+
+Faz duas coisas: cria `~/code`, `~/code/worktrees` e `~/code/.scratchpad` (com o
+README que diz que o scratchpad é efêmero e substitui o `/tmp` para os agentes) e
+gerencia os blocos do `~/.claude/CLAUDE.md`.
+
+**Perfis** selecionam quais blocos entram. Os blocos `all` (`os-info`, `core`,
+`herdr`, `git-worktree`) entram sempre; `backend` e `frontend` só com o perfil ativo.
+`--profiles` é escolha explícita e fica salva em `scaffold.profiles` no kb config — da
+segunda vez em diante `kb scaffold` sozinho basta. Trocar os perfis remove do CLAUDE.md
+o bloco que saiu (só o que tem marcador).
+
+**Marcadores** delimitam o que é gerenciado:
+
+```markdown
+<!-- kb-scaffold:begin core v1 -->
+...miolo gerenciado pelo engine...
+<!-- kb-scaffold:end core -->
+```
+
+O que ele **nunca** faz:
+
+- **não toca em texto fora dos marcadores** — um CLAUDE.md artesanal só ganha os
+  blocos anexados ao fim; migrar o texto à mão para dentro de bloco é decisão sua;
+- **não reescreve bloco na mesma versão**, nem se o miolo foi editado à mão (por isso
+  o retrato do `fastfetch` no `os-info` não se refaz a cada execução — só quando a
+  versão do bloco sobe);
+- **não apaga bloco que não conhece**: marcador sem template no engine fica como está
+  e é apenas reportado;
+- **não instala nada**. Pacote faltando é assunto do `kb doctor`, que sugere; quem roda
+  o `fr`/`fu`/`npm i -g` é o humano.
+
+Rodar duas vezes não muda nada — idempotência é contrato, não gentileza. O passo a
+passo de uma estação zerada (gregioos → dotfiles → scaffold → doctor) está no
+[README do engine](../../cli/kb/README.md#bootstrap-de-estação-nova).
 
 ## `kb doctor`
 
@@ -29,8 +73,27 @@ Valida o conjunto e imprime ✓/✗ por item:
 - **n8n dev**: se o container `n8n-dev` existe, nenhum workflow importado aponta
   para o auth de produção (credencial dev usando prod)
 
+E os checks de estação, que dizem se a máquina sustenta o que o CLAUDE.md global manda
+fazer:
+
+| check | ✗ quando | correção sugerida |
+|---|---|---|
+| **`claude` no PATH** | o CLI não está no PATH (devflow, panes de agente e o consolidate chamam pelo nome) | `npm i -g @anthropic-ai/claude-code` ou o módulo do gregioos |
+| **ferramentas no PATH** | falta `rg`, `fd`, `jq`, `yq`, `http`, `gh`, `herdr`, `wtree`, `stow` ou `pnpm` — um ✗ por ferramenta, porque a correção é por pacote | pacote no gregioos + `fr` (NixOS) / `fu` (macOS), ou o gerenciador da distro |
+| **node ≥ 20** | versão menor (o engine é ESM e o arquivador usa `--env-file`) | mesma via da linha acima |
+| **gregioos** | `~/gregioos` não é repo git — sem ele nenhuma correção acima é aplicável | clonar e aplicar com `fr`/`fu` |
+| **dotfiles (stow aplicado)** | `~/code/dotfiles` ausente, ou `~/.config/starship.toml` não aponta para dentro dele | `./install.sh` (sistema antes do stow) |
+| **workspace `~/code`** | falta `~/code`, `~/code/worktrees` ou `~/code/.scratchpad` | `kb scaffold` |
+| **blocos do `~/.claude/CLAUDE.md`** | bloco faltando, em versão menor que a do template, ou de perfil que saiu | `kb scaffold` |
+
+O check dos blocos usa exatamente a mesma decisão do `kb scaffold` (a função pura
+`planChanges`), então o doctor nunca manda rodar um comando que não mudaria nada. O
+`gregioos` é pulado fora de NixOS/nix-darwin — plataforma que não se aplica não vira
+falha.
+
 Sai com 1 se qualquer check falhar — usável em automação. Check pulado
-(docker/graphify ausente) imprime `-` e não conta como falha.
+(docker/graphify ausente, plataforma que não se aplica) imprime `-` e não conta como
+falha. **O doctor nunca conserta nada**: ele imprime o comando pronto e o humano roda.
 
 ## `kb status` — trabalho não salvo
 
@@ -100,4 +163,6 @@ e o hook, uma vez, em `~/.claude/settings.json`:
 ## Requisitos
 
 Node ≥ 20, zero dependências. `docker` e `graphify` são opcionais — checks que
-dependem deles são pulados ou acusados conforme o caso.
+dependem deles são pulados ou acusados conforme o caso. `fastfetch` é opcional para o
+`kb scaffold`: sem ele o bloco `os-info` entra com a instrução de rodar
+`fastfetch -l none` no lugar do retrato.

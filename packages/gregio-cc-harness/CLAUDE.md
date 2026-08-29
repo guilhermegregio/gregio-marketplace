@@ -1,8 +1,9 @@
 # gregio-cc-harness — manutenção
 
-Package **fino**: a implementação mudou de casa. `doctor`, `status`, `map`,
-`rules` e `guard` são subcomandos do engine `kb` (`cli/kb/src/kb/commands/`);
-aqui ficam só a doc do consumidor (README) e os contratos abaixo.
+Package **fino**: a implementação mudou de casa. `scaffold`, `doctor`, `status`,
+`map`, `rules` e `guard` são subcomandos do engine `kb`
+(`cli/kb/src/kb/commands/`); aqui ficam só a doc do consumidor (README) e os
+contratos abaixo.
 
 | aqui era | agora é | código |
 |---|---|---|
@@ -10,19 +11,32 @@ aqui ficam só a doc do consumidor (README) e os contratos abaixo.
 | `scripts/harness.mjs status` | `kb status` | `cli/kb/src/kb/commands/status.js` + `cli/kb/src/kb/repo-status.js` |
 | `scripts/harness.mjs map` | `kb map` | `cli/kb/src/kb/commands/map.js` |
 | `scripts/harness.mjs install` | `kb rules <repo>` + hook `kb guard` | `commands/rules.js`, `commands/guard.js` |
+| (não existia) | `kb scaffold` | `commands/scaffold.js` + `cli/kb/src/kb/claude-home.js` + `cli/kb/templates/claude-home/` |
 
 `scripts/harness.mjs` é stub de deprecação (aponta o comando `kb` e sai 1) — não
 ressuscite lógica aqui.
 
 ## Contratos que não podem regredir
 
-- **Check só entra com cicatriz.** Cada check do `kb doctor` rastreia uma dor
-  real: plugin instalado mas desabilitado em `enabledPlugins` passou semanas
-  despercebido; credencial n8n dev apontando pra prod
+- **Check só entra com cicatriz, e a cicatriz fica comentada no código.** Cada
+  check do `kb doctor` rastreia uma dor real, registrada no comentário acima dele
+  em `commands/doctor.js`: plugin instalado mas desabilitado em `enabledPlugins`
+  passou semanas despercebido; credencial n8n dev apontando pra prod
   (`auth.nxttrainingapp.com`) queimou dados reais; guard ausente deixa
-  freeze/wtree sem guardrail. Não remova um check sem registrar o porquê.
+  freeze/wtree sem guardrail; ferramenta do CLAUDE.md global faltando faz o agente
+  obedecer a uma regra que a máquina não sustenta e travar sem dizer por quê;
+  dotfiles clonado com o stow nunca aplicado deixou uma máquina com tudo
+  "existindo" e nada no lugar; bloco do CLAUDE.md em versão velha é regra
+  desatualizada seguida ao pé da letra, pior que regra ausente. Check novo sem
+  cicatriz escrita é ruído — e não se remove um check sem registrar o porquê.
 - **`kb doctor` sai com 1 se qualquer ✗** — automação depende do exit code, não
-  do texto. Check pulado (docker/n8n ausente) imprime `-` e não conta como falha.
+  do texto. Check pulado (docker/n8n ausente, plataforma em que o check não se
+  aplica) imprime `-` e não conta como falha.
+- **`kb doctor` é read-only ABSOLUTO.** Ele diagnostica e imprime o comando de
+  correção (`kb scaffold`, `fr`/`fu`, `./install.sh`, o pacote a adicionar no
+  gregioos); quem conserta é o humano. Duas execuções seguidas têm de imprimir
+  exatamente a mesma coisa e não tocar em nada — doctor que conserta sozinho vira
+  ferramenta que ninguém roda com medo.
 - **O check do hook aceita os dois mundos durante a transição**: `kb guard` (o
   jeito novo) e `guard.mjs` (instalações antigas continuam protegidas) — o
   legado passa com nota de migração, não com ✗. Quem já migrou não pode ver
@@ -32,6 +46,36 @@ ressuscite lógica aqui.
   `KB_RULES_DIR` → path relativo ao engine → plugin cache) e copia. Auto-detecção
   de stack, idempotência e `--prune` têm dono único.
 - **`kb map` não executa nada** — só sugere `kb project add`.
+
+### `kb scaffold` — contratos
+
+- **Só escreve entre os marcadores.** `<!-- kb-scaffold:begin <bloco> v<n> -->` …
+  `<!-- kb-scaffold:end <bloco> -->` delimitam a região gerenciada; todo texto fora
+  deles é copiado byte a byte. Num CLAUDE.md artesanal os blocos são **anexados ao
+  fim** e a migração do texto à mão é do humano — nunca adivinhamos o que apagar.
+  Bloco com marcador de início e sem o de fim é ignorado (arquivo mexido à mão).
+- **Nunca instala binário.** Bootstrap de estação para no que é filesystem
+  (diretórios + CLAUDE.md + `scaffold.profiles` na config); pacote faltando é ✗ do
+  `kb doctor` com a sugestão pronta, e quem roda `fr`/`fu`/`npm i -g` é o humano.
+  A fronteira é o que torna os dois comandos seguros de rodar a qualquer hora.
+- **Idempotência é requisito, não gentileza.** Segunda execução não pode tocar em
+  mtime nenhum: todo write é precedido de comparação de conteúdo, bloco na mesma
+  versão nunca é reescrito (nem se o miolo foi editado à mão) e o retrato do
+  `fastfetch` só é capturado quando já se sabe que há algo a escrever — senão o
+  uptime da máquina sozinho quebraria a idempotência.
+- **`planChanges` (em `cli/kb/src/kb/claude-home.js`) é pura e tem dono único.**
+  String entra, string sai — e é a MESMA função que o `kb scaffold` usa para aplicar
+  e o `kb doctor` para detectar drift. Doctor com decisão própria mandaria o humano
+  rodar um comando que não muda nada. Não duplique a lógica de decisão em nenhum
+  dos dois comandos.
+- **Bloco sem template não é apagado.** Marcador que este engine não conhece
+  (estação que rodou uma versão mais nova) fica como está e vira `orphans` no
+  relatório: engine velho não apaga bloco que não sabe recriar.
+- **Perfil é escolha explícita e persistida.** `--profiles` presente = decisão do
+  humano (inclusive vazio, que zera); ausente = valem os perfis salvos em
+  `scaffold.profiles`; sem salvos, só os blocos `all`. Perfil salvo que sumiu do
+  manifest continua aparecendo no `--list` — bloco que some sem aviso vira mistério
+  na próxima estação.
 - **`XDG_CONFIG_HOME`/`KB_CONFIG` são respeitados** para achar o kb config (via
   `cli/kb/src/kb/paths.js`) — NixOS e ambientes de teste dependem disso.
 
@@ -45,6 +89,19 @@ ressuscite lógica aqui.
 - A query do n8n roda dentro do container `postgres-dev` com `$POSTGRES_USER`
   expandido pelo `sh -c` **de dentro** do container — não troque por expansão
   local.
+- **Detecção de NixOS é `/run/current-system`**: `/etc/NIXOS` sumiu no 26.05 e
+  quem checava por ele passou a tratar a estação como Linux genérico, dando a dica
+  de correção errada. A sugestão de instalação é platform-aware (`fr` no NixOS,
+  `fu` no nix-darwin, gerenciador da distro no resto).
+- **Presença de binário é procura no PATH, não `--version`.** `wtree`, `herdr` e
+  `claude` não têm flag de versão estável: rodar `--version` para decidir presença
+  transformava exit code != 0 em ✗ falso — e cada processo disparado é ruído num
+  comando read-only.
+- **A sentinela do stow é o symlink do starship** apontando para dentro de
+  `~/code/dotfiles`: repo clonado não prova stow aplicado.
+- O bloco `os-info` é um **retrato**, não um espelho: ele não se refaz a cada
+  `kb scaffold`, só quando a versão do bloco sobe. Quem quer o estado de agora roda
+  `fastfetch -l none` — o próprio bloco diz isso.
 
 ## `kb status` — contratos
 
@@ -68,6 +125,12 @@ ressuscite lógica aqui.
 ## Testes manuais
 
 ```bash
+node cli/kb/bin/kb.js scaffold --list  # seletor de perfis/versões, não escreve nada
+node cli/kb/bin/kb.js scaffold --dry-run
+# estação limpa: HOME isola o CLAUDE.md e KB_CONFIG a config (XDG_CONFIG_HOME do
+# shell real vazaria pro teste)
+HOME=/tmp/estacao-fake KB_CONFIG=/tmp/estacao-fake/kb.json \
+  node cli/kb/bin/kb.js scaffold --profiles backend
 node cli/kb/bin/kb.js doctor          # exit 1 é resultado válido se houver ✗ real
 node cli/kb/bin/kb.js status --all
 node cli/kb/bin/kb.js map
