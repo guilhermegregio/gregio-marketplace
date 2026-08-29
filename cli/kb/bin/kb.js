@@ -14,6 +14,7 @@ const COMMANDS = {
   source: () => import('../src/kb/commands/source.js'),
   // harness: bootstrap e guardrails do ambiente (nasceram como scripts soltos do
   // gregio-cc-harness/gregio-cc-rules; o engine é o dono agora).
+  scaffold: () => import('../src/kb/commands/scaffold.js'),
   doctor: () => import('../src/kb/commands/doctor.js'),
   status: () => import('../src/kb/commands/status.js'),
   map: () => import('../src/kb/commands/map.js'),
@@ -53,6 +54,9 @@ Comandos:
   source discord|gmail ...    (fase posterior)
 
 Harness (bootstrap e guardrails do ambiente):
+  scaffold [--profiles a,b] [--dry-run] [--list]
+                              prepara a estação: dirs do workspace + blocos gerenciados
+                              do ~/.claude/CLAUDE.md (perfis persistidos na config)
   doctor                      relatório ✓/✗ do conjunto (exit 1 se houver ✗)
   status [dir] [--all]        trabalho não salvo nos repos (exit 1 se houver risco)
   map [dir]                   repos git de ~/code fora do kb (só sugere o project add)
