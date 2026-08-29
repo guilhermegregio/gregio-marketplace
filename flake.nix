@@ -18,7 +18,7 @@
 
         kb = pkgs.stdenvNoCC.mkDerivation {
           pname = "kb";
-          version = enginePkg.version or "0.2.0";
+          version = enginePkg.version or "0.3.0";
           src = self;
           nativeBuildInputs = [ pkgs.makeWrapper ];
 
