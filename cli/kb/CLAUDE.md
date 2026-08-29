@@ -51,6 +51,7 @@ kb dev run <slug>                       # computa ondas; avisa se o repo está n
 kb dev done <slug> [--promote ...]      # promove learnings/ADRs → arquiva plano → re-merge
 
 # Harness (bootstrap e guardrails do ambiente)
+kb scaffold [--profiles a,b] [--dry-run] [--list]   # prepara a estação: dirs do workspace + blocos do ~/.claude/CLAUDE.md
 kb doctor                               # ✓/✗ do conjunto (exit 1 se houver ✗)
 kb status [dir] [--all]                 # trabalho não salvo nos repos (exit 1 se houver risco)
 kb map [dir]                            # repos git de ~/code fora do kb
@@ -61,8 +62,17 @@ kb guard                                # hook PreToolUse (stdin JSON → stdout
 Arquitetura do engine: `src/kb/` (`config.js`, `routing.js`, `frontmatter.js`,
 `graphify.js` = chokepoint do scan-root, `repo-hygiene.js`, `repo-claudemd.js`,
 `freeze.js` = índice de contratos congelados, `repo-status.js` = varredura de trabalho
-não salvo, `commands/`). Config no XDG (`~/.config/kb/config.json`, **não** neste repo);
-estado em `~/.local/state/kb/`.
+não salvo, `claude-home.js` = blocos gerenciados do `~/.claude/CLAUDE.md`, `commands/`).
+Config no XDG (`~/.config/kb/config.json`, **não** neste repo); estado em
+`~/.local/state/kb/`.
+
+Os blocos do CLAUDE.md global moram em `templates/claude-home/` (um `.md` por bloco, com
+frontmatter `block`/`profiles`/`order`/`version`) e viajam no pacote como o
+`vault-skeleton`. Quem decide o que muda é `src/kb/claude-home.js` — `readTemplates` +
+`planChanges`, **pura** (string entra, string sai) — e ela é compartilhada por
+`kb scaffold` (aplica) e `kb doctor` (detecta drift, read-only): doctor que discordasse
+do scaffold mandaria o humano rodar um comando que não muda nada. Contrato congelado:
+`behaviors.feature`.
 
 `kb guard` é o guardrail no Claude Code (subcomando, não script solto): **bloqueia**
 edição de contrato congelado e **avisa** ao escrever na main de repo com plano ativo.
