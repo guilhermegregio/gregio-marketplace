@@ -59,6 +59,15 @@ kb rules <repo> [--stack a,b] [--dry-run] [--prune] [--list]   # rules do gregio
 kb guard                                # hook PreToolUse (stdin JSON → stdout JSON)
 ```
 
+`kb doctor` valida **o harness**, não a estação de quem mantém: config, plugins, hook do
+guard, graphify, rules resolvíveis (mesma cadeia do `kb rules`, importada de
+`commands/rules.js` — nunca duplicada), ferramentas do contrato, workspace e drift dos
+blocos. Check que é da máquina de alguém (repo de config do sistema, symlink farm,
+serviço local) vai em **`doctor.checks`** na config do usuário — tipos `path`,
+`symlink-inside` e `command`, com `label`/`fix` obrigatórios, `platforms` e `skip_if`.
+Config malformada vira ✗ do próprio bloco, nunca derruba o relatório. Doc do consumidor:
+`cli/kb/README.md` e `packages/gregio-cc-harness/README.md`.
+
 Arquitetura do engine: `src/kb/` (`config.js`, `routing.js`, `frontmatter.js`,
 `graphify.js` = chokepoint do scan-root, `repo-hygiene.js`, `repo-claudemd.js`,
 `freeze.js` = índice de contratos congelados, `repo-status.js` = varredura de trabalho

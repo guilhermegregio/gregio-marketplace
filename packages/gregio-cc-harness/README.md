@@ -53,15 +53,17 @@ O que ele **nunca** faz:
 - **não apaga bloco que não conhece**: marcador sem template no engine fica como está
   e é apenas reportado;
 - **não instala nada**. Pacote faltando é assunto do `kb doctor`, que sugere; quem roda
-  o `fr`/`fu`/`npm i -g` é o humano.
+  o gerenciador de pacotes (ou o `npm i -g`) é o humano.
 
 Rodar duas vezes não muda nada — idempotência é contrato, não gentileza. O passo a
-passo de uma estação zerada (gregioos → dotfiles → scaffold → doctor) está no
+passo de uma estação zerada (pacotes → suas configs → scaffold → doctor) está no
 [README do engine](../../cli/kb/README.md#bootstrap-de-estação-nova).
 
 ## `kb doctor`
 
-Valida o conjunto e imprime ✓/✗ por item:
+Valida **o que o harness precisa para rodar** e imprime ✓/✗ por item. O que é da sua
+estação (repo de config do sistema, dotfiles aplicados, serviço local) não está aqui: vai
+em `doctor.checks`, na seção seguinte.
 
 - **kb config** existe (`~/.config/kb/config.json`, respeitando `KB_CONFIG` e
   `XDG_CONFIG_HOME`)
@@ -70,30 +72,72 @@ Valida o conjunto e imprime ✓/✗ por item:
 - **hook do guard** presente em `hooks.PreToolUse`; passa com `kb guard` e
   também com o `guard.mjs` antigo (transição), aí com nota de migração
 - **graphify** responde e não emite warning de skill desatualizada
-- **n8n dev**: se o container `n8n-dev` existe, nenhum workflow importado aponta
-  para o auth de produção (credencial dev usando prod)
+- **rules disponíveis**: a cadeia de resolução do `kb rules` (`KB_RULES_DIR` → package
+  irmão → `<engine>/rules` → plugin cache) chega em algum diretório com rules. O ✗ lista
+  os caminhos tentados — sem isso o `kb rules` só falharia dentro do repo alvo
 
 E os checks de estação, que dizem se a máquina sustenta o que o CLAUDE.md global manda
 fazer:
 
 | check | ✗ quando | correção sugerida |
 |---|---|---|
-| **`claude` no PATH** | o CLI não está no PATH (devflow, panes de agente e o consolidate chamam pelo nome) | `npm i -g @anthropic-ai/claude-code` ou o módulo do gregioos |
-| **ferramentas no PATH** | falta `rg`, `fd`, `jq`, `yq`, `http`, `gh`, `herdr`, `wtree`, `stow` ou `pnpm` — um ✗ por ferramenta, porque a correção é por pacote | pacote no gregioos + `fr` (NixOS) / `fu` (macOS), ou o gerenciador da distro |
-| **node ≥ 20** | versão menor (o engine é ESM e o arquivador usa `--env-file`) | mesma via da linha acima |
-| **gregioos** | `~/gregioos` não é repo git — sem ele nenhuma correção acima é aplicável | clonar e aplicar com `fr`/`fu` |
-| **dotfiles (stow aplicado)** | `~/code/dotfiles` ausente, ou `~/.config/starship.toml` não aponta para dentro dele | `./install.sh` (sistema antes do stow) |
+| **`claude` no PATH** | o CLI não está no PATH (devflow, panes de agente e automações chamam pelo nome) | `npm i -g @anthropic-ai/claude-code`, ou o pacote do seu gerenciador declarativo |
+| **ferramentas no PATH** | falta `rg`, `fd`, `jq`, `yq`, `http`, `gh`, `herdr`, `wtree` ou `pnpm` — um ✗ por ferramenta, porque a correção é por pacote | o gerenciador de pacotes da sua máquina (a dica é platform-aware: Nix, macOS, distro) |
+| **node ≥ 20** | versão menor (o engine é ESM e usa `--env-file`) | mesma via da linha acima |
 | **workspace `~/code`** | falta `~/code`, `~/code/worktrees` ou `~/code/.scratchpad` | `kb scaffold` |
 | **blocos do `~/.claude/CLAUDE.md`** | bloco faltando, em versão menor que a do template, ou de perfil que saiu | `kb scaffold` |
 
 O check dos blocos usa exatamente a mesma decisão do `kb scaffold` (a função pura
-`planChanges`), então o doctor nunca manda rodar um comando que não mudaria nada. O
-`gregioos` é pulado fora de NixOS/nix-darwin — plataforma que não se aplica não vira
-falha.
+`planChanges`), então o doctor nunca manda rodar um comando que não mudaria nada.
 
-Sai com 1 se qualquer check falhar — usável em automação. Check pulado
-(docker/graphify ausente, plataforma que não se aplica) imprime `-` e não conta como
-falha. **O doctor nunca conserta nada**: ele imprime o comando pronto e o humano roda.
+Sai com 1 se qualquer check falhar — usável em automação. Check pulado (graphify
+ausente, plataforma que não se aplica, `skip_if` de um check seu) imprime `-` e não
+conta como falha. **O doctor nunca conserta nada**: ele imprime o comando pronto e o
+humano roda.
+
+### `doctor.checks` — os checks da sua estação
+
+O engine não conhece a sua topologia de repos, nem os seus serviços. Declare esses
+checks no seu `~/.config/kb/config.json` (`kb.config.example.json` tem um exemplo
+pronto) e eles entram no mesmo relatório, depois dos checks do harness, na ordem do
+array:
+
+```json
+{
+  "doctor": {
+    "checks": [
+      { "type": "path", "label": "repo de config do sistema", "path": "~/meu-repo-de-sistema",
+        "git": true, "platforms": ["linux", "darwin"], "fix": "clone e aplique o repo de config" },
+      { "type": "symlink-inside", "label": "dotfiles aplicados", "path": "~/.config/algum-app/config.toml",
+        "target": "~/meus-dotfiles", "fix": "rode o instalador dos dotfiles" },
+      { "type": "command", "label": "serviço local não aponta para produção",
+        "argv": ["docker", "exec", "meu-postgres-dev", "sh", "-c", "psql -tAc \"select count(*) from cfg where url like '%api.example.com%'\""],
+        "expect_stdout": "/^0$/", "skip_if": ["docker", "info"],
+        "fix": "troque a credencial de produção pela de dev no serviço local" }
+    ]
+  }
+}
+```
+
+| tipo | ✓ quando |
+|---|---|
+| **`path`** | `path` existe; com `git: true`, exige também `<path>/.git` |
+| **`symlink-inside`** | o realpath de `path` cai **dentro** de `target` — é assim que se prova symlink farm aplicada: repo clonado com o instalador nunca rodado deixa tudo "existindo" e nada no lugar |
+| **`command`** | `argv` (executado **sem shell**) sai 0; com `expect_stdout`, quem decide é o casamento — `"/regex/flags"` é regex, qualquer outra string é substring |
+
+Campos comuns:
+
+- **`label` e `fix` são obrigatórios** — `fix` é o texto impresso junto do ✗, então
+  escreva o comando que você mesmo rodaria;
+- **`platforms`** (`linux`, `darwin`, `nixos`) restringe o check; fora da lista ele
+  imprime `-` e não conta como falha. Numa estação NixOS casam `linux` **e** `nixos`;
+- **`skip_if`** (só em `command`) é outro `argv`: se ele falhar, o check vira `-` em vez
+  de ✗ — é como um check de container não acusa falha com o docker desligado.
+
+⚠️ **O contrato read-only do doctor vale para os checks do engine.** Um `command` é seu:
+o doctor executa o que você declarou, a cada execução — declare só comando que **lê**.
+Config ausente ou malformada não derruba o relatório: vira um ✗ do próprio bloco (ou da
+entrada inválida) e os outros checks seguem.
 
 ## `kb status` — trabalho não salvo
 
@@ -162,7 +206,8 @@ e o hook, uma vez, em `~/.claude/settings.json`:
 
 ## Requisitos
 
-Node ≥ 20, zero dependências. `docker` e `graphify` são opcionais — checks que
-dependem deles são pulados ou acusados conforme o caso. `fastfetch` é opcional para o
-`kb scaffold`: sem ele o bloco `os-info` entra com a instrução de rodar
-`fastfetch -l none` no lugar do retrato.
+Node ≥ 20, zero dependências. `graphify` é opcional — o check dele acusa quando falta.
+`fastfetch` é opcional para o `kb scaffold`: sem ele o bloco `os-info` entra com a
+instrução de rodar `fastfetch -l none` no lugar do retrato. Qualquer outra dependência
+externa (docker, banco, serviço) só entra pelos seus `doctor.checks`, e o `skip_if`
+existe para que ela desligada vire `-`, não ✗.
