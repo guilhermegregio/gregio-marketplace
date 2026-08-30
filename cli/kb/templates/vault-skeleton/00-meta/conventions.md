@@ -25,7 +25,7 @@ projects: [nome-projeto]      # projetos que esta nota toca
 groups: [nome-grupo]          # produtos/iniciativas (cross-projeto)
 stack: [typescript, supabase] # tecnologias
 tags: [auth, mobile]
-visibility: {{VISIBILITY}}    # private | team-nxt | team-stone | shared | public
+visibility: {{VISIBILITY}}    # private | team-<nome-do-time> | shared | public
 created: AAAA-MM-DD
 updated: AAAA-MM-DD
 ---
@@ -34,6 +34,9 @@ updated: AAAA-MM-DD
 ## Regras
 
 - `visibility` default deste vault: **{{VISIBILITY}}**. Não rebaixar sem intenção.
+- `private`, `shared` e `public` valem em qualquer base; `team-<nome>` é um padrão
+  aberto — quais times existem é escolha de quem monta os vaults (um vault por
+  audiência, ver `kb vault list`).
 - Nomes de arquivo em `kebab-case`. IDs são `<vault>-<categoria>-<slug>`.
 - Links entre notas via `[[wikilink]]`. Linke liberalmente.
 - Datas absolutas (nunca "ontem"/"semana passada").
