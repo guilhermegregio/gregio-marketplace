@@ -36,6 +36,7 @@
       }
     ]
   },
+  "_comment_vaults": "Um vault por AUDIÊNCIA, não por assunto: o que é seu fica em `private`, o que é de um time ganha a visibilidade daquele time, e `shared` é o que sai para fora. `default: true` marca o vault que os comandos assumem sem `--vault`.",
   "vaults": [
     {
       "name": "pessoal",
@@ -45,48 +46,34 @@
       "graphOut": "graphify-out/graph.json",
       "includeInCentral": true
     },
-    { "name": "nxt", "path": "~/code/vault-nxt", "visibility": "team-nxt", "includeInCentral": true },
-    { "name": "stone", "path": "~/code/vault-stone", "visibility": "team-stone", "includeInCentral": true },
-    { "name": "vivicupcakes", "path": "~/code/vault-vivicupcakes", "visibility": "shared", "includeInCentral": true }
+    { "name": "trabalho", "path": "~/code/vault-trabalho", "visibility": "team-acme", "includeInCentral": true },
+    { "name": "cliente", "path": "~/code/vault-cliente", "visibility": "shared", "includeInCentral": true }
   ],
+  "_comment_groups": "Produto lógico: agrega repos e subprojetos que se leem juntos. Um membro pode ser um repo (`api`) ou um subprojeto de monorepo (`monorepo#app-web`).",
   "groups": [
     {
-      "name": "nxt",
-      "title": "NXT Training",
-      "members": ["nxt-app-workout", "ds-agent#ds-nxt", "agent-nxt-weight-training", "my-coach"]
+      "name": "produto-a",
+      "title": "Produto A",
+      "members": ["api", "monorepo#app-web", "worker"]
     },
-    { "name": "vivicupcakes", "title": "Vivi Cupcakes", "members": ["ds-agent#ds-vivicupcakes"] }
+    { "name": "produto-b", "title": "Produto B", "members": ["monorepo#app-admin"] }
   ],
   "projects": [
     {
-      "name": "jumpster-flutter",
-      "path": "~/code/jumpster-flutter",
+      "name": "api",
+      "path": "~/code/api",
       "graphOut": "graphify-out/graph.json",
       "includeInCentral": true
     },
-    { "name": "my-coach", "path": "~/code/my-coach", "includeInCentral": true },
-    { "name": "agent-nxt-weight-training", "path": "~/code/agent-nxt-weight-training", "includeInCentral": true },
+    { "name": "worker", "path": "~/code/worker", "includeInCentral": true },
     {
-      "name": "ds-agent",
-      "path": "~/code/ds-agent",
+      "name": "monorepo",
+      "path": "~/code/monorepo",
       "includeInCentral": true,
       "monorepo": true,
       "subprojects": [
-        { "name": "ds-nxt", "subpath": "apps/ds-nxt" },
-        { "name": "ds-bluefit", "subpath": "apps/ds-bluefit" },
-        { "name": "ds-fit4you", "subpath": "apps/ds-fit4you" },
-        { "name": "ds-vivicupcakes", "subpath": "apps/ds-vivicupcakes" }
-      ]
-    },
-    {
-      "name": "nxt-app-workout",
-      "path": "~/code/nxt-app-workout",
-      "includeInCentral": true,
-      "monorepo": true,
-      "subprojects": [
-        { "name": "nxt-app", "subpath": "apps/app" },
-        { "name": "nxt-admin", "subpath": "apps/admin" },
-        { "name": "nxt-partners", "subpath": "apps/partners" }
+        { "name": "app-web", "subpath": "apps/web" },
+        { "name": "app-admin", "subpath": "apps/admin" }
       ]
     }
   ]
