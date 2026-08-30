@@ -1,6 +1,6 @@
 {
   "name": "@gregio/kb",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "type": "module",
   "description": "CLI do harness de desenvolvimento com IA: base de conhecimento pessoal (vaults Obsidian, grafo central, ciclo de planos) mais o bootstrap e os guardrails do ambiente (scaffold, doctor, status, map, rules, guard)",
   "keywords": [

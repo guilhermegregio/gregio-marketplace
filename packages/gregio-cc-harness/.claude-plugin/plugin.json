@@ -1,7 +1,7 @@
 {
   "name": "gregio-cc-harness",
-  "description": "Doc e contratos do bootstrap do harness — a implementação vive no engine kb: 'kb scaffold' prepara uma estação nova (dirs do workspace ~/code, worktrees, .scratchpad e os blocos gerenciados do ~/.claude/CLAUDE.md, por perfil), 'kb doctor' valida o conjunto e diz o que falta com o comando de correção (kb config, plugins habilitados, hook do guard, graphify, credenciais n8n dev vs prod, ferramentas no PATH, gregioos/dotfiles, workspace e drift dos blocos), 'kb status' aponta trabalho não salvo (uncommitted/unpushed/branch não mergeada/worktree órfão), 'kb map' lista repos de ~/code fora do kb, 'kb rules <repo>' materializa as rules e 'kb guard' é o hook PreToolUse dos guardrails.",
-  "version": "0.3.0",
+  "description": "Doc e contratos do bootstrap do harness — a implementação vive no engine kb: 'kb scaffold' prepara uma estação nova (dirs do workspace ~/code, worktrees, .scratchpad e os blocos gerenciados do ~/.claude/CLAUDE.md, por perfil), 'kb doctor' valida o que o harness precisa para rodar e diz o que falta com o comando de correção (kb config, plugins habilitados, rules disponíveis, hook do guard, graphify, ferramentas no PATH, workspace e drift dos blocos), mais os checks extras que você declarar em doctor.checks; 'kb status' aponta trabalho não salvo (uncommitted/unpushed/branch não mergeada/worktree órfão), 'kb map' lista repos de ~/code fora do kb, 'kb rules <repo>' materializa as rules e 'kb guard' é o hook PreToolUse dos guardrails.",
+  "version": "0.4.0",
   "author": {
     "name": "Guilherme Gregio",
     "email": "guilherme@gregio.net"
