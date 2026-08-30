@@ -173,9 +173,9 @@ export function graphSources(config, { onlyRepos = null } = {}) {
 // Resolve um grupo para os nomes de FONTE (o atributo `repo` no grafo central) que
 // ele agrega. Como o central indexa o MERGE NA RAIZ de cada monorepo (C5), a fonte
 // de um monorepo é UM repo = o nome do projeto. Membros aceitos:
-//   "my-coach"            -> repo simples (ou vault) = a própria fonte
-//   "nxt-app-workout"     -> monorepo = a fonte raiz (1 repo)
-//   "ds-agent#ds-nxt"     -> subprojeto: COLAPSA no monorepo "ds-agent" no central
+//   "app-web"             -> repo simples (ou vault) = a própria fonte
+//   "monorepo"            -> monorepo = a fonte raiz (1 repo)
+//   "monorepo#app-admin"  -> subprojeto: COLAPSA no monorepo "monorepo" no central
 // Limite C5: no central, subprojetos de um mesmo monorepo não são separáveis
 // (todos vêm sob o nome do monorepo). A granularidade por-subprojeto fica nos
 // subgrafos em disco, p/ planejamento local dentro do subprojeto.
