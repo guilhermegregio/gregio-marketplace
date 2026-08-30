@@ -8,6 +8,34 @@
     "visibility": "private",
     "category": "article"
   },
+  "doctor": {
+    "_comment": "Checks EXTRAS do `kb doctor`, declarados por quem usa. O doctor do engine valida só o que o harness precisa para rodar; a cicatriz que é da SUA estação (o repo de config da máquina, a symlink farm aplicada, o serviço que não pode apontar pro ambiente errado) entra aqui. Tipos: path | symlink-inside | command. `platforms` (linux/darwin/nixos) fora da lista imprime `-`. O contrato read-only vale para os checks do engine: `command` é seu, use só comando que LÊ.",
+    "checks": [
+      {
+        "type": "path",
+        "label": "repo de config do sistema",
+        "path": "~/meu-repo-de-sistema",
+        "git": true,
+        "platforms": ["linux", "darwin"],
+        "fix": "clone o repo de config da máquina em ~/meu-repo-de-sistema e aplique"
+      },
+      {
+        "type": "symlink-inside",
+        "label": "dotfiles aplicados",
+        "path": "~/.config/algum-app/config.toml",
+        "target": "~/meus-dotfiles",
+        "fix": "rode o instalador dos dotfiles — repo clonado não prova symlink farm aplicada"
+      },
+      {
+        "type": "command",
+        "label": "serviço local não aponta para produção",
+        "argv": ["docker", "exec", "meu-postgres-dev", "sh", "-c", "psql -U postgres -d meu_app_dev -t -A -c \"select count(*) from workflow where config::text like '%api.example.com%'\""],
+        "expect_stdout": "/^0$/",
+        "skip_if": ["docker", "info"],
+        "fix": "troque a credencial de produção pela de dev no serviço local"
+      }
+    ]
+  },
   "vaults": [
     {
       "name": "pessoal",

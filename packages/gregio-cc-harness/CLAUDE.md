@@ -21,22 +21,30 @@ ressuscite lógica aqui.
 - **Check só entra com cicatriz, e a cicatriz fica comentada no código.** Cada
   check do `kb doctor` rastreia uma dor real, registrada no comentário acima dele
   em `commands/doctor.js`: plugin instalado mas desabilitado em `enabledPlugins`
-  passou semanas despercebido; credencial n8n dev apontando pra prod
-  (`auth.nxttrainingapp.com`) queimou dados reais; guard ausente deixa
-  freeze/wtree sem guardrail; ferramenta do CLAUDE.md global faltando faz o agente
-  obedecer a uma regra que a máquina não sustenta e travar sem dizer por quê;
-  dotfiles clonado com o stow nunca aplicado deixou uma máquina com tudo
-  "existindo" e nada no lugar; bloco do CLAUDE.md em versão velha é regra
-  desatualizada seguida ao pé da letra, pior que regra ausente. Check novo sem
-  cicatriz escrita é ruído — e não se remove um check sem registrar o porquê.
+  passou semanas despercebido; guard ausente deixa freeze/wtree sem guardrail;
+  rules que não resolvem só falham na hora do `kb rules`, já dentro do repo alvo;
+  ferramenta do CLAUDE.md global faltando faz o agente obedecer a uma regra que a
+  máquina não sustenta e travar sem dizer por quê; bloco do CLAUDE.md em versão
+  velha é regra desatualizada seguida ao pé da letra, pior que regra ausente.
+  Check novo sem cicatriz escrita é ruído — e não se remove um check sem registrar
+  o porquê (abaixo).
+- **O doctor valida o harness, não a estação de quem o mantém.** Este código é
+  público e roda na máquina de outras pessoas: hostname interno, repo pessoal e
+  alias de quem mantém não entram no engine. Cicatriz que é da estação de alguém
+  vira `doctor.checks` na config **daquele** usuário.
 - **`kb doctor` sai com 1 se qualquer ✗** — automação depende do exit code, não
-  do texto. Check pulado (docker/n8n ausente, plataforma em que o check não se
-  aplica) imprime `-` e não conta como falha.
+  do texto. Check pulado (graphify ausente, plataforma em que o check não se
+  aplica, `skip_if` de um check da config) imprime `-` e não conta como falha.
 - **`kb doctor` é read-only ABSOLUTO.** Ele diagnostica e imprime o comando de
-  correção (`kb scaffold`, `fr`/`fu`, `./install.sh`, o pacote a adicionar no
-  gregioos); quem conserta é o humano. Duas execuções seguidas têm de imprimir
-  exatamente a mesma coisa e não tocar em nada — doctor que conserta sozinho vira
-  ferramenta que ninguém roda com medo.
+  correção (`kb scaffold`, o pacote a instalar); quem conserta é o humano. Duas
+  execuções seguidas têm de imprimir exatamente a mesma coisa e não tocar em nada
+  — doctor que conserta sozinho vira ferramenta que ninguém roda com medo. Um
+  check `command` da config do usuário é responsabilidade dele: a doc pede comando
+  somente-leitura, e o engine não tem como garantir isso por ele.
+- **A resolução do diretório de rules tem dono único.** O check "rules
+  disponíveis" importa `findRulesDir` de `commands/rules.js` — se o doctor
+  repetisse a cadeia de candidatos, daria ✓ num caminho que o `kb rules` não
+  acharia (ou o contrário).
 - **O check do hook aceita os dois mundos durante a transição**: `kb guard` (o
   jeito novo) e `guard.mjs` (instalações antigas continuam protegidas) — o
   legado passa com nota de migração, não com ✗. Quem já migrou não pode ver
@@ -47,6 +55,42 @@ ressuscite lógica aqui.
   de stack, idempotência e `--prune` têm dono único.
 - **`kb map` não executa nada** — só sugere `kb project add`.
 
+### Checks removidos (e por quê) — 2026-08-30
+
+Três checks saíram do `commands/doctor.js` porque eram do **ecossistema de quem
+mantém**, não do harness — e este repo é público:
+
+| check removido | o que validava | por que saiu | para onde foi |
+|---|---|---|---|
+| `n8n dev → prod` | nenhum workflow do `n8n-dev` apontando para o host de auth de produção | tinha o **hostname interno hardcoded** num repo público, e presumia os containers `n8n-dev`/`postgres-dev` da máquina de quem mantém | `doctor.checks` tipo `command` (com `skip_if: ["docker", "info"]` e `expect_stdout`) |
+| `gregioos` | `~/gregioos` é um repo git | presume o repo de config declarativa pessoal; ninguém mais tem esse caminho | `doctor.checks` tipo `path` com `git: true` |
+| `dotfiles (stow aplicado)` | `~/code/dotfiles` existe e `~/.config/starship.toml` resolve para dentro dele | mesma coisa: repo pessoal, sentinela pessoal | `doctor.checks` tipo `symlink-inside` |
+
+Junto saíram `stow` das ferramentas obrigatórias (só servia ao dotfiles pessoal —
+`wtree` e `herdr` **continuam** exigidos, são para distribuir) e a redação presa
+aos aliases de quem mantém nas sugestões de correção (agora: "instale com o
+gerenciador de pacotes da sua máquina"). A cicatriz não se perdeu: virou
+capacidade configurável, e o exemplo genérico dos três tipos está em
+`cli/kb/kb.config.example.json`.
+
+### `doctor.checks` — contratos
+
+- **Config do usuário é entrada não confiável.** `doctor.checks` ausente, não-array,
+  entrada sem `label`/`fix`, tipo desconhecido, `argv` que não é array de strings:
+  tudo vira ✗ com a explicação, nunca exceção. Diagnóstico que se recusa a rodar por
+  causa de uma vírgula é pior do que diagnóstico incompleto.
+- **`label` e `fix` são obrigatórios** em todo check. Um ✗ sem sugestão de correção
+  é exatamente o que o doctor existe para não ser.
+- **`command` roda sem shell** (`spawnSync` com `argv`) — sem interpolação, sem glob,
+  sem `&&`. Quem precisa de pipeline põe o `sh -c` explicitamente no próprio `argv`.
+- **`expect_stdout`, quando presente, é quem decide** — comando que sempre sai 0
+  (`docker exec ... psql -c 'select count(*)'`) não provaria nada pelo exit code.
+  `"/regex/flags"` é regex; qualquer outra string é substring.
+- **`skip_if` vira `-`, não ✗**: dependência externa desligada (docker parado) não é
+  problema da estação, é check que não se aplica agora.
+- **Ordem do array = ordem da saída.** O relatório é determinístico, senão o
+  contrato read-only ("duas execuções idênticas") cai.
+
 ### `kb scaffold` — contratos
 
 - **Só escreve entre os marcadores.** `<!-- kb-scaffold:begin <bloco> v<n> -->` …
@@ -56,7 +100,8 @@ ressuscite lógica aqui.
   Bloco com marcador de início e sem o de fim é ignorado (arquivo mexido à mão).
 - **Nunca instala binário.** Bootstrap de estação para no que é filesystem
   (diretórios + CLAUDE.md + `scaffold.profiles` na config); pacote faltando é ✗ do
-  `kb doctor` com a sugestão pronta, e quem roda `fr`/`fu`/`npm i -g` é o humano.
+  `kb doctor` com a sugestão pronta, e quem roda o gerenciador de pacotes (ou o
+  `npm i -g`) é o humano.
   A fronteira é o que torna os dois comandos seguros de rodar a qualquer hora.
 - **Idempotência é requisito, não gentileza.** Segunda execução não pode tocar em
   mtime nenhum: todo write é precedido de comparação de conteúdo, bloco na mesma
@@ -86,19 +131,18 @@ ressuscite lógica aqui.
   seria errado.
 - Plugins com scope `project`/`local` não são cobrados em `enabledPlugins`
   global (são habilitados por projeto); o doctor só valida scope `user`.
-- A query do n8n roda dentro do container `postgres-dev` com `$POSTGRES_USER`
-  expandido pelo `sh -c` **de dentro** do container — não troque por expansão
-  local.
 - **Detecção de NixOS é `/run/current-system`**: `/etc/NIXOS` sumiu no 26.05 e
   quem checava por ele passou a tratar a estação como Linux genérico, dando a dica
-  de correção errada. A sugestão de instalação é platform-aware (`fr` no NixOS,
-  `fu` no nix-darwin, gerenciador da distro no resto).
+  de correção errada. A sugestão de instalação é platform-aware (Nix, gerenciador
+  do macOS, gerenciador da distro) e o mesmo vale para o `platforms` dos checks da
+  config: numa estação NixOS os tokens que casam são `linux` **e** `nixos`.
 - **Presença de binário é procura no PATH, não `--version`.** `wtree`, `herdr` e
   `claude` não têm flag de versão estável: rodar `--version` para decidir presença
   transformava exit code != 0 em ✗ falso — e cada processo disparado é ruído num
   comando read-only.
-- **A sentinela do stow é o symlink do starship** apontando para dentro de
-  `~/code/dotfiles`: repo clonado não prova stow aplicado.
+- **Symlink farm: a prova é o realpath, não o clone.** É por isso que o tipo
+  `symlink-inside` existe em `doctor.checks` — repo clonado com o instalador nunca
+  rodado deixa tudo "existindo" e nada no lugar, e ninguém percebe.
 - O bloco `os-info` é um **retrato**, não um espelho: ele não se refaz a cada
   `kb scaffold`, só quando a versão do bloco sobe. Quem quer o estado de agora roda
   `fastfetch -l none` — o próprio bloco diz isso.

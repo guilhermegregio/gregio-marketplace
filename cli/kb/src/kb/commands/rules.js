@@ -30,21 +30,35 @@ const MARKER = 'gregio-cc-rules';
  *      copia as rules para dentro do pacote e elas viajam com ele;
  *   4. marketplace instalado via /plugin (repo clonado em ~/.claude/plugins/repos).
  */
-function resolveRulesDir() {
-  const candidates = [
+function rulesDirCandidates() {
+  return [
     process.env.KB_RULES_DIR && expandPath(process.env.KB_RULES_DIR),
     resolve(ENGINE_ROOT, '..', '..', 'packages', 'gregio-cc-rules', 'rules'),
     join(ENGINE_ROOT, 'rules'),
     join(homedir(), '.claude', 'plugins', 'repos', 'gregio-marketplace', 'packages', 'gregio-cc-rules', 'rules'),
   ].filter(Boolean);
-  const found = candidates.find(existsSync);
-  if (!found) {
+}
+
+/**
+ * Resolução sem exceção, para quem só quer diagnosticar: `{ dir, candidates }` com
+ * `dir: null` quando nada existe. O `kb doctor` usa esta função em vez de repetir a
+ * cadeia — duas listas divergentes dariam ✓ no doctor num caminho que o `kb rules` não
+ * acharia.
+ */
+export function findRulesDir() {
+  const candidates = rulesDirCandidates();
+  return { dir: candidates.find(existsSync) ?? null, candidates };
+}
+
+function resolveRulesDir() {
+  const { dir, candidates } = findRulesDir();
+  if (!dir) {
     throw new Error(
       `rules não encontradas. Procurei em:\n${candidates.map(c => `  ${c}`).join('\n')}\n` +
       'Aponte KB_RULES_DIR para o diretório rules/ do gregio-cc-rules.',
     );
   }
-  return found;
+  return dir;
 }
 
 /** Frontmatter mínimo: `rule`, `stacks`, `version`. Sem dependência de parser YAML. */
