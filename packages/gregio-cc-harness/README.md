@@ -209,7 +209,7 @@ e o hook, uma vez, em `~/.claude/settings.json`:
 
 | guardrail | quando | decisão |
 |---|---|---|
-| 🧊 contrato congelado | `Edit`/`Write` num `.feature` sob `kb dev freeze` — mora no vault, em `<vault>/10-projects/<projeto>/behaviors/` (contrato no repo é legado) | **deny** |
+| 🧊 contrato congelado | `Edit`/`Write` num contrato `.feature.md` sob `kb dev freeze` — mora no vault, em `<vault>/10-projects/<projeto>/behaviors/` (contrato no repo é legado) | **deny** |
 | 🌳 feature na main | escrita em repo registrado no kb, branch `main`, com plano ativo | **aviso** |
 
 ## Requisitos

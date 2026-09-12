@@ -58,6 +58,12 @@ NUNCA faça `ls -R` nem leia o vault inteiro. Protocolo, nesta ordem:
      e os `[[wikilinks]]` são arestas `origin: wikilink`. Filtre por eles (ex.: todos os
      `fm_type=="learning"`, notas de um `fm_projects`, por `fm_visibility`) e navegue a
      teia de wikilinks — não leia pasta por pasta.
+   - **Contratos no grafo:** filtre `fm_type == "contract"` (com `fm_plan` para os de um
+     plano) e siga as arestas `relation: "contracts"` — `origin: frontmatter` liga o
+     `_plan.md` aos contratos do seu `contracts:`; `origin: folder` liga a casa
+     (`10-projects/<p>/_project.md`) a cada arquivo de `behaviors/`. Ex.: "quais
+     contratos o plano X congela?" → `get_neighbors` no nó do `_plan.md` filtrando
+     `relation == "contracts"`.
 5. **Budget:** router + 1 índice + N notas-alvo. Precisou de mais? Vá ao grafo, não
    abra mais arquivos.
 
@@ -86,7 +92,9 @@ atualize quem o referenciava para apontar o vault — e não deixe stub.
 id, type, title, status, projects[], groups[], stack[], tags[], visibility, created, updated
 ```
 
-`type`: project|plan|adr|c4|research|learning|pattern|source|content|concept|moc|doc.
+`type`: project|plan|adr|c4|contract|research|learning|pattern|source|content|concept|moc|doc.
+Contrato (`type: contract`) é um `.feature.md` em `10-projects/<projeto>/behaviors/` e
+leva também `plan: <slug>` quando nasce de um plano.
 `status`: idea|active|paused|done|archived.
 `visibility`: convenção **aberta**, não lista fechada — `private`, `shared` e `public`
 são universais; `team-<nome-do-time>` é o padrão para audiência de time, e quais times
@@ -108,6 +116,9 @@ kb capture "<texto>" --vault <vault> [--tags ...]
 
 # Criar nota estruturada a partir de template
 kb new --vault <vault> --type project|plan|adr|c4|research|learning|pattern|content --title "..." [--project p] [--topic t]
+
+# Contrato Gherkin em markdown → 10-projects/<p>/behaviors/<slug>.feature.md
+kb new --vault <vault> --type contract --project <p> --title "..." [--plan <slug>]
 ```
 
 Roteamento do `add --as`: `article→60-sources/articles`, `idea→60-sources/ideas`,

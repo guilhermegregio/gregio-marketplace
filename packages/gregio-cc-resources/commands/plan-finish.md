@@ -39,13 +39,15 @@ Crie `specs/<nome-do-modulo>/README.md` com:
 - **Migrations**: Lista de migrations relacionadas
 - **Histórico**: Tabela com fases implementadas
 
-### 4. Criar behaviors.feature (no vault)
+### 4. Criar o contrato de behaviors `.feature.md` (no vault)
 
 Contrato é conhecimento, não runtime: o Gherkin **não fica no repo**. Crie-o na casa do
-projeto no vault — `<vault>/10-projects/<projeto>/behaviors/<nome-do-modulo>.feature`.
+projeto no vault — `<vault>/10-projects/<projeto>/behaviors/<nome-do-modulo>.feature.md`,
+criado com `kb new --vault <vault> --type contract --project <projeto> --title "<nome-do-modulo>"`.
 O bloco "📚 Conhecimento deste projeto mora no vault" do `CLAUDE.md` do repo diz qual é a
-casa; se o repo não tiver esse ponteiro, pergunte ao usuário antes de escrever. Formato
-Gherkin (BDD):
+casa; se o repo não tiver esse ponteiro, pergunte ao usuário antes de escrever. O arquivo
+é markdown com frontmatter (`type: contract`), título `# Contrato — <nome>` e uma seção
+`## Funcionalidade: X` por funcionalidade, com os cenários num bloco `gherkin` (BDD):
 
 ```gherkin
 # language: pt
@@ -121,8 +123,8 @@ docs: consolidate <nome-do-modulo> feature documentation
 - Remove specs/tasks/ files (all phases completed)
 ```
 
-O `behaviors.feature` é commitado **no vault** (repo git próprio), em commit separado:
-`docs(<projeto>): add behaviors/<nome-do-modulo>.feature`.
+O contrato `.feature.md` é commitado **no vault** (repo git próprio), em commit separado:
+`docs(<projeto>): add behaviors/<nome-do-modulo>.feature.md`.
 
 ## Exemplo de uso
 

@@ -45,25 +45,48 @@ Requer Node ≥ 20.6. Zero dependências de runtime.
 **Repo = código + runtime** (`CLAUDE.md`, `references/` de skills, `graphify-out/`
 só-código). **Vault = conhecimento** — docs, ADRs, planos, learnings e também os
 **contratos**: o Gherkin de um plano mora na casa do projeto no vault,
-`<vault>/10-projects/<projeto>/behaviors/<escopo>.feature` (um arquivo por app em
+`<vault>/10-projects/<projeto>/behaviors/<escopo>.feature.md` (um arquivo por app em
 monorepo). No vault o contrato tem path único — não se duplica por worktree — e herda a
 visibilidade do vault. O único rastro no repo é o bloco `kb:link` do `CLAUDE.md`
 apontando para a casa.
 
 ## Contratos
 
+Um contrato é um arquivo **`.feature.md`**: markdown com frontmatter, lido por humano e
+por agente e indexado pelo grafo como qualquer nota — não é executado por cucumber.
+
+```bash
+kb new --vault pessoal --type contract --project agentic-os --title "Login" [--plan <slug>]
+# → <vault>/10-projects/agentic-os/behaviors/login.feature.md
+```
+
+O arquivo nasce do template `templates/notes/contract.md`:
+
+- frontmatter com `type: contract`, `status`, `plan` (só com `--plan`), `projects` (o
+  `--project` entra se faltar), `groups`, `visibility` (a do vault por default); o `id`
+  sai do título curto;
+- título `# Contrato — <título>`;
+- uma seção `## Funcionalidade: <nome>` por funcionalidade, com os cenários num bloco
+  ` ```gherkin ` (`# language: pt`, `Funcionalidade:`, `Cenário:`, `Dado/Quando/Então`).
+
+O slug vem do título; se o nome já existe, o `kb new` usa `<slug>-2.feature.md` (e assim por diante) em vez de
+sobrescrever.
+
 O `_plan.md` declara os contratos em `contracts:`, com entradas relativas a
-`10-projects/` do vault do plano:
+`10-projects/` do vault do plano — com ou sem extensão:
 
 ```yaml
 contracts:
-  - agentic-os/behaviors/kb-cli.feature   # → <vault>/10-projects/agentic-os/behaviors/kb-cli.feature
+  - agentic-os/behaviors/kb-cli.feature.md   # → <vault>/10-projects/agentic-os/behaviors/kb-cli.feature.md
+  - agentic-os/behaviors/login               # sem extensão: tenta login.feature.md, depois login.feature (legado)
 ```
 
 | entrada | resolve para |
 |---|---|
 | absoluta ou `~/…` | como está |
 | relativa | `<vault do plano>/10-projects/<entrada>` |
+| com extensão explícita | literal |
+| sem extensão | `<entrada>.feature.md`; se só existir `<entrada>.feature`, usa esse — `.feature` puro é **legado**, com aviso no stderr sugerindo converter para `.feature.md` |
 | relativa que só existe no repo de um dos `projects:` | o repo — **legado**, com aviso no stderr dizendo para onde mover |
 | não existe em lugar nenhum | erro listando os paths tentados |
 
@@ -71,6 +94,15 @@ contracts:
 cria o `_project.md` se faltar); `--no-contract` pula a task de behaviors. `kb dev freeze`
 congela os arquivos resolvidos e o `kb guard` passa a negar edição neles —
 `kb dev unfreeze <slug> --reason "..."` é o caminho quando o comportamento precisa mudar.
+Freeze e guard não distinguem a extensão: vale o path resolvido.
+
+**No grafo.** O enriquecimento do grafo de vault (`kb graph build`) trata contrato como
+nota: o frontmatter vira atributo `fm_*` do nó-arquivo (inclusive `fm_type: "contract"` e
+`fm_plan`) e surgem arestas `relation: "contracts"` — plano → contrato a partir do
+`contracts:` do `_plan.md` (`origin: frontmatter`, com a mesma resolução sem extensão) e
+casa (`10-projects/<p>/_project.md`) → contrato para todo arquivo sob
+`10-projects/<p>/behaviors/` (`origin: folder`). Nó-arquivo é reconhecido também quando o
+graphify prefixa o label com a pasta (nome de arquivo repetido, como `_project.md`).
 
 ## Casa do projeto: `map`, `project add --vault`, `project move`, `vault index`
 
