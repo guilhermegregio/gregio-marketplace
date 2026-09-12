@@ -8,9 +8,11 @@ argument-hint: [start <slug> | check <slug> | run <slug> | done <slug>]
 
 O ciclo de engenharia que **consome** a skill `kb` (conhecimento) nas pontas. Regra de
 fronteira: **repo = código + runtime** (`CLAUDE.md`, `references/` de skills,
-`graphify-out/` só-código, `behavior.feature` por módulo); **vault = conhecimento**
-(arquitetura, PRD, spec, lições, ADR, logs). Toda escrita de conhecimento passa por
-comandos `kb`/`kb dev` — nunca crie `.md` de design solto no repo.
+`graphify-out/` só-código); **vault = conhecimento** (arquitetura, PRD, spec, lições,
+ADR, logs) **e contrato**: os behaviors Gherkin moram na casa do projeto no vault,
+`<vault>/10-projects/<projeto>/behaviors/<escopo>.feature` (um por app em monorepo) —
+path único, sem cópia por worktree. Toda escrita de conhecimento passa por comandos
+`kb`/`kb dev` — nunca crie `.md` de design nem `.feature` de contrato solto no repo.
 
 Comandos (binário global `kb`; engine em `~/code/gregio-marketplace/cli/kb`):
 
@@ -28,7 +30,7 @@ kb dev done <slug> [--promote learning,adr,c4]                 # promove duráve
 
 ```
 spec (vault) → protótipo (ds-agent) → ⛔ GATE layout
-  → behaviors.feature (Gherkin) → ⛔ GATE contrato → 🧊 kb dev freeze
+  → behaviors .feature no vault (Gherkin) → ⛔ GATE contrato → 🧊 kb dev freeze
   → código (wtree) → review (cenários passam?) → kb dev done
 ```
 
@@ -44,7 +46,10 @@ decisão de produto: peça ao usuário e registre com
 recongele.
 
 `kb dev start --ui` scaffolda a task-gate **TP** (protótipo); **TB** (behaviors) vem
-por padrão. As tasks de código dependem delas via `depends_on`.
+por padrão e o start garante `<vault>/10-projects/<projeto>/behaviors/`. As tasks de
+código dependem delas via `depends_on`. No `_plan.md`, `contracts:` lista entradas
+relativas a `10-projects/` do vault do plano (`<projeto>/behaviors/<escopo>.feature`);
+contrato que só existe no repo ainda resolve, mas é legado e o `kb` avisa.
 
 ## Estágios (repo vs vault)
 
@@ -52,7 +57,7 @@ por padrão. As tasks de código dependem delas via `depends_on`.
 |---|---|---|---|
 | **DRAFT** | `kb capture` / `kb dev start` (semente) | — | `_plan.md` (draft) |
 | **PROTÓTIPO** ⛔ | telas navegáveis; iterar por screenshot até o usuário aprovar | protótipo (ds-agent) | — |
-| **BEHAVIORS** ⛔🧊 | Gherkin do comportamento; usuário aprova; `kb dev freeze` | `behaviors.feature` | `contracts:` no plano |
+| **BEHAVIORS** ⛔🧊 | Gherkin do comportamento; usuário aprova; `kb dev freeze` | — | `<vault>/10-projects/<projeto>/behaviors/*.feature` + `contracts:` no plano |
 | **SINCRONIZAR** | `kb graph build --group <g>` + grafo local do repo | `graphify-out/` (só código) | — |
 | **PLANEJAR** | consultar grafo (MCP), escrever `_plan.md` + `tasks/*` com **gates** e `scope` | (lê) | plano + tasks |
 | **EXECUTAR** | worktree isolado (`wtree --herdr`); agente implementa; loga | código + runtime | `execution/<data>.md` |
@@ -64,7 +69,7 @@ por padrão. As tasks de código dependem delas via `depends_on`.
 Quem **monta** o plano (`kb dev start` + edita tasks) **para** e marca o `_plan.md`
 `status: ready-for-review`. O humano revisa cortes/escopos/DAG e troca para `approved`.
 Só então `kb dev run` (ou execução manual task a task). Detalhe em
-`vault-pessoal/10-projects/ai-dev-harness/plan-structure.md`.
+`vault-pessoal/10-projects/agentic-os/plan-structure.md`.
 
 ## Despacho distribuído (execução das tasks)
 
@@ -83,7 +88,7 @@ Regras: prompt autocontido (o agente não abre o _plan.md); sentinela `RESULTADO
 obrigatória; **nunca esperar `--status done`** (vira `idle` quando alguém foca o
 pane); o orquestrador reverifica o diff na coleta (o humano pode ter instruído o
 agente diretamente) e faz o merge — SEMPRE serial, agente de task nunca mergeia.
-Protocolo completo e tabela de falhas: `ai-dev-harness/dispatch-distribuido.md`.
+Protocolo completo e tabela de falhas: `vault-pessoal/10-projects/agentic-os/dispatch-distribuido.md`.
 
 ## Tasks atômicas + paralelismo
 

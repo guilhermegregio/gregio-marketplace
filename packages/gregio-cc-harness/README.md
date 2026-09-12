@@ -8,7 +8,7 @@ contrato deles.
 kb scaffold [--profiles a,b] # prepara a estação: dirs do workspace + blocos do CLAUDE.md global
 kb doctor                    # relatório ✓/✗ do conjunto (exit 1 se houver ✗)
 kb status [dir] [--all]      # trabalho não salvo nos repos (exit 1 se houver risco)
-kb map [dir]                 # repos git de ~/code fora do kb
+kb map [dir]                 # repos git de ~/code fora do kb + cobertura repo → kb → vault (exit 1 se ✗)
 kb rules <repo>              # materializa as rules (package gregio-cc-rules)
 kb guard                     # hook PreToolUse dos guardrails (stdin/stdout JSON)
 ```
@@ -176,6 +176,14 @@ Varre `~/code` (1 nível, dirs com `.git`), cruza com os `projects` **e**
 `vaults` do kb config e lista os não registrados, sugerindo
 `kb project add <path>`. Não executa nada — registrar repo é decisão do humano.
 
+Depois vem a **cobertura** de cada projeto registrado: path existe, casa no vault
+(com `_project.md`), casa em vários vaults sem `vault` na config, ponteiro `kb:link`
+do `CLAUDE.md` apontando para a casa, e `10-projects/_index.md` de cada vault em dia.
+Cada ✗ traz o comando de correção (`kb project add <path> --vault <v>`,
+`kb project move <nome> --to-vault <v>`, `kb project link-claude <nome>`,
+`kb vault index --vault <v>`) e o exit é 1 se houver ✗. Repo não registrado não
+conta como ✗.
+
 ## Instalar o guardrail num repo
 
 O antigo `harness install` sumiu: virou dois passos explícitos.
@@ -201,7 +209,7 @@ e o hook, uma vez, em `~/.claude/settings.json`:
 
 | guardrail | quando | decisão |
 |---|---|---|
-| 🧊 contrato congelado | `Edit`/`Write` num `behaviors.feature` sob `kb dev freeze` | **deny** |
+| 🧊 contrato congelado | `Edit`/`Write` num `.feature` sob `kb dev freeze` — mora no vault, em `<vault>/10-projects/<projeto>/behaviors/` (contrato no repo é legado) | **deny** |
 | 🌳 feature na main | escrita em repo registrado no kb, branch `main`, com plano ativo | **aviso** |
 
 ## Requisitos

@@ -7,7 +7,7 @@ export async function run({ positionals }) {
   console.error(
     `kb source ${provider ?? ''}: ainda não implementado (fase posterior).\n` +
       'Discord reusa src/index.js + src/consolidate.js; Gmail usa o MCP do Gmail.\n' +
-      'Veja a doc do engine no vault (vault-pessoal/10-projects/ai-dev-harness/kb-engine.md).',
+      'Veja a doc do engine no vault (vault-pessoal/10-projects/agentic-os/kb-engine.md).',
   );
   process.exit(1);
 }

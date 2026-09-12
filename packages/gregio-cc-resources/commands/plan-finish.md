@@ -39,9 +39,13 @@ Crie `specs/<nome-do-modulo>/README.md` com:
 - **Migrations**: Lista de migrations relacionadas
 - **Histórico**: Tabela com fases implementadas
 
-### 4. Criar behaviors.feature
+### 4. Criar behaviors.feature (no vault)
 
-Crie `specs/<nome-do-modulo>/behaviors.feature` em formato Gherkin (BDD):
+Contrato é conhecimento, não runtime: o Gherkin **não fica no repo**. Crie-o na casa do
+projeto no vault — `<vault>/10-projects/<projeto>/behaviors/<nome-do-modulo>.feature`.
+O bloco "📚 Conhecimento deste projeto mora no vault" do `CLAUDE.md` do repo diz qual é a
+casa; se o repo não tiver esse ponteiro, pergunte ao usuário antes de escrever. Formato
+Gherkin (BDD):
 
 ```gherkin
 # language: pt
@@ -107,16 +111,18 @@ Delete a pasta `specs/tasks/` e todo seu conteúdo.
 
 ### 8. Commit
 
-Faça commit com a mensagem:
+Faça commit no repo com a mensagem:
 
 ```
 docs: consolidate <nome-do-modulo> feature documentation
 
 - Add specs/<nome-do-modulo>/README.md with complete feature docs
-- Add specs/<nome-do-modulo>/behaviors.feature with BDD scenarios
 - Clean specs/current.md and specs/state.json for next feature
 - Remove specs/tasks/ files (all phases completed)
 ```
+
+O `behaviors.feature` é commitado **no vault** (repo git próprio), em commit separado:
+`docs(<projeto>): add behaviors/<nome-do-modulo>.feature`.
 
 ## Exemplo de uso
 
