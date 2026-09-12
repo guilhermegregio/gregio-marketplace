@@ -46,7 +46,7 @@ kb group new <n> | add <g> <m...> | list # produtos lógicos (agregam repos/subp
 
 # Grafo central (privado, local, via MCP stdio)
 kb graph build [--group g]              # freshen por fonte + merge no central
-kb graph serve                          # sobe o MCP (interp Python absoluto)
+kb graph serve                          # sobe o MCP (stdio; registre no cliente como `kb graph serve`)
 
 # Ciclo de planos cross-project (skill devflow) — fluxo v2:
 #   spec → protótipo ⛔ → behaviors ⛔🧊 → código → review → finish

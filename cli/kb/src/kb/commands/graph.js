@@ -107,14 +107,12 @@ async function serveCmd() {
   const out = centralPath(config);
   if (!existsSync(out)) throw new Error(`grafo central ausente: ${out}. Rode "kb graph build".`);
   const interp = resolvePythonInterp(config);
-  console.log('Config MCP (cole no cliente, ex. Claude Desktop):');
-  console.log(
-    JSON.stringify(
-      { mcpServers: { 'kb-central': { command: interp, args: ['-m', 'graphify.serve', out] } } },
-      null,
-      2,
-    ),
-  );
-  console.log(`\nServindo ${out} (stdio, local) — Ctrl+C para parar.`);
+  // MCP é stdio: o stdout pertence ao protocolo. Tudo que é informativo vai para stderr,
+  // e o comando registrado no cliente é `kb graph serve` (estável; o interpretador do
+  // graphify vem do nix store e muda a cada rebuild — nunca vai hardcoded na config).
+  console.error('Config MCP (stdio) — registre no cliente com o comando estável:');
+  console.error('  claude mcp add --scope user kb-central -- kb graph serve');
+  console.error(JSON.stringify({ mcpServers: { 'kb-central': { command: 'kb', args: ['graph', 'serve'] } } }, null, 2));
+  console.error(`Servindo ${out} via ${interp} — Ctrl+C para parar.`);
   serve(out, interp);
 }
