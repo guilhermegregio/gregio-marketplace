@@ -65,6 +65,7 @@ async function build(opts) {
           process.stdout.write(
             ` ok (enrich: +${r.addedEdges} wikilink, ${r.enrichedNodes} c/ frontmatter` +
               (r.wikilinksUnresolved ? `, ${r.wikilinksUnresolved} não resolvidos` : '') +
+              (r.contractEdges ? `, +${r.contractEdges} contratos` : '') +
               ')\n',
           );
         } catch (e) {
