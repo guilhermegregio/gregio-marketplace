@@ -6,6 +6,7 @@ import { loadConfig, saveConfig, validateConfig } from '../config.js';
 import { upsertVault, removeVault } from '../registry.js';
 import { scaffoldVault, listScaffoldFiles, fileMtime, renderScaffoldFile } from '../templates.js';
 import { expandPath, VAULT_SKELETON } from '../paths.js';
+import { regenerateVaultIndex } from '../vault-index.js';
 
 export async function run({ positionals, opts }) {
   const sub = positionals[0];
@@ -22,8 +23,10 @@ export async function run({ positionals, opts }) {
       return sync(opts);
     case 'aggregator':
       return aggregator(positionals[1] ?? 'build', opts);
+    case 'index':
+      return index(opts);
     default:
-      console.error('uso: kb vault <list|new|register|unregister|sync>');
+      console.error('uso: kb vault <list|new|register|unregister|sync|index>');
       process.exit(1);
   }
 }
@@ -135,6 +138,43 @@ async function sync(opts) {
   }
   if (!drift) console.log('Todos os vaults em dia com o skeleton.');
   else if (!apply) console.log(`\n${drift} arquivo(s) com drift. Rode "kb vault sync --apply" e revise/commite em cada vault.`);
+}
+
+// Regenera as seções derivadas dos índices ("## Lista" de 10-projects, "## Ativos" de
+// 30-plans) a partir do frontmatter. Sem --vault, todos. Idempotente.
+async function index(opts) {
+  const config = await loadConfig();
+  const dryRun = opts['dry-run'] === true;
+  let vaults = config.vaults ?? [];
+  if (opts.vault !== undefined) {
+    vaults = vaults.filter(v => v.name === opts.vault);
+    if (!vaults.length) {
+      throw new Error(
+        `vault "${opts.vault}" desconhecido — válidos: ${(config.vaults ?? []).map(v => v.name).join(', ') || '(nenhum)'}`,
+      );
+    }
+  }
+  let changed = 0;
+  for (const v of vaults) {
+    if (!existsSync(expandPath(v.path))) {
+      console.warn(`! ${v.name}: path ausente (${v.path}) — pulando`);
+      continue;
+    }
+    for (const r of await regenerateVaultIndex(v, { dryRun })) {
+      if (r.missing) {
+        console.warn(`! ${v.name}/${r.rel}: ausente — rode "kb vault sync --apply"`);
+      } else if (!r.changed) {
+        console.log(`  ${v.name}/${r.rel}: inalterado`);
+      } else {
+        changed++;
+        console.log(`  ${v.name}/${r.rel}: ${dryRun ? 'mudaria' : 'regenerado'}`);
+        if (dryRun) for (const line of r.diff) console.log(`    ${line}`);
+      }
+    }
+  }
+  if (!changed) console.log('Índices em dia.');
+  else if (dryRun) console.log(`\n${changed} índice(s) mudariam (--dry-run: nada escrito).`);
+  else console.log(`\n${changed} índice(s) regenerado(s). Revise e commite em cada vault.`);
 }
 
 // Monta o vault agregador: vault-all/ com um mount por vault registrado.

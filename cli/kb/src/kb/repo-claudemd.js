@@ -1,4 +1,4 @@
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { expandPath } from './paths.js';
@@ -7,11 +7,48 @@ import { expandPath } from './paths.js';
 const START = '<!-- kb:link start -->';
 const END = '<!-- kb:link end -->';
 
-function slug(s) {
+export function slug(s) {
   return s
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
+}
+
+// Nomes de pasta que podem ser a casa do projeto em 10-projects/ (override primeiro).
+export function houseFolderCandidates(project) {
+  return [...new Set([project.vaultProject, project.name, slug(project.name)].filter(Boolean))];
+}
+
+/**
+ * Faces do projeto: vaults onde existe 10-projects/<pasta>/ →
+ * [{ vaultName, folder, dir, hasProject }]. Várias faces sem `vault` na config deixam
+ * a resolução dependente da ordem dos vaults — é isso que o `kb map` aponta.
+ */
+export function houseFaces(config, project) {
+  const out = [];
+  for (const v of config.vaults ?? []) {
+    for (const folder of houseFolderCandidates(project)) {
+      const dir = join(expandPath(v.path), '10-projects', folder);
+      if (!existsSync(dir)) continue;
+      out.push({ vaultName: v.name, folder, dir, hasProject: existsSync(join(dir, '_project.md')) });
+      break;
+    }
+  }
+  return out;
+}
+
+// Caminho curto da casa, como aparece no bloco kb:link.
+export function targetLabel(target) {
+  return `vault-${target.vaultName}/10-projects/${target.folder}/`;
+}
+
+/** O CLAUDE.md do repo tem o bloco kb:link apontando para `target`? (só leitura) */
+export function claudeMdPointsTo(repoRoot, target) {
+  const file = join(repoRoot, 'CLAUDE.md');
+  if (!existsSync(file)) return false;
+  const cur = readFileSync(file, 'utf8');
+  const m = cur.match(new RegExp(`${START}[\\s\\S]*?${END}`));
+  return Boolean(m && m[0].includes(`\`${targetLabel(target)}\``));
 }
 
 // Resolve onde o conhecimento do projeto mora → { vaultName, folder }.
@@ -44,7 +81,7 @@ export function resolveVaultTarget(config, project) {
 }
 
 function renderBlock(target) {
-  const path = `vault-${target.vaultName}/10-projects/${target.folder}/`;
+  const path = targetLabel(target);
   return [
     START,
     `> 📚 **Conhecimento deste projeto mora no vault:** \`${path}\``,
