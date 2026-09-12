@@ -34,11 +34,69 @@ Requer Node ≥ 20.6. Zero dependências de runtime.
 | Grupo | Comandos | Para quê |
 |---|---|---|
 | Autoria | `add`, `capture`, `new` | ingerir URL, captura rápida no inbox, nota a partir de template |
-| Vaults | `vault`, `aggregator` | criar/registrar vaults, sincronizar scaffold, montar o vault agregador |
-| Registro | `project`, `group` | registrar repos e agrupá-los em produtos lógicos |
+| Vaults | `vault`, `aggregator` | criar/registrar vaults, sincronizar scaffold, regenerar índices (`vault index`), montar o vault agregador |
+| Registro | `project`, `group` | registrar repos (com o vault da casa), migrar a casa entre vaults (`project move`), agrupar em produtos lógicos |
 | Grafo | `graph build\|merge\|serve` | grafo central merge-ado, servido por MCP local |
-| Planos | `dev start\|check\|freeze\|run\|done` | ciclo spec → protótipo → behaviors (congelados) → código → finish |
-| Harness | `scaffold`, `doctor`, `status`, `map`, `rules`, `guard` | bootstrap da estação, diagnóstico do ambiente, trabalho não salvo, repos fora do kb, rules por stack, hook `PreToolUse` |
+| Planos | `dev start\|check\|freeze\|run\|done` | ciclo spec → protótipo → behaviors (congelados, no vault) → código → finish |
+| Harness | `scaffold`, `doctor`, `status`, `map`, `rules`, `guard` | bootstrap da estação, diagnóstico do ambiente, trabalho não salvo, cobertura repo → kb → vault, rules por stack, hook `PreToolUse` |
+
+## Fronteira: repo × vault
+
+**Repo = código + runtime** (`CLAUDE.md`, `references/` de skills, `graphify-out/`
+só-código). **Vault = conhecimento** — docs, ADRs, planos, learnings e também os
+**contratos**: o Gherkin de um plano mora na casa do projeto no vault,
+`<vault>/10-projects/<projeto>/behaviors/<escopo>.feature` (um arquivo por app em
+monorepo). No vault o contrato tem path único — não se duplica por worktree — e herda a
+visibilidade do vault. O único rastro no repo é o bloco `kb:link` do `CLAUDE.md`
+apontando para a casa.
+
+## Contratos
+
+O `_plan.md` declara os contratos em `contracts:`, com entradas relativas a
+`10-projects/` do vault do plano:
+
+```yaml
+contracts:
+  - agentic-os/behaviors/kb-cli.feature   # → <vault>/10-projects/agentic-os/behaviors/kb-cli.feature
+```
+
+| entrada | resolve para |
+|---|---|
+| absoluta ou `~/…` | como está |
+| relativa | `<vault do plano>/10-projects/<entrada>` |
+| relativa que só existe no repo de um dos `projects:` | o repo — **legado**, com aviso no stderr dizendo para onde mover |
+| não existe em lugar nenhum | erro listando os paths tentados |
+
+`kb dev start <slug> --vault <n> --project <p>` garante a pasta `behaviors/` na casa (e
+cria o `_project.md` se faltar); `--no-contract` pula a task de behaviors. `kb dev freeze`
+congela os arquivos resolvidos e o `kb guard` passa a negar edição neles —
+`kb dev unfreeze <slug> --reason "..."` é o caminho quando o comportamento precisa mudar.
+
+## Casa do projeto: `map`, `project add --vault`, `project move`, `vault index`
+
+```bash
+kb map [dir]                                   # não registrados + cobertura (exit 1 se houver ✗)
+kb project add <path> --vault <v>              # fixa o vault da casa do projeto
+kb project move <nome> --to-vault <v> [--from-vault v] [--dry-run] [--no-link]
+kb vault index [--vault v] [--dry-run]         # regenera os índices derivados do vault
+```
+
+- **`kb map`** lista os repos git de `~/code` fora do kb (não é falha: ficar fora é
+  escolha) e a **cobertura** de cada projeto registrado: path existe, `vault` da config é
+  um vault registrado, casa existe com `_project.md`, casa em mais de um vault sem
+  `vault` na config, `CLAUDE.md` com ponteiro para a casa e `10-projects/_index.md` de
+  cada vault listando todas as casas. Cada ✗ vem com o comando de correção; nada é
+  executado.
+- **`kb project add --vault <v>`** grava o vault da casa no projeto. O nome é validado
+  antes de qualquer escrita.
+- **`kb project move`** migra `10-projects/<pasta>/` inteira (behaviors incluso) para
+  outro vault: `id` e `visibility` das notas, `vault` na config, contratos congelados
+  repontados, ponteiro do `CLAUDE.md` (a menos de `--no-link`) e os índices dos dois
+  vaults. Planos ficam no vault onde foram abertos — o comando só avisa quantos ativos
+  citam o projeto. Tudo que pode falhar é checado antes da primeira escrita; `--dry-run`
+  só mostra o plano; o commit nos vaults/repo é seu.
+- **`kb vault index`** regenera `## Lista` de `10-projects/_index.md` e `## Ativos` de
+  `30-plans/_index.md` a partir do frontmatter. Idempotente; sem `--vault`, todos.
 
 ## Bootstrap de estação nova
 
