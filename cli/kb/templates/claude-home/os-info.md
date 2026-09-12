@@ -2,7 +2,7 @@
 block: os-info
 profiles: [all]
 order: 10
-version: 2
+version: 3
 ---
 
 # OS Info

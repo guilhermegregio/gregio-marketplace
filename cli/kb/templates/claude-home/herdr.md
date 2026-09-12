@@ -2,7 +2,7 @@
 block: herdr
 profiles: [all]
 order: 30
-version: 1
+version: 2
 ---
 
 # EXECUÇÃO DE COMANDOS — herdr obrigatório
@@ -29,7 +29,7 @@ Receita padrão — use direto, sem precisar carregar a skill:
 ```bash
 PANE=$(herdr pane split "$HERDR_PANE_ID" --direction down --no-focus | jq -r '.result.pane.pane_id')
 herdr pane run "$PANE" "pnpm dev"
-herdr wait output "$PANE" --match "ready|listening" --regex --timeout 60000
+herdr pane wait-output --regex "ready|listening" --timeout 60000 "$PANE"
 herdr pane read "$PANE" --source recent --lines 40
 ```
 

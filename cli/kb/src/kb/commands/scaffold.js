@@ -79,12 +79,22 @@ function tilde(p, home) {
  * do CLAUDE.md, que é o que importa.
  */
 function captureFastfetch() {
+  // O módulo de paleta do fastfetch imprime duas linhas feitas só de escape ANSI —
+  // saem mesmo redirecionado, e dentro do bloco de código o agente lê aquilo como lixo.
+  // Por isso limpamos o escape e descartamos a linha que sobrou vazia. (`--pipe` não
+  // ajuda: testado, não muda uma vírgula da saída.)
   const r = spawnSync('fastfetch', ['-l', 'none'], { encoding: 'utf8' });
   if (r.error || r.status !== 0 || !r.stdout?.trim()) {
     return '> `fastfetch` não estava disponível quando este bloco foi escrito.\n' +
       '> Rode `fastfetch -l none` para ver a máquina agora.';
   }
-  return `\`\`\`\n${r.stdout.trim()}\n\`\`\``;
+  const clean = r.stdout
+    // eslint-disable-next-line no-control-regex
+    .replace(/\x1b\[[0-9;]*m/g, '')
+    .split('\n')
+    .filter(line => line.trim() !== '')
+    .join('\n');
+  return `\`\`\`\n${clean}\n\`\`\``;
 }
 
 const SIGN = { create: '+', update: '~', remove: '-' };
