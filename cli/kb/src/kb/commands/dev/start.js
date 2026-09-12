@@ -17,7 +17,8 @@ import { behaviorsDir, projectsRoot } from '../../contracts.js';
 // de behaviors (plano sem comportamento observável — refactor puro, doc, infra).
 //
 // Com contrato, o start garante a casa do projeto no vault
-// (<vault>/10-projects/<project>/behaviors/) — é lá que o .feature da TB vai morar.
+// (<vault>/10-projects/<project>/behaviors/) — é lá que o .feature.md da TB vai morar
+// (criado com `kb new --type contract --project <p> --title <t> --plan <slug>`).
 export async function run({ positionals, opts }) {
   const slug = positionals[0];
   if (!slug) throw new Error('uso: kb dev start <slug> --vault <n> --project <repo> [--title "..."]');
@@ -80,7 +81,7 @@ export async function run({ positionals, opts }) {
 
   console.log(`Plano criado: ${dir} (status: draft)`);
   if (house?.created) console.log(`Casa do projeto criada no vault: ${house.projectFile} (template de projeto)`);
-  if (house) console.log(`Contratos do plano: ${house.behaviors}/<escopo>.feature`);
+  if (house) console.log(`Contratos do plano: ${house.behaviors}/<escopo>.feature.md (kb new --type contract --project ${opts.project} --title "<escopo>" --plan ${slug})`);
   if (staged.length) console.log(`Tasks-gate: ${staged.join(', ')} — as tasks de código dependem delas.`);
   console.log('Edite _plan.md + tasks/, troque para status: ready-for-review e pare para revisão (gate de handoff).');
 }

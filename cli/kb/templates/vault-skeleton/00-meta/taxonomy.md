@@ -12,7 +12,10 @@ updated: {{DATE}}
 
 - **10-projects/** — uma pasta por projeto: `_project.md` (casa: stack, repos, status),
   `architecture/` (C4 + ADRs do projeto), `plans/` (planos só deste projeto),
-  `learnings/`.
+  `learnings/`, `behaviors/`.
+- **10-projects/<projeto>/behaviors/*.feature.md** — os contratos do projeto (Gherkin em
+  markdown, `type: contract`), congelados por `kb dev freeze` e referenciados em
+  `contracts:` do `_plan.md`. `.feature` puro é legado.
 - **20-systems/** — cross-projeto: `landscape-c4.md` (todas as marcas/serviços) e
   `integrations/` (uma nota por par de integração).
 - **30-plans/** — planos que cruzam >1 projeto: `<slug>/_plan.md` + `execution/`.
@@ -25,4 +28,5 @@ updated: {{DATE}}
 Onde o `kb add` coloca cada `--as`: `article→60-sources/articles`,
 `idea→60-sources/ideas`, `research→50-research/<topic>`,
 `learning→40-knowledge/learnings`, `pattern→40-knowledge/patterns`,
-`content→90-content/<slug>`.
+`content→90-content/<slug>`. O `kb new --type contract` cria em
+`10-projects/<projeto>/behaviors/<slug>.feature.md`.
