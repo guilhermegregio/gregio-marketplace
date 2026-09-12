@@ -18,7 +18,7 @@ Graphify e o filtro do agente.
 ```yaml
 ---
 id: slug-estavel-unico        # gerado pelo engine; não renomear à toa
-type: project | plan | adr | c4 | research | learning | pattern | source | content | doc | moc
+type: project | plan | adr | c4 | contract | research | learning | pattern | source | content | doc | moc
 title: Título legível
 status: idea | active | paused | done | archived
 projects: [nome-projeto]      # projetos que esta nota toca
@@ -41,3 +41,8 @@ updated: AAAA-MM-DD
 - Links entre notas via `[[wikilink]]`. Linke liberalmente.
 - Datas absolutas (nunca "ontem"/"semana passada").
 - Não duplicar: antes de criar, procure nota existente e atualize-a.
+- `type: contract` é o contrato de comportamento de um plano (devflow): arquivo
+  `10-projects/<projeto>/behaviors/<escopo>.feature.md`, com `plan: <slug>` no
+  frontmatter, `# Contrato — <título>`, uma seção `## Funcionalidade: <nome>` por
+  funcionalidade e os cenários em bloco ` ```gherkin `. Crie com
+  `kb new --type contract --project <p> --title <t> --plan <slug>`.

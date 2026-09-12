@@ -45,6 +45,9 @@ export function resolveNewTarget(kind, { topic, title, project } = {}) {
       return { folder: `10-projects/${proj}/architecture/adr`, type: 'adr', base: slugify(title) };
     case 'c4':
       return { folder: `10-projects/${proj}/architecture`, type: 'c4', base: slugify(title) };
+    case 'contract':
+      // Contrato Gherkin em markdown na casa do projeto; o `new` dá o sufixo .feature.md.
+      return { folder: `10-projects/${proj}/behaviors`, type: 'contract', base: slugify(title) };
     case 'concept':
       return { folder: '40-knowledge/concepts', type: 'concept', base: slugify(title) };
     case 'integration':

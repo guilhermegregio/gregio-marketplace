@@ -7,7 +7,7 @@ import { readIndex } from '../freeze.js';
 
 // `kb guard` — hook PreToolUse do Claude Code com os dois guardrails do harness.
 //
-// 1. 🧊 **Contrato congelado** (devflow v2): editar um `.feature` que está sob freeze
+// 1. 🧊 **Contrato congelado** (devflow v2): editar um contrato (`.feature.md`, ou `.feature` legado) sob freeze
 //    é BLOQUEADO — seja na casa do projeto no vault (canônico) ou num repo (legado). O contrato é escrito e aprovado antes do código; cenário
 //    quebrando significa código errado, não cenário otimista. Liberar exige
 //    `kb dev unfreeze <plano> --reason "..."` — decisão de produto, com rastro.
@@ -101,12 +101,15 @@ async function decide() {
     const where = isVaultContract(resolve(frozen.file))
       ? 'Ele mora na casa do projeto no vault (path único, sem cópia em worktree).'
       : 'Ele ainda está num repo (legado) — o lugar dele é a casa do projeto no vault ' +
-        '(<vault>/10-projects/<projeto>/behaviors/).';
+        '(<vault>/10-projects/<projeto>/behaviors/<escopo>.feature.md).';
+    const format = frozen.file.endsWith('.feature')
+      ? ' Está em `.feature` puro (legado): ao ajustá-lo, converta para `<escopo>.feature.md`.'
+      : '';
     const vaultFlag = frozen.vault ? ` --vault ${frozen.vault}` : '';
     return deny(
       `🧊 CONTRATO CONGELADO — ${frozen.file}\n\n` +
       `Este contrato foi aprovado e congelado no plano "${frozen.plan}" ` +
-      `(${frozen.frozen_at?.slice(0, 10) ?? '?'}), ANTES da implementação. ${where}\n\n` +
+      `(${frozen.frozen_at?.slice(0, 10) ?? '?'}), ANTES da implementação. ${where}${format}\n\n` +
       'Se um cenário está falhando, o padrão é: **o código está errado**. Corrija o código.\n\n' +
       'Se o comportamento REALMENTE precisa mudar, isso é decisão de produto — peça ao ' +
       'usuário e registre:\n' +
