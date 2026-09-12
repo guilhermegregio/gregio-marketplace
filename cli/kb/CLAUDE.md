@@ -17,7 +17,7 @@ canais/threads/forums de um guild numa janela de horas (default 24h); (2)
 
 Docs, specs e contratos **não vivem neste repo** — moram no vault pessoal, em
 `vault-pessoal/10-projects/agentic-os/` (spec do arquivador, setup do bot, doc do
-engine `kb`, `behaviors/*.feature`). Plano da base de conhecimento:
+engine `kb`, `behaviors/*.feature.md`). Plano da base de conhecimento:
 `~/.claude/plans/happy-churning-reef.md`.
 
 **Regra de fronteira:** repo = código + runtime (`CLAUDE.md`, `references/` de skills,
@@ -35,6 +35,7 @@ vaults e constrói os grafos. Detalhe operacional e protocolo de leitura cirúrg
 kb add <url> --vault <n> [--as <cat>]   # ingest roteado de URL
 kb capture "<texto>" --vault <n>        # append no inbox
 kb new --vault <n> --type <t> --title   # nova nota (frontmatter do contrato)
+kb new --vault <n> --type contract --project <p> --title <t> [--plan slug]   # contrato .feature.md em 10-projects/<p>/behaviors/
 
 # Registro (repos → grafo central)
 kb project add <path> [--group g] [--vault v]   # registra repo (auto-detecta monorepo) + hygiene + hook; --vault fixa o vault da casa
@@ -52,7 +53,7 @@ kb graph serve                          # sobe o MCP (stdio; registre no cliente
 #   spec → protótipo ⛔ → behaviors ⛔🧊 → código → review → finish
 kb dev start <slug> --vault <n> --project <p> [--ui] [--no-contract]   # --ui scaffolda a task-gate TP; garante a casa <vault>/10-projects/<p>/behaviors/
 kb dev check <slug> [--task Txx]        # valida DAG / gates / drift de contrato
-kb dev freeze <slug>                    # 🧊 congela os contracts: do plano (behaviors .feature no vault)
+kb dev freeze <slug>                    # 🧊 congela os contracts: do plano (behaviors .feature.md no vault)
 kb dev unfreeze <slug> --reason "..."   # descongela (decisão de produto, com rastro)
 kb dev run <slug>                       # computa ondas; avisa se o repo está na main
 kb dev done <slug> [--promote ...]      # promove learnings/ADRs → arquiva plano → re-merge
@@ -93,17 +94,24 @@ do scaffold mandaria o humano rodar um comando que não muda nada.
 
 ### Contratos (behaviors no vault)
 
-O contrato Gherkin mora na **casa do projeto no vault do plano**:
-`<vault>/10-projects/<projeto>/behaviors/<escopo>.feature` — um arquivo por app em
-monorepo. Motivo: contrato é conhecimento, não runtime; no vault ele tem path único (não
-se duplica por worktree) e herda a visibilidade do vault. A resolução das entradas de
+O contrato mora na **casa do projeto no vault do plano**:
+`<vault>/10-projects/<projeto>/behaviors/<escopo>.feature.md` — um arquivo por app em
+monorepo. Formato: markdown com frontmatter (`type: contract`, `plan`, `projects`,
+`groups`, `visibility`), título `# Contrato — <título>` e uma seção
+`## Funcionalidade: X` por funcionalidade com os cenários em bloco ` ```gherkin `.
+Nasce de `kb new --type contract --project <p> --title <t> [--plan slug]`
+(`commands/new.js` + `routing.js`, corpo em `templates/notes/contract.md`; o `id` sai do
+título curto, `--project` entra em `projects:` e `--plan` vira `plan:`). Motivo: contrato
+é conhecimento, não runtime; no vault ele tem path único (não se duplica por worktree) e herda a visibilidade do vault. A resolução das entradas de
 `contracts:` do `_plan.md` tem dono único, `src/kb/contracts.js` (importada por
 `dev freeze`/`unfreeze`, `dev start` e `freeze.js`):
 
 | entrada em `contracts:` | resolve para |
 |---|---|
 | absoluta ou `~/…` | como está |
-| relativa (`agentic-os/behaviors/kb-cli.feature`) | `<vault do plano>/10-projects/<entrada>` |
+| relativa (`agentic-os/behaviors/kb-cli.feature.md`) | `<vault do plano>/10-projects/<entrada>` |
+| com extensão explícita | literal |
+| sem extensão (`agentic-os/behaviors/kb-cli`) | `<entrada>.feature.md`; senão `<entrada>.feature` — `.feature` puro é legado, aviso no stderr |
 | relativa ausente no vault, presente no repo de um `projects:` | o repo (**legado**) + aviso no stderr com o destino |
 | ausente em todo lugar | erro listando os paths tentados |
 
@@ -112,6 +120,16 @@ o `_project.md` se faltar — contrato sem casa vira arquivo órfão que nenhum 
 enxerga. O freeze indexa o path absoluto resolvido; o `kb guard` bloqueia edição desse
 arquivo (contrato legado no repo também casa pela identidade git, e a mensagem de deny
 aponta o destino no vault).
+
+No grafo, `src/kb/vault-graph.js` (enriquecimento pós-graphify do grafo de vault):
+nó-arquivo é o nó `document` cujo label é o basename **ou** um sufixo do `source_file`
+(o graphify prefixa com a pasta quando o nome se repete — `_project.md`, `_index.md`); o
+frontmatter vira `fm_*`, incluindo `fm_plan`; e há arestas `relation: "contracts"`
+plano → contrato (`origin: frontmatter`, do `contracts:` do `_plan.md`, resolução
+silenciosa própria com a mesma regra sem extensão — o `.feature` legado não é indexado
+pelo graphify, então não vira nó nem aresta) e casa → contrato
+(`origin: folder`, `_project.md` → todo arquivo sob `10-projects/<p>/behaviors/`).
+Arestas dedupadas: rodar duas vezes dá o mesmo grafo.
 
 ### Casa do projeto e cobertura
 

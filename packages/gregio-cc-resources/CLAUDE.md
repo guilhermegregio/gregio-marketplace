@@ -23,8 +23,8 @@ O fluxo plan→task→finish guarda estado **no projeto alvo** (não no plugin):
 - `specs/current.md` — plano atual
 - `specs/state.json` — fila/estado das tasks
 - `specs/tasks/*` — tasks individuais
-- consolidação final em `specs/<nome-modulo>/README.md`; o `behaviors.feature` vai
-  para a casa do projeto no vault (`<vault>/10-projects/<projeto>/behaviors/<nome-modulo>.feature`),
+- consolidação final em `specs/<nome-modulo>/README.md`; o contrato de behaviors vai
+  para a casa do projeto no vault (`<vault>/10-projects/<projeto>/behaviors/<nome-modulo>.feature.md`),
   não para o repo
 
 Refactors nos commands devem manter esses paths e formatos compatíveis:

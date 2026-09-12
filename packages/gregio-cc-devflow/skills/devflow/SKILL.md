@@ -10,14 +10,15 @@ O ciclo de engenharia que **consome** a skill `kb` (conhecimento) nas pontas. Re
 fronteira: **repo = código + runtime** (`CLAUDE.md`, `references/` de skills,
 `graphify-out/` só-código); **vault = conhecimento** (arquitetura, PRD, spec, lições,
 ADR, logs) **e contrato**: os behaviors Gherkin moram na casa do projeto no vault,
-`<vault>/10-projects/<projeto>/behaviors/<escopo>.feature` (um por app em monorepo) —
+`<vault>/10-projects/<projeto>/behaviors/<escopo>.feature.md` (um por app em monorepo) —
 path único, sem cópia por worktree. Toda escrita de conhecimento passa por comandos
-`kb`/`kb dev` — nunca crie `.md` de design nem `.feature` de contrato solto no repo.
+`kb`/`kb dev` — nunca crie `.md` de design nem contrato `.feature.md` solto no repo.
 
 Comandos (binário global `kb`; engine em `~/code/gregio-marketplace/cli/kb`):
 
 ```bash
 kb dev start <slug> --vault <n> --project <repo> [--ui] [--no-contract]  # plano (draft) + tasks-gate
+kb new --vault <n> --type contract --project <repo> --title "..." [--plan <slug>]  # contrato .feature.md na casa
 kb dev check <slug> [--task Txx]                               # DAG/ready-set; gates; drift de contrato
 kb dev freeze <slug>                                           # 🧊 congela os behaviors aprovados
 kb dev unfreeze <slug> --reason "..."                          # descongela (decisão de produto)
@@ -30,7 +31,7 @@ kb dev done <slug> [--promote learning,adr,c4]                 # promove duráve
 
 ```
 spec (vault) → protótipo (ds-agent) → ⛔ GATE layout
-  → behaviors .feature no vault (Gherkin) → ⛔ GATE contrato → 🧊 kb dev freeze
+  → behaviors .feature.md no vault (Gherkin) → ⛔ GATE contrato → 🧊 kb dev freeze
   → código (wtree) → review (cenários passam?) → kb dev done
 ```
 
@@ -48,8 +49,16 @@ recongele.
 `kb dev start --ui` scaffolda a task-gate **TP** (protótipo); **TB** (behaviors) vem
 por padrão e o start garante `<vault>/10-projects/<projeto>/behaviors/`. As tasks de
 código dependem delas via `depends_on`. No `_plan.md`, `contracts:` lista entradas
-relativas a `10-projects/` do vault do plano (`<projeto>/behaviors/<escopo>.feature`);
-contrato que só existe no repo ainda resolve, mas é legado e o `kb` avisa.
+relativas a `10-projects/` do vault do plano (`<projeto>/behaviors/<escopo>.feature.md`,
+ou sem extensão: o `kb` tenta `.feature.md` e depois o `.feature` puro, que é legado e sai
+com aviso); contrato que só existe no repo ainda resolve, mas é legado e o `kb` avisa.
+
+**Formato do contrato.** Crie com `kb new --type contract --project <p> --title <t>
+[--plan <slug>]` — nasce em `<vault>/10-projects/<p>/behaviors/<slug-do-título>.feature.md`
+com frontmatter (`type: contract`, `plan`, `projects`, `groups`, `visibility`), título
+`# Contrato — <título>` e uma seção `## Funcionalidade: X` por funcionalidade, com os
+cenários num bloco ` ```gherkin `. Não roda em cucumber: é lido por humano e agente e
+indexado pelo grafo como qualquer `.md`.
 
 ## Estágios (repo vs vault)
 
@@ -57,7 +66,7 @@ contrato que só existe no repo ainda resolve, mas é legado e o `kb` avisa.
 |---|---|---|---|
 | **DRAFT** | `kb capture` / `kb dev start` (semente) | — | `_plan.md` (draft) |
 | **PROTÓTIPO** ⛔ | telas navegáveis; iterar por screenshot até o usuário aprovar | protótipo (ds-agent) | — |
-| **BEHAVIORS** ⛔🧊 | Gherkin do comportamento; usuário aprova; `kb dev freeze` | — | `<vault>/10-projects/<projeto>/behaviors/*.feature` + `contracts:` no plano |
+| **BEHAVIORS** ⛔🧊 | `kb new --type contract` + cenários Gherkin; usuário aprova; `kb dev freeze` | — | `<vault>/10-projects/<projeto>/behaviors/*.feature.md` + `contracts:` no plano |
 | **SINCRONIZAR** | `kb graph build --group <g>` + grafo local do repo | `graphify-out/` (só código) | — |
 | **PLANEJAR** | consultar grafo (MCP), escrever `_plan.md` + `tasks/*` com **gates** e `scope` | (lê) | plano + tasks |
 | **EXECUTAR** | worktree isolado (`wtree --herdr`); agente implementa; loga | código + runtime | `execution/<data>.md` |

@@ -2,7 +2,7 @@
 block: git-worktree
 profiles: [all]
 order: 40
-version: 2
+version: 3
 ---
 
 # EXECUÇÃO COM GIT
@@ -15,7 +15,7 @@ direto na main é aceitável só para hotfix, doc e ajuste pontual — e nesses 
 que está na main.
 
 Um hook (o subcomando `kb guard`) avisa quando você escreve na main de um repo com plano
-ativo, e **bloqueia** edição de contrato congelado (`.feature` na casa do projeto no vault, sob
+ativo, e **bloqueia** edição de contrato congelado (`.feature.md` na casa do projeto no vault, sob
 `kb dev freeze`) — nesse caso o certo é corrigir o código, ou pedir autorização e rodar
 `kb dev unfreeze <plano> --reason "..."`.
 
