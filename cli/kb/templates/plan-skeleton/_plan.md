@@ -14,7 +14,7 @@ stack: []
 tags: [{{SLUG}}, plano]
 visibility: {{VISIBILITY}}
 gates_globais: []
-contracts: []                   # behaviors.feature congelados por `kb dev freeze`
+contracts: []                   # .feature congelados por `kb dev freeze`, relativos a <vault>/10-projects/ — ex.: {{PROJECT}}/behaviors/<escopo>.feature
 created: {{DATE}}
 updated: {{DATE}}
 ---
