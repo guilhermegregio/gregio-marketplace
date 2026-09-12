@@ -1,19 +1,19 @@
 import { readFile, writeFile } from 'node:fs/promises';
-import { isAbsolute, resolve } from 'node:path';
-import { loadConfig, getVault, defaultVault, getProject } from '../../config.js';
+import { loadConfig, getVault, defaultVault } from '../../config.js';
 import { expandPath } from '../../paths.js';
 import { merge } from '../../frontmatter.js';
 import { driftedFiles, freeze, readIndex, unfreeze } from '../../freeze.js';
+import { contractCandidates, resolveContract } from '../../contracts.js';
 import { loadPlan } from './plan.js';
 
 // kb dev freeze <slug> [--vault n]                    congela os contratos do plano
 // kb dev unfreeze <slug> [--file p] --reason "..."    descongela (exige justificativa)
 //
-// Os contratos são declarados no _plan.md:
+// Os contratos são declarados no _plan.md e moram na casa do projeto no vault:
 //   contracts:
-//     - /caminho/apps/white-label/behaviors.feature
-// Caminho relativo é resolvido a partir do repo do projeto (frontmatter `projects`)
-// ou do cwd.
+//     - agentic-os/behaviors/kb-cli.feature   # → <vault>/10-projects/agentic-os/behaviors/kb-cli.feature
+// Absoluto/~ fica como está; relativo que só existe no repo do projeto é legado (avisa).
+// Regras completas em src/kb/contracts.js.
 
 export async function runFreeze({ positionals, opts }) {
   const slug = positionals[0];
@@ -27,11 +27,11 @@ export async function runFreeze({ positionals, opts }) {
   if (!declared.length) {
     throw new Error(
       `plano "${slug}" não declara contratos.\n` +
-      'Adicione ao _plan.md:\n  contracts:\n    - <path do behaviors.feature>',
+      'Adicione ao _plan.md:\n  contracts:\n    - <projeto>/behaviors/<escopo>.feature',
     );
   }
 
-  const files = declared.map(p => resolveContract(config, plan, p));
+  const files = declared.map(entry => resolveContract({ config, vault, plan, entry }).file);
   const entries = await freeze({ plan: slug, vault: vault.name, files });
 
   // O plano guarda o registro humano; o índice guarda o hash para o hook.
@@ -62,7 +62,7 @@ export async function runUnfreeze({ positionals, opts }) {
   const config = await loadConfig();
   const vault = opts.vault ? getVault(config, opts.vault) : defaultVault(config);
   const { dir, plan } = await loadPlan(expandPath(vault.path), slug);
-  const file = opts.file ? resolveContract(config, plan, opts.file) : null;
+  const file = opts.file ? await unfreezeTarget({ config, vault, plan, slug, entry: opts.file }) : null;
 
   const removed = await unfreeze({ plan: slug, vault: vault.name, file });
   if (!removed) {
@@ -102,12 +102,15 @@ export async function runFrozen({ opts }) {
   }
 }
 
-function resolveContract(config, plan, p) {
-  if (isAbsolute(p)) return p;
-  const projects = plan.frontmatter?.projects ?? [];
-  for (const name of projects) {
-    const proj = getProject(config, name);
-    if (proj) return resolve(expandPath(proj.path), p);
-  }
-  return resolve(process.cwd(), p);
+/**
+ * Path do índice que `--file` descongela. Casa primeiro com o que está congelado (o
+ * arquivo pode ter sido removido ou movido depois do freeze); senão resolve normalmente.
+ */
+async function unfreezeTarget({ config, vault, plan, slug, entry }) {
+  const c = contractCandidates({ config, vault, plan, entry });
+  const candidates = c.absolute ? [c.absolute] : [c.vault, ...c.repos.map(r => r.path)];
+  const frozen = (await readIndex()).entries.filter(e => e.plan === slug && e.vault === vault.name);
+  const hit = candidates.find(p => frozen.some(e => e.file === p));
+  if (hit) return hit;
+  return resolveContract({ config, vault, plan, entry, quiet: true }).file;
 }
