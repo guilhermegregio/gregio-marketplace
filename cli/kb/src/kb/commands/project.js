@@ -4,7 +4,8 @@ import { upsertProject, removeProject, upsertGroup, detectSubprojects } from '..
 import { expandPath } from '../paths.js';
 import { asList } from '../args.js';
 import { applyHygiene, installHook } from '../repo-hygiene.js';
-import { linkClaudeMd } from '../repo-claudemd.js';
+import { linkClaudeMd, resolveVaultTarget, targetLabel } from '../repo-claudemd.js';
+import { moveProject } from '../project-move.js';
 import { basename, join } from 'node:path';
 
 export async function run({ positionals, opts }) {
@@ -22,8 +23,10 @@ export async function run({ positionals, opts }) {
       return initHygiene(positionals[1]);
     case 'link-claude':
       return linkClaude(positionals[1], opts);
+    case 'move':
+      return moveProject(positionals[1], opts);
     default:
-      console.error('uso: kb project <add|list|remove|scan|init-hygiene|link-claude>');
+      console.error('uso: kb project <add|list|remove|scan|init-hygiene|link-claude|move>');
       process.exit(1);
   }
 }
@@ -52,21 +55,38 @@ async function applyToProject(project) {
 }
 
 async function add(pathArg, opts) {
-  if (!pathArg) throw new Error('uso: kb project add <path> [--name n] [--group g] [--no-scan] [--subproject sub]');
+  if (!pathArg) {
+    throw new Error('uso: kb project add <path> [--name n] [--group g] [--vault v] [--no-scan] [--subproject sub]');
+  }
   const path = expandPath(pathArg);
   if (!existsSync(path)) throw new Error(`path não existe: ${path}`);
 
   const config = await loadConfig({ required: false });
   const name = opts.name || basename(path);
 
-  const project = { name, path, graphOut: 'graphify-out/graph.json', includeInCentral: true };
+  // --vault: vault da casa do projeto. Validado antes de qualquer escrita — um nome
+  // errado gravado na config faria o link-claude cair silenciosamente no fallback.
+  if (opts.vault !== undefined) {
+    const names = (config.vaults ?? []).map(v => v.name);
+    if (opts.vault === true || !names.includes(opts.vault)) {
+      throw new Error(`vault "${opts.vault === true ? '' : opts.vault}" desconhecido — válidos: ${names.join(', ') || '(nenhum)'}`);
+    }
+  }
 
-  if (opts['no-scan'] !== true) {
-    const explicit = asList(opts.subproject);
+  const existing = getProject(config, name);
+  const project = { name, path, graphOut: 'graphify-out/graph.json', includeInCentral: true };
+  if (opts.vault !== undefined) project.vault = opts.vault;
+
+  // Re-add preserva o que já foi curado (subprojetos renomeados, grupos): só re-detecta
+  // subprojetos se o projeto é novo ou se vieram --subproject explícitos.
+  const explicitSubs = asList(opts.subproject);
+  const rescan = opts['no-scan'] !== true && (!existing || explicitSubs.length > 0);
+
+  if (rescan) {
     const { isMono, candidates } = detectSubprojects(path, name);
     let subs = [];
-    if (explicit.length) {
-      subs = explicit.map(sp => ({ name: `${name}-${basename(sp)}`, subpath: sp }));
+    if (explicitSubs.length) {
+      subs = explicitSubs.map(sp => ({ name: `${name}-${basename(sp)}`, subpath: sp }));
     } else if (isMono && candidates.length) {
       subs = candidates;
     }
@@ -88,7 +108,11 @@ async function add(pathArg, opts) {
   }
 
   await saveConfig(config);
-  console.log(`Projeto "${name}" registrado.`);
+  console.log(`Projeto "${name}" ${existing ? 'atualizado' : 'registrado'}.`);
+  if (project.vault) {
+    const target = resolveVaultTarget(config, getProject(config, name));
+    console.log(`Casa no vault: ${targetLabel(target)} (ponteiro: kb project link-claude ${name})`);
+  }
 
   if (opts['no-hygiene'] !== true) {
     console.log('Aplicando hygiene + hook do graphify:');

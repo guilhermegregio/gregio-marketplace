@@ -37,10 +37,16 @@ Comandos:
   vault register <n> --path <p> [--visibility v]
   vault unregister <n>
   vault sync [--check|--apply]               sincroniza o scaffold 00-meta dos vaults
+  vault index [--vault v] [--dry-run]        regenera "## Lista" de 10-projects/_index.md e
+                              "## Ativos" de 30-plans/_index.md pelo frontmatter (sem --vault: todos)
   aggregator build|refresh [--mode symlink|submodule]
                               (re)monta o vault agregador (visão única no Obsidian)
-  project add <path> [--name n] [--group g] [--no-scan] [--subproject <subpath>...]
-  project list | remove <n> | scan <n>
+  project add <path> [--name n] [--group g] [--vault v] [--no-scan] [--subproject <subpath>...]
+                              registra (re-add preserva subprojetos/grupos; --vault fixa o vault da casa)
+  project list | remove <n> | scan <n> | link-claude <n>|--all
+  project move <n> --to-vault <v> [--from-vault v] [--dry-run] [--no-link]
+                              migra a casa 10-projects/<n>/ entre vaults (id, visibility, config,
+                              contratos congelados, CLAUDE.md, índices); planos ficam onde estão
   group new <n> [--title t] | add <g> <membro...> | rm <g> <membro> | list
   graph build [--group g] [--force] | merge | serve
   dev start <slug> --vault <n> --project <repo> [--title t] [--ui] [--no-contract]
@@ -59,7 +65,8 @@ Harness (bootstrap e guardrails do ambiente):
                               do ~/.claude/CLAUDE.md (perfis persistidos na config)
   doctor                      relatório ✓/✗ do conjunto (exit 1 se houver ✗)
   status [dir] [--all]        trabalho não salvo nos repos (exit 1 se houver risco)
-  map [dir]                   repos git de ~/code fora do kb (só sugere o project add)
+  map [dir]                   repos git de ~/code fora do kb + cobertura repo → kb → vault
+                              por projeto (só sugere a correção; exit 1 se houver ✗)
   rules <repo> [--stack a,b] [--dry-run] [--prune] [--list]
                               materializa as rules do gregio-cc-rules em <repo>/.claude/rules
   guard                       hook PreToolUse (stdin JSON → stdout JSON): bloqueia
