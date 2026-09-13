@@ -52,7 +52,7 @@ Comandos:
   dev start <slug> --vault <n> --project <repo> [--title t] [--ui] [--no-contract]
                                    cria um plano (draft) com as tasks-gate do devflow
   dev check <slug> [--task Txx]    valida DAG + ready-set + drift de contrato
-  dev freeze <slug>                congela os contracts do plano (behaviors.feature)
+  dev freeze <slug>                congela os contracts do plano (.feature.md na casa do projeto)
   dev unfreeze <slug> --reason ""  descongela (exige justificativa; registra no plano)
   dev frozen [--slug s]            lista contratos congelados e o que saiu do lugar
   dev done <slug> [--promote ...]  promove durável + arquiva o plano + re-merge central
