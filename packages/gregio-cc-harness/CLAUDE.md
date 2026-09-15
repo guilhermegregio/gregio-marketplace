@@ -45,6 +45,14 @@ ressuscite lógica aqui.
   disponíveis" importa `findRulesDir` de `commands/rules.js` — se o doctor
   repetisse a cadeia de candidatos, daria ✓ num caminho que o `kb rules` não
   acharia (ou o contrário).
+- **Os hooks do plugin (`hooks/`) só fazem valer regra que o `kb scaffold` escreve.**
+  Cada hook corresponde a um bloco do CLAUDE.md global (`core`, `herdr`) ou ao
+  `kb guard`; regra de estação não entra. Por isso a notificação é ponto de extensão
+  (`claude-notify` do PATH, se existir) e não um script de quem mantém — este repo é
+  público. Scripts em `sh` + `jq`, sem bashismo: rodam igual no macOS.
+- **O doctor procura o guard no `settings.json` E nos plugins habilitados**
+  (`<installPath>/hooks/hooks.json`). Quem migrou para o plugin não pode ver ✗ falso;
+  plugin desabilitado não conta, porque o Claude Code não roda os hooks dele.
 - **O check do hook aceita os dois mundos durante a transição**: `kb guard` (o
   jeito novo) e `guard.mjs` (instalações antigas continuam protegidas) — o
   legado passa com nota de migração, não com ✗. Quem já migrou não pode ver

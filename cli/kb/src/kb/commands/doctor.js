@@ -109,6 +109,26 @@ function preToolUseCommands(settings) {
   return (settings?.hooks?.PreToolUse ?? []).flatMap(g => (g.hooks ?? []).map(h => h.command ?? ''));
 }
 
+/**
+ * Comandos PreToolUse vindos de plugins HABILITADOS (`<installPath>/hooks/hooks.json`).
+ * Desde o harness 0.5.0 o guard pode chegar pelo plugin `gregio-cc-harness` — sem isso o
+ * doctor dava ✗ falso a quem migrou do settings.json. Plugin desabilitado não conta: o
+ * Claude Code não roda os hooks dele. Arquivo ilegível é ignorado (o check de plugins já
+ * cobra o que falta).
+ */
+function pluginPreToolUseCommands(installed, enabled) {
+  return Object.entries(installed)
+    .filter(([key]) => enabled[key] === true)
+    .flatMap(([, entries]) => entries.map(e => e.installPath).filter(Boolean))
+    .flatMap(dir => {
+      try {
+        return preToolUseCommands(readJson(join(dir, 'hooks', 'hooks.json')));
+      } catch {
+        return [];
+      }
+    });
+}
+
 /** `platforms` ausente/vazio = vale em toda plataforma. */
 function platformApplies(platforms) {
   if (platforms === undefined) return true;
@@ -214,8 +234,9 @@ export async function run() {
   } catch (e) {
     check(false, 'settings.json', `${settingsPath}: ${e.message}`);
   }
+  let installed = {};
   try {
-    const installed = readJson(installedPluginsPath).plugins ?? {};
+    installed = readJson(installedPluginsPath).plugins ?? {};
     const enabled = settings?.enabledPlugins ?? {};
     const userScoped = Object.entries(installed).filter(([, entries]) =>
       entries.some(e => e.scope === 'user'),
@@ -234,19 +255,21 @@ export async function run() {
     check(false, 'plugins instalados', `${installedPluginsPath}: ${e.message}`);
   }
 
-  // 3. hook do guard (guardrail de freeze/wtree) em hooks.PreToolUse.
+  // 3. hook do guard (guardrail de freeze/wtree) em hooks.PreToolUse — no settings.json
+  //    ou num plugin habilitado (o gregio-cc-harness traz o hook desde a 0.5.0).
   //    Transição: o guard virou subcomando (`kb guard`), mas quem ainda aponta para o
   //    guard.mjs antigo continua protegido — passa com nota de migração.
   if (settings) {
-    const commands = preToolUseCommands(settings);
+    const fromPlugins = pluginPreToolUseCommands(installed, settings.enabledPlugins ?? {});
+    const commands = [...preToolUseCommands(settings), ...fromPlugins];
     const viaKb = commands.some(c => c.includes('kb guard'));
     const viaLegacy = commands.some(c => c.includes('guard.mjs'));
     if (viaKb) {
-      check(true, 'hook guard em PreToolUse', 'kb guard');
+      check(true, 'hook guard em PreToolUse', fromPlugins.some(c => c.includes('kb guard')) ? 'kb guard (plugin)' : 'kb guard');
     } else if (viaLegacy) {
       check(true, 'hook guard em PreToolUse', 'guard.mjs (legado) — migre o command para "kb guard"');
     } else {
-      check(false, 'hook guard em PreToolUse', `guardrail de freeze/wtree ausente — adicione em ${settingsPath}: hooks.PreToolUse[{matcher:"Edit|Write|NotebookEdit", hooks:[{type:"command", command:"kb guard"}]}]`);
+      check(false, 'hook guard em PreToolUse', `guardrail de freeze/wtree ausente — habilite o plugin gregio-cc-harness (traz o hook) ou adicione em ${settingsPath}: hooks.PreToolUse[{matcher:"Edit|Write|NotebookEdit", hooks:[{type:"command", command:"kb guard"}]}]`);
     }
   }
 
