@@ -69,8 +69,9 @@ em `doctor.checks`, na seção seguinte.
   `XDG_CONFIG_HOME`)
 - **plugins** instalados (scope user) estão habilitados em `enabledPlugins` do
   `~/.claude/settings.json` — plugin instalado mas desabilitado é silencioso
-- **hook do guard** presente em `hooks.PreToolUse`; passa com `kb guard` e
-  também com o `guard.mjs` antigo (transição), aí com nota de migração
+- **hook do guard** presente em `hooks.PreToolUse` do `settings.json` **ou** de um
+  plugin habilitado (este plugin traz o hook); passa com `kb guard` e também com o
+  `guard.mjs` antigo (transição), aí com nota de migração
 - **graphify** responde e não emite warning de skill desatualizada
 - **rules disponíveis**: a cadeia de resolução do `kb rules` (`KB_RULES_DIR` → package
   irmão → `<engine>/rules` → plugin cache) chega em algum diretório com rules. O ✗ lista
@@ -184,6 +185,23 @@ Cada ✗ traz o comando de correção (`kb project add <path> --vault <v>`,
 `kb vault index --vault <v>`) e o exit é 1 se houver ✗. Repo não registrado não
 conta como ✗.
 
+## Hooks do plugin
+
+Habilitar o plugin instala os hooks em qualquer estação (`hooks/hooks.json`) — nada
+de copiar JSON para o `~/.claude/settings.json` de cada máquina. Eles fazem valer as
+regras que o `kb scaffold` escreve no CLAUDE.md global:
+
+| hook | evento | faz | depende de |
+|---|---|---|---|
+| `deny-grep-find.sh` | PreToolUse `Bash` | nega `grep`/`find` em posição de comando (bloco `core`) | `jq` |
+| `deny-background-herdr.sh` | PreToolUse `Bash` | com `HERDR_ENV=1`, nega `run_in_background` (bloco `herdr`) | `jq` |
+| `kb guard` | PreToolUse `Edit\|Write\|NotebookEdit` | guardrails de freeze/wtree (tabela abaixo) | `kb` |
+| `notify.sh` | `Stop`, `Notification` (`permission_prompt`) | repassa o JSON do evento a um `claude-notify` do PATH; sem ele, não faz nada | opcional |
+
+`claude-notify` é **ponto de extensão**, não dependência: a estação decide como
+notificar. Quem já tinha esses hooks no `settings.json` deve removê-los ao habilitar
+o plugin — o Claude Code soma as duas fontes e cada hook rodaria duas vezes.
+
 ## Instalar o guardrail num repo
 
 O antigo `harness install` sumiu: virou dois passos explícitos.
@@ -192,7 +210,8 @@ O antigo `harness install` sumiu: virou dois passos explícitos.
 kb rules <repo>        # rules por stack em <repo>/.claude/rules
 ```
 
-e o hook, uma vez, em `~/.claude/settings.json`:
+e o hook `kb guard`, que vem com este plugin habilitado. Sem o plugin, declare-o uma
+vez em `~/.claude/settings.json`:
 
 ```json
 {
