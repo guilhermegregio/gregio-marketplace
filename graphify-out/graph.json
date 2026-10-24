@@ -928,8 +928,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_kb_bin_kb",
-      "community": 24,
-      "community_name": "scaffold.js",
+      "community": 1,
+      "community_name": "add.js",
       "norm_label": "kb.js"
     },
     {
@@ -939,8 +939,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "cli_kb_bin_kb_commands",
-      "community": 24,
-      "community_name": "scaffold.js",
+      "community": 1,
+      "community_name": "add.js",
       "norm_label": "commands"
     },
     {
@@ -951,8 +951,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_bin_kb_main",
-      "community": 24,
-      "community_name": "scaffold.js",
+      "community": 1,
+      "community_name": "add.js",
       "norm_label": "main()"
     },
     {
@@ -1468,8 +1468,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_kb_src_kb_args",
-      "community": 24,
-      "community_name": "scaffold.js",
+      "community": 1,
+      "community_name": "add.js",
       "norm_label": "args.js"
     },
     {
@@ -1480,8 +1480,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_args_parseargs",
-      "community": 24,
-      "community_name": "scaffold.js",
+      "community": 1,
+      "community_name": "add.js",
       "norm_label": "parseargs()"
     },
     {
@@ -1492,8 +1492,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_args_aslist",
-      "community": 24,
-      "community_name": "scaffold.js",
+      "community": 1,
+      "community_name": "add.js",
       "norm_label": "aslist()"
     },
     {
@@ -1504,7 +1504,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_claude_home",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "claude-home.js"
     },
     {
@@ -1515,7 +1515,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_claude_home_claude_home_templates",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "claude_home_templates"
     },
     {
@@ -1527,7 +1527,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_claude_home_beginmarker",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "beginmarker()"
     },
     {
@@ -1539,7 +1539,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_claude_home_endmarker",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "endmarker()"
     },
     {
@@ -1551,7 +1551,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_claude_home_renderblock",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "renderblock()"
     },
     {
@@ -1563,7 +1563,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_claude_home_readblockmeta",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "readblockmeta()"
     },
     {
@@ -1575,7 +1575,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_claude_home_readtemplates",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "readtemplates()"
     },
     {
@@ -1587,7 +1587,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_claude_home_rendertemplates",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "rendertemplates()"
     },
     {
@@ -1599,7 +1599,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_claude_home_listprofiles",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "listprofiles()"
     },
     {
@@ -1611,7 +1611,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_claude_home_selecttemplates",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "selecttemplates()"
     },
     {
@@ -1623,7 +1623,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_claude_home_parseblocks",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "parseblocks()"
     },
     {
@@ -1635,7 +1635,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_claude_home_joinseam",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "joinseam()"
     },
     {
@@ -1647,7 +1647,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_claude_home_planchanges",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "planchanges()"
     },
     {
@@ -1857,8 +1857,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_dev_freeze_runfrozen",
-      "community": 4,
-      "community_name": "expandPath",
+      "community": 11,
+      "community_name": "paths.js",
       "norm_label": "runfrozen()"
     },
     {
@@ -2044,8 +2044,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_dev_start",
-      "community": 1,
-      "community_name": "add.js",
+      "community": 4,
+      "community_name": "expandPath",
       "norm_label": "start.js"
     },
     {
@@ -2068,8 +2068,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_dev_start_ensureprojecthouse",
-      "community": 1,
-      "community_name": "add.js",
+      "community": 4,
+      "community_name": "expandPath",
       "norm_label": "ensureprojecthouse()"
     },
     {
@@ -2080,7 +2080,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_doctor",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "doctor.js"
     },
     {
@@ -2091,7 +2091,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_doctor_home",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "home"
     },
     {
@@ -2102,7 +2102,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_doctor_settingspath",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "settingspath"
     },
     {
@@ -2113,7 +2113,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_doctor_installedpluginspath",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "installedpluginspath"
     },
     {
@@ -2124,7 +2124,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_doctor_is_nixos",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "is_nixos"
     },
     {
@@ -2135,7 +2135,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_doctor_platform_tags",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "platform_tags"
     },
     {
@@ -2146,7 +2146,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_doctor_required_tools",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "required_tools"
     },
     {
@@ -2158,7 +2158,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_doctor_readjson",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "readjson()"
     },
     {
@@ -2170,7 +2170,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_doctor_onpath",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "onpath()"
     },
     {
@@ -2182,7 +2182,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_doctor_realpathornull",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "realpathornull()"
     },
     {
@@ -2194,7 +2194,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_doctor_isinside",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "isinside()"
     },
     {
@@ -2206,7 +2206,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_doctor_sh",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "sh()"
     },
     {
@@ -2218,55 +2218,67 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_doctor_pretoolusecommands",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "pretoolusecommands()"
+    },
+    {
+      "label": "pluginPreToolUseCommands()",
+      "file_type": "code",
+      "source_file": "cli/kb/src/kb/commands/doctor.js",
+      "source_location": "L119",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "cli_kb_src_kb_commands_doctor_pluginpretoolusecommands",
+      "community": 24,
+      "community_name": "doctor.js",
+      "norm_label": "pluginpretoolusecommands()"
     },
     {
       "label": "platformApplies()",
       "file_type": "code",
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L113",
+      "source_location": "L133",
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_doctor_platformapplies",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "platformapplies()"
     },
     {
       "label": "matchesExpected()",
       "file_type": "code",
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L120",
+      "source_location": "L140",
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_doctor_matchesexpected",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "matchesexpected()"
     },
     {
       "label": "runUserCheck()",
       "file_type": "code",
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L137",
+      "source_location": "L157",
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_doctor_runusercheck",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "runusercheck()"
     },
     {
       "label": "run()",
       "file_type": "code",
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L192",
+      "source_location": "L212",
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_doctor_run",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "run()"
     },
     {
@@ -2455,7 +2467,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_guard",
       "community": 11,
-      "community_name": "guard.js",
+      "community_name": "paths.js",
       "norm_label": "guard.js"
     },
     {
@@ -2466,7 +2478,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_guard_allow",
       "community": 11,
-      "community_name": "guard.js",
+      "community_name": "paths.js",
       "norm_label": "allow"
     },
     {
@@ -2478,7 +2490,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_guard_deny",
       "community": 11,
-      "community_name": "guard.js",
+      "community_name": "paths.js",
       "norm_label": "deny()"
     },
     {
@@ -2490,7 +2502,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_guard_warn",
       "community": 11,
-      "community_name": "guard.js",
+      "community_name": "paths.js",
       "norm_label": "warn()"
     },
     {
@@ -2502,7 +2514,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_guard_readjson",
       "community": 11,
-      "community_name": "guard.js",
+      "community_name": "paths.js",
       "norm_label": "readjson()"
     },
     {
@@ -2514,7 +2526,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_guard_git",
       "community": 11,
-      "community_name": "guard.js",
+      "community_name": "paths.js",
       "norm_label": "git()"
     },
     {
@@ -2526,7 +2538,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_guard_repoidentity",
       "community": 11,
-      "community_name": "guard.js",
+      "community_name": "paths.js",
       "norm_label": "repoidentity()"
     },
     {
@@ -2538,7 +2550,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_guard_isvaultcontract",
       "community": 11,
-      "community_name": "guard.js",
+      "community_name": "paths.js",
       "norm_label": "isvaultcontract()"
     },
     {
@@ -2550,7 +2562,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_guard_decide",
       "community": 11,
-      "community_name": "guard.js",
+      "community_name": "paths.js",
       "norm_label": "decide()"
     },
     {
@@ -2562,7 +2574,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_guard_run",
       "community": 11,
-      "community_name": "guard.js",
+      "community_name": "paths.js",
       "norm_label": "run()"
     },
     {
@@ -2572,8 +2584,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_map",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 26,
+      "community_name": "project-move.js",
       "norm_label": "map.js"
     },
     {
@@ -2583,8 +2595,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_map_home",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 26,
+      "community_name": "project-move.js",
       "norm_label": "home"
     },
     {
@@ -2595,8 +2607,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_map_tilde",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 26,
+      "community_name": "project-move.js",
       "norm_label": "tilde()"
     },
     {
@@ -2607,8 +2619,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_map_run",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 26,
+      "community_name": "project-move.js",
       "norm_label": "run()"
     },
     {
@@ -2619,8 +2631,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_map_coverage",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 26,
+      "community_name": "project-move.js",
       "norm_label": "coverage()"
     },
     {
@@ -2713,8 +2725,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_project_linkclaude",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 4,
+      "community_name": "expandPath",
       "norm_label": "linkclaude()"
     },
     {
@@ -2760,8 +2772,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_rules",
-      "community": 24,
-      "community_name": "scaffold.js",
+      "community": 1,
+      "community_name": "add.js",
       "norm_label": "rules.js"
     },
     {
@@ -2772,8 +2784,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_rules_rulesdircandidates",
-      "community": 24,
-      "community_name": "scaffold.js",
+      "community": 1,
+      "community_name": "add.js",
       "norm_label": "rulesdircandidates()"
     },
     {
@@ -2784,8 +2796,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_rules_findrulesdir",
-      "community": 24,
-      "community_name": "scaffold.js",
+      "community": 1,
+      "community_name": "add.js",
       "norm_label": "findrulesdir()"
     },
     {
@@ -2796,8 +2808,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_rules_resolverulesdir",
-      "community": 24,
-      "community_name": "scaffold.js",
+      "community": 1,
+      "community_name": "add.js",
       "norm_label": "resolverulesdir()"
     },
     {
@@ -2808,8 +2820,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_rules_readrulemeta",
-      "community": 24,
-      "community_name": "scaffold.js",
+      "community": 1,
+      "community_name": "add.js",
       "norm_label": "readrulemeta()"
     },
     {
@@ -2820,8 +2832,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_rules_readtoplevelpackagejsons",
-      "community": 24,
-      "community_name": "scaffold.js",
+      "community": 1,
+      "community_name": "add.js",
       "norm_label": "readtoplevelpackagejsons()"
     },
     {
@@ -2832,8 +2844,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_rules_detectstacks",
-      "community": 24,
-      "community_name": "scaffold.js",
+      "community": 1,
+      "community_name": "add.js",
       "norm_label": "detectstacks()"
     },
     {
@@ -2844,8 +2856,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_rules_run",
-      "community": 24,
-      "community_name": "scaffold.js",
+      "community": 1,
+      "community_name": "add.js",
       "norm_label": "run()"
     },
     {
@@ -2856,7 +2868,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_scaffold",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "scaffold.js"
     },
     {
@@ -2867,7 +2879,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_scaffold_scratchpad_readme",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "scratchpad_readme"
     },
     {
@@ -2879,7 +2891,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_scaffold_homepaths",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "homepaths()"
     },
     {
@@ -2891,7 +2903,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_scaffold_tilde",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "tilde()"
     },
     {
@@ -2903,7 +2915,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_scaffold_capturefastfetch",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "capturefastfetch()"
     },
     {
@@ -2914,7 +2926,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_scaffold_sign",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "sign"
     },
     {
@@ -2925,7 +2937,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_scaffold_verb_apply",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "verb_apply"
     },
     {
@@ -2936,7 +2948,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_scaffold_verb_dry",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "verb_dry"
     },
     {
@@ -2948,7 +2960,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_scaffold_readifexists",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "readifexists()"
     },
     {
@@ -2960,7 +2972,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_scaffold_printlist",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "printlist()"
     },
     {
@@ -2972,7 +2984,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_commands_scaffold_run",
       "community": 24,
-      "community_name": "scaffold.js",
+      "community_name": "doctor.js",
       "norm_label": "run()"
     },
     {
@@ -3242,8 +3254,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_config_getproject",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 4,
+      "community_name": "expandPath",
       "norm_label": "getproject()"
     },
     {
@@ -3301,8 +3313,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_contracts_projectsroot",
-      "community": 1,
-      "community_name": "add.js",
+      "community": 4,
+      "community_name": "expandPath",
       "norm_label": "projectsroot()"
     },
     {
@@ -3313,8 +3325,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_contracts_behaviorsdir",
-      "community": 1,
-      "community_name": "add.js",
+      "community": 4,
+      "community_name": "expandPath",
       "norm_label": "behaviorsdir()"
     },
     {
@@ -3384,8 +3396,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_kb_src_kb_freeze",
-      "community": 4,
-      "community_name": "expandPath",
+      "community": 11,
+      "community_name": "paths.js",
       "norm_label": "kb/freeze.js"
     },
     {
@@ -3395,8 +3407,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "cli_kb_src_kb_freeze_freeze_index",
-      "community": 4,
-      "community_name": "expandPath",
+      "community": 11,
+      "community_name": "paths.js",
       "norm_label": "freeze_index"
     },
     {
@@ -3407,8 +3419,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_freeze_readindex",
-      "community": 4,
-      "community_name": "expandPath",
+      "community": 11,
+      "community_name": "paths.js",
       "norm_label": "readindex()"
     },
     {
@@ -3419,8 +3431,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_freeze_writeindex",
-      "community": 4,
-      "community_name": "expandPath",
+      "community": 11,
+      "community_name": "paths.js",
       "norm_label": "writeindex()"
     },
     {
@@ -3431,8 +3443,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_freeze_sha",
-      "community": 4,
-      "community_name": "expandPath",
+      "community": 11,
+      "community_name": "paths.js",
       "norm_label": "sha()"
     },
     {
@@ -3443,8 +3455,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_freeze_freeze",
-      "community": 4,
-      "community_name": "expandPath",
+      "community": 11,
+      "community_name": "paths.js",
       "norm_label": "freeze()"
     },
     {
@@ -3467,8 +3479,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_freeze_frozenentryfor",
-      "community": 4,
-      "community_name": "expandPath",
+      "community": 11,
+      "community_name": "paths.js",
       "norm_label": "frozenentryfor()"
     },
     {
@@ -3479,8 +3491,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_freeze_driftedfiles",
-      "community": 4,
-      "community_name": "expandPath",
+      "community": 11,
+      "community_name": "paths.js",
       "norm_label": "driftedfiles()"
     },
     {
@@ -3490,8 +3502,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_kb_src_kb_frontmatter",
-      "community": 1,
-      "community_name": "add.js",
+      "community": 4,
+      "community_name": "expandPath",
       "norm_label": "frontmatter.js"
     },
     {
@@ -3502,8 +3514,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_frontmatter_parsescalar",
-      "community": 1,
-      "community_name": "add.js",
+      "community": 4,
+      "community_name": "expandPath",
       "norm_label": "parsescalar()"
     },
     {
@@ -3514,8 +3526,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_frontmatter_parseinlinearray",
-      "community": 1,
-      "community_name": "add.js",
+      "community": 4,
+      "community_name": "expandPath",
       "norm_label": "parseinlinearray()"
     },
     {
@@ -3526,8 +3538,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_frontmatter_parse",
-      "community": 1,
-      "community_name": "add.js",
+      "community": 4,
+      "community_name": "expandPath",
       "norm_label": "parse()"
     },
     {
@@ -3538,8 +3550,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_frontmatter_needsquote",
-      "community": 1,
-      "community_name": "add.js",
+      "community": 4,
+      "community_name": "expandPath",
       "norm_label": "needsquote()"
     },
     {
@@ -3550,8 +3562,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_frontmatter_serializescalar",
-      "community": 1,
-      "community_name": "add.js",
+      "community": 4,
+      "community_name": "expandPath",
       "norm_label": "serializescalar()"
     },
     {
@@ -3562,8 +3574,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_frontmatter_stringify",
-      "community": 1,
-      "community_name": "add.js",
+      "community": 4,
+      "community_name": "expandPath",
       "norm_label": "stringify()"
     },
     {
@@ -3609,8 +3621,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_graphify_ingesturl",
-      "community": 1,
-      "community_name": "add.js",
+      "community": 6,
+      "community_name": "graph.js",
       "norm_label": "ingesturl()"
     },
     {
@@ -3750,8 +3762,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_kb_src_kb_paths",
-      "community": 4,
-      "community_name": "expandPath",
+      "community": 11,
+      "community_name": "paths.js",
       "norm_label": "paths.js"
     },
     {
@@ -3761,8 +3773,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "cli_kb_src_kb_paths_here",
-      "community": 4,
-      "community_name": "expandPath",
+      "community": 11,
+      "community_name": "paths.js",
       "norm_label": "here"
     },
     {
@@ -3772,8 +3784,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "cli_kb_src_kb_paths_engine_root",
-      "community": 1,
-      "community_name": "add.js",
+      "community": 4,
+      "community_name": "expandPath",
       "norm_label": "engine_root"
     },
     {
@@ -3783,8 +3795,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "cli_kb_src_kb_paths_config_example_path",
-      "community": 4,
-      "community_name": "expandPath",
+      "community": 11,
+      "community_name": "paths.js",
       "norm_label": "config_example_path"
     },
     {
@@ -3817,8 +3829,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "cli_kb_src_kb_paths_config_dir",
-      "community": 4,
-      "community_name": "expandPath",
+      "community": 11,
+      "community_name": "paths.js",
       "norm_label": "config_dir"
     },
     {
@@ -3828,8 +3840,8 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "cli_kb_src_kb_paths_state_dir",
-      "community": 4,
-      "community_name": "expandPath",
+      "community": 11,
+      "community_name": "paths.js",
       "norm_label": "state_dir"
     },
     {
@@ -3840,7 +3852,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_paths_config_path",
       "community": 11,
-      "community_name": "guard.js",
+      "community_name": "paths.js",
       "norm_label": "config_path"
     },
     {
@@ -3850,8 +3862,8 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "cli_kb_src_kb_paths_central_graph_default",
-      "community": 4,
-      "community_name": "expandPath",
+      "community": 11,
+      "community_name": "paths.js",
       "norm_label": "central_graph_default"
     },
     {
@@ -3861,8 +3873,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_kb_src_kb_project_move",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 26,
+      "community_name": "project-move.js",
       "norm_label": "project-move.js"
     },
     {
@@ -3873,8 +3885,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_project_move_mdfiles",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 26,
+      "community_name": "project-move.js",
       "norm_label": "mdfiles()"
     },
     {
@@ -3885,8 +3897,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_project_move_rewritefrontmatter",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 26,
+      "community_name": "project-move.js",
       "norm_label": "rewritefrontmatter()"
     },
     {
@@ -3897,8 +3909,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_project_move_git",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 26,
+      "community_name": "project-move.js",
       "norm_label": "git()"
     },
     {
@@ -3909,8 +3921,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_project_move_plansciting",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 26,
+      "community_name": "project-move.js",
       "norm_label": "plansciting()"
     },
     {
@@ -3921,8 +3933,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_project_move_moveproject",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 26,
+      "community_name": "project-move.js",
       "norm_label": "moveproject()"
     },
     {
@@ -3933,8 +3945,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_project_move_warnplans",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 26,
+      "community_name": "project-move.js",
       "norm_label": "warnplans()"
     },
     {
@@ -4073,8 +4085,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "cli_kb_src_kb_repo_claudemd",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 26,
+      "community_name": "project-move.js",
       "norm_label": "repo-claudemd.js"
     },
     {
@@ -4085,8 +4097,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_repo_claudemd_slug",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 26,
+      "community_name": "project-move.js",
       "norm_label": "slug()"
     },
     {
@@ -4097,8 +4109,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_repo_claudemd_housefoldercandidates",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 26,
+      "community_name": "project-move.js",
       "norm_label": "housefoldercandidates()"
     },
     {
@@ -4109,8 +4121,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_repo_claudemd_housefaces",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 26,
+      "community_name": "project-move.js",
       "norm_label": "housefaces()"
     },
     {
@@ -4121,8 +4133,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_repo_claudemd_targetlabel",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 26,
+      "community_name": "project-move.js",
       "norm_label": "targetlabel()"
     },
     {
@@ -4133,8 +4145,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_repo_claudemd_claudemdpointsto",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 26,
+      "community_name": "project-move.js",
       "norm_label": "claudemdpointsto()"
     },
     {
@@ -4145,8 +4157,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_repo_claudemd_resolvevaulttarget",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 26,
+      "community_name": "project-move.js",
       "norm_label": "resolvevaulttarget()"
     },
     {
@@ -4157,8 +4169,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_repo_claudemd_renderblock",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 26,
+      "community_name": "project-move.js",
       "norm_label": "renderblock()"
     },
     {
@@ -4169,8 +4181,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_repo_claudemd_linkclaudemd",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 26,
+      "community_name": "project-move.js",
       "norm_label": "linkclaudemd()"
     },
     {
@@ -4593,7 +4605,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_vault_index",
       "community": 26,
-      "community_name": "vault-index.js",
+      "community_name": "project-move.js",
       "norm_label": "vault-index.js"
     },
     {
@@ -4605,7 +4617,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_vault_index_today",
       "community": 26,
-      "community_name": "vault-index.js",
+      "community_name": "project-move.js",
       "norm_label": "today()"
     },
     {
@@ -4617,7 +4629,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_vault_index_frontmatterof",
       "community": 26,
-      "community_name": "vault-index.js",
+      "community_name": "project-move.js",
       "norm_label": "frontmatterof()"
     },
     {
@@ -4629,7 +4641,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_vault_index_subdirs",
       "community": 26,
-      "community_name": "vault-index.js",
+      "community_name": "project-move.js",
       "norm_label": "subdirs()"
     },
     {
@@ -4641,7 +4653,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_vault_index_asarray",
       "community": 26,
-      "community_name": "vault-index.js",
+      "community_name": "project-move.js",
       "norm_label": "asarray()"
     },
     {
@@ -4653,7 +4665,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_vault_index_listprojecthouses",
       "community": 26,
-      "community_name": "vault-index.js",
+      "community_name": "project-move.js",
       "norm_label": "listprojecthouses()"
     },
     {
@@ -4664,8 +4676,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_vault_index_listactiveplans",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 26,
+      "community_name": "project-move.js",
       "norm_label": "listactiveplans()"
     },
     {
@@ -4677,7 +4689,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_vault_index_projectrows",
       "community": 26,
-      "community_name": "vault-index.js",
+      "community_name": "project-move.js",
       "norm_label": "projectrows()"
     },
     {
@@ -4689,7 +4701,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_vault_index_planrows",
       "community": 26,
-      "community_name": "vault-index.js",
+      "community_name": "project-move.js",
       "norm_label": "planrows()"
     },
     {
@@ -4701,7 +4713,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_vault_index_replacesection",
       "community": 26,
-      "community_name": "vault-index.js",
+      "community_name": "project-move.js",
       "norm_label": "replacesection()"
     },
     {
@@ -4713,7 +4725,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_vault_index_bumpupdated",
       "community": 26,
-      "community_name": "vault-index.js",
+      "community_name": "project-move.js",
       "norm_label": "bumpupdated()"
     },
     {
@@ -4725,7 +4737,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_vault_index_planvaultindex",
       "community": 26,
-      "community_name": "vault-index.js",
+      "community_name": "project-move.js",
       "norm_label": "planvaultindex()"
     },
     {
@@ -4737,7 +4749,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_vault_index_linediff",
       "community": 26,
-      "community_name": "vault-index.js",
+      "community_name": "project-move.js",
       "norm_label": "linediff()"
     },
     {
@@ -4749,7 +4761,7 @@
       "_origin": "ast",
       "id": "cli_kb_src_kb_vault_index_regeneratevaultindex",
       "community": 26,
-      "community_name": "vault-index.js",
+      "community_name": "project-move.js",
       "norm_label": "regeneratevaultindex()"
     },
     {
@@ -4760,8 +4772,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "cli_kb_src_kb_vault_index_unlistedhouses",
-      "community": 0,
-      "community_name": "project.js",
+      "community": 26,
+      "community_name": "project-move.js",
       "norm_label": "unlistedhouses()"
     },
     {
@@ -5538,6 +5550,96 @@
       "norm_label": "main()"
     },
     {
+      "label": "deny-background-herdr.sh",
+      "file_type": "code",
+      "source_file": "packages/gregio-cc-harness/hooks/deny-background-herdr.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "packages_gregio_cc_harness_hooks_deny_background_herdr",
+      "community": 27,
+      "community_name": "deny-background-herdr.sh",
+      "norm_label": "deny-background-herdr.sh"
+    },
+    {
+      "label": "deny-background-herdr.sh script",
+      "file_type": "code",
+      "source_file": "packages/gregio-cc-harness/hooks/deny-background-herdr.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "packages_gregio_cc_harness_hooks_deny_background_herdr_sh__entry",
+      "community": 27,
+      "community_name": "deny-background-herdr.sh",
+      "norm_label": "deny-background-herdr.sh script"
+    },
+    {
+      "label": "deny-grep-find.sh",
+      "file_type": "code",
+      "source_file": "packages/gregio-cc-harness/hooks/deny-grep-find.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "packages_gregio_cc_harness_hooks_deny_grep_find",
+      "community": 28,
+      "community_name": "deny-grep-find.sh",
+      "norm_label": "deny-grep-find.sh"
+    },
+    {
+      "label": "deny-grep-find.sh script",
+      "file_type": "code",
+      "source_file": "packages/gregio-cc-harness/hooks/deny-grep-find.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "packages_gregio_cc_harness_hooks_deny_grep_find_sh__entry",
+      "community": 28,
+      "community_name": "deny-grep-find.sh",
+      "norm_label": "deny-grep-find.sh script"
+    },
+    {
+      "label": "hooks/notify.sh",
+      "file_type": "code",
+      "source_file": "packages/gregio-cc-harness/hooks/notify.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "packages_gregio_cc_harness_hooks_notify",
+      "community": 29,
+      "community_name": "hooks/notify.sh",
+      "norm_label": "hooks/notify.sh"
+    },
+    {
+      "label": "notify.sh script",
+      "file_type": "code",
+      "source_file": "packages/gregio-cc-harness/hooks/notify.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "packages_gregio_cc_harness_hooks_notify_sh__entry",
+      "community": 29,
+      "community_name": "hooks/notify.sh",
+      "norm_label": "notify.sh script"
+    },
+    {
       "label": "harness.mjs",
       "file_type": "code",
       "source_file": "packages/gregio-cc-harness/scripts/harness.mjs",
@@ -5591,7 +5693,7 @@
       "norm_label": "npx"
     },
     {
-      "label": "notify.sh",
+      "label": "scripts/notify.sh",
       "file_type": "code",
       "source_file": "packages/gregio-cc-resources/scripts/notify.sh",
       "source_location": "L1",
@@ -5603,7 +5705,7 @@
       "id": "packages_gregio_cc_resources_scripts_notify",
       "community": 18,
       "community_name": "notify.sh",
-      "norm_label": "notify.sh"
+      "norm_label": "scripts/notify.sh"
     },
     {
       "label": "notify.sh script",
@@ -8340,7 +8442,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L337",
+      "source_location": "L360",
       "weight": 1.0,
       "_origin": "ast",
       "source": "cli_kb_src_kb_commands_doctor_run",
@@ -8556,7 +8658,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L337",
+      "source_location": "L360",
       "weight": 1.0,
       "_origin": "ast",
       "source": "cli_kb_src_kb_commands_doctor_run",
@@ -11259,7 +11361,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L120",
+      "source_location": "L140",
       "weight": 1.0,
       "_origin": "ast",
       "source": "cli_kb_src_kb_commands_doctor",
@@ -11292,11 +11394,22 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L113",
+      "source_location": "L133",
       "weight": 1.0,
       "_origin": "ast",
       "source": "cli_kb_src_kb_commands_doctor",
       "target": "cli_kb_src_kb_commands_doctor_platformapplies",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cli/kb/src/kb/commands/doctor.js",
+      "source_location": "L119",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "cli_kb_src_kb_commands_doctor",
+      "target": "cli_kb_src_kb_commands_doctor_pluginpretoolusecommands",
       "confidence_score": 1.0
     },
     {
@@ -11347,7 +11460,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L192",
+      "source_location": "L212",
       "weight": 1.0,
       "_origin": "ast",
       "source": "cli_kb_src_kb_commands_doctor",
@@ -11358,7 +11471,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L137",
+      "source_location": "L157",
       "weight": 1.0,
       "_origin": "ast",
       "source": "cli_kb_src_kb_commands_doctor",
@@ -11453,7 +11566,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L116",
+      "source_location": "L136",
       "weight": 1.0,
       "_origin": "ast",
       "source": "cli_kb_src_kb_commands_doctor_platformapplies",
@@ -11465,7 +11578,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L139",
+      "source_location": "L159",
       "weight": 1.0,
       "_origin": "ast",
       "source": "cli_kb_src_kb_commands_doctor_runusercheck",
@@ -11477,7 +11590,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L297",
+      "source_location": "L320",
       "weight": 1.0,
       "_origin": "ast",
       "source": "cli_kb_src_kb_commands_doctor_run",
@@ -11488,7 +11601,19 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L203",
+      "source_location": "L125",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "cli_kb_src_kb_commands_doctor_pluginpretoolusecommands",
+      "target": "cli_kb_src_kb_commands_doctor_readjson",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "cli/kb/src/kb/commands/doctor.js",
+      "source_location": "L223",
       "weight": 1.0,
       "_origin": "ast",
       "source": "cli_kb_src_kb_commands_doctor_run",
@@ -11500,7 +11625,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L285",
+      "source_location": "L308",
       "weight": 1.0,
       "_origin": "ast",
       "source": "cli_kb_src_kb_commands_doctor_run",
@@ -11512,7 +11637,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L157",
+      "source_location": "L177",
       "weight": 1.0,
       "_origin": "ast",
       "source": "cli_kb_src_kb_commands_doctor_runusercheck",
@@ -11524,7 +11649,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L161",
+      "source_location": "L181",
       "weight": 1.0,
       "_origin": "ast",
       "source": "cli_kb_src_kb_commands_doctor_runusercheck",
@@ -11536,7 +11661,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L254",
+      "source_location": "L277",
       "weight": 1.0,
       "_origin": "ast",
       "source": "cli_kb_src_kb_commands_doctor_run",
@@ -11548,7 +11673,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L170",
+      "source_location": "L190",
       "weight": 1.0,
       "_origin": "ast",
       "source": "cli_kb_src_kb_commands_doctor_runusercheck",
@@ -11560,7 +11685,19 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L241",
+      "source_location": "L125",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "cli_kb_src_kb_commands_doctor_pluginpretoolusecommands",
+      "target": "cli_kb_src_kb_commands_doctor_pretoolusecommands",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "cli/kb/src/kb/commands/doctor.js",
+      "source_location": "L264",
       "weight": 1.0,
       "_origin": "ast",
       "source": "cli_kb_src_kb_commands_doctor_run",
@@ -11572,7 +11709,19 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L138",
+      "source_location": "L263",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "cli_kb_src_kb_commands_doctor_run",
+      "target": "cli_kb_src_kb_commands_doctor_pluginpretoolusecommands",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "cli/kb/src/kb/commands/doctor.js",
+      "source_location": "L158",
       "weight": 1.0,
       "_origin": "ast",
       "source": "cli_kb_src_kb_commands_doctor_runusercheck",
@@ -11584,7 +11733,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L179",
+      "source_location": "L199",
       "weight": 1.0,
       "_origin": "ast",
       "source": "cli_kb_src_kb_commands_doctor_runusercheck",
@@ -11596,7 +11745,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L375",
+      "source_location": "L398",
       "weight": 1.0,
       "_origin": "ast",
       "source": "cli_kb_src_kb_commands_doctor_run",
@@ -11608,7 +11757,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L144",
+      "source_location": "L164",
       "weight": 1.0,
       "_origin": "ast",
       "source": "cli_kb_src_kb_commands_doctor_runusercheck",
@@ -11621,7 +11770,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "cli/kb/src/kb/commands/doctor.js",
-      "source_location": "L267",
+      "source_location": "L290",
       "weight": 1.0,
       "_origin": "ast",
       "source": "cli_kb_src_kb_commands_doctor_run",
@@ -20027,6 +20176,39 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "packages/gregio-cc-harness/hooks/deny-background-herdr.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_gregio_cc_harness_hooks_deny_background_herdr",
+      "target": "packages_gregio_cc_harness_hooks_deny_background_herdr_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/gregio-cc-harness/hooks/deny-grep-find.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_gregio_cc_harness_hooks_deny_grep_find",
+      "target": "packages_gregio_cc_harness_hooks_deny_grep_find_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "packages/gregio-cc-harness/hooks/notify.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "packages_gregio_cc_harness_hooks_notify",
+      "target": "packages_gregio_cc_harness_hooks_notify_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "packages/gregio-cc-resources/mcp.json",
       "source_location": "L1",
@@ -20071,5 +20253,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "b50ac11a7bc668ba613c32492a511c1417442c1c"
+  "built_at_commit": "5d83b33d9bf3ae7b710f60c181a812d0fc6f5405"
 }

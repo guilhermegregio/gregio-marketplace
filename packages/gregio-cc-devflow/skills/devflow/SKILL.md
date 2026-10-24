@@ -88,10 +88,18 @@ claude que o `wtree` já abre no worktree, e recebe só um resumo:
 ```bash
 herdr pane send-text "$PANE" "<prompt autocontido + 'termine com RESULTADO:'>"
 sleep 1; herdr pane send-keys "$PANE" Enter          # Enter separado (paste é lento)
-herdr agent wait "$PANE" --status working --timeout 15000 || reenviar Enter
-herdr agent wait "$PANE" --status idle --timeout 900000   # idle COBRE done
+herdr agent wait "$PANE" --until working --timeout 15000 || reenviar Enter
+herdr agent wait "$PANE" --timeout 900000   # SEM --until: volta em idle | done | BLOCKED
+herdr agent get "$PANE"                     # blocked? → ler a pergunta e responder
 herdr agent read "$PANE" --source recent-unwrapped --lines 60   # buscar RESULTADO:
 ```
+
+**`blocked` é evento, não "ainda trabalhando".** O agente pode parar numa pergunta
+(escopo, aprovação). `--until idle` não vê isso e o orquestrador fica cego até o
+timeout, com o humano tendo de responder no pane. Com várias tasks em paralelo, vigie
+todas num laço sobre `herdr agent list` e volte assim que **qualquer** uma sair de
+`working`; trate `blocked` primeiro (`agent read --source visible`, decidir ou
+perguntar ao usuário se for decisão de produto, responder).
 
 Regras: prompt autocontido (o agente não abre o _plan.md); sentinela `RESULTADO:`
 obrigatória; **nunca esperar `--status done`** (vira `idle` quando alguém foca o
